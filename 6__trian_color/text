@@ -1,3 +1,0 @@
-Stranice pravilnog N-terokuta obojene su u tri boje. Može li se mnogokut triangulirati i obojati mu dijagonale tako da svaki od N-2 trokuta ima sve tri stranice različite boje?
-
-Rj: Može akko sve tri boje iste parnosti, te nijedne boje nema preko N-2. Konstrukcija: napravi "ear" na vrhu koji spaja dvije boje od kojih je barem jedna maksimalna, nastavi induktivno. Moze se O(N).
