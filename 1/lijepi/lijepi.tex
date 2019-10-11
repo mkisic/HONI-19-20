@@ -1,0 +1,56 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=30,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Lijepi}
+
+Znate li bez kalkulatora izračunati koliko je $3+4$? A koliko je $23+67$? Svi
+znaju da su odgovori na ova pitanja $7$ i $90$. Svi osim Filipa koji tvrdi da
+su odgovori $34$ i $2367$. Očito je da on dva broja ne zbraja na ispravan način
+već drugi broj „lijepi“ na kraj prvog da bi dobio svoje rješenje.
+
+Neka je zadano $N$ izraza oblika $x+y$. Za svaki izraz odredite rješenje na
+Filipov način, a onda na pravi način zbrojite tako dobivena rješenja.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom retku nalazi se prirodan broj $N$ $(1 \le N \le 10)$ iz teksta zadatka. \\
+U sljedećih $N$ redaka su po dva prirodna broja $x$ i $y$ $(1 \le x, y \le 10^9)$
+koji opisuju izraz oblika $x+y$ iz teksta zadatka.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+U jedini redak ispišite ukupan zbroj $N$ brojeva dobivenih na Filipov način.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+\subsection*{Bodovanje}
+\textbf{TODO}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Primjeri test podataka}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/lijepi.dummy.in.1}{test/lijepi.dummy.out.1} &
+\sampleinputs{test/lijepi.dummy.in.2}{test/lijepi.dummy.out.2} &
+\sampleinputs{test/lijepi.dummy.in.3}{test/lijepi.dummy.out.3}
+\end{tabularx}
+
+\textbf{Pojašnjenje drugog test podatka:} \\
+Prema Filipu, rješenje prvog izraza je $3412$, rješenje drugog $1137$, a
+rješenje trećeg $4291$. Ukupan zbroj tih brojeva je $8840$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:

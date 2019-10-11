@@ -1,0 +1,62 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=20,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Dinamo}
+
+Godina je 2069., Dinamo slavi 50 godina svog prvog od ukupno deset osvajanja
+Lige prvaka. Kile se prisjeća tog vremena i prvih 6 utakmica grupne faze
+natjecanja. On se sjeća da je Dinamo u prvom kolu igrao protiv kluba s oznakom
+$A$, u drugom protiv kluba $C$, a u trećem protiv $S$. Stari Kile se ne može
+sjetiti s kim je Dinamo igrao u četvrtom, petom i šestom kolu.
+
+Znamo da u Ligi prvaka vrijedi pravilo da u četvrtom kolu klub igra s
+protivnikom s kojim je igrao u trećem kolu, u petom s protivnikom iz prvog kola,
+a u šestom s onim iz drugog kola. Pomozi Kiletu i odgovori na njegovo pitanje
+„S kim smo ono igrali u $X$-tom kolu?“.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom retku nalazi se prirodan broj $A$ $(1 \le A \le 10)$ iz teksta zadatka. \\
+U drugom retku nalazi se prirodan broj $C$ $(1 \le C \le 10)$ iz teksta zadatka. \\
+U trećem retku nalazi se prirodan broj $S$ $(1 \le S \le 10)$ iz teksta zadatka. \\
+U četvrtom retku nalazi se prirodan broj $X$ $(4 \le X \le 6)$ iz teksta zadatka.
+
+Brojevi $A$, $C$ i $S$ međusobno su različiti.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+U jedini redak ispišite traženu oznaku kluba s kojim je Dinamo igrao u $X$-tom
+kolu.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Primjeri test podataka}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/dinamo.dummy.in.1}{test/dinamo.dummy.out.1} &
+\sampleinputs{test/dinamo.dummy.in.2}{test/dinamo.dummy.out.2} &
+\sampleinputs{test/dinamo.dummy.in.3}{test/dinamo.dummy.out.3}
+\end{tabularx}
+
+\textbf{Pojašnjenje prvog test podatka:} \\
+Dinamo je u prvom kolu igrao s timom koji ima oznaku $3$, u drugom s $5$, a u
+trećem s timom $2$. U četvrtom kolu, prema pravilu iz teksta zadatka opet
+je igrao s timom $2$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
