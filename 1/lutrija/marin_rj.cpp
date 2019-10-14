@@ -49,6 +49,7 @@ void dfs(int cvor) {
       bio[i] = 0;
     }
   }
+  tmp.pop_back();
 }
 
 int main() {
@@ -57,6 +58,9 @@ int main() {
   for (ll i = b - 2; i <= b + 2; i++) if (prosti(i)) v.pb(i);
   v.pb(2);
 
+  sort(all(v));
+  v.erase(unique(all(v)), v.end());
+
   REP(i, (int)v.size()) {
     if (v[i] == a) {
       bio[i] = 1;
@@ -64,7 +68,7 @@ int main() {
     }
   }
 
-  if (rj.empty()) puts("NEMOGUCE");
+  if (rj.empty()) puts("PREVARA");
   else {
     printf("%d\n",(int)rj.size());
     for (auto t : rj) printf("%lld ", t);
