@@ -46,6 +46,6 @@ int main() {
     }
   }
 
-  puts("PREVARA");
+  puts("-1");
   return 0;
 }

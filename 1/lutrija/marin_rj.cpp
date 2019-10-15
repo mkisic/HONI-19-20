@@ -68,7 +68,7 @@ int main() {
     }
   }
 
-  if (rj.empty()) puts("PREVARA");
+  if (rj.empty()) puts("-1");
   else {
     printf("%d\n",(int)rj.size());
     for (auto t : rj) printf("%lld ", t);

@@ -56,7 +56,7 @@ int main() {
   }
 
   if (!bio[b]) {
-    puts("PREVARA");
+    puts("-1");
     return 0;
   }
 
