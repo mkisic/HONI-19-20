@@ -1,0 +1,93 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=110,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Trobojnica}
+
+  %\setlength\intextsep{-0.1cm}
+%\begin{wrapfigure}[6]{r}{0.26\textwidth}
+%\centering
+%\includegraphics[width=0.26\textwidth]{img/flag.png}
+%\end{wrapfigure}
+
+,,\textit{Sve neka gori kad kroz vene crven, bijeli, plavi krene.}''
+-- Slaven Bilić, 2008.
+
+U ovom zadatku promatramo pravilne $N$-terokute kojima su stranice obojene u tri
+boje, a vrhovi označeni prirodnim brojevima u smjeru kazaljke na satu.
+\textit{Triangulacija} je podjela mnogokuta na trokute unutarnjim
+dijagonalama takva da dijagonale nemaju zajedničkih točaka osim vrhova mnogokuta
+te ne sijeku stranice mnogokuta osim u vrhovima mnogokuta. Naravno, u ovom
+zadatku i svaka dijagonala mora biti obojena u jednu od tri boje.
+
+Triangulacija je \textit{domoljubna} ako za svaki od $N-2$ trokuta vrijedi da su
+mu sve tri stranice različite boje. Vaš je zadatak odrediti domoljubnu
+triangulaciju zadanog mnogokuta.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom je retku prirodan broj $N$ iz teksta zadatka. \\
+U drugom je retku $N$-teroznamenkasti broj čije znamenke predstavljaju boje
+stranica $N$-terokuta u smjeru kazaljke na satu. Odnosno, prva znamenka
+predstavlja boju stranice $(1,2)$, druga znamenka boju stranice $(2,3)$ i tako
+sve do $N$-te znamenke koja predstavlja boju stranice $(N, 1)$. Dakako, boje su
+označene znamenkama $1$, $2$ i $3$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+Ako postoji domoljubna trijangulacija za zadani mnogokut, u prvi redak ispišite
+riječ \texttt{DA}, a u protivnom ispišite riječ \texttt{NE}. \\
+Ako ste ispisali \texttt{DA}, u svakom od sljedeća $N-3$ retka ispišite po jednu
+dijagonalu u obliku $X$ $Y$ $C$, gdje su $X$ i $Y$ vrhovi dijagonale, a $C$ boja
+$(1 \le X, Y \le N, 1 \le C \le 3)$. Ispisane dijagonale trebaju činiti
+domoljubnu trijangulaciju ulaznog mnogokuta.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+\subsection*{Bodovanje}
+{\renewcommand{\arraystretch}{1.4}
+  \setlength{\tabcolsep}{6pt}
+  \begin{tabular}{ccl}
+ Podzadatak & Broj bodova & Ograničenja \\ \midrule
+  1 & 20 & $4 \le N \le 8$ \\
+  2 & 40 & $4 \le N \le 10^3$ \\
+  3 & 50 & $4 \le N \le 2\cdot10^5$ \\
+\end{tabular}}
+
+Ako vaš program točno ispisuje prvi redak u svakom testnom primjeru nekog
+podzadatka, osvojit će $10\%$ bodova predviđenih za taj podzadatak.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Probni primjeri}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/trobojnica.dummy.in.1}{test/trobojnica.dummy.out.1} &
+\sampleinputs{test/trobojnica.dummy.in.2}{test/trobojnica.dummy.out.2} &
+\sampleinputs{test/trobojnica.dummy.in.3}{test/trobojnica.dummy.out.3}
+\end{tabularx}
+
+%\textbf{Pojašnjenje drugog probnog primjera:}
+
+%\textbf{1. upit} \textrightarrow{}
+%$A_9 = 9$, $A_{10} = 1 + 0 = 1$, $A_{11} = 1 + 1 = 2$,
+%$A_{12} = 1 + 2 = 3$, $A_{13} = 1 + 3 = 4$.\\
+%\phantom{\textbf{1. upit} \textrightarrow{}}
+%$A_9 + A_{10} + A_{11} + A_{12} + A_{13} = 9 + 1 + 2 + 3 + 4 = 19$.
+
+%\textbf{2. upit} \textrightarrow{}
+%$A_{44} = 4 + 4 = 8$, $A_{45} = 4 + 5 = 9$. $A_{44} + A_{45} = 8 + 9 = 17$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:

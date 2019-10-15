@@ -7,9 +7,9 @@
 ]{Lijepi}
 
 \setlength\intextsep{-0.1cm}
-\begin{wrapfigure}[8]{r}{0.25\textwidth}
+\begin{wrapfigure}[5]{r}{0.23\textwidth}
 \centering
-\includegraphics[width=0.25\textwidth]{img/abacus.png}
+\includegraphics[width=0.23\textwidth]{img/abacus.png}
 \end{wrapfigure}
 
 Znate li bez kalkulatora izračunati koliko je $3+4$? A koliko je $23+67$? Svi
@@ -24,8 +24,8 @@ Filipov način, a onda na pravi način zbrojite tako dobivena rješenja.
 % Input
 \subsection*{Ulazni podaci}
 U prvom je retku prirodan broj $N$ $(1 \le N \le 10)$ iz teksta zadatka. \\
-U sljedećih su $N$ redaka po dva prirodna broja $x$ i $y$ $(1 \le x, y \le 10^9)$
-koji opisuju izraz oblika $x+y$ iz teksta zadatka.
+U sljedećih su $N$ redaka po dva prirodna broja $x$ i $y$ manja ili jednaka
+milijardu koji opisuju izraz oblika $x+y$ iz teksta zadatka.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Output
@@ -35,7 +35,9 @@ U jedini redak ispišite ukupan zbroj $N$ brojeva dobivenih na Filipov način.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Scoring
 \subsection*{Bodovanje}
-\textbf{TODO}
+U test podacima ukupno vrijednima $18$ bodova vrijedit će da je $N=1$ te da su
+$X$ i $Y$ dvoznamenkasti. \\
+U test podacima ukupno vrijednima $22$ boda vrijedit će $1 \le X, Y \le 999$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Examples
