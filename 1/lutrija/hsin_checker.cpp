@@ -81,6 +81,8 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
 
   if (n_output == -1 || n_official == -1) {
     if (n_official == n_output) {
+      string smece;
+      if (fout >> smece) finish(0.0, WRONG_OUTPUT_FORMAT);
       finish(1.0, CORRECT);
     } else {
       finish(0.0, WRONG);
