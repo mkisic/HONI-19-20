@@ -12,7 +12,7 @@ for i in 1 2 3; do
         if (( $(echo "$points < $subtask_points" | bc -l) )); then
             subtask_points=$points
         fi
-        head -2 $points_file | tail -1
+        echo $test_in `head -2 $points_file | tail -1`
     done
     echo === subtask \#$i $subtask_points
 done
