@@ -19,9 +19,6 @@ bool inTree[maxn];
 
 int dp[maxn][maxn][2][2];
 
-int cntt;
-int tagged[maxn];
-
 void load() {
 	cin >> n >> m;
 	for (int i = 1; i <= n; i++)
@@ -31,12 +28,6 @@ void load() {
 		cin >> x >> y;
 		e[x].push_back(y);
 		e[y].push_back(x);
-		if (!tagged[x])
-			cntt++;
-		if (!tagged[y])
-			cntt++;	
-		tagged[x] = 1;
-		tagged[y] = 1;	
 	}
 	cin >> q;
 }
