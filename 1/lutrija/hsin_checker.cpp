@@ -43,6 +43,11 @@ bool prime(ll x) {
   return 1;
 }
 
+bool range(ll x) {
+  if (x < 2 || x > 1e15) return 0;
+  return 1;
+}
+
 /**
  * The main checking function.
  * @param fin official input
@@ -55,6 +60,7 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   const string TEST_DATA_ERROR = "Greska u sluzbenom ulazu ili izlazu.";
   const string WRONG = "Netocno.";
   const string CORRECT = "Tocno.";
+  const string OUT_OF_RANGE = "Broj u nizu je prevelik ili premalen.";
 
   // Read official input
   ll a, b;
@@ -108,6 +114,7 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   if (v_official.back() != v_output.back()) ok = 0;
 
   for (auto x : v_output) {
+    if (!range(x)) finish(0.0, OUT_OF_RANGE);
     if (!prime(x)) ok = 0;
   }
 
