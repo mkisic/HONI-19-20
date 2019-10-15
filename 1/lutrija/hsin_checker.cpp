@@ -59,25 +59,25 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   // Read official input
   ll a, b;
 
-  if (!(fin >> a)) finish(0, TEST_DATA_ERROR);
-  if (!(fin >> b)) finish(0, TEST_DATA_ERROR);
+  if (!(fin >> a)) finish(0.0, TEST_DATA_ERROR);
+  if (!(fin >> b)) finish(0.0, TEST_DATA_ERROR);
 
   // Read official output
   int n_official;
-  if (!(foff >> n_official)) finish(0, TEST_DATA_ERROR);
+  if (!(foff >> n_official)) finish(0.0, TEST_DATA_ERROR);
   
   vector <ll> v_official;
   if (n_official != -1) {
     REP(i, n_official) {
       ll x;
-      if (!(foff >> x)) finish(0, TEST_DATA_ERROR);
+      if (!(foff >> x)) finish(0.0, TEST_DATA_ERROR);
       v_official.push_back(x);
     }
   }
 
   // Read contestant's output
   int n_output;
-  if (!(fout >> n_output)) finish(0, WRONG_OUTPUT_FORMAT);
+  if (!(fout >> n_output)) finish(0.0, WRONG_OUTPUT_FORMAT);
 
   if (n_output == -1 || n_official == -1) {
     if (n_official == n_output) {
@@ -88,12 +88,17 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
     return;
   }
 
+  if (n_output <= 0) finish(0.0, WRONG);
+
   vector <ll> v_output;
   REP(i, n_output) {
     ll x;
-    if (!(fout >> x)) finish(0, TEST_DATA_ERROR);
+    if (!(fout >> x)) finish(0.0, TEST_DATA_ERROR);
     v_output.push_back(x);
   }
+
+  string smece;
+  if (fout >> smece) finish(0.0, WRONG_OUTPUT_FORMAT);
 
   bool ok = 1;
 
