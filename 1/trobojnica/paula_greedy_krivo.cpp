@@ -1,6 +1,3 @@
-// ovo pada na primjeru 11111...11122,
-// a bez random pocetka je jos lakse rusiti, npr 12333
-
 #include <bits/stdc++.h>
 using namespace std;
 

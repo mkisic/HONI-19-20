@@ -30,7 +30,14 @@ const string CORRECT = "Tocno.";
 const string PARTIAL_FIRST = "Prvi red je tocan, drugi nije.";
 const string ALARM = "Checker nije dobar.";
 
-const int MaxN = 300300;
+const string PARTIAL = "Prvi red je tocan.";
+const string PARTIAL_WRONG_OUTPUT_FORMAT = "Prvi red je tocan. Krivo formatiran izlaz.";
+const string PARTIAL_WRONG_TRIANGULATION =
+    "Prvi red je tocan. Triangulacija nije valjana.";
+const string PARTIAL_WRONG_COLORING =
+    "Prvi red je tocan. Bojanje nije valjano.";
+
+const int MaxN = 200200;
 
 bool valid_color(int color) { return color >= 1 && color <= 3; }
 bool other_color(int a, int b) { return 6 - a - b; }
@@ -131,24 +138,32 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   // Read official output
   string official_answer;
   if (!(foff >> official_answer)) finish(0, TEST_DATA_ERROR);
+  if (official_answer != "DA" && official_answer != "NE") finish(0, TEST_DATA_ERROR);
 
   // Read contestant's output
   string contestant_answer;
   if (!(fout >> contestant_answer)) finish(0, WRONG_OUTPUT_FORMAT);
   //  std::transform(contestant_answer.begin(), contestant_answer.end(), contestant_answer.begin(), ::toupper);
-  if (official_answer == "NE" && contestant_answer == "NE") finish(1.0, CORRECT);
+  if (official_answer != contestant_answer) finish(0, WRONG);
+  
+  if (official_answer == "NE") finish(1.0, CORRECT);
+
+  if (fout.eof()) finish(0.1, PARTIAL);
 
   set<pii> diagonals;
   REP(i, N-3) {
     int u, v, color;
     if (!(fout >> u) || !(fout >> v) || !(fout >> color)) {
-      finish(0, WRONG_OUTPUT_FORMAT);
+      finish(0.1, PARTIAL_WRONG_OUTPUT_FORMAT);
     }
-    if (u < 1 || u > N || v < 1 || v > N || v == u) finish(0, WRONG_OUTPUT_FORMAT);
+    if (u < 1 || u > N || v < 1 || v > N || v == u)
+        finish(0.1, PARTIAL_WRONG_OUTPUT_FORMAT);
     if (u > v) swap(u, v);
-    if (v - u == 1 || (v == N && u == 1)) finish(0, WRONG_OUTPUT_FORMAT);
+    if (v - u == 1 || (v == N && u == 1))
+        finish(0.1, PARTIAL_WRONG_OUTPUT_FORMAT);
     pii diag = {u, v};
-    if (diagonals.find(diag) != diagonals.end()) finish(0, WRONG);
+    if (diagonals.find(diag) != diagonals.end())
+        finish(0.1, PARTIAL_WRONG_OUTPUT_FORMAT);
     diagonals.insert(diag);
 
     adj[u].push_back({v, color});
@@ -158,20 +173,10 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
     M[{u, v}] = color;
   }
   
-  bool first_part = (contestant_answer == "DA");
-  bool second_part = check_triangulation();
-  //TRACE(second_part);
-  second_part &= check_colors();
-  //TRACE(second_part);
+  if (!check_triangulation()) finish(0.1, PARTIAL_WRONG_TRIANGULATION);
+  if (!check_colors()) finish(0.1, PARTIAL_WRONG_COLORING);
   
-  if (first_part && second_part) {
-    if (official_answer == "NE") finish(0.0, TEST_DATA_ERROR);
-    finish(1.0, CORRECT);
-  } else if (first_part) {
-    finish(0.1, PARTIAL_FIRST);
-  } else {
-    finish(0.0, WRONG);
-  }
+  finish(1.0, CORRECT);
 
   // The function MUST terminate before this line via finish()!
 }

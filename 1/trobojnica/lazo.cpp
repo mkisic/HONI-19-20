@@ -45,9 +45,6 @@ int main(){
       P.count[0] % 2 != P.count[1] % 2 ||
       P.count[1] % 2 != P.count[2] % 2 ||
       P.count[2] % 2 != P.count[0] % 2){
-    cout << P.count[0] << endl;
-    cout << P.count[1] << endl;
-    cout << P.count[2] << endl;
     cout << "NE" << endl;
     return 0;
   }
