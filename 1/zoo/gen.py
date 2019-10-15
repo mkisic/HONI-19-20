@@ -220,7 +220,6 @@ def gen_cases():
         test.write(file('test/%s.dummy.in.%d' % (PROBLEM, i+1), 'wt'))
 
     # 1. subtask -- 1 <= R, S <= 100
-
     subtask1 = []
     for i in range(1, 4):
         subtask1.append(random_walks(random.randint(2, 30),\
@@ -237,6 +236,18 @@ def gen_cases():
                                                   random.randint(75, 100)))
 
     real.append(subtask1)
+
+    # 2. subtask -- 1 <= R, S <= 1000
+    subtask2 = []
+    for i in range(1, 6):
+        subtask2.append(random_walks(random.randint(950, 1000),\
+                                     random.randint(950, 1000)))
+
+    for i in range(6, 16):
+        subtask2.append(random_grid_with_one_walk(random.randint(950, 1000),\
+                                                  random.randint(950, 1000)))
+
+    real.append(subtask2)
 
     # # 1. test -- 1 <= l <= r <= 9
     # real.append(gen_all_pairs(1, 9))
