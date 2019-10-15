@@ -84,10 +84,8 @@ int main(){
 
     // usual transformation leads to monochromatic polygon, need to avoid it
     // we just rotate, the big sequence will be next on the chopping block
-    if (first.points.size() == 2 &&
-	second.points.size() == 2 &&
-	P.compressed.size() == 1 &&
-	P.compressed.front().points.size() != 2){
+    if (P.count[first.color] == 1 &&
+        P.count[second.color] == 1) {
       P.compressed.push_back(move(first));
       P.compressed.push_back(move(second));
       continue;
