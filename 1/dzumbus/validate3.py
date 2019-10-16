@@ -84,12 +84,14 @@ def check(lines):
 
 
 # Ocekivani clusteri! Ovo vjerojatno zelis promijeniti!
-expected_clusters = {'Normalni': 1, "Lanac" : 1}
+expected_clusters = {'prvi': 1, "drugi" : 1, "treci" : 1, "cet" : 1}
 
 
 def what_cluster(data):
-    if data['n'] == data['m'] + 1 and data['deg'] <= 2 and data['maks'] <= 1000: return 'Lanac'
-    return 'Normalni'
+  if data['n'] == data['m'] + 1 and data['maks'] <= 1000: return 'prvi'
+  if data['n'] == data['m'] + 1 and data['maks'] <= 10**9: return 'drugi'
+  if data['maks'] <= 100: return 'treci'
+  return "cet"
 
 
 ################### Zadatak-specifican kod iznad ove linije #########################
