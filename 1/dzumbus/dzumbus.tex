@@ -55,14 +55,20 @@ Ispišite odgovore na $Q$ upita, svaki u svom retku.
 % Scoring
 
 \subsection*{Bodovanje}
-U svim podzadacima vrijedi $1 \le N \le 500$, $0 \le M \le N$ i $1 \le D_i, S_i \le 10^9$.
+U svim podzadacima vrijedi $1 \le N \le 500$, $1 \le Q \le 2\cdot10^5$ i $1 \le D_i \le 10^9$.
 
 {\renewcommand{\arraystretch}{1.4}
   \setlength{\tabcolsep}{6pt}
   \begin{tabular}{ccl}
  Podzadatak & Broj bodova & Ograničenja \\ \midrule
-  1 & 60 & $M = N - 1$, $1 \le S_i \le 1000$ \\
-  2 & 50 & nema dodatnih ograničenja \\
+  1 & 20 & \makecell[l]{$M = N - 1$, $1 \le S_i \le 1000$, \\
+            svaki će Marinov prijatelj biti voljan sa najviše dvoje drugih
+            prijatelja \\ razmjenjivati bilješke.} \\
+  2 & 30 & \makecell[l]{$M = N - 1$, $1 \le S_i \le 10^9$ \\
+            svaki će Marinov prijatelj biti voljan sa najviše dvoje drugih
+            prijatelja \\ razmjenjivati bilješke.} \\
+  3 & 30 & $0 \le M < N$, $1 \le S_i \le 100$ \\
+  4 & 30 & $0 \le M < N$, $1 \le S_i \le 10^9$ \\
 \end{tabular}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
