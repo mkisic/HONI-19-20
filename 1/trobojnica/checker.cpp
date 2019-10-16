@@ -5,7 +5,7 @@
 //
 // Usage: [checker] [input] [official_output] [contestant_output]
 //
-// Score (real between 0.0 and 1.0) written on stdout.
+// Score (real between 0.0 and 1) written on stdout.
 // Textual description of the result written on stderr.
 
 #include <bits/stdc++.h>
@@ -27,7 +27,6 @@ const string WRONG_OUTPUT_FORMAT = "Krivo formatiran izlaz.";
 const string TEST_DATA_ERROR = "Greska u sluzbenom ulazu ili izlazu.";
 const string WRONG = "Netocno.";
 const string CORRECT = "Tocno.";
-const string PARTIAL_FIRST = "Prvi red je tocan, drugi nije.";
 const string ALARM = "Checker nije dobar.";
 
 const string PARTIAL = "Prvi red je tocan.";
@@ -35,7 +34,7 @@ const string PARTIAL_WRONG_OUTPUT_FORMAT = "Prvi red je tocan. Krivo formatiran 
 const string PARTIAL_WRONG_TRIANGULATION =
     "Prvi red je tocan. Triangulacija nije valjana.";
 const string PARTIAL_WRONG_COLORING =
-    "Prvi red je tocan. Bojanje nije valjano.";
+    "Prvi red je tocan. Bojenje nije valjano.";
 
 const int MaxN = 200200;
 
@@ -146,7 +145,12 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   //  std::transform(contestant_answer.begin(), contestant_answer.end(), contestant_answer.begin(), ::toupper);
   if (official_answer != contestant_answer) finish(0, WRONG);
   
-  if (official_answer == "NE") finish(1.0, CORRECT);
+  if (official_answer == "NE") {
+      if (fout.eof()) finish(1, CORRECT);
+      else finish(0.1, PARTIAL_WRONG_OUTPUT_FORMAT);
+  }
+  
+  // odgovor je DA
 
   if (fout.eof()) finish(0.1, PARTIAL);
 
@@ -165,6 +169,8 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
     if (diagonals.find(diag) != diagonals.end())
         finish(0.1, PARTIAL_WRONG_OUTPUT_FORMAT);
     diagonals.insert(diag);
+    if (!(1 <= color && color <= 3))
+        finish(0.1, PARTIAL_WRONG_OUTPUT_FORMAT);
 
     adj[u].push_back({v, color});
     // adj[v].push_back({u, color}); WE DON'T DO THIS
@@ -172,11 +178,12 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
     edge[v].push_back({u, color});
     M[{u, v}] = color;
   }
-  
+  if (!fout.eof()) finish(0.1, PARTIAL_WRONG_OUTPUT_FORMAT);
+
   if (!check_triangulation()) finish(0.1, PARTIAL_WRONG_TRIANGULATION);
   if (!check_colors()) finish(0.1, PARTIAL_WRONG_COLORING);
   
-  finish(1.0, CORRECT);
+  finish(1, CORRECT);
 
   // The function MUST terminate before this line via finish()!
 }
