@@ -12,59 +12,62 @@
 %\includegraphics[width=0.26\textwidth]{img/flag.png}
 %\end{wrapfigure}
 
-,,\textit{Sve neka gori kad kroz vene crven, bijeli, plavi krene.}''
--- Slaven Bilić, 2008.
+%\subsection
 
-U ovom zadatku promatramo pravilne $N$-terokute kojima su stranice obojene u tri
-boje, a vrhovi označeni prirodnim brojevima u smjeru kazaljke na satu.
-\textit{Triangulacija} je podjela mnogokuta na trokute unutarnjim
-dijagonalama takva da dijagonale nemaju zajedničkih točaka osim vrhova mnogokuta
-te ne sijeku stranice mnogokuta osim u vrhovima mnogokuta. Naravno, u ovom
-zadatku i svaka dijagonala mora biti obojena u jednu od tri boje.
+,,\textit{Everything will be in flames once red, white and blue start running through your veins}''
+-- Slaven Bilić
 
-Triangulacija je \textit{domoljubna} ako za svaki od $N-2$ trokuta vrijedi da su
-mu sve tri stranice različite boje. Vaš je zadatak odrediti domoljubnu
-triangulaciju zadanog mnogokuta.
+In this task, we will observe regular polygons that have each of their $N$ sides
+colored in one of three colors and whose vertices are denoted from $1$ to $N$
+in a clockwise order. \textit{Triangulaton} of a polygon is a decomposition of
+its area into a set of non-intersecting triangles whose sides either lie on the
+sides of the polygon or its internal diagonals. Of course, in this task, each of
+the diagonals used for polygon triangulation is also colored in one of three
+colors.
+
+The triangulation is said to be \textit{patriotic} if each of its $N-2$
+triangles has all three sides of different colors. Your task is to determine
+a patriotic triangulation of a given polygon.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Input
-\subsection*{Ulazni podaci}
-U prvom je retku prirodan broj $N$ iz teksta zadatka. \\
-U drugom je retku $N$-teroznamenkasti broj čije znamenke predstavljaju boje
-stranica $N$-terokuta u smjeru kazaljke na satu. Odnosno, prva znamenka
-predstavlja boju stranice $(1,2)$, druga znamenka boju stranice $(2,3)$ i tako
-sve do $N$-te znamenke koja predstavlja boju stranice $(N, 1)$. Dakako, boje su
-označene znamenkama $1$, $2$ i $3$.
+\subsection*{Input}
+The first line contains an integer $N$ from the task description. \\
+The second line contains an integer consisting of $N$ digits which represent
+the colors of polygon sides. More precisely, the first digit represents
+the color of side $(1,2)$, the second one represents the color of side $(2,3)$,
+and so on until the $N$-th digit which represents the color of side $(N,1$). The
+colors will always be denoted with digits $1$, $2$ and $3$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Output
-\subsection*{Izlazni podaci}
-Ako postoji domoljubna trijangulacija za zadani mnogokut, u prvi redak ispišite
-riječ \texttt{DA}, a u protivnom ispišite riječ \texttt{NE}. Ako ste ispisali
-\texttt{DA}, u svakom od sljedeća $N-3$ retka ispišite po jednu
-dijagonalu u obliku $X$ $Y$ $C$, gdje su $X$ i $Y$ vrhovi dijagonale, a $C$ boja
-$(1 \le X, Y \le N, 1 \le C \le 3)$. Ispisane dijagonale trebaju činiti
-domoljubnu trijangulaciju ulaznog mnogokuta. Poredak dijagonala u ispisu nije
-bitan. Ako postoji više domoljubnih triangulacija, ispišite bilo koju.
+\subsection*{Output}
+If there is no patriotic triangulation of a given polygon, output \texttt{NE}
+and terminate the program. Otherwise, in the first line output \texttt{DA}
+and in the next $N-3$ lines output each diagonal used in the patriotic
+triangulation. Each diagonal should be specified as $X$ $Y$ $C$ where $X$ and
+$Y$ are the endpoints of a diagonal and $C$ is its color
+$(1 \le X, Y \le N, 1 \le C \le 3)$. The order of diagonals in the output is
+not important. If there are multiple correct solutions, output any of them.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Scoring
-\subsection*{Bodovanje}
+\subsection*{Scoring}
 {\renewcommand{\arraystretch}{1.4}
   \setlength{\tabcolsep}{6pt}
   \begin{tabular}{ccl}
- Podzadatak & Broj bodova & Ograničenja \\ \midrule
+ Subtask & Score & Constraints \\ \midrule
   1 & 20 & $4 \le N \le 11$ \\
   2 & 40 & $4 \le N \le 10^3$ \\
   3 & 50 & $4 \le N \le 2\cdot10^5$ \\
 \end{tabular}}
 
-Ako vaš program točno ispisuje prvi redak u svakom testnom primjeru nekog
-podzadatka, osvojit će $10\%$ bodova predviđenih za taj podzadatak.
+If your program correctly outputs the first line in each test case of a certain
+subtask, you will score $10\%$ of the points allocated for that subtask.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Examples
-\subsection*{Probni primjeri}
+\subsection*{Examples}
 \begin{tabularx}{\textwidth}{X'X'X}
 \sampleinputs{test/trobojnica.dummy.in.1}{test/trobojnica.dummy.out.1} &
 \sampleinputs{test/trobojnica.dummy.in.2}{test/trobojnica.dummy.out.2} &
