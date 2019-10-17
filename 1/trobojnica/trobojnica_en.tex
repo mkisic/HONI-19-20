@@ -19,8 +19,8 @@
 
 In this task, we will observe regular polygons that have each of their $N$ sides
 colored in one of three colors and whose vertices are denoted from $1$ to $N$
-in a clockwise order. \textit{Triangulaton} of a polygon is a decomposition of
-its area into a set of non-intersecting triangles whose sides either lie on the
+in a clockwise order. A \textit{triangulaton} of a polygon is a decomposition of
+its area into a set of non-overlapping triangles whose sides either lie on the
 sides of the polygon or its internal diagonals. Of course, in this task, each of
 the diagonals used for polygon triangulation is also colored in one of three
 colors.
@@ -35,14 +35,14 @@ a patriotic triangulation of a given polygon.
 The first line contains an integer $N$ from the task description. \\
 The second line contains an integer consisting of $N$ digits which represent
 the colors of polygon sides. More precisely, the first digit represents
-the color of side $(1,2)$, the second one represents the color of side $(2,3)$,
+the color of side $(1,2)$, the second digit represents the color of side $(2,3)$,
 and so on until the $N$-th digit which represents the color of side $(N,1)$. The
 colors will always be denoted with digits $1$, $2$ and $3$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Output
 \subsection*{Output}
-If there is no patriotic triangulation of a given polygon, output \texttt{NE}
+If there is no patriotic triangulation of the given polygon, output \texttt{NE}
 and terminate the program. Otherwise, in the first line output \texttt{DA}
 and in the next $N-3$ lines output each diagonal used in the patriotic
 triangulation. Each diagonal should be specified as $X$ $Y$ $C$ where $X$ and
