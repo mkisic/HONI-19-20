@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{zadaci}
+\ProvidesPackage{tasks}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % process the options...
@@ -101,14 +101,14 @@
   \begin{center}
   \setlength{\tabcolsep}{6pt}
   \renewcommand{\arraystretch}{1.4}
-  \begin{tabularx}{.74\textwidth}{lccr}
+  \begin{tabularx}{.51\textwidth}{lccr}
     \toprule
-    Zadatak  &
-    Vremensko ograničenje &
-    Memorijsko ograničenje &
-    Bodovi \\ \midrule
+    Task  &
+    Time limit &
+    Memory limit &
+    Score \\ \midrule
     \printtabtoks \midrule
-      \textbf{Ukupno} & & & \arabic{totalpoints} \\
+      \textbf{Total} & & & \arabic{totalpoints} \\
     \bottomrule
   \end{tabularx}
   \end{center}
@@ -126,12 +126,12 @@
     \vspace{1.5cm}
     \textsf{\Large {\LARGE \textbf{#1}}\\
       \vspace{.5cm}
-       {\large 1. kolo, 19. listopada 2019.}
+       {\large Round 1, October 19\textsuperscript{th} 2019.}
      }
   \end{center}
   \vspace{1.2cm}
   \begin{center}
-    \textsf{\LARGE \textbf{Zadaci}}
+    \textsf{\LARGE \textbf{Tasks}}
   \end{center}
   \begin{center}
     \begin{minipage}{\textwidth}
@@ -163,11 +163,11 @@
   }
   \phantomsection
   \addcontentsline{toc}{subsection}{\@problemname}
-  \section*{Zadatak \@problemname}
-  \markright{Zadatak \textbf{\@problemname} \\
+  \section*{Task \@problemname}
+  \markright{Task \textbf{\@problemname} \\
     \@timelimit\ /\
     \@memorylimit\ /\
-      \@problempoints\ bodova}
+      \@problempoints\ points}
   %\vspace{-.5em}
   %\-\hspace{1em} \textsf{Broj bodova: \@problempoints} \\
   %\-\hspace{1em} \textsf{Vremensko ograničenje: \@timelimit} \\
@@ -177,9 +177,9 @@
 }
 \newcolumntype{'}{@{\hskip\tabcolsep\vrule width .2pt\hskip\tabcolsep}}
 \newcommand{\sampleinputs}[2]{
-  \textbf{ulaz}
+  \textbf{input}
   \linespread{1}{\verbatiminput{#1}}
-  \textbf{izlaz}
+  \textbf{output}
   \linespread{1}{\verbatiminput{#2}}
 }
 \renewcommand{\t}[1]{\texttt{#1}}
