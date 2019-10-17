@@ -98,7 +98,7 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   }
 
   if (n_output <= 0) finish(0.0, WRONG);
-  if (n_output > 100000) finish(0.0, PREVISE);
+  if (n_output > 30) finish(0.0, PREVISE);
 
   vector <ll> v_output;
   REP(i, n_output) {
