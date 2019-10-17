@@ -146,7 +146,8 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   if (official_answer != contestant_answer) finish(0, WRONG);
   
   if (official_answer == "NE") {
-      if (fout.eof()) finish(1, CORRECT);
+      string smece;
+      if (!(fout >> smece)) finish(1, CORRECT);
       else finish(0.1, PARTIAL_WRONG_OUTPUT_FORMAT);
   }
   
@@ -178,7 +179,9 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
     edge[v].push_back({u, color});
     M[{u, v}] = color;
   }
-  if (!fout.eof()) finish(0.1, PARTIAL_WRONG_OUTPUT_FORMAT);
+
+  string smece;
+  if (fout >> smece) finish(0.1, PARTIAL_WRONG_OUTPUT_FORMAT);
 
   if (!check_triangulation()) finish(0.1, PARTIAL_WRONG_TRIANGULATION);
   if (!check_colors()) finish(0.1, PARTIAL_WRONG_COLORING);
