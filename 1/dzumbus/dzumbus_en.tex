@@ -12,83 +12,88 @@
 \includegraphics[width=0.23\textwidth]{img/dzumbus.png}
 \end{wrapfigure}
 
-Marin je dobar čovjek pa će organizirati čak $Q$ zabava za svojih $N$ prijatelja
--- natjecatelja iz biologije. Na Marinovim će se zabavama posluživati
-\textit{džumbus}, mješavina Coca-Cole i soka od đumbira, a zabave se i same
-obično pretvore u džumbus.
+%\subsection
 
-Marin za svakog prijatelja zna koliko mu je decilitara džumbusa potrebno da se
-oraspoloži. Među prijateljima postoji $M$ parova za koje znamo da će se, ako su
-na istoj zabavi oba člana para raspoloženi, u nekom trenutku (točnom jednom za
-vrijeme te zabave) odvojiti od ostalih i razmijeniti sve bilješke iz biologije
-koje posjeduju. Kada osoba $A$ na nekoj zabavi kopira osobi $B$ svoje bilješke
-iz biologije, osoba $B$ ih može dijeliti na isti način, no parovi su takvi da
-nije moguće da se te bilješke vrate do osobe $A$ \textbf{za vrijeme te zabave,
-bez obzira na poredak kojim se parovi sastaju}.
+Marin is a good man, so he'll organize $Q$ parties for his $N$ friends, all of
+which are competitive programmers. The only drink that is going to be served at
+his parties will be \textit{džumbus} --- a mixture of Coke and ginger juice.
 
-Marin je, u duhu eksperimentiranja, za različite zabave pripremio različite
-količine džumbusa. Džumbus će na svakoj zabavi rasporediti među prijateljima
-tako da se njih što više na toj zabavi barem jednom upusti u razmjenu bilješki.
+For each of his friends, Marin knows the amount of džumbus they need to
+drink in order to relax. He also knows that there are $M$ pairs of people among
+his friends such that, if both of them are relaxed, they will begin to
+exchange the solutions of past COCI problems (since there are no
+published editorials). When a person $A$ shares their solutions with person $B$,
+the person $B$ may decide to share those solutions in the same manner, but it is
+also known that $M$ pairs are formed in a way that it is impossible that those
+solutions will get back to person $A$ during that party, regardless of the order in
+which exchanges took place.
 
-Za svaku od $Q$ zabava ispišite koliko će se različitih Marinovih prijatelja na
-njoj barem jednom upustiti u razmjenu bilješki.
+Marin has prepared different amounts of džumbus for each party. He will
+always distribute the drink among his friends in a way which maximizes the
+number of people that will at least once exchange their solutions with another
+person at the party.
+
+Your task is to determine the number of people that will exchange their
+solutions for each of the $Q$ parties.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Input
-\subsection*{Ulazni podaci}
-U prvom su retku prirodni brojevi $N$ i $M$ iz teksta zadatka. \\
-U drugom je retku $N$ prirodnih brojeva $D_i$, količine džumbusa u
-decilitrima koje su potrebne Marinovim prijateljima da se oraspolože, redom
-od prijatelja s oznakom $1$ do prijatelja s oznakom $N$. \\
-U $i$-tom od sljedećih $M$ redaka su po dva prirodna broja $A_i$ i $B_i$
-$(A_i \ne B_i)$, oznake parova prijatelja iz teksta zadatka. \\
-U sljedećem je retku prirodan broj $Q$ iz teksta zadatka. \\
-U sljedećih $Q$ redaka je po jedan prirodan broj $S_i$, količina džumbusa u
-decilitrima koju je Marin pripremio za $i$-tu zabavu.
+\subsection*{Input}
+The first line contains integers $N$ and $M$ from the task description. \\
+The second line contains $N$ space separated integers $D_i$, the amounts of
+džumbus needed to relax Marin's friends, given in order from a friend number $1$
+to a friend number $N$. \\
+The $i$-th of the next $M$ lines contains two integers $A_i$ and $B_i$
+$(A_i \ne B_i)$, denoting a pair of friends from the task description. \\
+The next line contains an integer $Q$ from the task description. \\
+The next $Q$ lines contain a single integer $S_i$ which represents the total
+amount of džumbus that is going to be served at $i$-th party.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Output
-\subsection*{Izlazni podaci}
-Ispišite odgovore na $Q$ upita, svaki u svom retku.
+\subsection*{Output}
+Output the number of people that will exchange their solutions for each
+of the $Q$ parties. The answer for each party should be given in a separate
+line. Note that the parties are independent of each other.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Scoring
 
-\subsection*{Bodovanje}
-U svim podzadacima vrijedi $1 \le N \le 500$, $1 \le Q \le 2\cdot10^5$ i $1 \le D_i \le 10^9$.
+\subsection*{Scoring}
+In all subtasks, it holds $1 \le N \le 500$, $1 \le Q \le 2\cdot10^5$ i $1 \le D_i \le 10^9$.
 
 {\renewcommand{\arraystretch}{1.4}
   \setlength{\tabcolsep}{6pt}
   \begin{tabular}{ccl}
- Podzadatak & Broj bodova & Ograničenja \\ \midrule
+ Subtask & Score & Constraints \\ \midrule
   1 & 20 & \makecell[l]{$M = N - 1$, $1 \le S_i \le 1000$, \\
-            svaki će Marinov prijatelj biti voljan sa najviše dvoje drugih
-            prijatelja \\ razmjenjivati bilješke.} \\
+            Marin's friends will be paired up in a way that each friend \\
+            will exchange their solutions with at most two other people.} \\
   2 & 30 & \makecell[l]{$M = N - 1$, $1 \le S_i \le 10^9$ \\
-            svaki će Marinov prijatelj biti voljan sa najviše dvoje drugih
-            prijatelja \\ razmjenjivati bilješke.} \\
+            Marin's friends will be paired up in a way that each friend \\
+            will exchange their solutions with at most two other people.} \\
   3 & 30 & $0 \le M < N$, $1 \le S_i \le 100$ \\
   4 & 30 & $0 \le M < N$, $1 \le S_i \le 10^9$ \\
 \end{tabular}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Examples
-\subsection*{Probni primjeri}
+\subsection*{Examples}
 \begin{tabularx}{\textwidth}{X'X'X}
 \sampleinputs{test/dzumbus.dummy.in.1}{test/dzumbus.dummy.out.1} &
 \sampleinputs{test/dzumbus.dummy.in.2}{test/dzumbus.dummy.out.2} &
 \sampleinputs{test/dzumbus.dummy.in.3}{test/dzumbus.dummy.out.3}
 \end{tabularx}
 
-\textbf{Pojašnjenje trećeg probnog primjera:}
-Marin je na prvoj zabavi oraspoložio prijatelje s oznakama
-$1$, $2$, $3$, $7$, $9$, $10$, $12$ i $13$ potrošivši na njih
-ukupno $45$ decilitara džumbusa.
+\textbf{Clarification of the third example:}
+At the first party, Marin decided to relax friends with indexes
+$1$, $2$, $3$, $7$, $9$, $10$, $12$ and $13$. They have drunk a total
+of $45$ units of džumbus.
 
 \setlength\intextsep{-0.5cm}
 \begin{wrapfigure}{c}{\textwidth}
 \centering
-\includegraphics[width=0.6\textwidth]{img/tree.png}
+\includegraphics[width=0.6\textwidth]{img/treeEnglish.png}
 \end{wrapfigure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
