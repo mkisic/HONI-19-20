@@ -14,17 +14,15 @@
 
 %\subsection
 
-,,\textit{Everything will be in flames once red, white and blue start running through your veins}''
--- Slaven Bilić
-
 Kako bi osvojili parcijalu od $10\%$ bodova, trebamo pronaći nužan i dovoljan uvjet postojanja
 domoljubne triangulacije za mnogokut s obojanih stranica.
 
-\textbf{Tvrdnja 1: } \; U svakoj triangulaciji postoji "uho", tj. trokut koji dijeli barem dvije
-stranice s mnogokutom.
+\textbf{Tvrdnja 1: } \; U svakoj triangulaciji za $N \ge 4$ postoje barem dva "uha", tj. trokut
+koji dijeli dvije stranice s mnogokutom.
 
-\emph{Skica dokaza: } \; Indukcija. Vrijedi za trokut.
-Neka dijagonala dijeli mnogokut na dva manja mnogokuta, induktivno se pozovimo dalje. $\qed$
+\emph{Skica dokaza: } \; Indukcija. Vrijedi za kvadrat.
+Neka dijagonala dijeli mnogokut na dva manja mnogokuta. Ako je neki od njih trokut, to je traženo uho;
+inače se možemo induktivno pozvati dalje. $\qed$
 
 Neka na početku ima $a$, $b$ i $c$ stranica u bojama $1$, $2$ i $3$ redom.
 Vrijedi $a+b+c = N$. Jasno je da mora biti $max\{a, b, c\} < n$, inače ne može postojati uho.
@@ -41,7 +39,7 @@ Prebrojimo li broj bridova boje $1$ po trokutima, dobivamo
 iz čega zaključujemo da je $a$ iste parnosti kao $N-3$. Analogno dobivamo isto i za $b$ i $c$. $\qed$
 
 Navedeni uvjeti su zapravo dovoljni; to se najbolje dokazuje algoritmom koji je rješenje ovog zadatka.
-Ukratko rečeno, induktivno ćemo raditi uha koristeći stranice dvije različite boje,
+Ukratko rečeno, induktivno ćemo raditi uši koristeći stranice dvije različite boje,
 čime nećemo promijeniti (dokažite!) jednakost parnosti brojeva $\{a, b, c\}$ u novom mnogokutu, koji
 ima jednu stranicu manje.
 Jedino na što treba paziti je mogućnost da novi mnogokut ima sve stranice iste boje.
@@ -54,7 +52,6 @@ iste boje, te je barem jedna od tih boja ona boja koje ima najviše među trenut
 Ukoliko svaki put krenemo od mjesta gdje smo napravili zadnje uho, moguće je pokazati da
 je vremenska složenost amortizirani $O(N)$.
 
-Uz opisano rješenje, razne nedeterminističke implementacije postižu dobre vremenske složenosti.
 Postoje i kompliciranija $O(N log N)$ rješenja, koja također trebaju dobiti sve bodove.
 
 \end{statement}
