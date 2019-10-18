@@ -14,6 +14,7 @@ vector<int> e[maxn];
 
 int n, m;
 int d[maxn];
+int subtreeSize[maxn];
 
 bool inTree[maxn];
 
@@ -34,10 +35,13 @@ void load() {
 
 void dfs(int x, int p) {
 	inTree[x] = 1;
+	subtreeSize[x] = 1;
 	for (int i = 0; i < e[x].size(); i++) {
 		int y = e[x][i];	
-		if (y != p)
-			dfs(y, x);	
+		if (y != p) {
+			dfs(y, x);
+		    subtreeSize[x] += subtreeSize[y];
+		}
 	}
 }
 
@@ -64,12 +68,12 @@ void calculateDp(int x, int p) {
 		if (y == p)
 			continue;
 		calculateDp(y, x);
-		for (int j = 0; j <= n; j++)
+		for (int j = 0; j <= min(n, subtreeSize[y]); j++)
 			for (int l = 0; l < 2; l++)
 				for (int r = 0; r < 2; r++)	{
 					if (dp[y][j][l][r] == inf)
 						continue;
-					for (int k = 0; k <= n - j; k++) 
+					for (int k = 0; k <= min(n - j, subtreeSize[x]); k++) 
 						for (int o = 0; o < 2; o++)
 							for (int s = 0; s < 2; s++) {
 								if (dp[x][k][o][s] == inf)
