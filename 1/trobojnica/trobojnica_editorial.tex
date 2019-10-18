@@ -1,0 +1,67 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=110,
+  timelimit=1 second,
+  memorylimit=512 MiB,
+]{Trobojnica}
+
+  %\setlength\intextsep{-0.1cm}
+%\begin{wrapfigure}[6]{r}{0.26\textwidth}
+%\centering
+%\includegraphics[width=0.26\textwidth]{img/flag.png}
+%\end{wrapfigure}
+
+%\subsection
+
+,,\textit{Everything will be in flames once red, white and blue start running through your veins}''
+-- Slaven Bilić
+
+Kako bi osvojili parcijalu od $10\%$ bodova, trebamo pronaći nužan i dovoljan uvjet postojanja
+domoljubne triangulacije za mnogokut s obojanih stranica.
+
+\textbf{Tvrdnja 1: } \; U svakoj triangulaciji postoji "uho", tj. trokut koji dijeli barem dvije
+stranice s mnogokutom.
+
+\emph{Skica dokaza: } \; Indukcija. Vrijedi za trokut.
+Neka dijagonala dijeli mnogokut na dva manja mnogokuta, induktivno se pozovimo dalje. $\qed$
+
+Neka na početku ima $a$, $b$ i $c$ stranica u bojama $1$, $2$ i $3$ redom.
+Vrijedi $a+b+c = N$. Jasno je da mora biti $max\{a, b, c\} < n$, inače ne može postojati uho.
+
+\textbf{Tvrdnja 2: } \; Ako postoji domoljubna triangulacija, brojevi $\{a, b, c\}$ su iste parnosti.
+
+\emph{Skica dokaza: } \; Dvostruko prebrojavanje.
+Prebrojimo li broj bridova boje $1$ po trokutima, dobivamo 
+
+\begin{align*}
+  2 * \text{# dijagonala boje 1} + a = N - 3,
+\end{align*}
+
+iz čega zaključujemo da je $a$ iste parnosti kao $N-3$. Analogno dobivamo isto i za $b$ i $c$. $\qed$
+
+Navedeni uvjeti su zapravo dovoljni; to se najbolje dokazuje algoritmom koji je rješenje ovog zadatka.
+Ukratko rečeno, induktivno ćemo raditi uha koristeći stranice dvije različite boje,
+čime nećemo promijeniti (dokažite!) jednakost parnosti brojeva $\{a, b, c\}$ u novom mnogokutu, koji
+ima jednu stranicu manje.
+Jedino na što treba paziti je mogućnost da novi mnogokut ima sve stranice iste boje.
+
+Jedna lijepa implementacija je sljedeće: za svaki vrh mnogokuta pamtimo njegovog sljedbenika u
+trenutnom mnogokutu, te boju brida koji ih povezuje. Traženje mjesta na kojem možemo napraviti
+uho zapravo nije veliki problem.
+Naime, možemo samo ići u krug i napraviti uho na prvom vrhu čiji su prethodni i sljedbeni brid
+iste boje, te je barem jedna od tih boja ona boja koje ima najviše među trenutnim stranicama.
+Ukoliko svaki put krenemo od mjesta gdje smo napravili zadnje uho, moguće je pokazati da
+je vremenska složenost amortizirani $O(N)$.
+
+Uz opisano rješenje, razne nedeterminističke implementacije postižu dobre vremenske složenosti.
+Postoje i kompliciranija $O(N log N)$ rješenja, koja također trebaju dobiti sve bodove.
+
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
