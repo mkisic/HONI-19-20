@@ -69,7 +69,6 @@ void calculateDp(int x, int p) {
 		if (y == p)
 			continue;
 		calculateDp(y, x);
-		subSum += subtreeSize[y];
 		for (int j = 0; j <= subtreeSize[y]; j++)
 			for (int l = 0; l < 2; l++)
 				for (int r = 0; r < 2; r++)	{
@@ -91,6 +90,7 @@ void calculateDp(int x, int p) {
 									updatedDp[o][newS][cnt] = min(updatedDp[o][newS][cnt], cost);
 							}
 					}
+	    subSum += subtreeSize[y];
 		for (int j = 0; j <= n; j++)
 			for (int k = 0; k < 2; k++)
 				for (int l = 0; l < 2; l++)	{
