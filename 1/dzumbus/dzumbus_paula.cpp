@@ -7,8 +7,8 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
-const int MAXN = 510, MAXQ = 2e5 + 10;
-const ll INF = 1e16;
+const int MAXN = 1010, MAXQ = 2e5 + 10;
+const ll INF = 1e15;
 
 int n, m, q;
 ll c[MAXN];
@@ -104,7 +104,6 @@ int main() {
     for (int i = n - 1; i >= 0; i--)
         dp_out[n][i] = min(dp_out[n][i], dp_out[n][i + 1]); 
 
-    int q;
     cin >> q;
     for (int i = 0; i < q; i++) {
         cin >> query[i].first;
