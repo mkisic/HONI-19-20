@@ -1,13 +1,19 @@
 #include <vector>
+#include <cstdio>
 #include <cstring>
 #include <iostream>
 #include <algorithm>
 using namespace std; 
 
-const int maxn = 505;
+const int maxn = 1005;
+const int maxq = 200005;
 const int inf = 0x3f3f3f3f;
 
+typedef pair<int, int> pii;
+
 int q;
+pii qs[maxq];
+int sol[maxq];
 
 int root;
 vector<int> e[maxn];
@@ -21,16 +27,16 @@ bool inTree[maxn];
 int dp[maxn][maxn][2][2];
 
 void load() {
-	cin >> n >> m;
+	scanf("%d%d", &n, &m);
 	for (int i = 1; i <= n; i++)
-		cin >> d[i];
+		scanf("%d", &d[i]);
 	for (int i = 0; i < m; i++) {
 		int x, y;
-		cin >> x >> y;
+		scanf("%d%d", &x, &y);
 		e[x].push_back(y);
 		e[y].push_back(x);
 	}
-	cin >> q;
+	scanf("%d", &q);
 }
 
 void dfs(int x, int p) {
@@ -103,15 +109,25 @@ void calculateDp(int x, int p) {
 void solve() {
 	memset(dp, inf, sizeof dp); 
 	calculateDp(root, -1);
-	for (int i = 0; i < q; i++) {
-		int cs;
-		cin >> cs;
-		int sol = 0;
-		for (int j = 1; j <= n; j++)
-			if (dp[0][j][0][0] <= cs)
-				sol = max(sol, j);
-		cout << sol << endl;
+	for (int i = 0; i < q; i++) { 
+		scanf("%d", &qs[i].first);
+		qs[i].second = i;
 	}
+	sort(qs, qs + q);
+	int cq = q - 1;
+	int i = n;
+	while (i >= 0 && cq >= 0) {
+		while (cq >= 0 && qs[cq].first >= dp[0][i][0][0]) {
+			sol[qs[cq].second] = i;
+			cq--;		
+		}
+		if (cq == -1)
+			break;
+		while (dp[0][i][0][0] > qs[cq].first)
+			i--;
+	}
+	for (int i = 0; i < q; i++)
+		printf("%d\n", sol[i]);
 }
 
 int main (void) {
