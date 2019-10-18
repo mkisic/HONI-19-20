@@ -12,71 +12,73 @@
 \includegraphics[width=0.23\textwidth]{img/tragovi.png}
 \end{wrapfigure}
 
-Kasno uvečer, na Božić 2010., Zdravko je odlučio izaći iz kuće, prijeći cestu te
-prošetati snježnim maksimirskim parkom. Nažalost, zimsku je idilu prekinuo jedan
-monstrum koji je iskočio iz grma. No, Zdravko se nije prepao, već je odlučio
-otjerati monstruma glasnim urlikanjem. Operacija je uspjela, monstrum se
-preplašio i pobjegao, a Zdravko je nastavio šetnju parkom ne sluteći da je
-njegovo urlikanje uzburkalo dio životinja koje se nalaze u obližnjem zoološkom
-vrtu. Preciznije, Zdravkovo urlikanje je najviše uzburkalo tigrove i bikove koji
-su odlučili pobjeći iz zoološkog vrta kako bi pronašli mirnije mjesto za
-spavanje.
+%\section
 
-Tijekom bijega, tigrovi i bikovi morali su proći kroz ograđeno, snijegom
-prekriveno, pravokutno područje podijeljeno na $R \times S$ jediničnih polja.
-Ove životinje u pravokutno su područje morale ući preko gornjeg lijevog kuta, a
-iz područja su morale izaći preko donjeg desnog kuta. Kako bi u što većoj tišini
-prošle kroz ovo područje, životinje su područjem prolazile jedna po jedna,
-krećući se proizvoljnim putem u četiri osnovna smjera (gore, dolje, lijevo,
-desno). Odnosno, životinja se tijekom bijega nije nužno kretala najkraćim putem
-te je na neka polja (uključivo sa početnim i završnim) mogla stati više puta.
-Budući da je pravokutno područje prekriveno snijegom, životinje ostavljaju
-tragove kada stanu na neko polje (potencijalno brišući trag prethodne životinje
-koja je prošla tim poljem).
+On a cold Christmas night in 2010, Zagreb was covered in snow.
+Zdravko decided to leave his castle, cross the road and take a stroll through
+the Maksimir park. Unfortunately, the idyllic winter evening was interrupted by
+a monster that was lurking in the nearby bushes. The monster jumped in front of
+Zdravko, but Zdravko roared a mighty roar which scared the monster away.
+Unbeknownst to him, a bunch of animals from the nearby zoo were startled by
+that roar. More precisely, a group of tigers and bulls were so annoyed that they
+decided to escape the zoo in order to find a nice quiet place to sleep.
 
-Odredite najmanji mogući broj životinja koje su pobjegle iz zoološkog vrta na
-temelju ostavljenih tragova na spomenutom pravokutnom području.
+During their escape, the animals had to pass through a rectangular area divided
+in $R \times C$ unit squares. The animals must enter the area through the
+upper-left corner and must leave the area through the lower-right corner. In
+order to escape as quietly as possible, animals will pass through this area
+one by one, walking along an arbitrary path in four general directions (up,
+down, left and right). In other words, each animal does
+not necessarily travel along a shortest path during its escape
+and it might step on the same unit square more than once (including the entrance
+and exit). Since the ground is covered in snow, animals leave footprints when
+they step inside unit squares. If another footprint is already in the square
+that is about to be stepped on, the animal will erase the previous footprint and
+leave a new one.
+
+Your task is to determine the minimal number of animals that have
+escaped the Maksimir zoo based on the footprints that were left in the
+aforementioned rectangular area.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Input
-\subsection*{Ulazni podaci}
-U prvom su retku prirodni brojevi $R$ i $S$ iz teksta zadatka. \\
-U sljedećih je $R$ redaka po $S$ znakova koji predstavljaju pravokutno područje
-iz teksta zadatka. Znak \texttt{T} označava tigrov trag, znak \texttt{B}
-označava bikov trag, a znak \texttt{*} označava netaknuto područje prekriveno
-snijegom.
+\subsection*{Input}
+The first line contains two integers $R$ and $C$ from the task description. \\
+The next $R$ lines contain $C$ characters that represent the rectangular area
+from the task description. Character \texttt{T} represents a tiger's footprint,
+character \texttt{B} represents a bull's footprint and character \texttt{*}
+represents untouched snow.
 
-Možete pretpostaviti da su ulazni podaci takvi da je barem jedna životinja ušla
-u pravokutno područje i da je svaka takva životinja iz njega i izašla te da se
-pritom kretala u skladu s tekstom zadatka.
+You can assume that the input data is such that at least one animal entered the
+rectangular area and that each animal that entered the area has also left the
+area according to the rules from the task description.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Output
-\subsection*{Izlazni podaci}
-U jednom retku ispišite najmanji mogući broj životinja koje su pobjegle iz
-zoološkog vrta.
+\subsection*{Output}
+Output the minimal number of animals that have escaped the zoo.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Scoring
-\subsection*{Bodovanje}
+\subsection*{Scoring}
 {\renewcommand{\arraystretch}{1.4}
   \setlength{\tabcolsep}{6pt}
   \begin{tabular}{ccl}
- Podzadatak & Broj bodova & Ograničenja \\ \midrule
-  1 & 45 & $2 \le R, S \le 100$ \\
-  2 & 65 & $2 \le R, S \le 1000$ \\
+ Subtask & Score & Constraints \\ \midrule
+  1 & 45 & $2 \le R, C \le 100$ \\
+  2 & 65 & $2 \le R, C \le 1000$ \\
 \end{tabular}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Examples
-\subsection*{Probni primjeri}
+\subsection*{Examples}
 \begin{tabularx}{\textwidth}{X'X'X}
 \sampleinputs{test/zoo.dummy.in.1}{test/zoo.dummy.out.1} &
 \sampleinputs{test/zoo.dummy.in.2}{test/zoo.dummy.out.2} &
 \sampleinputs{test/zoo.dummy.in.3}{test/zoo.dummy.out.3}
 \end{tabularx}
 
-\textbf{Pojašnjenje drugog probnog primjera:}
+\textbf{Clarification of the second example:}
 
 \begin{wrapfigure}{c}{\textwidth}
 \centering
