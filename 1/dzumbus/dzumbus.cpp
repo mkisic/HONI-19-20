@@ -63,17 +63,19 @@ void calculateDp(int x, int p) {
 				updatedDp[i][k].push_back(inf);	
 	dp[x][0][0][0] = 0;
 	dp[x][0][1][0] = d[x];
+	int subSum = 1;
 	for (int i = 0; i < e[x].size(); i++) {
 		int y = e[x][i];
 		if (y == p)
 			continue;
 		calculateDp(y, x);
-		for (int j = 0; j <= min(n, subtreeSize[y]); j++)
+		subSum += subtreeSize[y];
+		for (int j = 0; j <= subtreeSize[y]; j++)
 			for (int l = 0; l < 2; l++)
 				for (int r = 0; r < 2; r++)	{
 					if (dp[y][j][l][r] == inf)
 						continue;
-					for (int k = 0; k <= min(n - j, subtreeSize[x]); k++) 
+					for (int k = 0; k <= subSum; k++) 
 						for (int o = 0; o < 2; o++)
 							for (int s = 0; s < 2; s++) {
 								if (dp[x][k][o][s] == inf)
