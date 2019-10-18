@@ -60,7 +60,8 @@ line. Note that the parties are independent of each other.
 % Scoring
 
 \subsection*{Scoring}
-In all subtasks, it holds $1 \le N \le 1000$, $1 \le Q \le 2\cdot10^5$ i $1 \le D_i \le 10^9$.
+In all subtasks, it holds $1 \le N \le 1000$, $0 \le M < N$, $1 \le Q \le 2\cdot10^5$,
+$1 \le D_i \le 10^9$ and $1 \le S_i \le 10^9$.
 
 {\renewcommand{\arraystretch}{1.4}
   \setlength{\tabcolsep}{6pt}
@@ -69,11 +70,11 @@ In all subtasks, it holds $1 \le N \le 1000$, $1 \le Q \le 2\cdot10^5$ i $1 \le 
   1 & 20 & \makecell[l]{$M = N - 1$, $1 \le S_i \le 1000$, \\
             Marin's friends will be paired up in a way that each friend \\
             will exchange their solutions with at most two other people.} \\
-  2 & 30 & \makecell[l]{$M = N - 1$, $1 \le S_i \le 10^9$ \\
+  2 & 30 & \makecell[l]{$M = N - 1$ \\
             Marin's friends will be paired up in a way that each friend \\
             will exchange their solutions with at most two other people.} \\
-  3 & 30 & $0 \le M < N \le 100$ \\
-  4 & 30 & $0 \le M < N$, $1 \le S_i \le 10^9$ \\
+  3 & 30 & $N \le 100$ \\
+  4 & 30 & no additional constraints. \\
 \end{tabular}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
