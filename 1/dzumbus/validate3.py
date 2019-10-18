@@ -22,7 +22,7 @@ def dfs(cvor, veza):
 
 def stablo():
   ret = 1
-  for i in range(1, 501):
+  for i in range(1, 1001):
     if not bio[i]: 
       ret &= dfs(i, -1)
 
@@ -36,13 +36,13 @@ def check(lines):
     global bio, v
     v = []
     bio = []
-    for i in range(501):
+    for i in range(1001):
       L = []
       v.append(L)
       bio.append(0)
 
     n, m = map(int, lines[0].split())
-    assert 1 <= n <= 500, "n kriv"
+    assert 1 <= n <= 1000, "n kriv"
     assert 0 <= m < n, "m kriv"
     nl.append("{} {}{}".format(n, m, E));
 
@@ -76,7 +76,7 @@ def check(lines):
     assert stablo(), "nije suma stabala"
 
     deg = 0
-    for i in range(501): deg = max(deg, len(v[i]))
+    for i in range(1001): deg = max(deg, len(v[i]))
 
     assert lines == nl, "Krivi format (%s vs %s)" % (lines, nl)
     assert lines[-1][-1] == "\n", "Zadnji red ne zavrsava sa \\n"
@@ -90,7 +90,7 @@ expected_clusters = {'prvi': 1, "drugi" : 1, "treci" : 1, "cet" : 1}
 def what_cluster(data):
   if data['n'] == data['m'] + 1 and data['maks'] <= 1000: return 'prvi'
   if data['n'] == data['m'] + 1 and data['maks'] <= 10**9: return 'drugi'
-  if data['maks'] <= 100: return 'treci'
+  if data['n'] <= 100: return 'treci'
   return "cet"
 
 
