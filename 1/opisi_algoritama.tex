@@ -13,7 +13,7 @@
 
 \section*{Opisi algoritama}
 Zadatke, testne primjere i rješenja pripremili: Nikola Dmitrović, Marin Kišić,
-Josip Klepec, Vedran Kurdija, Ivan Lazarić, Ivan Paljak, Stjepan Požgaj, Daniel Paleka i
+Josip Klepec, Vedran Kurdija, Ivan Lazarić, Daniel Paleka, Ivan Paljak, Stjepan Požgaj i
 Paula Vidas. Primjeri implementiranih rješenja su dani u priloženim izvornim
 kodovima.
 
@@ -322,9 +322,11 @@ izračunali dinamiku za njegovu djecu u željenoj složenosti. Neka taj čvor im
 \end{align*}
 Stoga je ukupna složenost cijelog rješenja $\mathcal{O}(N^2)$.
 
+\clearpage
+
 \subsection*{Zadatak: Trobojnica}
 \textsf{Predložio: Daniel Paleka}\\
-\textsf{Potrebno znanje: ??}
+\textsf{Potrebno znanje: konstruktivni algoritmi, matematička indukcija, amortizirana složenost}
 
 Kako bismo osvojili podzadatak od $10\%$ bodova, trebamo pronaći nužan i dovoljan uvjet postojanja
 domoljubne triangulacije za mnogokut s obojanih stranica.
@@ -366,11 +368,34 @@ je vremenska složenost amortizirani $\mathcal{O}(N)$.
 
 Postoje i kompliciranija $\mathcal{O}(N \log N)$ rješenja, koja također trebaju dobiti sve bodove.
 
+\clearpage
 
 \subsection*{Zadatak: Zoo}
 \textsf{Predložio: Ivan Paljak}\\
-\textsf{Potrebno znanje: ??}
+\textsf{Potrebno znanje: bfs/dfs, određivanje dubine stabla}
 
+Primijetimo da nam je odmah poznato koja je životnja zadnja prošla preko
+pravokutnog područja. Ako se na početnom i završnom polju nalazi znak \texttt{T},
+tada je to bio tigar, a inače bik. Također, primijetimo da, ako je poljem prošao
+minimalan broj životinja, tada nikad nisu dvije životinje iste vrste išle jedna
+za drugom.
+
+Zadatak rješavamo ``unazad''. Pronađimo najprije sva polja na koja je mogla stati
+zadnja životinja prije nego što je napustila područje. Ta polja čine povezanu
+komponentu tragova iste vrste (u četiri smjera), a možemo je pronaći pretragom u
+širinu. Budući da je tim svim poljima mogla proći i prethodna životinja, možemo
+u sva polja te komponente upisati tragove životnje druge vrste i dodati 1 u rješenje.
+Ovaj postupak je potrebno ponavljati sve dok na polju ne ostanu tragovi samo
+jedne vrste životinja. Naivna implementacija ovog algoritma osvojit će $45$
+bodova.
+
+Zamislimo svaku povezanu komponentu tragova iste vrste kao čvor u grafu. Dva su
+čvora povezana ako su odgovarajuće komponente susjedne, odnosno postoje dva
+susjedna polja u matrici od kojih jedno pripada prvoj, a drugo drugoj komponenti.
+Primijetimo da je taj graf zapravo stablo. Ukorijenimo li stablo u komponenti
+kojoj pripada gornje lijevo polje, tada broj koraka prethodno opisanog algoritma
+odgovara dubini tog stabla. Stablo možemo izgraditi u vremenskoj složenosti
+$\mathcal{O}(R\cdot S)$, a broj čvorova u stablu ograđen je istim izrazom.
 
 \end{document}
 %%% Local Variables:
