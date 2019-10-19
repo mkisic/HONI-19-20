@@ -13,7 +13,7 @@
 
 \section*{Opisi algoritama}
 Zadatke, testne primjere i rješenja pripremili: Nikola Dmitrović, Marin Kišić,
-Josip Klepec, Ivan Lazarić, Ivan Paljak, Stjepan Požgaj, Daniel Paleka i
+Josip Klepec, Vedran Kurdija, Ivan Lazarić, Ivan Paljak, Stjepan Požgaj, Daniel Paleka i
 Paula Vidas. Primjeri implementiranih rješenja su dani u priloženim izvornim
 kodovima.
 
@@ -149,7 +149,7 @@ je ``trol'', može se naslutiti da se iza svega krije nešto elegantno.
 No, krenimo redom. U test podacima vrijednima $10$ bodova radimo nad elementima
 niza koje Marin uopće nije mijenjao (jer su već bili jednoznamenkasti).
 Za osvajanje ovih bodova bilo je dovoljno za svaki upit ispisati vrijednost
-$l + (l + 1) + … + (r - 1) + r$.
+$l + (l + 1) + \dots + (r - 1) + r$.
 
 Za dodatnih $20$ bodova ograničenja su bila dovoljno mala da je bilo moguće
 simulirati postupak opisan u tekstu zadatka. Odnosno, krečući se petljom po
@@ -225,7 +225,102 @@ grafu pronađemo neki put od $A$ do $B$.
 
 \subsection*{Zadatak: Džumbus}
 \textsf{Predložio: Vedran Kurdija}\\
-\textsf{Potrebno znanje: ??}
+\textsf{Potrebno znanje: stablo, dinamičko programiranje, analiza složenosti}
+
+Kao što to obično i biva, sve ćemo podzadatke riješiti dinamičkim programiranjem. 
+
+U prvom i drugom podzadatku iz ograničenja zaključujemo da parovi čine točno jedan lanac.
+Prvi ćemo podzadatak riješiti koristeći dinamiku koja u stanju ima poziciju u lancu $P$,
+količinu džumbusa koju imamo na raspolaganju $K$ te bit $B$ sa vrijednošću $0$ ili $1$
+koji označava je li osoba na poziciji $P$ u lancu razmjenjivala bilješke.
+Vrijednost dinamike $dp[P][K][B]$ odnosit će se samo na prvih $P$ ljudi u lancu,
+a bit će jednaka najvećem broju ljudi koji mogu barem jednom razmjenjivati bilješke uz
+optimalnu raspodjelu $K$ decilitara džumbusa te uz uvjet da je osoba na poziciji $P$ u
+lancu razmjenjivala bilješke (slučaj $B = 1$) ili nije (slučaj $B = 0$).
+Neka $L[i]$ označava oznaku $i$-te osobe u lancu.
+Prijelaz je (uz obraćanje pozornosti na granice i rubne slučajeve koje prepuštamo čitatelju)
+sljedeći: 
+$$dp[P][K][0] = \max \{ dp[P - 1][K][0], dp[P - 1][K][1] \}$$
+$$
+dp[P][K][1] = \max
+\begin{cases}
+    dp[P - 1][K - D_{L[P]}][1] + 1 \\
+    dp[P - 1][K - D_{L[P]} - D_{L[P - 1]}] + 2
+\end{cases}
+$$
+Odgovor na upit $S_i$ pronalazimo kao $\max \{dp[L[N]][S_i][0], dp[L[N]][S_i][1]\}$.
+Složenost je $\mathcal{O}(N \cdot \max S_i)$.
+
+Budući da u drugom podzadatku nema dodatnog ograničenja na vrijednosti $S_i$,
+dinamika iz prvog zadatka bila bi daleko prespora i zauzela daleko previše memorije.
+Zato ćemo stvari lukavo obrnuti. U stanju će ponovno biti pozicija u lancu i bit koji označava
+je li trenutna osoba razmjenjivala bilješke, no sada ćemo količinu džumbusa
+iz stanja premjestiti u vrijednost dinamike, a broj ljudi koji su barem jednom razmjenjivali
+bilješke premjestiti iz vrijednosti u stanje. Prijelaz koristi sličnu ideju kao i u prošlom
+podzadatku te ga ostavljamo čitatelju za samousavršavanje.
+Odgovor na upit $S_i$ pronalazimo kao najveći $R$ za koji je
+$\min \{dp[L[N]][R][0], dp[N][R][1]\} \le S_i$.
+Detalje oko implementacije odgovaranja na upite ostavljamo čitatelju,
+budući da nisu zahtjevni. Složenost izračuna dinamike je $\mathcal{O}(N^2)$. 
+
+U trećem podzadatku više nemamo lanac, već šumu stabala. Šumu možemo svesti na jedno stablo
+tako da stvorimo novi čvor kojega ćemo tretirati kao osobu kojoj je potrebna beskonačna količina
+džumbusa da se oraspoloži (u praksi za ovo naprosto uzimamo neki broj veći od $\max S_i$, tj. od
+$10^9$). Na novi ćemo čvor spojiti sva stabla iz šume. Time smo dobili jedno veliko stablo,
+sigurni da nam novi čvor neće pokvariti računanje rezultata.
+Koristimo sličnu dinamiku kao u drugom podzadatku, samo ovoga puta na stablu. Stablo ćemo
+ukorijeniti u bilo kojem čvoru (npr. čvoru $1$). Vrijednost $dp[P][R][B]$ je najmanja količina
+džumbusa potrebna da u podstablu čvora $P$ postignemo da $R$ ljudi razmijeni bilješke,
+uz uvijet da je osoba $P$ razmjenjivala bilješke ako je $B = 1$, ili nije ako je $B = 0$.
+Prije izračuna vrijednosti dinamike za čvor $P$, trebamo imati izračunate sve vrijednosti
+dinamika njegove djece. Koristit ćemo i pomoćnu dinamiku $dp\_prefiks$, koja u stanju ima broj
+ljudi unutar podstabla čvora $P$ koji su barem jednom razmjenjivali bilješke $R$,
+bit za vrijednošću $0$ ili $1$ koji, kao i prije, označava je li osoba $P$ razmjenjivala
+bilješke, te broj $K$ koji označava da smo do sada uzeli u obzir prvih $K$ djece čvora $P$.
+Očito je onda $dp[P][R][B] = dp\_prefiks[R][B][\text{broj djece od P}]$. Neka $C[i]$ označava
+$i$-to dijete čvora $P$. Za ovu dinamiku imamo prijelaze:
+$$
+dp\_prefiks[R][0][K] =
+\min_{A + B = R} \{ dp\_prefix[A][0][K-1] + \min \{ dp[C[K]][B][0], dp[C[K]][B][1] \} \}
+$$
+$$
+dp\_prefiks[R][1][K] = \min_{A + B = R}
+\begin{cases}
+    dp\_prefiks[A-1][0][K-1] + D_P + dp[C[K]][B][1] \\
+    dp\_prefiks[A-1][0][K-1] + D_P + dp[C[K]][B-1][0] + D_{C[K]} \\
+    dp\_prefiks[A][1][K-1] + D_P + dp[C[K]][B][1] \\
+    dp\_prefiks[A][1][K-1] + D_P + dp[C[K]][B-1][0] + D_{C[K]} \\
+    dp\_prefiks[A][1][K-1] + dp[C[K]][B][0]
+\end{cases}
+$$
+(Implementacijske detalje i rubne slučajeve ostavljamo čitatelju.)
+Kada pozbrojimo po svim čvorovima, ukupno postoji $\mathcal{O}(N^2)$ stanja dinamike
+$dp\_prefiks$, i svaki prijelaz se računa u najviše $\mathcal{O}(N)$ koraka, pa složenost možemo
+ograničiti sa $\mathcal{O}(N^3)$.
+Znam što mislite. Nema teorije da se ovo može još ubrzati, zar ne!? 
+
+Za rješavanje četvrtog podzadatka potrebno je uočiti da je, uz pažljivu implementaciju,
+složenost opisanog rješenja zapravo $\mathcal{O}(N^2)$. Očito je nemoguće da u nekom skupu
+ljudi više nijh razmijeni bilježnice nego što je veličina tog skupa. Stoga, pri računanju
+$dp\_prefiks$, nije potrebno za $A$ i $B$ razmatrati sve moguće vrijednost, već samo one za
+koje je ta situacija moguća (dakle $A$ ne može biti veći od zbroja veličina podstabala do sada
+obrađene djece plus $1$, a $B$ ne može biti veći od veličine podstabla trenutnog djeteta).
+Dokazat ćemo da je za svaki čvor ukupna složenost izračuna dinamike za njega i sve čvorove u
+njegovom podstablu $\mathcal{O}(\text{veličina podstabla}^2)$. Dokaz provodimo induktivno po
+dubini stabla. Tvrdnja očito vrijedi ako je čvor list. Pretpostavimo da smo za neki čvor
+izračunali dinamiku za njegovu djecu u željenoj složenosti. Neka taj čvor ima $X$ djece,
+čije su veličine podstabala $Y_1, Y_2, ... Y_X$. Ukupna složenost izračuna dinamike je
+\begin{align*}
+    \mathcal{O} \left( \sum_{i=1}^{X} Y_i^2 +
+    \sum_{i=1}^{X}(1 + \sum_{j=1}^{i-1}Y_j) \cdot Y_i \right)
+    &= \mathcal{O} \left( \sum_{i=1}^{X}Y_i^2 + \sum_{i=1}^{X}Y_i +
+    \sum_{i=1}^{X}\sum_{j=1}^{i-1}Y_i Y_j \right) \\
+    &= \mathcal{O} \left( 1 + \sum_{i=1}^{X}Y_i^2 + 2\sum_{i=1}^{X}Y_i +
+    2\sum_{i=1}^{X}\sum_{j=1}^{i-1}Y_i Y_j \right) \\
+    &= \mathcal{O} \left( (1 + \sum_{i=1}^X Y_i)^2 \right) \\
+    &= \mathcal{O} (\text{veličina podstabla}^2) 
+\end{align*}
+Stoga je ukupna složenost cijelog rješenja $\mathcal{O}(N^2)$.
 
 \subsection*{Zadatak: Trobojnica}
 \textsf{Predložio: Daniel Paleka}\\
@@ -242,7 +337,7 @@ Neka dijagonala dijeli mnogokut na dva manja mnogokuta. Ako je neki od njih trok
 inače se možemo induktivno pozvati dalje.
 
 Neka na početku ima $a$, $b$ i $c$ stranica u bojama $1$, $2$ i $3$ redom.
-Vrijedi $a+b+c = N$. Jasno je da mora biti $max\{a, b, c\} < n$, inače ne može postojati uho.
+Vrijedi $a+b+c = N$. Jasno je da mora biti $\max\{a, b, c\} < n$, inače ne može postojati uho.
 
 \textbf{Tvrdnja 2: } \; Ako postoji domoljubna triangulacija, brojevi $\{a, b, c\}$ su iste parnosti.
 
@@ -269,7 +364,7 @@ iste boje, te je barem jedna od tih boja ona boja koje ima najviše među trenut
 Ukoliko svaki put krenemo od mjesta gdje smo napravili zadnje uho, moguće je pokazati da
 je vremenska složenost amortizirani $\mathcal{O}(N)$.
 
-Postoje i kompliciranija $\mathcal{O}(N log N)$ rješenja, koja također trebaju dobiti sve bodove.
+Postoje i kompliciranija $\mathcal{O}(N \log N)$ rješenja, koja također trebaju dobiti sve bodove.
 
 
 \subsection*{Zadatak: Zoo}
