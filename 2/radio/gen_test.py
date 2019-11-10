@@ -99,17 +99,17 @@ def gen_cases():
 
     # 1. subtask -- N = 1
     for i in range(1, 4):
-        print('Generating subtask 1, case ', i)
+        print('Generating subtask 1, case %d' % i)
         real.append(gen_random(1, 1, 100000, 1))
     
     # 2. subtask
     for i in range(4,5):
-        print('Generating subtask 1, case ', i)
+        print('Generating subtask 2, case %d' % i)
         real.append(gen_random(1, 100000, 100000, 1))
     
     # 3. subtask --> long long
     for i in range(5,7):
-        print('Generating subtask 1, case ', i)
+        print('Generating subtask 3, case %d' % i)
         real.append(gen_random(90000, 100000, 100, 90000))
 
     for i, test in enumerate(real):
