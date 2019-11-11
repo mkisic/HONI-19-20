@@ -8,34 +8,25 @@ def check(lines):
     nl = []   # ispravno formatirane linije
     E = "\n"  # line ending
 
-    n, x = map(int, lines[0].strip().split())
-    assert 1 <= n <= 100000, "n kriv"
-    assert 1 <= x <= 100000, "x kriv"
-    nl.append("{} {}{}".format(n, x, E))
-    maks = 0
-
-    for i in range(n):
-      a, b = map(int, lines[1 + i].strip().split())
-      assert 1 <= a <= 100000, "a kriv"
-      assert 1 <= b <= 100000, "b kriv"
-      x += b - a
-      maks = max(maks, x)
-      assert 0 <= x, "x premali"
-      nl.append("{} {}{}".format(a,b,E))
+    n = int(lines[0].strip())
+    k = int(lines[1].strip())
+    assert 0 <= n <= 100, "n kriv"
+    assert 1 <= k <= 100, "k kriv"
+    nl.append("{}{}".format(n, E))
+    nl.append("{}{}".format(k, E))
 
     assert lines == nl, "Krivi format (%s vs %s)" % (lines, nl)
     assert lines[-1][-1] == "\n", "Zadnji red ne zavrsava sa \\n"
-    return {"n" : n, "maks" : maks}
+    return {}
 
 
 # Ocekivani clusteri! Ovo vjerojatno zelis promijeniti!
-expected_clusters = {'Normalni': 3, "N=1": 3}
+expected_clusters = {'Normalni': 5}
 
 
 def what_cluster(data):
     # na temelju povratne informacije iz check(lines)
     # zakljucuje za TP u kojoj je bodovnoj sekciji
-    if data['n'] == 1: return "N=1"
     return 'Normalni'
 
 
