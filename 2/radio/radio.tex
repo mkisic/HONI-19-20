@@ -1,0 +1,78 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=30,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Radio}
+
+\setlength\intextsep{-0.1cm}
+\begin{wrapfigure}[7]{r}{0.23\textwidth}
+\centering
+\includegraphics[width=0.23\textwidth]{img/radio.jpg}
+\end{wrapfigure}
+
+Stjepan je, nakon godinu dana rada u poznatoj hrvatskoj firmi, kupio polovni
+BMW. Na putu od Zagreba do Belice (malog mjesta pored Pribislavca) Stjepan je
+glasno puštao glazbu i nakon \textbf{dugo dugo} trpljenja te buke njegova
+cura Ana mu je uputila $N$ pritužbi.
+
+Svaka pritužba je bila oblika:
+,,Sjepane, molim te stišaj glazbu za $A_i$ jedinica''.  Stjepan bi rado
+poslušao svoju curu, ali također bi htio održati visoku razinu glasnoće
+glazbe. Kako bi pomirio svoje dvojbe Stjepan je odlučio povećati jačinu
+glazbe za $B_i$ jedinica svaki put kad bi mu Ana uputila pritužbu, a zatim
+ispuniti želju svojoj djevojci i smanjiti jačinu glazbe za $A_i$ jedinica.
+
+Ako znamo da je jačina glazbe na početku puta bila $X$ jedinica, pitamo se
+kolika je bila na kraju puta?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom su retku dva prirodna broja $N$, $X$ $(1 \le N, X \le 10^5)$ iz teksta
+zadatka. \\
+U sljedećih su $N$ redaka dva prirodna broja $A_i$ i $B_i$ $(1 \le Ai, Bi \le 10^5)$
+iz teksta zadatka.
+
+Jačina glazbe tokom puta nikada neće biti negativna.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+U jedini redak ispišite jačinu glazbe na kraju puta.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+\subsection*{Bodovanje}
+U test podacima ukupno vrijednima $15$ bodova vrijedit će da je $N = 1$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Probni primjeri}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/radio.dummy.in.1}{test/radio.dummy.out.1} &
+\sampleinputs{test/radio.dummy.in.2}{test/radio.dummy.out.2} &
+\sampleinputs{test/radio.dummy.in.3}{test/radio.dummy.out.3}
+\end{tabularx}
+
+\textbf{Pojašnjenje prvog probnog primjera:}
+Na početku vožnje jačina glazbe je $10$ jedinica. Nakon što Ana uputi prvu i
+jedinu pritužbu, Stjepan pojača radio za pet jedinica na $15$, a zatim ga
+smanji za jednu jedinicu na $14$.
+
+\textbf{Pojašnjenje drugog probnog primjera:}
+Na početku vožnje jačina glazbe je $7$ jedinica, nakon prve pritužbe jačina je
+$4$ jedinice, a nakon druge i posljednje pritužbe jačina glazbe iznosi $2$
+jedinice.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
