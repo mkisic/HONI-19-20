@@ -2,48 +2,56 @@
 % Problem statement
 \begin{statement}[
   problempoints=110,
-  timelimit=2 sekunde,
+  timelimit=1 sekund1,
   memorylimit=512 MiB,
-]{Trobojnica}
+]{Checker}
 
-  %\setlength\intextsep{-0.1cm}
-%\begin{wrapfigure}[6]{r}{0.26\textwidth}
-%\centering
-%\includegraphics[width=0.26\textwidth]{img/flag.png}
-%\end{wrapfigure}
-
-,,\textit{...fool me once, shame on — shame on you. Fool me — you can't get fooled again."}''
+\textit{...fool me once, shame on — shame on you. Fool me — you can't get fooled again."}
 -- W.
 
-U ovom zadatku promatramo pravilne $N$-terokute kojima su stranice obojene u tri boje, a vrhovi označeni prirodnim brojevima u smjeru kazaljke na satu.
+U ovom zadatku promatramo pravilne $N$-terokute kojima su stranice obojene u
+tri boje, a vrhovi označeni prirodnim brojevima u smjeru kazaljke na satu.
 \textit{Triangulacija} je podjela mnogokuta na trokute unutarnjim
-dijagonalama takva da dijagonale nemaju zajedničkih točaka osim vrhova mnogokuta te ne sijeku stranice mnogokuta osim u vrhovima mnogokuta.
-Naravno, u ovom zadatku i svaka će dijagonala biti obojena u jednu od tri boje.
+dijagonalama takva da dijagonale nemaju zajedničkih točaka osim vrhova
+mnogokuta te ne sijeku stranice mnogokuta osim u vrhovima mnogokuta.
+Naravno, u ovom zadatku i svaka će dijagonala biti obojena u jednu od tri
+boje.
 
-Triangulacija je \textit{domoljubna} ako za svaki od $N-2$ trokuta vrijedi da su
-mu sve tri stranice različite boje. Vaš je zadatak odrediti čine li dijagonale triangulaciju, te je li ta triangulacija domoljubna.
+Triangulacija je \textit{domoljubna} ako za svaki od $N-2$ trokuta vrijedi da
+su mu sve tri stranice različite boje. Vaš je zadatak odrediti čine li
+dijagonale triangulaciju, te je li ta triangulacija domoljubna.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Input
 \subsection*{Ulazni podaci}
-\textbf{U prvom je retku broj podzadatka za trenutni test primjer.} (Ukoliko vaše rješenje ne mari za podzadatke, samo učitajte  i ignorirajte ga.)
-U drugom je retku prirodan broj $N$ iz teksta zadatka. \\
+U prvom je retku redni broj podzadatka kojem pripada testni primjer
+(vidi tablicu u poglavlju o bodovanju). Ako vaše rješenje ne mari za podzadatke,
+samo ga učitajte i ignorirajte.
+
+U drugom je retku prirodan broj $N$ iz teksta zadatka.
+
 U trećem je retku $N$-teroznamenkasti broj čije znamenke predstavljaju boje
 stranica $N$-terokuta u smjeru kazaljke na satu. Odnosno, prva znamenka
 predstavlja boju stranice $(1,2)$, druga znamenka boju stranice $(2,3)$ i tako
 sve do $N$-te znamenke koja predstavlja boju stranice $(N, 1)$. Dakako, boje su
 označene znamenkama $1$, $2$ i $3$.
-U svakom od sljedećih $N-3$ redaka nalazi se po jedna dijagonala u obliku $X$ $Y$ $C$, gdje su $X$ i $Y$ vrhovi dijagonale, a $C$ boja
-$(1 \le X, Y \le N, 1 \le C \le 3)$. Svaki redak će opisivati validnu dijagonalu: vrhovi $X$ i $Y$ neće biti ni isti ni susjedni.
+
+U svakom od sljedećih $N-3$ redaka nalazi se po jedna dijagonala u obliku
+$X$ $Y$ $C$, gdje su $X$ i $Y$ vrhovi dijagonale, a $C$ boja
+$(1 \le X, Y \le N, 1 \le C \le 3)$. Svaki redak će opisivati validnu
+dijagonalu, odnosno vrhovi $X$ i $Y$ neće biti ni isti ni susjedni.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Output
 \subsection*{Izlazni podaci}
-Ako zadane dijagonale ne čine triangulaciju, ispišite "neispravna triangulacija".
+Ako zadane dijagonale ne čine triangulaciju, ispišite
+\texttt{"neispravna triangulacija"} (bez navodnika).
 
-Ako pak dijagonale čine triangulaciju, no ona nije domoljubna, ispišite "neispravno bojenje".
+Ako pak dijagonale čine triangulaciju, no ona nije domoljubna, ispišite
+\texttt{"neispravno bojenje"} (bez navodnika).
 
-Ako dijagonale čine domoljubnu triangulaciju, ispišite "tocno".
+Ako dijagonale čine domoljubnu triangulaciju, ispišite \texttt{"tocno"}
+(bez navodnika).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Scoring
@@ -54,32 +62,25 @@ Ako dijagonale čine domoljubnu triangulaciju, ispišite "tocno".
  Podzadatak & Broj bodova & Ograničenja \\ \midrule
   1 & 12 & $4 \le N \le 300$ \\
   2 & 17 & $4 \le N \le 2000$ \\
-  3 & 23 & $4 \le N \le 2\cdot10^5$, odgovor je "neispravna triangulacija" ili "tocno" \\
-  4 & 23 & $4 \le N \le 2\cdot10^5$, odgovor je "neispravno bojenje" ili "tocno" \\
+    3 & 23 & $4 \le N \le 2\cdot10^5$, odgovor je \texttt{neispravna triangulacija} ili \texttt{tocno} \\
+    4 & 23 & $4 \le N \le 2\cdot10^5$, odgovor je \texttt{neispravno bojenje} ili \texttt{tocno} \\
   5 & 35 & $4 \le N \le 2\cdot10^5$
 \end{tabular}}
 
-Za razliku od zadatka "Trobojnica", ako vaš program točno ispisuje prvi redak u svakom testnom primjeru nekog podzadatka, osvojit će $10-\%$ bodova predviđenih za taj podzadatak.
+Za razliku od zadatka "Trobojnica", ako vaš program točno ispisuje prvi redak u
+svakom testnom primjeru nekog podzadatka, osvojit će $100\%$ bodova predviđenih
+za taj podzadatak.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Examples
 \subsection*{Probni primjeri}
-\begin{tabularx}{\textwidth}{X'X'X}
-\sampleinputs{test/trobojnica.dummy.in.1}{test/trobojnica.dummy.out.1} &
-\sampleinputs{test/trobojnica.dummy.in.2}{test/trobojnica.dummy.out.2} &
-\sampleinputs{test/trobojnica.dummy.in.3}{test/trobojnica.dummy.out.3}
-\end{tabularx}
+%\begin{tabularx}{\textwidth}{X'X'X}
+%\sampleinputs{test/trobojnica.dummy.in.1}{test/trobojnica.dummy.out.1} &
+%\sampleinputs{test/trobojnica.dummy.in.2}{test/trobojnica.dummy.out.2} &
+%\sampleinputs{test/trobojnica.dummy.in.3}{test/trobojnica.dummy.out.3}
+%\end{tabularx}
 
-%\textbf{Pojašnjenje drugog probnog primjera:}
-
-%\textbf{1. upit} \textrightarrow{}
-%$A_9 = 9$, $A_{10} = 1 + 0 = 1$, $A_{11} = 1 + 1 = 2$,
-%$A_{12} = 1 + 2 = 3$, $A_{13} = 1 + 3 = 4$.\\
-%\phantom{\textbf{1. upit} \textrightarrow{}}
-%$A_9 + A_{10} + A_{11} + A_{12} + A_{13} = 9 + 1 + 2 + 3 + 4 = 19$.
-
-%\textbf{2. upit} \textrightarrow{}
-%$A_{44} = 4 + 4 = 8$, $A_{45} = 4 + 5 = 9$. $A_{44} + A_{45} = 8 + 9 = 17$.
+\textbf{TODO}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % We're done
