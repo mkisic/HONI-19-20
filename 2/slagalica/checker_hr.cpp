@@ -94,13 +94,14 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   for (int i = 0; i < n; ++i) {
     if (puzzle.find(sol_contestant[i]) != puzzle.end()) finish(0.0, WRONG);
     if (puzzle_type.find(sol_contestant[i]) == puzzle_type.end()) finish(0.0, WRONG);
+    puzzle.insert(sol_contestant[i]);
   }
 
   for (int i = 1; i < n; ++i)
     if (!fit(puzzle_type[sol_contestant[i - 1]], puzzle_type[sol_contestant[i]]))
       finish(0.0, WRONG);
 
-  finish(0.2857142857, PARTIAL);
+  finish(0.4, PARTIAL);
   // The function MUST terminate before this line via finish()!
 }
 
