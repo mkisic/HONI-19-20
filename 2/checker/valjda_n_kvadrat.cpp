@@ -19,14 +19,10 @@ const int MAXN = 2e5 + 10;
 
 int n;
 pii nxt[MAXN];
-pair<pii, int> diagonals[MAXN * 2];
+map<int, int> diagonals[MAXN];
 
 int dist(int a, int b) {
     return (b + n - a) % n;
-}
-
-bool cmp(const pair<pii, int>& a, const pair<pii, int>& b) {
-    return dist(a.fi.fi, a.fi.se) < dist(b.fi.fi, b.fi.se);
 }
 
 bool check_triangle(int a, int b, int c) {
@@ -37,6 +33,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
+
+    srand(time(0));
 
     int t;
     cin >> t;
@@ -53,32 +51,29 @@ int main() {
         cin >> a >> b >> c;
         a--; b--;
 
-        diagonals[2 * i] = {{a, b}, c};
-        diagonals[2 * i + 1] = {{b, a}, c};
+        diagonals[a][b] = c;
+        diagonals[b][a] = c;
     }
 
-    int m = 2 * (n - 3);
-    sort(diagonals, diagonals + m, cmp);
-
     bool coloring = true;
-
+    int a = rand() % n;
     for (int i = 0; i < n - 2; i++) {
-        int a = diagonals[i].fi.fi;
-        int b = nxt[a].fi;
-        int c = diagonals[i].fi.se;
-
-        int color_a = nxt[a].se;
-        int color_b = nxt[b].se;
-        int color_c = diagonals[i].se;
-
-        if (nxt[b].fi != c) {
-            cout << WRONG_TRIANGULATION << "\n";
-            return 0;
+        int start_a = a;
+        while (!diagonals[a].count(nxt[nxt[a].fi].fi)) {
+            a = nxt[a].fi;
+            if (a == start_a) {
+                cout << WRONG_TRIANGULATION << "\n";
+                return 0;
+            }
         }
 
-        coloring &= check_triangle(color_a, color_b, color_c);
+        int b = nxt[a].fi;
+        int c = nxt[b].fi;
 
-        nxt[a] = {c, color_c};
+        coloring &= check_triangle(nxt[a].se, nxt[b].se, diagonals[a][c]);
+
+        nxt[a] = {c, diagonals[a][c]};
+        diagonals[a].erase(c);
     }
 
     if (!coloring) {

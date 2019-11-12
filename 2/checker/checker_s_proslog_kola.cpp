@@ -84,6 +84,9 @@ void finish(string s) {
 }
 
 int main() {
+    int t;
+    cin >> t;
+
     string color_str;
     cin >> N >> color_str;
 
