@@ -111,8 +111,8 @@ int main() {
   int q; cin >> q;
   REP(i, q) {
     ll x, y; cin >> x >> y;
-    x ^= cnt * t;
-    y ^= cnt * t;
+    x ^= cnt * t * cnt * cnt;
+    y ^= cnt * t * cnt * cnt;
 
     if(solve((lf) x, (lf) y)) {
       cout << "DA\n";

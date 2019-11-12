@@ -62,13 +62,13 @@ int main() {
     poly.pb({x, y});
   }
   int q;
-  int da = 0;
+  ll da = 0;
   scanf("%d",&q);
   REP(i, q) {
     scanf("%lld %lld",&x,&y);
     if (t) {
-      x ^= da;
-      y ^= da;
+      x ^= (da * da * da);
+      y ^= (da * da * da);
     }
     int ans = solve();
     da += ans;

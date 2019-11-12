@@ -24,7 +24,7 @@ const vector <string> cluster[3] = {
   {"3a", "3b", "3c", "3d", "3e", "3f", "4a", "4b", "4c", "4d"},
   {"4e", "5a", "5b", "5c", "5e", "5f", "5g", "5h", "5i"}};
 
-const int HASH[] = {1, 0, 1};
+const int HASH[] = {0, 0, 1};
 const int Q[] = {2000, 100000, 100000};
 
 const string IN_PREF = "svjetlost/svjetlost.in.";
@@ -76,7 +76,7 @@ bool pitaj(ll x, ll y) {
 
 int CNT;
 
-pll get_point(int pozitiv) {
+pll get_point(int pozitiv, ll da, int sad) {
   pll ret;
   int cnt = 0;
   do {
@@ -85,7 +85,7 @@ pll get_point(int pozitiv) {
     ret.sec = RandLL();
     if (Rand(2)) ret.fi = -ret.fi;
     if (Rand(2)) ret.sec = -ret.sec;
-  } while (pitaj(ret.fi, ret.sec) != pozitiv);
+  } while (pitaj(ret.fi, ret.sec) != pozitiv || sad * (pitaj(ret.fi ^ da, ret.sec ^ da) == pozitiv));
   CNT = max(CNT, cnt);
   return ret;
 }
@@ -112,11 +112,20 @@ void napravi(int test, string OUT, string IN) {
   int q = Q[test] - Rand(5);
 
   int da = 0;
+  int moze = 3;
   REP(i, q) {
     int ok = Rand(2);
-    pll tocka = get_point(ok);
-    if (HASH[test]) tocka.fi ^= da;
-    if (HASH[test]) tocka.sec ^= da;
+    ll ksor = 0;
+    ksor = da;
+    if (i > 10000 && moze && Rand(1000) == 1) {
+      ksor = da;
+      moze--;
+    }
+    else ksor = 0;
+    ksor *= HASH[test];
+    pll tocka = get_point(ok, (ll)ksor * ksor * ksor, ksor > 0);
+    if (HASH[test]) tocka.fi ^= ((ll)da * da * da);
+    if (HASH[test]) tocka.sec ^= ((ll)da * da * da);
     da += ok;
     kveri_tocke.pb(tocka);
   }
