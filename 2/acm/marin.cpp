@@ -18,6 +18,7 @@ typedef pair <ll, ll> pll;
 #define mp make_pair
 #define pb push_back
 
+const string JA = "NijeZivotJedanACM";
 const int MAXN = 1010;
 
 int n, m;
@@ -28,12 +29,14 @@ char c;
 
 int read_att() {
   int ret = 0;
-  while (scanf("%c",&c) && c != '/' && c != ' ') {
+  while (scanf("%c",&c) && c != '/' && c != ' ' && c != '\n') {
     ret *= 10;
     ret += c - '0';
   }
   return ret;
 }
+
+vector <int> moji;
 
 pii read_tim() {
   pii ret;
@@ -49,9 +52,23 @@ pii read_tim() {
       ret.fi--;
       ret.sec += S + M * 60 + H * 60 * 60 + 20 * 60 * tries;
       last = 1;
+      if (ime == JA) moji.pb(S + M * 60 + H * 60 * 60 + 20 * 60 * tries);
     } else {
+      if (ime == JA) moji.pb(0);
       last = 0;
     }
+  }
+  return ret;
+}
+
+pii zadnji() {
+  pii ret = {0, 0};
+  int pt = 0;
+  while (scanf("%c",&c) != EOF) {
+    if (c == '+') {
+      ret.fi--;
+      ret.sec += moji[pt++];
+    } else if (c == '-') pt++;
   }
   return ret;
 }
@@ -61,11 +78,11 @@ int main() {
   REP(i, n) {
     cin >> ime;
     pii t = read_tim();
-    if (ime != "NijeZivotJedanACM") v.pb({t, ime});
+    if (ime != JA) v.pb({t, ime});
   }
   sort(all(v));
   cin >> ime;
-  pair <pii, string> mi = {read_tim(), "NijeZivotJedanACM"};
+  pair <pii, string> mi = {zadnji(), JA};
   REP(i, (int)v.size()) {
     if (v[i] > mi) {
       printf("%d\n",i + 1);
