@@ -66,10 +66,8 @@ int main() {
   scanf("%d",&q);
   REP(i, q) {
     scanf("%lld %lld",&x,&y);
-    if (t) {
-      x ^= (da * da * da);
-      y ^= (da * da * da);
-    }
+    x ^= da * da * da * t;
+    y ^= da * da * da * t;
     int ans = solve();
     da += ans;
     cout << ODG[ans] << '\n';
