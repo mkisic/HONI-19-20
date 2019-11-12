@@ -19,16 +19,16 @@ def check(lines):
 
 
 # Ocekivani clusteri! Ovo vjerojatno zelis promijeniti!
-expected_clusters = {"Prvi": 1, "Drugi" : 1, "Treci" : 1, "Cetvrti" : 1, "Greska" : 0}
+expected_clusters = {"Prvi": 1, "Drugi" : 1, "Treci" : 1, "Cetvrti" : 1}
 
 
 def what_cluster(data):
     n = data['n']
     k = data['k']
-    if n <= 5 and k == 1: return "Prvi"
-    if n <= 500 and k == n: return "Drugi"
-    if n <= 500 and k == 100: return "Treci"
-    if n <= 500 and k == 8: return "Cetvrti"
+    if n <= 100 and k == n: return "Prvi"
+    if n == 500 and k == 100: return "Drugi"
+    if n <= 32 and k == 5: return "Treci"
+    if 100 <= n <= 500 and k == 10: return "Cetvrti"
     return 'Greska'
 
 
