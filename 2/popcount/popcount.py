@@ -16,7 +16,6 @@ def main():
         code.append("A=((A&" + str(p) + ")+((A&" + str(q) + ")>>(1<<" + str(i) + ")))")
         i += 1
 
-
     print(len(code))
     for line in code:
         print(line)
