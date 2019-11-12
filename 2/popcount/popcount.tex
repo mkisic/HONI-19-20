@@ -1,0 +1,117 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=110,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Popcount}
+
+\setlength\intextsep{-0.1cm}
+\begin{wrapfigure}[3]{r}{0.22\textwidth}
+\centering
+\includegraphics[width=0.22\textwidth]{img/computer.png}
+\end{wrapfigure}
+
+\textit{\textbf{M}alo \textbf{Al}gebarsko \textbf{Na}predno \textbf{R}ačunalo}
+(popularno \texttt{MALNAR}) posljednji je krik tehnologije u svijetu
+minijaturnih programabilnih računala. Vlastite programe za ovaj uređaj moguće
+je pisati u programskom jeziku \textit{MalnarScript} kojeg krase sljedeća
+obilježja:
+
+\begin{itemize}[topsep=0pt]
+   \item Ulaz u program je jedan nenegativan cijeli broj koji je strogo manji
+         od $2^N$.
+   \item Izlaz programa je jedan nenegativan cijeli broj koji je strogo manji
+         od $2^N$.
+   \item U izvornom kodu \textit{MalnarScript}-a moguće je baratati točno
+         jednom $N$-bitnom cjelobrojnom  varijablom $A$ bez predznaka (engl.\
+         \textit{unsigned}). Na početku programa vrijednost varijable $A$
+         odgovara ulazu u program, a njena završna vrijednost predstavlja izlaz
+         programa.
+   \item Izvorni kod sastoji se od najviše $K$ naredbi oblika \texttt{A=<izraz>}
+         koje se slijedno izvršavaju te se svaka od njih mora sastojati od
+         \textbf{najviše 1000 znakova}. Simbol \texttt{<izraz>} definiramo
+         rekurzivno kao:
+\end{itemize}
+
+\begin{center}
+  \texttt{<izraz> = A | <broj> | (<izraz><operator><izraz>)}
+\end{center}
+
+Odnosno, simbol \texttt{<izraz>} može biti varijabla $A$, može odgovarati
+simbolu \texttt{<broj>} ili pak može unutar okruglih zagrada predstavljati
+dvočlani izraz u kojem se svaki operand pokorava istoj definiciji.
+
+Simbol \texttt{<broj>} u gornjoj definiciji predstavlja nenegativan cijeli broj
+u dekadskom zapisu koji je strogo manji od $2^N$, dok simbol
+\verb|<operator>| može biti \verb|+|, \verb|-|, \verb|||,
+\verb|&|, \verb|<<| ili \verb|>>| te redom može predstavljati
+operacije zbrajanja, oduzimanja, bitovnog ili, bitovnog i, posmaka ulijevo i
+posmaka udesno.  Također, znak $A$ se u izrazu smije pojavljivati
+\textbf{najviše 5 puta}.
+
+U slučaju da prilikom zbrajanja ili oduzimanja dođe do aritmetičkog
+prelijevanja (engl.\ \textit{overflow}) ili podlijevanja (engl.\
+\textit{underflow}), programski jezik \textit{MalnarScript} će te operacije
+izvesti modulo $2^N$. Primjerice, uz pretpostavku $N=3$ izraz $(7+3)$ u jeziku
+\textit{MalnarScript} iznosi $2$, a izraz $(2-5)$ iznosi $5$.
+
+Desna strana jednakosti svake naredbe u konačnici se evaluira u jedan broj koji
+se tada sprema u varijablu $A$. Evaluacija samog izraza provodi se tako da se
+najprije svako pojavljivanje znaka $A$ zamijeni sa trenutnom vrijednošću
+varijable $A$. Zatim se izraz računa kao u matematici, odnosno, najprije se
+rješavaju zagrade. Primijetite da je definicija ispravnog izraza takva da je
+prioritet operatora nebitan, odnosno, račun je u potpunosti definiran
+zagradama.
+
+Vaš je zadatak napisati program koji ispisuje program u jeziku
+\textit{MalnarScript} koji računa broj jedinica u binarnom zapisu ulaza u
+program.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom su retku prirodni brojevi $N$ i $K$ $(1 \le N, K \le 500)$ iz teksta
+zadatka.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+U prvom retku potrebno je ispisati broj naredbi traženog programa u jeziku
+\textit{MalnarScript}.
+
+U preostalim je retcima potrebno ispisati naredbe traženog programa. Sve
+naredbe moraju u potpunosti poštovati sintaksu jezika \textit{MalnarScript}
+kako je opisano u tekstu zadatka.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+\subsection*{Bodovanje}
+{\renewcommand{\arraystretch}{1.4}
+  \setlength{\tabcolsep}{6pt}
+  \begin{tabular}{ccl}
+ Podzadatak & Broj bodova & Ograničenja \\ \midrule
+  1 & 15 & $1 \le N \le 100$, $K = N$ \\
+  2 & 15 & $N = 500$, $K = 100$ \\
+  3 & 35 & $1 \le N \le 32$, $K=5$ \\
+  4 & 45 & $100 \le N \le 500$, $K=10$
+\end{tabular}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Probni primjeri}
+\begin{tabularx}{\textwidth}{X'X}
+\sampleinputs{test/popcount.dummy.in.1}{test/popcount.dummy.out.1} &
+\sampleinputs{test/popcount.dummy.in.2}{test/popcount.dummy.out.2}
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
