@@ -94,91 +94,110 @@ def gen_cases():
         print>>sys.stderr, 'Generating test/%s.dummy.in.%d' % (PROBLEM, i+1)
         test.write(file('test/%s.dummy.in.%d' % (PROBLEM, i+1), 'wt'))
 
-    # 1. subtask -- 2 <= n <= 10
+    # N do 4
+    # 1
     subtask1 = []
-    print('Generating subtask 1, case ', 1)
-    subtask1.append(gen_random(10, 10, 2, 2, 6, 7))
-
+    subtask1.append(gen_random(4, 4, 1, 1, 5, 8))
+    subtask1.append(gen_random(4, 4, 1, 0, 5, 8))
     real.append(subtask1)
-
-    # 2. subtask -- 2 <= n <= 10^5, samo 1 i 4
+    
+    # N do 10
+    # 2
     subtask2 = []
+    subtask2.append(gen_random(10, 10, 2, 2, 6, 7))
+    subtask2.append(gen_random(10, 10, 2, 3, 6, 7))
+    real.append(subtask2)
 
-    print('Generating subtask 2, case ', 1)
+    # samo 1 i 4
+    # 3
+    subtask3 = []
     n = random.randint(80000, 99999)
     if n % 2 == 0:
         n += 1
-    subtask2.append(gen_random(n, n, (n - 2) // 2, (n - 2) // 2 + 1, 5, 7))
-
-    print('Generating subtask 2, case ', 2)
+    subtask3.append(gen_random(n, n, (n - 2) // 2, (n - 2) // 2 + 1, 5, 7))
     n = random.randint(80000, 99999)
     if n % 2 == 1:
         n += 1
-    subtask2.append(gen_random(n, n, (n - 2) // 2, (n - 2) // 2, 6, 7))
-
-    real.append(subtask2)
-
-    # 3. subtask -- 2 <= n <= 10^5, najvise jedan 1 ili 4
-
-    subtask3 = []
-
-    print('Generating subtask 3, case ', 1)
-    subtask3.append(gen_random(80000, 100000, 0, 0, 6, 8))
-
-    print('Generating subtask 3, case ', 2)
-    subtask3.append(gen_random(80000, 100000, 1, 0, 6, 8))
-
-    print('Generating subtask 3, case ', 3)
-    subtask3.append(gen_random(80000, 100000, 0, 1, 6, 7))
-
-    print('Generating subtask 3, case ', 4)
-    subtask3.append(gen_random(80000, 100000, 0, 0, 5, 8))
-    for i in range(len(subtask3[-1].x)):
-        if subtask3[-1].x[i] == 2:
-            subtask3[-1].x[i] = 3
-
+    subtask3.append(gen_random(n, n, (n - 2) // 2, (n - 2) // 2, 5, 7))
     real.append(subtask3)
-
-    # 4. subtask -- 2 <= n <= 10^5
-
+    # 4
     subtask4 = []
+    n = random.randint(80000, 99999)
+    if n % 2 == 1:
+        n += 1
+    subtask4.append(gen_random(n, n, (n - 2) // 2, (n - 2) // 2, 6, 7))
+    n = random.randint(80000, 99999)
+    if n % 2 == 0:
+        n += 1
+    subtask4.append(gen_random(n, n, (n - 2) // 2, (n - 2) // 2 + 1, 6, 7))
+    real.append(subtask4)
 
-    print('Generating subtask 4, case ', 1)
+    # max jedan 1 ili 4
+    # 5
+    subtask5 = []
+    subtask5.append(gen_random(80000, 100000, 0, 0, 6, 8))
+    subtask5.append(gen_random(80000, 100000, 1, 0, 6, 8))
+    real.append(subtask5)
+    # 6
+    subtask6 = []
+    subtask6.append(gen_random(80000, 100000, 0, 1, 6, 7))
+    subtask6.append(gen_random(80000, 100000, 0, 0, 6, 7))
+    for i in range(len(subtask6[-1].x)):
+        if subtask6[-1].x[i] == 3:
+            subtask6[-1].x[i] = 2
+    real.append(subtask6)
+    # 7
+    subtask7 = []
+    subtask7.append(gen_random(80000, 100000, 0, 1, 5, 7))
+    subtask7.append(gen_random(80000, 100000, 0, 0, 5, 7))
+    real.append(subtask7)
+    # 8
+    subtask8 = []
+    subtask8.append(gen_random(80000, 100000, 0, 0, 5, 8))
+    for i in range(len(subtask8[-1].x)):
+        if subtask8[-1].x[i] == 2:
+            subtask8[-1].x[i] = 3
+    subtask8.append(gen_random(80000, 100000, 1, 0, 5, 8))
+    real.append(subtask8)
+
+    # bez dodatnih ogranicenja
+    # 9
+    subtask9 = []
     br1 = random.randint(20000, 30000)
     br4 = random.randint(20000, 30000)
-    subtask4.append(gen_random(80000, 100000, br1, br4, 6, 8))
-
-    print('Generating subtask 4, case ', 2)
+    subtask9.append(gen_random(80000, 100000, br1, br4, 6, 8))
+    subtask9.append(gen_random(80000, 100000, br1, br1 - 1, 6, 8))
+    real.append(subtask9)
+    # 10
+    subtask10 = []
     br1 = random.randint(20000, 30000)
-    br4 = br1 + 1
-    subtask4.append(gen_random(80000, 100000, br1, br4, 5, 8))
-
-    print('Generating subtask 4, case ', 3)
+    subtask10.append(gen_random(80000, 100000, br1, br1 + 1, 5, 7))
+    subtask10.append(gen_random(80000, 100000, br1, br1, 5, 7))
+    real.append(subtask10)
+    # 11
+    subtask11 = []
     br1 = random.randint(20000, 30000)
-    br4 = br1 + 1
-    subtask4.append(gen_random(80000, 100000, br1, br4, 5, 7))
-
-    print('Generating subtask 4, case ', 4)
+    subtask11.append(gen_random(80000, 100000, br1, br1, 6, 7))
+    subtask11.append(gen_random(80000, 100000, br1, br1 + 1, 6, 7))
+    real.append(subtask11)
+    # 12
+    subtask12 = []
     br1 = random.randint(20000, 30000)
-    br4 = br1
-    subtask4.append(gen_random(80000, 100000, br1, br4, 5, 8))
-
-    print('Generating subtask 4, case ', 5)
+    subtask12.append(gen_random(80000, 100000, br1, br1 - 1, 6, 8))
+    subtask12.append(gen_random(80000, 100000, br1, br1 + 1, 6, 8))
+    real.append(subtask12)
+    # 13
+    subtask13 = []
     br1 = random.randint(20000, 30000)
-    br4 = br1
-    subtask4.append(gen_random(80000, 100000, br1, br4, 6, 7))
-
-    print('Generating subtask 4, case ', 6)
+    subtask13.append(gen_random(80000, 100000, br1, br1, 5, 8))
+    subtask13.append(gen_random(80000, 100000, br1, br1 + 1, 5, 8))
+    real.append(subtask13)
+    # 14
+    subtask14 = []
     br1 = random.randint(20000, 30000)
-    br4 = br1 - 1
-    subtask4.append(gen_random(80000, 100000, br1, br4, 6, 8))
-
-    print('Generating subtask 4, case ', 7)
-    br1 = random.randint(20000, 30000)
-    br4 = br1 + 1
-    subtask4.append(gen_random(80000, 100000, br1, br4, 5, 7))
-    
-    real.append(subtask4)
+    subtask14.append(gen_random(80000, 100000, br1, br1 + 1, 5, 7))
+    subtask14.append(gen_random(80000, 100000, br1, br1 - 1, 5, 7))
+    real.append(subtask14)
 
     for i, batch in enumerate(real):
         for j, test in enumerate(batch):
