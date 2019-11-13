@@ -24,8 +24,6 @@ int main() {
     cin.tie(0);
     cout.tie(0);
 
-    srand(time(0));
-
     int t;
     cin >> t;
 
