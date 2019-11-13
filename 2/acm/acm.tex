@@ -36,11 +36,11 @@ Timovi koji imaju isti broj riješenih zadataka poredani su \textbf{uzlazno} po
 penalty vremenu. \textit{Penalty} vrijeme za neki tim je suma penalty vremena
 svih točno riješenih zadataka. Penalty vrijeme točno riješenog zadatka
 odgovara vremenu zadnjeg poslanog rješenja za taj zadatak kojem se pridodaje
-\textbf{20 minuta} za svako pogrešno poslano rješenje.  Tim neće slati
-rješenje za zadatak koji su već točno riješili. Najveći dozvoljen broj
-poslanih rješenja za isti zadatak je \textbf{9 po timu}. Ako timovi imaju
-isti broj riješenih zadataka i isto penalty vrijeme, poredani su po imenima
-abecedno.
+\textbf{20 minuta} za svako pogrešno poslano rješenje na tom zadatku.  Tim
+neće slati rješenje za zadatak koji su već točno riješili. Najveći dozvoljen
+broj poslanih rješenja za isti zadatak je \textbf{9 po timu}. Ako timovi
+imaju isti broj riješenih zadataka i isto penalty vrijeme, poredani su po
+imenima abecedno.
 
 Natjecanje traje \textbf{pet} sati. Tijekom prva četiri sata rang lista je
 vidljiva svim timovima te za svaki tim pokazuje informacije o svakom zadatku
@@ -87,7 +87,6 @@ Riječi su za svaki zadatak oblika \texttt{SX/V}, gdje je:
 U posljednjem se retku nalazi se odmrznuti redak za naš trojac, tim s imenom
 \texttt{NijeZivotJedanACM}.
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Output
 \subsection*{Izlazni podaci}
@@ -97,12 +96,14 @@ završiti nakon odmrzavanja liste.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Scoring
 \subsection*{Bodovanje}
-U test podacima ukupno vrijednima $10$ bodova, na ulazu se neće pojaviti znak \texttt{‘?’}.\\
-U test podacima ukupno vrijednima dodatnih $15$ bodova, svako poslano rješenje svakog tima bit će točno.
+U test podacima ukupno vrijednima $20$ bodova, na ulazu se neće pojaviti znak
+\texttt{‘?’}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Examples
-\subsection*{Probni primjeri}
+\subsection*{
+  Probni primjeri
+}
 \begin{tabularx}{\textwidth}{X'X}
 \sampleinputs{test/acm.dummy.in.1}{test/acm.dummy.out.1} &
 \sampleinputs{test/acm.dummy.in.2}{test/acm.dummy.out.2}
