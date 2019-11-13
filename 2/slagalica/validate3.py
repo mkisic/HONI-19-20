@@ -31,16 +31,17 @@ def check(lines):
 
 
 # Ocekivani clusteri! Ovo vjerojatno zelis promijeniti!
-expected_clusters = {"Prvi": 1, "Drugi" : 2, "Treci" : 4, "Cetvrti" : 7}
+expected_clusters = {"Prvi" : 1, "Drugi": 1, "Treci" : 2, "Cetvrti" : 4, "Peti" : 6}
 
 
 def what_cluster(data):
     n = data['n']
     imam = data['imam']
-    if n <= 10: return "Prvi"
-    if imam[2] == 0 and imam[3] == 0: return "Drugi"
-    if imam[1] + imam[4] <= 1: return "Treci"
-    return "Cetvrti"
+    if n <= 4: return "Prvi"
+    if n <= 10: return "Drugi"
+    if imam[2] == 0 and imam[3] == 0: return "Treci"
+    if imam[1] + imam[4] <= 1: return "Cetvrti"
+    return "Peti"
 
 
 ################### Zadatak-specifican kod iznad ove linije #########################
