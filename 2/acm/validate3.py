@@ -98,9 +98,10 @@ def check(lines):
       tmp.append(parse(red[i], 0))
 
     for i in range(len(tmp)):
-      if ja[i][0] == tmp[i][0]:
+      if ja[i][0] != '?':
         assert ja[i] == tmp[i], "podaci nisu konzistentni"
         continue
+      if tmp[i][0] == '-': continue
       assert ja[i][1] <= tmp[i][1] and ja[i][2] <= tmp[i][2], "podaci nisu konzistentni"
 
 
