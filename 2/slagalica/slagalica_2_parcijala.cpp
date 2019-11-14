@@ -5,29 +5,25 @@ using namespace std;
 #define pb push_back
 #define mp make_pair
 
-typedef long long ll;
-typedef pair<int,int> pii;
-
 int prva, zadnja;
-int cntu, cntiz;
+int cnt;
 vector<int> u, iz;
 int n, t, val;
 bool pocetak;
 
 void ispis(bool last, int idx)
 {
-	if(idx == n - 2)
-		return;
 	if(last)
 		cout << u[idx / 2] << " ";
 	else 
 		cout << iz[idx / 2] << " ";
-	ispis(!last, idx + 1);
 }
 
 int main()
 {
 	cin >> n;
+	u.clear();
+	iz.clear();
 	for(int i = 0; i < n; i++)
 	{
 		cin >> t >> val;
@@ -35,46 +31,48 @@ int main()
 		{
 			pocetak = true;
 			prva = val;
-			cntiz++;
+			cnt++;
 		}
 		else if(t == 6)
 		{
 			pocetak = false;
 			prva = val;
-			cntu++;
+			cnt--;
 		}
 		else if(t == 7)
 		{
 			zadnja = val;
-			cntiz++;
+			cnt++;
 		}
 		else if(t == 8)
 		{
 			zadnja = val;
-			cntu++;
+			cnt--;
 		}
 		else if(t == 1)
 		{
-			cntiz += 2;
+			cnt += 2;
 			iz.pb(val);
 		}
 		else if(t == 4)
 		{
 			u.pb(val);
-			cntu += 2;
+			cnt -= 2;
 		}
 	}
-	if(cntu != cntiz)
+	if(cnt != 0)
 	{
 		cout << -1;
 		return 0;
 	}
-	sort(u.begin(),u.end());
-	sort(iz.begin(),iz.end());
-	reverse(u.begin(),u.end());
-	reverse(iz.begin(),iz.end());
+	sort(u.begin(), u.end());
+	sort(iz.begin(), iz.end());
 	cout << prva << " ";
-	ispis(pocetak,0);
+	for(int i = 0; i < n - 2; i++)
+	{
+		ispis(pocetak, i);
+		pocetak = !pocetak;
+	}
 	cout << zadnja;
 	return 0;
 }

@@ -8,7 +8,7 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> pii;
 
-int prva, zadnja, srednja, pamti;
+int prva, zadnja, srednja = -1, pamti;
 int cntu, cntiz;
 vector<int> desno, lijevo;
 int t, val;
@@ -16,19 +16,21 @@ int t, val;
 void l()
 {
 	sort(lijevo.begin(),lijevo.end());
-	for(int i = lijevo.size() - 1; i>= 0; i--)
+	for(int i = 0; i < lijevo.size(); i++)
 		cout << lijevo[i] << " ";
 }
 
 void r()
 {
 	sort(desno.begin(),desno.end());
-	for(int i = desno.size() - 1; i>= 0; i--)
+	for(int i = 0; i < desno.size(); i++)
 		cout << desno[i] << " ";
 }
 int main()
 {
 	int n;
+	lijevo.clear();
+	desno.clear();
 	cin >> n;
 	for(int i = 0; i < n; i++)
 	{
@@ -67,7 +69,7 @@ int main()
 		}
 		else if(t == 2)
 			lijevo.pb(val);
-		else
+		else if(t == 3)
 			desno.pb(val);
 	}
 	if(cntu != cntiz)
@@ -80,7 +82,8 @@ int main()
 		l();
 	else
 		r();
-	cout << srednja << " ";
+	if(srednja != -1)
+		cout << srednja << " ";
 	if(pamti == 1)
 		r();
 	else
