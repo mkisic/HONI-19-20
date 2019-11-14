@@ -13,12 +13,8 @@ int n, k;
 
 int main(void) {
   scanf("%d%d", &n, &k);
-  printf("1\n");
-  printf("A=(");
-  for (int i = 0; i < n - 1; ++i)
-    printf("((A&(1<<%d))>>%d)+(", i, i);
-  printf("(A&(1<<%d))>>%d", n - 1, n - 1);
-  for (int i = 0; i < n; ++i) printf(")");
-  printf("\n");
+  printf("%d\n", n - 1);
+  for (int i = 1; i < n; ++i)
+    printf("A=((A&(((1<<%d)-1)-(1<<%d)))+((A&(1<<%d))>>%d))\n", n, i, i, i);
   return 0;
 }
