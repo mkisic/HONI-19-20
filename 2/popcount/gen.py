@@ -49,23 +49,23 @@ def gen_cases():
     # 1. subtask -- 1 <= N <= 100, K = N
     subtask1 = []
     for i in range(1, 10):
-        subtask1.append(Test(i, i))
+        subtask1.append(Test(i, i - 1))
 
     for i in range(10, 16):
         n = random.randint(10, 100)
-        subtask1.append(Test(n, n))
+        subtask1.append(Test(n, n - 1))
 
     real.append(subtask1)
 
-    # 2. subtask -- N = 500, K = 100
-    subtask2 = [Test(500, 100)]
+    # 2. subtask -- N = 500, K = 128
+    subtask2 = [Test(500, 128)]
     real.append(subtask2)
 
-    # 3. subtask -- 1 <= N = 32, K = 5
+    # 3. subtask -- 1 <= N = 40, K = 7
     subtask3 = []
-    subtask3.append(Test(1, 5))
-    for i in range(14, 33):
-        subtask3.append(Test(i, 5))
+    subtask3.append(Test(1, 7))
+    for i in range(21, 41):
+        subtask3.append(Test(i, 7))
 
     real.append(subtask3)
 

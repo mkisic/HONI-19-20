@@ -174,6 +174,14 @@ def checker(fin, foff, fout):
         correct_popcount = my_popcount(A)
         if contestant_popcount != correct_popcount: finish(0, WRONG)
 
+    # Check all 1 and all 0
+    for i in [0, n]:
+        A = gen_with_bits(n, i)
+        contestant_popcount = evaluate_ms(n, A, ms_contestant, WRONG_COMMAND_FORMAT)
+        correct_popcount = my_popcount(A)
+        if contestant_popcount != correct_popcount: finish(0, WRONG)
+
+
     finish(1, CORRECT)
 
 
