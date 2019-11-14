@@ -50,7 +50,7 @@ def gen_random(minn, maxn, br1, br4, poc, kraj):
     ai = random.randint(1, n)
     for i in range(n):
         a.append(ai)
-        increment = random.randint(1, 10**9 // n)
+        increment = random.randint(1, 10**9 // n - 100)
         ai += increment
     random.shuffle(a)
     x = []
@@ -63,6 +63,14 @@ def gen_random(minn, maxn, br1, br4, poc, kraj):
     for i in range(n - 2 - br1 - br4):
         x.append(random.randint(2, 3))
     random.shuffle(x)
+    for i in range(n):
+        if x[i] == 2:
+            a[i] = 10 ** 9 - 10
+            break
+    for i in range(n):
+        if x[i] == 3:
+            a[i] = 10 ** 9 - 5
+            break
     return Test(n, x, a)
 
 def gen_cases():
@@ -99,6 +107,11 @@ def gen_cases():
     subtask1 = []
     subtask1.append(gen_random(4, 4, 1, 1, 5, 8))
     subtask1.append(gen_random(4, 4, 1, 0, 5, 8))
+    subtask1.append(gen_random(2, 2, 0, 0, 6, 7))
+    subtask1.append(gen_random(4, 4, 1, 0, 6, 8))
+    for i in range(4):
+        if subtask1[-1].x[i] == 3:
+            subtask1[-1].x[i] = 2
     real.append(subtask1)
     
     # N do 10
@@ -145,6 +158,7 @@ def gen_cases():
     for i in range(len(subtask6[-1].x)):
         if subtask6[-1].x[i] == 3:
             subtask6[-1].x[i] = 2
+    subtask6.append(gen_random(80000, 100000, 1, 0, 6, 8))
     real.append(subtask6)
     # 7
     subtask7 = []
@@ -158,6 +172,7 @@ def gen_cases():
         if subtask8[-1].x[i] == 2:
             subtask8[-1].x[i] = 3
     subtask8.append(gen_random(80000, 100000, 1, 0, 5, 8))
+    subtask8.append(gen_random(80000, 100000, 0, 1, 5, 7))
     real.append(subtask8)
 
     # bez dodatnih ogranicenja
