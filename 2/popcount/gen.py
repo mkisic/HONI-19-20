@@ -46,9 +46,9 @@ def gen_cases():
 
     real = []
 
-    # 1. subtask -- 1 <= N <= 100, K = N
+    # 1. subtask -- 1 <= N <= 100, K = N - 1
     subtask1 = []
-    for i in range(1, 10):
+    for i in range(2, 10):
         subtask1.append(Test(i, i - 1))
 
     for i in range(10, 16):
