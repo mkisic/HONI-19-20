@@ -80,6 +80,69 @@ za taj podzadatak.
 \sampleinputs{test/checker.dummy.in.3}{test/checker.dummy.out.3}
 \end{tabularx}
 
+
+\textbf{Pojašnjena probnih primjera:}
+
+\begin{tikzpicture}
+    \def\r{2}
+
+    \node(1) at (1*360/5:\r) {1};
+    \node(2) at (0*360/5:\r) {2};
+    \node(3) at (4*360/5:\r) {3};
+    \node(4) at (3*360/5:\r) {4};
+    \node(5) at (2*360/5:\r) {5};
+
+    \draw [ultra thick, red]   (1) -- (2);
+    \draw [ultra thick, black] (2) -- (3);
+    \draw [ultra thick, red]   (3) -- (4);
+    \draw [ultra thick, red]   (4) -- (5);
+    \draw [ultra thick, blue]  (5) -- (1);
+
+    \draw [ultra thick, blue]  (1) -- (3);
+    \draw [ultra thick, black] (2) -- (5);
+\end{tikzpicture}
+\hspace{30pt}
+\begin{tikzpicture}
+    \def\r{2}
+
+    \node(1) at (1*360/4:\r) {1};
+    \node(2) at (0*360/4:\r) {2};
+    \node(3) at (3*360/4:\r) {3};
+    \node(4) at (2*360/4:\r) {4};
+
+    \draw [ultra thick, red]   (1) -- (2);
+    \draw [ultra thick, black] (2) -- (3);
+    \draw [ultra thick, red]   (3) -- (4);
+    \draw [ultra thick, black] (4) -- (1);
+
+    \draw [ultra thick, black] (1) -- (3);
+\end{tikzpicture}
+\hspace{30pt}
+\begin{tikzpicture}
+    \def\r{2}
+
+    \node(1) at (2*360/7:\r) {1};
+    \node(2) at (1*360/7:\r) {2};
+    \node(3) at (0*360/7:\r) {3};
+    \node(4) at (6*360/7:\r) {4};
+    \node(5) at (5*360/7:\r) {5};
+    \node(6) at (4*360/7:\r) {6};
+    \node(7) at (3*360/7:\r) {7};
+
+    \draw [ultra thick, red]   (1) -- (2);
+    \draw [ultra thick, black] (2) -- (3);
+    \draw [ultra thick, black] (3) -- (4);
+    \draw [ultra thick, blue]  (4) -- (5);
+    \draw [ultra thick, red]   (5) -- (6);
+    \draw [ultra thick, black] (6) -- (7);
+    \draw [ultra thick, red]   (7) -- (1);
+
+    \draw [ultra thick, blue]  (1) -- (3);
+    \draw [ultra thick, red]   (3) -- (5);
+    \draw [ultra thick, blue]  (5) -- (7);
+    \draw [ultra thick, black] (7) -- (3);
+\end{tikzpicture}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % We're done
 \end{statement}
