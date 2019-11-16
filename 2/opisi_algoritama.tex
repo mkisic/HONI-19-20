@@ -1,0 +1,285 @@
+\documentclass[a4paper]{article}
+\usepackage{zadaci}
+\usepackage{wrapfig}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage[normalem]{ulem}
+\usetikzlibrary{angles,quotes}
+\contestname{Hrvatsko otvoreno natjecanje u informatici\\1.\ kolo, 19. listopada 2019.}
+\markright{\textbf{\textsf{Opisi algoritama}}}
+
+\begin{document}
+
+\section*{Opisi algoritama}
+Zadatke, testne primjere i rješenja pripremili: Nikola Dmitrović, Karlo Franić,
+Gabrijel Jambrošić, Marin Kišić, Josip Klepec, Vedran Kurdija, Daniel Paleka,
+Ivan Paljak, Stjepan Požgaj i Paula Vidas. Primjeri implementiranih rješenja su
+dani u priloženim izvornim kodovima.
+
+\subsection*{Zadatak: Osijek}
+\textsf{Pripremio: Nikola Dmitrović}\\
+\textsf{Potrebno znanje: naredba učitavanja i ispisivanja, operacija dijeljenja}
+
+Rješenje ovisi o ostatku pri dijeljenju broja $N$ s $K$. Ako su oni djeljivi bez
+ostatka, očito je da će Lega točno ,,$N$ podijeljeno s $K$'' puta izvući $K$ komada
+čipsa iz kutije s $N$ komada. Ako nisu djeljivi bez ostatka tada će u kutiji,
+nakon što Lega iz nje ,,$N$ podijeljeno s $K$'' puta izvuče $K$ komada, ostati još
+čipsa koji će se moći izvaditi u još jednom vađenju.
+
+\textit{Programski kod (pisan u \texttt{Python 3}):}
+
+\vspace{-2ex}
+\begin{verbatim}
+N = int(input())
+K = int(input())
+
+if N % K == 0:
+  print(N // K)
+else:
+  print(N // K + 1)
+\end{verbatim}
+
+ili
+
+\begin{verbatim}
+N = int(input())
+K = int(input())
+print(N // K + (N % K != 0))
+\end{verbatim}
+
+\subsection*{Zadatak: Radio}
+\textsf{Pripremili: Karlo Franić i Marin Kišić}\\
+\textsf{Potrebno znanje: naredba ponavljanja, osnovne aritmetičke operacije,
+poznavanje tipova podataka za spremanje velikih brojeva}
+
+Promotrimo najprije parcijalu koja nosi $15$ bodova. Unosimo tri broja $X$, $A$
+i $B$.  Stjepan će u tom slušaju pojačati radio za $B$ jedinica na $X + B$, a
+potom ga smanjiti za $A$ jedinica na $X + B - A$. Dakle, za osvajanje prve
+parcijale bilo je dovoljno ispisati $X + B - A$.
+
+Za osvajanje preostalih bodova potrebno je primijetiti da će se za svaki Anin
+upit početna jačina promijeniti za $B_i - A_i$ jedinica. Petljom prolazimo kroz
+sve Anine upite i trenutnoj jačini dodajemo $Bi - Ai$ za $i$-ti upit.
+
+Promatrajmo slučaj u kojemu je $N$ maksimalan, svaki $B$ maksimalan, a svaki
+$A$ minimalan. Tada će konačna jačina glazbe biti $N \cdot MAXB + X = 100000 *
+100000 + X$. Primjetimo da taj broj više ne stane u klasičan $32$-bitni
+cjelobrojni tip podatka (npr. \texttt{int} u jezicima \texttt{C/C++}). Da
+biste uspjeli spremiti rješenje potrebno je koristiti barem $64$-bitni
+cjelobrojni tip podatka (npr. \texttt{long long} u jezicima \texttt{C/C++}).
+
+Između ostalog, ovim su zadatkom autori odlučili provjeriti koliko je
+natjecatelja, obzirom na rezultate drugog zadatka prethodnog kola, naučilo
+ispravno koristiti brojčane tipove podataka u svojim omiljenim programskim
+jezicima.
+
+\subsection*{Zadatak: ACM}
+\textsf{Pripremili: Vedran Kurdija i Marin Kišić}\\
+\textsf{Potrebno znanje: naredba učitavanja, naredba ponavljanja, rad sa
+stringovima, sortiranje}
+
+Za $20$ bodova bilo je dovoljno zaključiti da će, budući da na ulazu nema
+\texttt{‘?’}, lista nakon odmrzavanja izgledati isto kao i zamrznuta lista.
+Dakle, trebalo je pronaći u kojem se retku zamrznute liste nalazi tim
+NijeZivotJedanACM i ispisati indeks tog retka.
+
+Za preostalih $30$ bodova, trebalo je zaključiti da su, u najgorem slučaju za
+naš tim, svi ostali timovi točno riješili sve zadatke sa \texttt{‘?’}, tj.
+zadatke poslane dok je lista bila zamrznuta. Intuicija je jasna, što više
+točnih rješenja imaju drugi timovi, to gore za naš tim. Zato, u zamrznutoj
+listi možemo za sve timove osim našega pretvoriti sve \texttt{‘?’} u
+\texttt{‘+’}. Ovime smo dobili odmrznutu listu u najgorem slučaju za naš tim.
+Sada nas zanima koliko će se timova u tako odmrznutoj listi naći iznad našeg
+tima.
+
+Najprije ćemo iz odmrznutog retka našeg tima koji smo dobili na ulazu
+prebrojiti broj točno riješenih zadataka te izračunati \textit{penalty}
+vrijednost našeg tima.  Uvest ćemo pomoćnu varijablu pozicija sa početnom
+vrijednošću $1$, na koju ćemo dodati koliko je boljih timova od našeg.
+
+Petljom ćemo obići sve timove u odmrznutoj listi (osim našeg) te za svaki
+prebrojiti koliko točno riješenih zadataka imaju, kao i kolika je njihova
+\textit{penalty} vrijednost. Ako neki tim ima više riješenih zadataka od
+našega, povećat ćemo varijablu \texttt{pozicija} za $1$. Ako neki tim ima
+jednak broj riješenih zadataka kao naš, usporedit ćemo \textit{penalty}
+vrijednosti tog i našeg tima te ako taj tim ima manju \textit{penalty}
+vrijednost, uvećati varijablu \texttt{pozicija} za $1$. Ako neki tim pak ima i
+jednak broj riješenih zadataka kao naš i jednaku \textit{penalty} vrijednost
+kao naš, usporedit ćemo imena timova. Ako je ime tog tima prije po abecedi,
+uvećat ćemo varijablu \texttt{pozicija} za $1$. Na kraju ćemo ispisati
+varijablu \texttt{pozicija}.
+
+\subsection*{Zadatak: Slagalica}
+\textsf{Pripremio: Gabrijel Jambrošić}\\
+\textsf{Potrebno znanje: analiza slučajeva, pohlepni algoritmi}
+
+Prvu parcijalu moguće je riješiti jednostavnom analizom slučajeva koristeći par
+\texttt{if} naredbi.
+
+Drugu parcijalu moguće je riješiti isprobavanjem svih permutacija u vremenskoj
+složenosti $\mathcal{O}(n!)$. Implementaciju ovog rješenja možete vidjeti u
+izvornom kodu \texttt{slagalica\_nfact.cpp}
+
+Primijetimo da ćemo u trećoj parcijali naizmjence stavljati komadiće oblika $1$
+i $4$ pa je optimalno uvijek uzeti onaj s najmanjim brojem kojeg možemo staviti.
+Ako nam na kraju ostane višak, rješenje ne postoji.
+
+Za četvrtu parcijalu pretpostavimo da smo složili neke komadiće te zadnji kojeg
+smo stavili na desnom kraju ima udubinu. Tada sljedeći komadić kojeg ćemo
+staviti na lijevom kraju mora imati izbočinu, a taj uvjet zadovoljavaju
+komadići oblika $1$ i $2$. Ako stavimo komadić oblika $2$, na desnoj će strani
+opet biti udubina te ćemo opet trebati komadić oblika $1$ ili $2$. S druge
+strane, ako stavimo komadić oblika $1$, onda ćemo u sljedećem koraku trebati
+komadiće oblika $3$ ili $4$. Drugim riječima, komadić oblika $1$ mijenja
+traženi oblik sljedećeg komadića, a isto vrijedi i za komadić oblika $4$. Stoga
+ćemo u ovom podzadatku najprije postaviti sve komadiće oblika $2$ (ili $3$,
+ovisno o obliku početnog komadića), zatim ćemo staviti komadić oblika $1$ ili
+$4$, a onda ćemo postaviti sve oblika $3$ (ili $2$). Uvijek postavljamo komadić
+traženog oblika s najmanjim brojem jer će tada i niz biti najmanji. Ako na
+kraju ne možemo spojiti zadnji komadić, rješenje ne postoji. Dodatno, moramo
+paziti na slučaj kada ne postoje komadići oblika $1$ i $4$.
+
+Za potpuno rješenje zadatka, uzmimo na početku jedan naivan pohlepni algoritam
+kojim uvijek uzimamo komadić traženog oblika s najmanjim brojem. Problem je taj
+da na kraju mogu ostati komadići oblika $2$ ili $3$ (ako
+ostanu komadići oblika $1$ ili $4$ rješenje ne postoji) koje ne možemo više
+staviti, a prije smo ih mogli. To možemo riješiti na način da te komadiće
+stavimo na zadnje mjesto na koje smo ih još uvijek mogli staviti jer će tamo
+najmanje povećati konačan niz. Možemo primijetiti da će to mjesto biti
+neposredno ispred zadnjeg komadića oblika $1$ ili $4$ jer smo tamo posljednji
+put promijenili traženi oblik komadića.
+
+\subsection*{Zadatak: Checker}
+\textsf{Pripremili: Paula Vidas i Daniel Paleka}\\
+\textsf{Potrebno znanje: matematička indukcija, vezana lista}
+
+\textbf{Tvrdnja 1: } \; U svakoj triangulaciji za $N \ge 4$ postoje barem dva
+``uha'', tj. trokut koji dijeli dvije stranice s mnogokutom.
+
+\emph{Skica dokaza: } \; Indukcija. Vrijedi za kvadrat.  Neka dijagonala dijeli
+mnogokut na dva manja mnogokuta. Ako je neki od njih trokut, to je traženo uho;
+inače se možemo induktivno pozvati dalje.
+
+Prvo ćemo opisati postupak provjere triangulacije.  Naivni algoritam miče uha
+te uvijek održava trenutnu triangulaciju. To je moguće implementirati u mnogim
+složenostima, pa je $\mathcal{O}(n^2)$ implementacija bila dovoljna za prva dva
+podzadatka.  Ovdje dajemo jedan mogući $\mathcal{O}(n \log n)$ algoritam.
+
+Za svaku dijagonalu $ab$, napravimo usmjerene bridove $(a, b)$ i $(b, a)$. Sada
+svih $2(N-2)$ bridova sortirajmo po duljini iz početnog do krajnjeg vrha u
+smjeru kazaljke na satu.  Jasno je da prvi element sortiranog niza odgovara
+uhu. Može se dokazati da ako uha mićemo tim redoslijedom, u svakom trenutku će
+prvi preostali brid u nizu odgovarati uhu kojega trebamo maknuti u ovom koraku.
+(Naravno, ako dani brid ne čini uho, triangulacija nije ispravna.)
+
+Za detalje implementacije pogledajte službeno rješenje, gdje koristimo vezanu
+listu za održavanje trenutnog poretka vanjskih vrhova mnogokuta. Tada su
+provjere je li neki brid čini uho i dobre obojenosti uha jednostavne i mogu se
+raditi paralelno s danim algoritmom.
+
+\subsection*{Zadatak: Popcount}
+\textsf{Pripremio: Ivan Paljak}\\
+\textsf{Potrebno znanje: konstruktivni algoritmi, turnirsko stablo}
+
+Nepoznat programski jezik, dopuštena samo jedna varijabla, ograničenja na broj
+naredbi i duljinu naredbe, \dots -- savršena kombinacija za rješavanje zadatka
+"podzadatak po podzadatak".
+
+U prvom podzadatku dopušteno nam je koristiti broj naredbi koji je (skoro)
+jednak broju bitova u ulaznoj vrijednosti. Ovo nam sugerira da ćemo zadatak
+rješavati "bit po bit". Pretpostavimo da smo sufiks od $X$ bitova uspješno
+riješili, odnosno, taj sufiks varijable $A$ sadrži vrijednost koja odgovara
+broju jedinica u tom istom sufiksu ulazne vrijednosti dok ostali
+bitovi nisu promijenjeni u odnosu na bitove ulazne vrijednosti. Primijetimo da
+sama ulazna vrijednost u program već ima riješen sufiks veličine $1$. Sufiks od
+$X+1$ bitova ćemo riješiti tako da vrijednost $(X+1)$-og bita pribrojimo
+varijabli $A$ te taj bit postavimo na $0$. To možemo napraviti naredbom
+\verb|A=((A&(((1<<N)-1)-(1<<X)))+((A&(1<<X))>>X))|. Koristeći naredbe ovog
+oblika za svaki bit uspješno smo riješili prvi podzadatak.
+
+Za osvajanje bodova na drugom podzadatku dovoljno je iskoristiti ideju iz prvog
+podzadatka zajedno sa svojstvom jezika da se varijabla $A$ smije pojavljivati
+najviše $5$ puta. Naravno, umjesto "bit po bit", zadatak ćemo rješavati
+tehnikom "četiri bita po četiri bita" i tako smanjiti broj naredbi $4$ puta.
+
+Za rješavanje preostalih podzadataka bilo je potrebno sjetiti se jedne poznate
+strukture podataka -- \textit{turnirskog stabla}. Zamislimo da je nad našim
+bitovima izgrađeno turnirsko stablo u kojem svaki čvor pamti sumu bitova u svom
+podstablu. Umjesto u dekadskom brojevnom sustavu, zamislimo da je u svakom čvoru
+turnirskog stabla napisana vrijednost u binarnom sustavu te da je prikazana u
+onoliko bitova kolika je veličina intervala kojeg taj čvor pokriva.
+
+Slijepimo li vrijednosti svih listova (slijeva nadesno), dobit ćemo ulaz u
+program.  Slijepimo li vrijednosti njihovih roditelja (slijeva nadesno), dobit
+ćemo željenu vrijednost varijable $A$ nakon prve naredbe. Ponavljamo li ovaj
+postupak sve do korijena stabla u končnici ćemo u varijabli $A$ imati
+točno rješenje, a broj naredbi bit će reda $\mathcal{O}(\log n)$. Ostaje nam
+samo osmisliti prijelaz između redaka u turnirskom stablu.
+
+U prvoj naredbi trebamo uzeti sve bitove na parnim pozicijama te im pribrojiti
+posmaknute bitove na neparnim pozicijama. To možemo dobiti izrazom
+\verb|((...01010101&A)+((...10101010&A)>>1))|. U sljedećem koraku algoritma
+potrebno je riješiti intervale duljine četiri pa je odgovarajuči izraz
+\verb|((...00110011&A)+((...11001100&A)>>2))|. Ponavljanjem ovog postupka
+dobivamo konačno rješenje zadatka.
+
+Ako ste konstantne vrijednosi iz gornjih izraza eksplicitno izračunali, osvojili
+ste svih $110$ bodova na zadatku. U slučaju da ste to napraviili implicitno,
+vrlo ste lagano mogli prekoračiti broj dopuštenih znakova u jednoj naredbi pa
+biste osvojili bodove samo na trećoj parcijali.
+
+\subsection*{Zadatak: Zvijezda}
+\textsf{Pripremio: Marin Kišić}\\
+\textsf{Potrebno znanje: ccw funkcija, binarna pretraga, analiza problema}
+
+Neka je s $A_i$ označena $i$-ta točka $N$-terokuta, a s $X$ točka iz upita.
+Indekse kod točaka u $N$-terokutu gledamo modulo $N$.  Za $20$ bodova bilo je
+dovoljno znati kako provjeriti nalazi li se točka s neke strane pravca.
+Funkcija koja daje odgovor na to popularno se zove $ccw$. Dakle, proći ćemo po
+svim dužinama i ako za neki $i$ vrijedi $ccw(A_i, A_{i+1}, X) > 0$ i
+$ccw(A_{i+\frac{n}{2}}, A_{i+\frac{n}{2}+1}, X) > 0$, to znači da se točka
+nalazi u obojenom dijelu površine.
+
+U dodatnih $30$ mogli ste implementirati takozvano \textit{offline} rješenje.
+To je rješenje koje prvo učita sve upite, obradi u nekom poretku (ne nužno onom
+u kojem su zadani u inputu) te onda redom odgovori na njih.
+
+Za svih $110$ bodova bilo je potrebno osmisliti \textit{online} rješenje,
+odnosno rješenje koje kada učita upit odmah odgovori na njega.
+
+Ako je $ccw(A_{i}, A_{i+1}, X) > 0$, na $i$-tu stranicu $N$-terokuta ćemo
+napisati $1$, a inače $0$. Sada je pitanje postoji li par nasuprotnih stranica
+na kojima pise $1$.  Očito ne možemo provjeriti što piše na svakoj stranici jer
+je to $\mathcal{O}(N)$, ali možemo nizom zamjedbi doći do efikasnijeg rješenja.
+
+\textbf{Zamjedba 1}: Ako neke dvije stranice imaju $1$ na sebi, onda i sve
+stranice između njih s neke strane $N$-terokuta imaju isto $1$ na sebi. Ovo
+možemo lagano uočiti promatranjem stranica na kojima je napisana $0$.
+Zamislimo da je točka iz upita izvor svjetlosti te da su stranice zidovi kroz
+koje ne prodire svjetlost.  Možemo uočiti da, ako svjetlost može doći do zida
+direktno iz izvora svijetlosti, onda je na tom zidu napisana $0$. Sada lako
+vidimo da sve nule tvore interval na tom cikličnom nizu. Jasno, iz toga slijedi
+da i jedinice također tvore interval.
+
+\textbf{Zamjedba 2}: odgovor je \texttt{DA} ako i samo ako je interval jedinica
+veličine barem $\frac{n}{2}+1$. Ovo je očito jer u $\frac{n}{2}+1$ uzastopnih
+stranica moraju postojati dvije koje su nastuprotne.
+
+Sada uzmimo proizvoljnu stranicu i njezinu nasuprotnu stranicu i pogledajmo
+koje vrijednosti pišu na njima. Ako na objema piše $1$ možemo odmah ispisati
+\texttt{DA}. Ako na objema pise $0$ možemo odmah ispisati \texttt{NE}. Ako na
+jednoj stranici piše $1$, a na drugoj $0$ onda možemo prelomiti niz na dvije
+polovice, svaka započinje stranicom za koju smo pogledali koja je vrijednost
+gore. Jedna polovica je oblika \texttt{111...000}, a druga \texttt{000...111}.
+U jednoj želimo pronaći zadnju jedinicu, u drugoj prvu jedinicu, a to možemo s
+binarnom pretragom. Kad smo to pronašli zapravo smo pronašli i rubove našeg
+intervala jedinica pa sad možemo lako odgovoriti na zadano pitanje.
+
+Vremenska složenost $\mathcal{O}(q \log n)$
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% End:
