@@ -1,0 +1,47 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=110,
+  timelimit=1 second,
+  memorylimit=512 MiB,
+]{Trobojnica}
+
+  %\setlength\intextsep{-0.1cm}
+%\begin{wrapfigure}[6]{r}{0.26\textwidth}
+%\centering
+%\includegraphics[width=0.26\textwidth]{img/flag.png}
+%\end{wrapfigure}
+
+%\subsection
+
+\textbf{Tvrdnja 1: } \; U svakoj triangulaciji za $N \ge 4$ postoje barem dva ``uha'', tj. trokut
+koji dijeli dvije stranice s mnogokutom.
+
+\emph{Skica dokaza: } \; Indukcija. Vrijedi za kvadrat.
+Neka dijagonala dijeli mnogokut na dva manja mnogokuta. Ako je neki od njih trokut, to je traženo uho;
+inače se možemo induktivno pozvati dalje. $\qed$
+
+Prvo ćemo opisati postupak provjere triangulacije.
+Naivni algoritam miče uha te uvijek održava trenutnu triangulaciju. To je moguće implementirati
+u mnogim složenostima, pa je $O(N^2)$ implementacija bila dovoljna za prva dva podzadatka.
+Ovdje dajemo jedan mogući $O(N \log n)$ algoritam.
+
+Za svaku dijagonalu $ab$, napravimo usmjerene bridove $(a, b)$ i $(b, a)$. Sada svih $2(N-2)$
+bridova sortirajmo po duljini iz početnog do krajnjeg vrha u smjeru kazaljke na satu.
+Jasno je da prvi element sortiranog niza odgovara uhu.Može se dokazati da ako uha mićemo
+tim redoslijedom, u svakom trenutku će prvi preostali brid u nizu odgovarati uhu
+kojega trebamo maknuti u ovom koraku. (Naravno, ako dani brid ne čini uho, triangulacija
+nije ispravna.)
+
+Za detalje implementacije pogledajte službeno rješenje, gdje koristimo vezanu listu za održavanje
+trenutnog poretka vanjskih vrhova mnogokuta. Tada su provjere je li neki brid čini uho i dobre
+obojenosti uha jednostavne i mogu se raditi paralelno s danim algoritmom.
+
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
