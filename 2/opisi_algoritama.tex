@@ -6,7 +6,7 @@
 \usepackage{amsmath}
 \usepackage[normalem]{ulem}
 \usetikzlibrary{angles,quotes}
-\contestname{Hrvatsko otvoreno natjecanje u informatici\\1.\ kolo, 19. listopada 2019.}
+\contestname{Hrvatsko otvoreno natjecanje u informatici\\2.\ kolo, 16. studenog 2019.}
 \markright{\textbf{\textsf{Opisi algoritama}}}
 
 \begin{document}
@@ -21,11 +21,11 @@ dani u priloženim izvornim kodovima.
 \textsf{Pripremio: Nikola Dmitrović}\\
 \textsf{Potrebno znanje: naredba učitavanja i ispisivanja, operacija dijeljenja}
 
-Rješenje ovisi o ostatku pri dijeljenju broja $N$ s $K$. Ako su oni djeljivi bez
-ostatka, očito je da će Lega točno ,,$N$ podijeljeno s $K$'' puta izvući $K$ komada
-čipsa iz kutije s $N$ komada. Ako nisu djeljivi bez ostatka tada će u kutiji,
-nakon što Lega iz nje ,,$N$ podijeljeno s $K$'' puta izvuče $K$ komada, ostati još
-čipsa koji će se moći izvaditi u još jednom vađenju.
+Rješenje ovisi o ostatku pri dijeljenju broja $N$ s brojem $K$. Ako su oni
+djeljivi bez ostatka, očito je da će Lega točno ,,$N$ podijeljeno s $K$'' puta
+izvući $K$ komada čipsa iz kutije s $N$ komada. Ako nisu djeljivi bez ostatka
+tada će u kutiji, nakon što Lega iz nje ,,$N$ podijeljeno s $K$'' puta izvuče
+$K$ komada, ostati još čipsa koji će se moći izvaditi u još jednom vađenju.
 
 \textit{Programski kod (pisan u \texttt{Python 3}):}
 
@@ -64,7 +64,7 @@ sve Anine upite i trenutnoj jačini dodajemo $Bi - Ai$ za $i$-ti upit.
 
 Promatrajmo slučaj u kojemu je $N$ maksimalan, svaki $B$ maksimalan, a svaki
 $A$ minimalan. Tada će konačna jačina glazbe biti $N \cdot MAXB + X = 100000 *
-100000 + X$. Primjetimo da taj broj više ne stane u klasičan $32$-bitni
+100000 + X$. Primijetimo da taj broj više ne stane u klasičan $32$-bitni
 cjelobrojni tip podatka (npr. \texttt{int} u jezicima \texttt{C/C++}). Da
 biste uspjeli spremiti rješenje potrebno je koristiti barem $64$-bitni
 cjelobrojni tip podatka (npr. \texttt{long long} u jezicima \texttt{C/C++}).
@@ -79,10 +79,9 @@ jezicima.
 \textsf{Potrebno znanje: naredba učitavanja, naredba ponavljanja, rad sa
 stringovima, sortiranje}
 
-Za $20$ bodova bilo je dovoljno zaključiti da će, budući da na ulazu nema
-\texttt{‘?’}, lista nakon odmrzavanja izgledati isto kao i zamrznuta lista.
-Dakle, trebalo je pronaći u kojem se retku zamrznute liste nalazi tim
-NijeZivotJedanACM i ispisati indeks tog retka.
+Za $20$ bodova bilo je dovoljno zaključiti da će lista nakon odmrzavanja
+izgledati isto kao i zamrznuta lista.  Dakle, trebalo je pronaći u kojem se
+retku zamrznute liste nalazi naš tim i ispisati indeks tog retka.
 
 Za preostalih $30$ bodova, trebalo je zaključiti da su, u najgorem slučaju za
 naš tim, svi ostali timovi točno riješili sve zadatke sa \texttt{‘?’}, tj.
@@ -119,7 +118,7 @@ Prvu parcijalu moguće je riješiti jednostavnom analizom slučajeva koristeći 
 
 Drugu parcijalu moguće je riješiti isprobavanjem svih permutacija u vremenskoj
 složenosti $\mathcal{O}(n!)$. Implementaciju ovog rješenja možete vidjeti u
-izvornom kodu \texttt{slagalica\_nfact.cpp}
+izvornom kodu \texttt{slagalica\_n\_fact.cpp}
 
 Primijetimo da ćemo u trećoj parcijali naizmjence stavljati komadiće oblika $1$
 i $4$ pa je optimalno uvijek uzeti onaj s najmanjim brojem kojeg možemo staviti.
@@ -149,6 +148,8 @@ stavimo na zadnje mjesto na koje smo ih još uvijek mogli staviti jer će tamo
 najmanje povećati konačan niz. Možemo primijetiti da će to mjesto biti
 neposredno ispred zadnjeg komadića oblika $1$ ili $4$ jer smo tamo posljednji
 put promijenili traženi oblik komadića.
+
+Vremenska složenost: $\mathcal{O}(n)$.
 
 \subsection*{Zadatak: Checker}
 \textsf{Pripremili: Paula Vidas i Daniel Paleka}\\
@@ -183,12 +184,12 @@ raditi paralelno s danim algoritmom.
 \textsf{Potrebno znanje: konstruktivni algoritmi, turnirsko stablo}
 
 Nepoznat programski jezik, dopuštena samo jedna varijabla, ograničenja na broj
-naredbi i duljinu naredbe, \dots -- savršena kombinacija za rješavanje zadatka
-"podzadatak po podzadatak".
+naredbi i duljinu naredbe, zvuči kao savršena kombinacija za rješavanje zadatka
+``podzadatak po podzadatak''.
 
 U prvom podzadatku dopušteno nam je koristiti broj naredbi koji je (skoro)
-jednak broju bitova u ulaznoj vrijednosti. Ovo nam sugerira da ćemo zadatak
-rješavati "bit po bit". Pretpostavimo da smo sufiks od $X$ bitova uspješno
+jednak broju bitova ulazne vrijednosti. Ovo nam sugerira da ćemo zadatak
+rješavati ``bit po bit''. Pretpostavimo da smo sufiks od $X$ bitova uspješno
 riješili, odnosno, taj sufiks varijable $A$ sadrži vrijednost koja odgovara
 broju jedinica u tom istom sufiksu ulazne vrijednosti dok ostali
 bitovi nisu promijenjeni u odnosu na bitove ulazne vrijednosti. Primijetimo da
@@ -196,12 +197,12 @@ sama ulazna vrijednost u program već ima riješen sufiks veličine $1$. Sufiks 
 $X+1$ bitova ćemo riješiti tako da vrijednost $(X+1)$-og bita pribrojimo
 varijabli $A$ te taj bit postavimo na $0$. To možemo napraviti naredbom
 \verb|A=((A&(((1<<N)-1)-(1<<X)))+((A&(1<<X))>>X))|. Koristeći naredbe ovog
-oblika za svaki bit uspješno smo riješili prvi podzadatak.
+oblika za svaki bit mogli ste riješiti prvi podzadatak.
 
 Za osvajanje bodova na drugom podzadatku dovoljno je iskoristiti ideju iz prvog
 podzadatka zajedno sa svojstvom jezika da se varijabla $A$ smije pojavljivati
-najviše $5$ puta. Naravno, umjesto "bit po bit", zadatak ćemo rješavati
-tehnikom "četiri bita po četiri bita" i tako smanjiti broj naredbi $4$ puta.
+najviše $5$ puta. Naravno, umjesto ``bit po bit'', zadatak ćemo rješavati
+tehnikom ``četiri bita po četiri bita'' i tako smanjiti broj naredbi $4$ puta.
 
 Za rješavanje preostalih podzadataka bilo je potrebno sjetiti se jedne poznate
 strukture podataka -- \textit{turnirskog stabla}. Zamislimo da je nad našim
@@ -213,21 +214,25 @@ onoliko bitova kolika je veličina intervala kojeg taj čvor pokriva.
 Slijepimo li vrijednosti svih listova (slijeva nadesno), dobit ćemo ulaz u
 program.  Slijepimo li vrijednosti njihovih roditelja (slijeva nadesno), dobit
 ćemo željenu vrijednost varijable $A$ nakon prve naredbe. Ponavljamo li ovaj
-postupak sve do korijena stabla u končnici ćemo u varijabli $A$ imati
+postupak sve do korijena stabla, u končnici ćemo u varijabli $A$ imati
 točno rješenje, a broj naredbi bit će reda $\mathcal{O}(\log n)$. Ostaje nam
 samo osmisliti prijelaz između redaka u turnirskom stablu.
 
-U prvoj naredbi trebamo uzeti sve bitove na parnim pozicijama te im pribrojiti
-posmaknute bitove na neparnim pozicijama. To možemo dobiti izrazom
+U prvoj naredbi mogli bismo uzeti sve bitove na parnim pozicijama te im
+pribrojiti posmaknute bitove na neparnim pozicijama. To možemo dobiti izrazom
 \verb|((...01010101&A)+((...10101010&A)>>1))|. U sljedećem koraku algoritma
 potrebno je riješiti intervale duljine četiri pa je odgovarajuči izraz
 \verb|((...00110011&A)+((...11001100&A)>>2))|. Ponavljanjem ovog postupka
 dobivamo konačno rješenje zadatka.
 
-Ako ste konstantne vrijednosi iz gornjih izraza eksplicitno izračunali, osvojili
-ste svih $110$ bodova na zadatku. U slučaju da ste to napraviili implicitno,
-vrlo ste lagano mogli prekoračiti broj dopuštenih znakova u jednoj naredbi pa
-biste osvojili bodove samo na trećoj parcijali.
+Ovisno o načinu na koji ste izračunali vrijednosti potrebnih konstanti
+($...0101010$, $...10101010$, \dots) mogli ste osvojiti različit broj
+bodova. Naime, neki načini implicitnog generiranje ovih konstanti
+će prekršiti uvjet da se svaka naredba smije sastojati od najviše $1000$
+znakova.
+
+U ovom zadatku, radi lakše implementacije, preporučamo korištenje programskih
+jezika \texttt{Python} ili \texttt{Java}.
 
 \subsection*{Zadatak: Zvijezda}
 \textsf{Pripremio: Marin Kišić}\\
@@ -241,17 +246,18 @@ svim dužinama i ako za neki $i$ vrijedi $ccw(A_i, A_{i+1}, X) > 0$ i
 $ccw(A_{i+\frac{n}{2}}, A_{i+\frac{n}{2}+1}, X) > 0$, to znači da se točka
 nalazi u obojenom dijelu površine.
 
-U dodatnih $30$ mogli ste implementirati takozvano \textit{offline} rješenje.
-To je rješenje koje prvo učita sve upite, obradi u nekom poretku (ne nužno onom
-u kojem su zadani u inputu) te onda redom odgovori na njih.
+Za dodatnih $30$ bodova mogli ste implementirati takozvano \textit{offline}
+rješenje.  To je rješenje koje prvo učita sve upite, obradi u nekom poretku (ne
+nužno onom u kojem su zadani u inputu) te onda redom odgovori na njih.
 
 Za svih $110$ bodova bilo je potrebno osmisliti \textit{online} rješenje,
 odnosno rješenje koje kada učita upit odmah odgovori na njega.
 
 Ako je $ccw(A_{i}, A_{i+1}, X) > 0$, na $i$-tu stranicu $N$-terokuta ćemo
 napisati $1$, a inače $0$. Sada je pitanje postoji li par nasuprotnih stranica
-na kojima pise $1$.  Očito ne možemo provjeriti što piše na svakoj stranici jer
-je to $\mathcal{O}(N)$, ali možemo nizom zamjedbi doći do efikasnijeg rješenja.
+na kojima pise $1$.  Očito ne možemo za svaki upit provjeriti što piše na
+svakoj stranici jer je vremenska složenost takvog algoritma $\mathcal{O}(nq)$,
+ali možemo nizom zamjedbi doći do efikasnijeg rješenja.
 
 \textbf{Zamjedba 1}: Ako neke dvije stranice imaju $1$ na sebi, onda i sve
 stranice između njih s neke strane $N$-terokuta imaju isto $1$ na sebi. Ovo
@@ -266,7 +272,7 @@ da i jedinice također tvore interval.
 veličine barem $\frac{n}{2}+1$. Ovo je očito jer u $\frac{n}{2}+1$ uzastopnih
 stranica moraju postojati dvije koje su nastuprotne.
 
-Sada uzmimo proizvoljnu stranicu i njezinu nasuprotnu stranicu i pogledajmo
+Sada uzmimo proizvoljnu stranicu i njezinu nasuprotnu stranicu te pogledajmo
 koje vrijednosti pišu na njima. Ako na objema piše $1$ možemo odmah ispisati
 \texttt{DA}. Ako na objema pise $0$ možemo odmah ispisati \texttt{NE}. Ako na
 jednoj stranici piše $1$, a na drugoj $0$ onda možemo prelomiti niz na dvije
@@ -276,7 +282,7 @@ U jednoj želimo pronaći zadnju jedinicu, u drugoj prvu jedinicu, a to možemo 
 binarnom pretragom. Kad smo to pronašli zapravo smo pronašli i rubove našeg
 intervala jedinica pa sad možemo lako odgovoriti na zadano pitanje.
 
-Vremenska složenost $\mathcal{O}(q \log n)$
+Vremenska složenost: $\mathcal{O}(q \log n)$
 \end{document}
 %%% Local Variables:
 %%% mode: latex
