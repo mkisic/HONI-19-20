@@ -42,6 +42,7 @@ int main() {
     bool ok = 1;
     REP(j, 2) FOR(i, 1, (int)v[j].size()) if (v[j][i] - v[j][i - 1] != v[j][1] - v[j][0]) ok = 0;
     if (ok) {
+      printf("%d %d\n",(int)v[0].size(),(int)v[1].size());
       REP(i, 2) {
         for (auto x : v[i]) printf("%d ", x);
         puts("");

@@ -23,6 +23,7 @@ const int MAXN = 100100;
 int n, p[MAXN];
 
 void print(vector <int> &a, multiset <int> &b) {
+  printf("%d %d\n", (int)a.size(), (int)b.size());
   for (auto x : a) printf("%d ", x);
   puts("");
   for (auto x : b) printf("%d ", x);
