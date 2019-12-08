@@ -32,7 +32,7 @@ int main() {
   }
 
   vector <int> v[2];
-  REP(mask, (1 << n)) {
+  FOR(mask, 1, (1 << n) - 1) {
     REP(j, 2) v[j].clear();
     REP(i, n) {
       if (mask & (1 << i)) v[1].pb(p[i]);
