@@ -66,7 +66,7 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   if (!(fout >> a)) finish(0.0, WRONG_OUTPUT_FORMAT);
   if (!(fout >> b)) finish(0.0, WRONG_OUTPUT_FORMAT);
 
-  if (a + b != n) finish(0.0, WRONG);
+  if (a + b != n || !a || !b) finish(0.0, WRONG);
   multiset <int> cont;
 
   vector <int> v[2];
