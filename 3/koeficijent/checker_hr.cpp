@@ -47,6 +47,7 @@ int convert(string s) {
 }
 
 bool check(string s, int n) {
+  if ((int)s.size() >= 200) return 0;
   string all = "0123456789+";
   for (auto c : s) {
     bool ok = 0;
