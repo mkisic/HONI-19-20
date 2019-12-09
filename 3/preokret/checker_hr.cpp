@@ -31,57 +31,6 @@ using namespace std;
  */
 void finish(double p, const string& m);
 
-bool number_check(string s) {
-  if ((int)s.size() > 3) return 0; // pazi na ovo ako se promjeni ogranicenje
-  if (s[0] == '0') return 0; // ni 0 nije dozvoljen pa je ovo ok
-  return 1;
-}
-
-int convert(string s) {
-  int ret = 0;
-  REP(i, (int)s.size()) {
-    ret *= 10;
-    ret += s[i] - '0';
-  }
-  return ret;
-}
-
-bool check(string s, int n) {
-  if ((int)s.size() >= 200) return 0;
-  string all = "0123456789+";
-  for (auto c : s) {
-    bool ok = 0;
-    for (auto t : all) if (c == t) ok = 1;
-    if (!ok) return 0;
-  }
-
-  if (s[0] == '+' || s[(int)s.size()-1] == '+') return 0;
-  string tmp = "";
-
-  int suma = 0;
-  int prib = 0;
-  REP(i, (int)s.size()) {
-    if (s[i] == '+') {
-      if (tmp == "") return 0;
-      if (!number_check(tmp)) return 0;
-      suma += convert(tmp);
-      prib++;
-      tmp = "";
-    } else {
-      tmp += s[i];
-    }
-  }
-  if (tmp != "") {
-    if (!number_check(tmp)) return 0;
-    suma += convert(tmp);
-    prib++;
-  } else {
-    return 0;
-  }
-  return suma == n && prib >= 3 && prib <= 1000;
-}
-
-
 /**
  * The main checking function.
  * @param fin official input
@@ -94,26 +43,40 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   const string TEST_DATA_ERROR = "Greska u sluzbenom ulazu ili izlazu.";
   const string WRONG = "Netocno.";
   const string CORRECT = "Tocno.";
+  const string PRVA = "Tocan prvi redak.";
+  const string DRUGA = "Tocan drugi redak.";
+  const string TRECA = "Tocan treci redak.";
+  const string PRVADRUGA = "Tocni su prvi i drugi redak.";
+  const string PRVATRECA = "Tocni su prvi i treci redak.";
+  const string DRUGATRECA = "Tocni su drugi i treci redak.";
 
-  // Read official input
-  int n;
+  // Read official input ---------------- ovo mi NIJE BITNO u ovom zadatku
+  // int n;
+  // if (!(fin >> n)) finish(0.0, TEST_DATA_ERROR);
 
-  if (!(fin >> n)) finish(0.0, TEST_DATA_ERROR);
-
-  // Read official output  -------------- ovo mi NIJE BITNO u ovom zadatku
-  // int official_output_val;
-  // if (!(foff >> official_output_val)) finish(0, TEST_DATA_ERROR);
+  // Read official output
+  string a, b, c;
+  if (!getline(foff, a)) finish(0.0, TEST_DATA_ERROR);
+  if (!getline(foff, b)) finish(0.0, TEST_DATA_ERROR);
+  if (!getline(foff, c)) finish(0.0, TEST_DATA_ERROR);
 
   // Read contestant's output
-  string out;
-  if (!(fout >> out)) finish(0.0, WRONG_OUTPUT_FORMAT);
+  string A, B, C;
+  if (!getline(fout, A)) A = "";
+  if (!getline(fout, B)) B = "";
+  if (!getline(fout, C)) C = "";
 
   string smece;
   if (fout >> smece) finish(0.0, WRONG_OUTPUT_FORMAT);
 
-  if (!check(out, n)) finish(0.0, WRONG);
-
-  finish(1.0, CORRECT);
+  if (a != A && b != B && c != C) finish(0.0, WRONG);
+  if (a == A && b != B && c != C) finish(0.2, PRVA);
+  if (a != A && b == B && c != C) finish(0.2, DRUGA);
+  if (a != A && b != B && c == C) finish(0.6, TRECA);
+  if (a == A && b == B && c != C) finish(0.4, PRVADRUGA);
+  if (a == A && b != B && c == C) finish(0.8, PRVATRECA);
+  if (a != A && b == B && c == C) finish(0.8, DRUGATRECA);
+  if (a == A && b == B && c == C) finish(1.0, CORRECT);
 
   // The function MUST terminate before this line via finish()!
 }
