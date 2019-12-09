@@ -59,10 +59,11 @@ int main() {
   scanf("%d",&q);
   REP(i, q) {
     scanf("%d %d",&a[i],&b[i]);
+    a[i]--; b[i]--;
   }
   REP(i, n) {
     scanf("%d",&p[i+1]);
-    kada[p[i+1]] = i+1;
+    kada[--p[i+1]] = i+1;
   }
   int lo = 0, hi = n, mid;
   while (lo != hi) {

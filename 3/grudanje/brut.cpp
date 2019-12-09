@@ -36,19 +36,21 @@ int main() {
   scanf("%d",&q);
   REP(i, q) {
     scanf("%d %d",&a[i],&b[i]);
+    a[i]--; b[i]--;
   }
   REP(i, n) {
     scanf("%d",&p[i+1]);
     kada[p[i+1]] = i+1;
   }
 
-  FOR(i, 1, n + 1) {
-    s[p[i]] = '*';
+  REP(i, n + 1) {
+    if (i) s[--p[i]] = '*';
     REP(j, q) {
       if (bio[j]) continue;
       REP(k, ABC) last[k] = -1;
       bool ok = 1;
       FOR(k, a[j], b[j] + 1) {
+        if (s[k] == '*') continue;
         if (last[s[k] - 'a'] != -1) { 
           ok = 0;
           break;
