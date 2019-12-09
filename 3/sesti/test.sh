@@ -1,5 +1,5 @@
-while true; do
-    python3 gen.py > in
-    ./$1 < in > out
-    ./checker_hr in tmp out
+for input in test/sobovi.in.*; do
+    output=${input/in/out}
+    ./$1 < $input > tmp
+    ./checker_hr $input $output tmp
 done

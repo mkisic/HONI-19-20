@@ -11,7 +11,7 @@ typedef long long ll;
 typedef long double ld;
 typedef pair<int, int> pii;
   
-const int MAXN = (1 << 20) + 10;
+const int MAXN = 1e6 + 10;
 int n, k;
 int match[MAXN], vis[MAXN], tick;
 int start[MAXN];
