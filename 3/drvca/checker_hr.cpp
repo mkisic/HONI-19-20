@@ -64,18 +64,19 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   // Read contestant's output
   int a, b;
   if (!(fout >> a)) finish(0.0, WRONG_OUTPUT_FORMAT);
-  if (!(fout >> b)) finish(0.0, WRONG_OUTPUT_FORMAT);
-
-  if (a + b != n || a <= 0 || b <= 0) finish(0.0, WRONG);
   multiset <int> cont;
 
-  vector <int> v[2];
+  vector <int> v[2], v1[2];
   REP(i, a) {
     int x;
     if (!(fout >> x)) finish(0.0, WRONG_OUTPUT_FORMAT);
     cont.insert(x);
     v[0].push_back(x);
   }
+
+  if (!(fout >> b)) finish(0.0, WRONG_OUTPUT_FORMAT);
+
+  if (a + b != n || a <= 0 || b <= 0) finish(0.0, WRONG);
 
   REP(i, b) {
     int x;
@@ -88,6 +89,13 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   if (fout >> smece) finish(0.0, WRONG_OUTPUT_FORMAT);
 
   if (cont != s) finish(0.0, WRONG);
+  if ((int)v[0].size() != a || (int)v[1].size() != b) finish(0.0, WRONG);
+  
+  REP(i, 2) {
+    v1[i] = v[i];
+    sort(v1[i].begin(), v1[i].end());
+    if (v1[i] != v[i]) finish(0.0, WRONG);
+  }
 
   REP(j, 2) {
     FOR(i, 1, (int)v[j].size()) if (v[j][i] - v[j][i - 1] != v[j][1] - v[j][0]) finish(0.0, NOT_ARIT);  
