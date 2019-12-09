@@ -58,11 +58,13 @@ bool check(string s, int n) {
   string tmp = "";
 
   int suma = 0;
+  int prib = 0;
   REP(i, (int)s.size()) {
     if (s[i] == '+') {
       if (tmp == "") return 0;
       if (!number_check(tmp)) return 0;
       suma += convert(tmp);
+      prib++;
       tmp = "";
     } else {
       tmp += s[i];
@@ -71,10 +73,11 @@ bool check(string s, int n) {
   if (tmp != "") {
     if (!number_check(tmp)) return 0;
     suma += convert(tmp);
+    prib++;
   } else {
     return 0;
   }
-  return suma == n;
+  return suma == n && prib >= 3 && prib <= 1000;
 }
 
 
