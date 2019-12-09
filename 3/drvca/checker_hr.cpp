@@ -57,13 +57,17 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
     s.insert(x);
   }
 
-  // Read official output  -------------- ovo mi NIJE BITNO u ovom zadatku
-  // int official_output_val;
-  // if (!(foff >> official_output_val)) finish(0, TEST_DATA_ERROR);
+  // Read official output
+  int official_output_val;
+  if (!(foff >> official_output_val)) finish(0.0, TEST_DATA_ERROR);
 
   // Read contestant's output
   int a, b;
   if (!(fout >> a)) finish(0.0, WRONG_OUTPUT_FORMAT);
+  
+  if (official_output_val == -1 && a != -1) finish(0.0, WRONG);
+  if (a == -1) finish(0.0, WRONG);
+  
   multiset <int> cont;
 
   vector <int> v[2], v1[2];
