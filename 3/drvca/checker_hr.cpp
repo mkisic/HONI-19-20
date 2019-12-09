@@ -80,7 +80,7 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
 
   if (!(fout >> b)) finish(0.0, WRONG_OUTPUT_FORMAT);
 
-  if (a + b != n || a <= 0 || b <= 0) finish(0.0, WRONG);
+  if (a + b != n || a <= 0 || b <= 0 || a >= n || b >= n) finish(0.0, WRONG);
 
   REP(i, b) {
     int x;
