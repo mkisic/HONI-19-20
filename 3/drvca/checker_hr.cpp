@@ -66,6 +66,7 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   if (!(fout >> a)) finish(0.0, WRONG_OUTPUT_FORMAT);
   
   if (official_output_val == -1 && a != -1) finish(0.0, WRONG);
+  if (official_output_val == -1 && a == -1) finish(1.0, CORRECT);
   if (a == -1) finish(0.0, WRONG);
   
   multiset <int> cont;
