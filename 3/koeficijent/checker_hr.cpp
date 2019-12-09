@@ -31,6 +31,53 @@ using namespace std;
  */
 void finish(double p, const string& m);
 
+bool number_check(string s) {
+  if ((int)s.size() > 3) return 0; // pazi na ovo ako se promjeni ogranicenje
+  if (s[0] == '0') return 0; // ni 0 nije dozvoljen pa je ovo ok
+  return 1;
+}
+
+int convert(string s) {
+  int ret = 0;
+  REP(i, (int)s.size()) {
+    ret *= 10;
+    ret += s[i] - '0';
+  }
+  return ret;
+}
+
+bool check(string s, int n) {
+  string all = "0123456789+";
+  for (auto c : s) {
+    bool ok = 0;
+    for (auto t : all) if (c == t) ok = 1;
+    if (!ok) return 0;
+  }
+
+  if (s[0] == '+' || s[(int)s.size()-1] == '+') return 0;
+  string tmp = "";
+
+  int suma = 0;
+  REP(i, (int)s.size()) {
+    if (s[i] == '+') {
+      if (tmp == "") return 0;
+      if (!number_check(tmp)) return 0;
+      suma += convert(tmp);
+      tmp = "";
+    } else {
+      tmp += s[i];
+    }
+  }
+  if (tmp != "") {
+    if (!number_check(tmp)) return 0;
+    suma += convert(tmp);
+  } else {
+    return 0;
+  }
+  return suma == n;
+}
+
+
 /**
  * The main checking function.
  * @param fin official input
@@ -54,15 +101,13 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   // if (!(foff >> official_output_val)) finish(0, TEST_DATA_ERROR);
 
   // Read contestant's output
-  int a, b, c;
-  if (!(fout >> a)) finish(0.0, WRONG_OUTPUT_FORMAT);
-  if (!(fout >> b)) finish(0.0, WRONG_OUTPUT_FORMAT);
-  if (!(fout >> c)) finish(0.0, WRONG_OUTPUT_FORMAT);
+  string out;
+  if (!(fout >> out)) finish(0.0, WRONG_OUTPUT_FORMAT);
 
   string smece;
   if (fout >> smece) finish(0.0, WRONG_OUTPUT_FORMAT);
 
-  if (a + b + c != n) finish(0.0, WRONG);
+  if (!check(out, n)) finish(0.0, WRONG);
 
   finish(1.0, CORRECT);
 

@@ -10,7 +10,7 @@ def check(lines):
 
     n = map(int, lines[0].strip().split())
     assert 3 <= n <= 100, "n kriv"
-    nl.append("{}{}".format(n, x, E))
+    nl.append("{}{}".format(n, E))
 
     assert lines == nl, "Krivi format (%s vs %s)" % (lines, nl)
     assert lines[-1][-1] == "\n", "Zadnji red ne zavrsava sa \\n"
