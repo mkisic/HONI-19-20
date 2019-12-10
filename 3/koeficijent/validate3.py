@@ -9,7 +9,7 @@ def check(lines):
     E = "\n"  # line ending
 
     n = map(int, lines[0].strip().split())
-    assert 3 <= n <= 100, "n kriv"
+    assert 2 <= n <= 100, "n kriv"
     nl.append("{}{}".format(n, E))
 
     assert lines == nl, "Krivi format (%s vs %s)" % (lines, nl)

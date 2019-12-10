@@ -8,21 +8,17 @@ def check(lines):
     nl = []   # ispravno formatirane linije
     E = "\n"  # line ending
 
-    n, k = map(int, lines[0].strip().split())
+    n = int(lines[0].strip())
+    k = int(lines[1].strip())
     assert 1 <= n <= 100, "n kriv"
     assert 1 <= k <= 100, "k kriv"
-    nl.append("{} {}{}".format(n, k, E))
+    nl.append("{}{}".format(n, E))
+    nl.append("{}{}".format(k, E))
 
-    p = list(map(int, lines[1].strip().split()))
-    assert len(p) == n, "nema n brojeva u 2. redu"
-
-    linija = ""
-    for x in p:
-      assert 1 <= x <= k, "nema takvog trenera"
-      linija += str(x) + ' '
-
-    linija[-1] = '\n'
-    nl.append(linija)
+    for i in range(n):
+      x = int(lines[2 + i].strip())
+      assert 1 <= x <= k, "krivi trener"
+      nl.append("{}{}".format(x, E))
 
     assert lines == nl, "Krivi format (%s vs %s)" % (lines, nl)
     assert lines[-1][-1] == "\n", "Zadnji red ne zavrsava sa \\n"
