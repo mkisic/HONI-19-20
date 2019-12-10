@@ -77,11 +77,13 @@ int main() {
     int a = p.fi;
     int d = p.se - p.fi;
 
+    int N = n;
     vector<int> prvi;
-    while(cnt[a]) {
+    while(cnt[a] && N > 1) {
       prvi.pb(a);
       cnt[a] --;
       a += d;
+      N --;
     }
 
     vector<int> drugi;
