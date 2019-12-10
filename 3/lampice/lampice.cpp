@@ -149,7 +149,7 @@ class TreeSolver {
   Tree tree_;
   vector<long long> hash_down_;
   vector<long long> hash_up_;
-  vector<set<long long>> hash_set_;
+  vector<unordered_set<long long>> hash_set_;
   vector<int> stack_;
 
   void SetHashes(int x, int dep) {
@@ -247,7 +247,13 @@ int main(void) {
   Tree tree;
   LoadTree(tree);
   Decompositor decomp(tree);
-  
+
+  // border case :/
+  if (tree.nodes.size() == 2 && input[0] == input[1]) {
+    printf("2\n");
+    return 0;
+  }
+
   int ans = 0;
   for (Tree decomp_tree; decomp.NextTree(decomp_tree);) {
     TreeSolver solver(decomp_tree);

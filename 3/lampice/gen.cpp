@@ -12,6 +12,7 @@ string type;  // strategija za generiranje
 bool mapping_applied = false;
 vector<pair<int, int>> E;
 int deep_diff;
+int reset_iters;
 
 void add_edge(int i, int j) {
   adj[i].push_back(j);
@@ -29,9 +30,12 @@ void init(int argc, char **argv) {
   type = string(argv[4]);
   mapping.resize(n);
   iota(mapping.begin(), mapping.end(), 0);
+  reset_iters = 10 + rand() % 5;
   if (type.substr(0, 4) == "deep") {
     deep_diff = max(20, n / 1000);
     if (argc >= 6) deep_diff = atoi(argv[5]);
+    if (type == "deep-reset" && argc >= 7)
+      reset_iters = atoi(argv[6]);
   }
 }
 
@@ -111,6 +115,13 @@ void gen_input_longpalin() {
     if (dist[i] > D && rand() % 10 == 0)
       input[i] = 'a' + rand() % k;
   }
+}
+
+void gen_input_reset() {
+  for (int i = 0; i < n; ++i)
+    input[i] = 'a';
+  for (int i = 0; i < reset_iters; ++i)
+    input[rand() % n] = 'a' + rand() % k;
 }
 
 vector<int> calc_path(int u, int v) {
@@ -209,6 +220,10 @@ int main(int argc, char **argv) {
   } else if (type == "deep-longpalin") {
     gen_tree_deep();
     gen_input_longpalin();
+    apply_mapping();
+  } else if (type == "deep-reset") {
+    gen_tree_deep();
+    gen_input_reset();
     apply_mapping();
   } else if (type == "chain-longpalin") {
     gen_chain();
