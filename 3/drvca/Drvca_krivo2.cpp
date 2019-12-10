@@ -84,7 +84,7 @@ int main() {
       a += d;
     }
 
-    REP(i, 2) {
+    REP(i, min(10, prvi.size() - 1)) {
       vector<int> drugi;
       for(auto q: cnt) {
         REP(k, q.se) {
