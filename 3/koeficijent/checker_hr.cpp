@@ -78,7 +78,7 @@ bool check(string s, int n) {
   } else {
     return 0;
   }
-  return suma == n && prib >= 3 && prib <= 1000;
+  return suma == n && prib >= 2 && prib <= 1000;
 }
 
 
