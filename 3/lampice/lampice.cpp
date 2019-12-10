@@ -1,9 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define TRACE(x) cerr << #x << " = " << x << endl
-#define _ << " _ " <<
-
 struct Tree {
   vector<int> nodes;  // original mapping
   vector<vector<int>> adj;
@@ -105,7 +102,7 @@ class Decompositor {
   }
 };
 
-const int MAXN = 200100;
+const int MAXN = 100100;
 char input[MAXN];
 
 class TreeSolver {
@@ -113,7 +110,7 @@ class TreeSolver {
   TreeSolver(const Tree &tree): tree_(tree) {
     hash_down_.resize(tree.nodes.size());
     hash_up_.resize(tree.nodes.size());
-    map_.resize(tree.nodes.size());
+    hash_set_.resize(tree.nodes.size());
     stack_.reserve(tree.nodes.size());
   }
 
@@ -126,13 +123,12 @@ class TreeSolver {
     }
   }
 
-  int Solve(int lbound) {
-    lbound = max(0, lbound - 1);
-    return max(2 * Run(0, lbound) + 1, 2 * Run(1, lbound));
+  int Solve() {
+    return max(2 * Run(0) + 1, 2 * Run(1));
   }
 
-  int Run(int k, int lo = 0) {
-    int hi = (int)tree_.nodes.size();
+  int Run(int k) {
+    int lo = k, hi = (int)tree_.nodes.size();
     while (lo < hi) {
       int mid = (lo + hi + 1) / 2;
       if (Check(mid, k)) lo = mid;
@@ -153,17 +149,17 @@ class TreeSolver {
   Tree tree_;
   vector<long long> hash_down_;
   vector<long long> hash_up_;
-  vector<unordered_map<long long, int>> map_;
+  vector<unordered_set<long long>> hash_set_;
   vector<int> stack_;
 
-  void SetMap(int x, int dep) {
-    map_[dep][hash_down_[x]] = x;
+  void SetHashes(int x, int dep) {
+    hash_set_[dep].insert(hash_down_[x]);
     for (int y : tree_.adj[x])
-      SetMap(y, dep + 1);
+      SetHashes(y, dep + 1);
   }
 
-  void ResetMaps() {
-    for (auto &it : map_)
+  void ResetHashes() {
+    for (auto &it : hash_set_)
       it.clear();
   }
 
@@ -173,11 +169,11 @@ class TreeSolver {
     stack_.push_back(0);
     const int n = (int)tree_.adj[0].size();
     for (int step = 0; step < 2; ++step) {
-      ResetMaps();
+      ResetHashes();
       for (int i = 0; i < n; ++i) {
         const int node = tree_.adj[0][i];
         if (i > 0 && CheckSubtree(len, node, k)) return true;
-        if (i + 1 != n) SetMap(node, 1);
+        if (i + 1 != n) SetHashes(node, 1);
       }
       reverse(tree_.adj[0].begin(), tree_.adj[0].end());
     }
@@ -185,19 +181,23 @@ class TreeSolver {
   }
 
   bool CheckSubtree(int len, int x, int k) {
+    const int dep = (int)stack_.size();
     stack_.push_back(x);
-    const int dep = (int)stack_.size() - 1;
     bool ret = false;
     if (dep >= len) {
-      if (CheckChain(len, dep, k))
-        ret = true;
+      if (CheckChain(len, dep, k)) {
+        stack_.pop_back();
+        return true;
+      }
     }
     for (int y : tree_.adj[x]) {
-      if (ret) break;
-      if (CheckSubtree(len, y, k)) ret = true;
+      if (CheckSubtree(len, y, k)) {
+        stack_.pop_back();
+        return true;
+      }
     }
     stack_.pop_back();
-    return ret;
+    return false;
   }
 
   bool CheckChain(int len, int dep, int k) {
@@ -212,14 +212,13 @@ class TreeSolver {
       }
       return hdown * power_[i] == hup;
     }
-    
     int tail = tot_len - dep;
     int head = dep - tail;
     if (hash_down_[stack_[head]] != hash_up_[stack_[head]])
       return false;
     long long hdown = hash_down_[stack_.back()];
     if (head > 0) hdown -= power_[tail + 1] * hash_down_[stack_[head - 1]];
-    return map_[tail].count(hdown);
+    return hash_set_[tail].find(hdown) != hash_set_[tail].end();
   }
 };
 
@@ -241,21 +240,21 @@ void LoadTree(Tree &tree) {
 }
 
 int main(void) {
+  TreeSolver::InitPowers();
+  
   Tree tree;
   LoadTree(tree);
   Decompositor decomp(tree);
-
-  Tree decomposed_tree;
-  TreeSolver::InitPowers();
+  
   int ans = 0;
   for (Tree decomp_tree; decomp.NextTree(decomp_tree);) {
     TreeSolver solver(decomp_tree);
     solver.Build();
-    ans = max(ans, solver.Solve(ans / 2));
+    ans = max(ans, solver.Solve());
   }
 
   printf("%d\n", ans);
-
+  
   return 0;
 }
 

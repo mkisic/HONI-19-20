@@ -1,31 +1,40 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-typedef long long ll;
+#define x first
+#define y second
+
+typedef pair<long long, long long> hash_t;
+
+hash_t operator+(hash_t a, hash_t b) { return {a.x + b.x, a.y + b.y}; }
+hash_t operator*(hash_t a, hash_t b) { return {a.x * b.x, a.y * b.y}; }
+hash_t operator+(hash_t a, char b) { return {a.x + b, a.y + b}; }
+hash_t operator*(hash_t a, char b) { return {a.x * b, a.y * b}; }
 
 const int MAXN = 100100;
-const int BASE = 31337;
+const hash_t BASE = {31337, 10007};
 
 int n;
-char s[MAXN];
+char input[MAXN];
 vector<int> adj[MAXN];
+hash_t P[MAXN];
 
+int ans = 1;
 
-int rec(int x, int prev = -1, ll hdown = 0, ll hup = 0, ll p = 1, int len = 1) {
-  hdown = hdown * BASE + s[x];
-  hup = hup + p * s[x];
-  int ret = 0;
-  if (hup == hdown) ret = len;
+void rec(int x, int prev = -1, hash_t down = {0, 0}, hash_t up = {0, 0}, int len = 1) {
+  down = down * BASE + input[x];
+  up = up + P[len - 1] * input[x];
+  if (up == down && len > ans)
+    ans = len;
   for (int y : adj[x]) {
     if (y == prev) continue;
-    ret = max(ret, rec(y, x, hdown, hup, p * BASE, len + 1));
+    rec(y, x, down, up, len + 1);
   }
-  return ret;
 }
 
 int main(void) {
   cin >> n;
-  cin >> s;
+  cin >> input;
   for (int i = 0; i < n - 1; ++i) {
     int u, v;
     cin >> u >> v;
@@ -33,9 +42,11 @@ int main(void) {
     adj[u].push_back(v);
     adj[v].push_back(u);
   }
-  int ans = 0;
+  P[0] = {1, 1};
+  for (int i = 1; i < n; ++i)
+    P[i] = P[i - 1] * BASE;
   for (int i = 0; i < n; ++i)
-    ans = max(ans, rec(i));
+    rec(i);
   cout << ans << endl;
   return 0;
 }
