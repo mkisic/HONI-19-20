@@ -83,8 +83,9 @@ int main() {
       cnt[a] --;
       a += d;
     }
-
-    REP(i, min(10, prvi.size() - 1)) {
+    
+    int N = prvi.size();
+    REP(i, min(10, N)) {
       vector<int> drugi;
       for(auto q: cnt) {
         REP(k, q.se) {
