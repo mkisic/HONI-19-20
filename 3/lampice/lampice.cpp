@@ -128,7 +128,7 @@ class TreeSolver {
   }
 
   int Run(int k) {
-    int lo = k, hi = (int)tree_.nodes.size();
+    int lo = 0, hi = (int)tree_.nodes.size();
     while (lo < hi) {
       int mid = (lo + hi + 1) / 2;
       if (Check(mid, k)) lo = mid;
@@ -149,7 +149,7 @@ class TreeSolver {
   Tree tree_;
   vector<long long> hash_down_;
   vector<long long> hash_up_;
-  vector<unordered_set<long long>> hash_set_;
+  vector<set<long long>> hash_set_;
   vector<int> stack_;
 
   void SetHashes(int x, int dep) {
@@ -165,6 +165,8 @@ class TreeSolver {
 
   // k 0 za neparno, 1 za parno
   bool Check(int len, int k) {
+    // pazi na prazni string
+    if (len == 0 && k == 1) return true;
     stack_.clear();
     stack_.push_back(0);
     const int n = (int)tree_.adj[0].size();
