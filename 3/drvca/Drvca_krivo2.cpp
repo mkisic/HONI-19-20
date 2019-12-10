@@ -85,7 +85,7 @@ int main() {
     }
     
     int N = prvi.size();
-    REP(i, min(10, N)) {
+    REP(i, min(5, N)) {
       vector<int> drugi;
       for(auto q: cnt) {
         REP(k, q.se) {
