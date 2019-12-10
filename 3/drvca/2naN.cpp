@@ -24,12 +24,12 @@ int n, p[MAXN];
 
 int main() {
   cin >> n;
-  REP(i, n) cin >> p[i];
-  sort(p, p + n);
   if (n > 25 || n == 1) {
     puts("-1");
     return 0;
   }
+  REP(i, n) cin >> p[i];
+  sort(p, p + n);
 
   vector <int> v[2];
   FOR(mask, 1, (1 << n) - 1) {
@@ -42,14 +42,15 @@ int main() {
     bool ok = 1;
     REP(j, 2) FOR(i, 1, (int)v[j].size()) if (v[j][i] - v[j][i - 1] != v[j][1] - v[j][0]) ok = 0;
     if (ok) {
-      printf("%d %d\n",(int)v[0].size(),(int)v[1].size());
       REP(i, 2) {
+        printf("%d\n",(int)v[i].size());
         for (auto x : v[i]) printf("%d ", x);
         puts("");
       }
       return 0;
     }
   }
+  puts("-1");
   return 0;
 }
 

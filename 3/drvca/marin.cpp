@@ -23,9 +23,10 @@ const int MAXN = 100100;
 int n, p[MAXN];
 
 void print(vector <int> &a, multiset <int> &b) {
-  printf("%d %d\n", (int)a.size(), (int)b.size());
+  printf("%d\n", (int)a.size());
   for (auto x : a) printf("%d ", x);
   puts("");
+  printf("%d\n", (int)b.size());
   for (auto x : b) printf("%d ", x);
   puts("");
 }
@@ -65,11 +66,12 @@ void check(int a, int b) {
     r++;
     if (r != s.end()) {
       raz.erase(raz.find(*r - *it));
+      if (it != s.begin()) raz.insert(*r - *l);
     }
     s.erase(it);
     ans.pb(tmp);
     tmp += k;
-  } while (ans.size() < n);
+  } while ((int)ans.size() < n);
 }
 
 int main() {
@@ -77,13 +79,11 @@ int main() {
   REP(i, n) scanf("%d",&p[i]);
   sort(p, p + n);
 
-  if (n == 1) {
-    puts("-1");
-    return 0;
-  }
   if (n <= 4) {
+    printf("%d\n",n / 2);
     REP(i, n / 2) printf("%d ",p[i]);
     puts("");
+    printf("%d\n",n - n / 2);
     FOR(i, n / 2, n) printf("%d ",p[i]);
     puts("");
     return 0;
