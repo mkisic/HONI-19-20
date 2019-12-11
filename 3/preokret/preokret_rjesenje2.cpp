@@ -18,9 +18,6 @@ int main()
 		rezultat[1][i] = rezultat[1][i - 1];
 		rezultat[2][i] = rezultat[2][i - 1];
 		rezultat[gol][i]++;
-
-		cout << rezultat[1][i] << ' ' << rezultat[2][i] << endl;
-
 		if (rezultat[1][i] == rezultat[2][i]) nerjeseno++;
 		else if (rezultat[1][i] > rezultat[2][i]) vodstvo[i] = 1;
 		else vodstvo[i] = 2;
