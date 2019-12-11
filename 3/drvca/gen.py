@@ -90,6 +90,38 @@ def isti(n, t):
 
   return Test(n, p)
 
+def preklopljeni(n, isti):
+  d2 = random.randint(2, 10)
+  d1 = d2 * random.randint(2, 10)
+
+  n1 = n // 4
+  if n <= 15:
+    n1 = min(n - 1, 7)
+  n2 = n - n1
+
+  if isti:
+    n1 = n // 2
+    n2 = n - n1
+    d1 = d2 * random.randint(2, 4)
+    assert n1 == n2
+
+  r = random.randint(n1 // 8, n1 // 4)
+  if n <= 15:
+    r = 2
+    d1 = d2 * 2
+
+  p = []
+  for i in range(1, n1 + 1):
+    p.append(i * d1)
+  for i in range(1, n2 + 1):
+    p.append(i * d2 + d1 * (n1 - r))
+
+  for i in range(5):
+    random.shuffle(p)
+
+  return Test(n, p)
+  
+
 def gen_cases():
   remove_cases()
 
@@ -116,6 +148,8 @@ def gen_cases():
     cluster.append(generiraj(14 + (i%2), random.randint(2, 10), i % 2, 0))
     cluster.append(generiraj(14 + (i%2), random.randint(2, 10), i % 2, 1))
 
+  cluster.append(preklopljeni(14, 0))
+  cluster.append(preklopljeni(15, 0))
   cluster.append(isti(15, 0))
   cluster.append(isti(15, 1))
   real.append(cluster)
@@ -125,7 +159,8 @@ def gen_cases():
   for i in range(4):
     cluster.append(generiraj(299 + (i%2), random.randint(100, 250), i % 2, 0))
     cluster.append(generiraj(299 + (i%2), random.randint(100, 250), i % 2, 1))
-  
+    cluster.append(preklopljeni(299 + (i%2), 0))
+
   cluster.append(isti(300, 0))
   cluster.append(isti(300, 1))
   real.append(cluster)
@@ -135,6 +170,8 @@ def gen_cases():
   for i in range(8):
     cluster.append(generiraj(100000, 50000, i % 2, 0))
 
+  cluster.append(preklopljeni( 99998, 1))
+  cluster.append(preklopljeni(100000, 1))
   cluster.append(isti(100000, 1))
   real.append(cluster)
 
@@ -143,6 +180,7 @@ def gen_cases():
   for i in range(4):
     cluster.append(generiraj(99999 + (i%2), random.randint(20000, 50000), i % 2, 0))
     cluster.append(generiraj(99999 + (i%2), random.randint(20000, 50000), i % 2, 1))
+    cluster.append(preklopljeni(99999 + (i % 2), 0))
 
   cluster.append(isti(100000, 0))
   cluster.append(isti(100000, 1))
@@ -164,4 +202,3 @@ def main():
 
 if __name__ == "__main__":
   main()
-
