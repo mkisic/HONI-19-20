@@ -47,6 +47,9 @@ def check(lines):
         v[b].append(a)
 
     assert dfs(0, v, set()) == n, "nije stablo"
+    leaves = 0
+    for i in range(n):
+        if len(v[i]) == 1: leaves += 1
 
     chain_v = []
     for i in range(n): chain_v.append([])
@@ -62,7 +65,7 @@ def check(lines):
 
     assert lines == nl, "Krivi format (%s vs %s)" % (lines, nl)
     assert lines[-1][-1] == "\n", "Zadnji red ne zavrsava sa \\n"
-    return {'n' : n, 'chain' : chain}
+    return {'n' : n, 'chain' : chain, 'leaves': leaves}
 
 # Ocekivani clusteri! Ovo vjerojatno zelis promijeniti!
 expected_clusters = {'Mali': 1, 'Lanac': 1, 'Veliki': 1}
