@@ -35,7 +35,10 @@ bool check(vector<int> v) {
   return true;
 }
 
+#define unique uni
+
 map<int, int> cnt;
+map<int, int> diff;
 
 void print(vector<int> v) {
   cout << v.size() << endl;
@@ -43,6 +46,22 @@ void print(vector<int> v) {
     cout << x << " ";
   }
   cout << endl;
+}
+void print(multiset<int> v) {
+  cout << v.size() << endl;
+  for(int x: v) {
+    cout << x << " ";
+  }
+  cout << endl;
+}
+
+void makni(int x, int y, int &unique) {
+  if(diff[y - x] == 1) unique --;
+  diff[y - x] --;
+}
+void dodaj(int x, int y, int &unique) {
+  if(diff[y - x] == 0) unique ++;
+  diff[y - x] ++;
 }
 
 int main() {
@@ -77,29 +96,49 @@ int main() {
     int a = p.fi;
     int d = p.se - p.fi;
 
+    diff.clear();
+
     vector<int> prvi;
-    while(cnt[a]) {
-      prvi.pb(a);
-      cnt[a] --;
-      a += d;
-    }
-    
-    int N = prvi.size();
-    REP(i, min(10, N)) {
-      vector<int> drugi;
-      for(auto q: cnt) {
-        REP(k, q.se) {
-          drugi.pb(q.fi);
+    multiset<int> drugi;
+
+    int unique = 0;
+    REP(i, n) {
+      if(i) {
+        diff[v[i] - v[i - 1]] ++;
+        if(diff[v[i] - v[i - 1]] == 1) {
+          unique ++;
         }
       }
+      drugi.insert(v[i]);
+    }
 
-      if(check(drugi)) {
+    while(cnt[a]) {
+      auto it = drugi.find(a);
+      auto it_pre = it;
+      auto it_post = it;
+
+      it_pre --;
+      it_post ++;
+
+      if(it_post != drugi.end()) {
+        makni(*it, *it_post, unique);
+      }
+      if(it != drugi.begin()) {
+        makni(*it_pre, *it, unique);
+      }
+      if(it != drugi.begin() && it_post != drugi.end()) {
+        dodaj(*it_pre, *it_post, unique);
+      }
+
+      drugi.erase(it);
+      prvi.pb(a);
+      a += d;
+
+      if(unique == 1 || drugi.size() == 1) {
         print(prvi);
         print(drugi);
         return 0;
       }
-      cnt[prvi.back()] ++;
-      prvi.pop_back();
     }
   }
   cout << -1 << endl;
