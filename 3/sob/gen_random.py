@@ -1,4 +1,4 @@
 from random import randint
-n = randint(2, 1000000)
-k = randint(1, n // 2)
-print(n, k)
+n = randint(2, 500000)
+m = randint(n, 500000)
+print(n, m)

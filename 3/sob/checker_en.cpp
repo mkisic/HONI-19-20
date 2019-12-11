@@ -45,8 +45,8 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   const string CORRECT = "Correct.";
 
   // Read official input
-  int n, k;
-  if (!(fin >> n) || !(fin >> k)) finish(0, TEST_DATA_ERROR);
+  int n, m;
+  if (!(fin >> n) || !(fin >> m)) finish(0, TEST_DATA_ERROR);
 
   // Read official output  -------------- ovo mi NIJE BITNO u ovom zadatku
   // int official_output_val;
@@ -55,10 +55,10 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   // Read contestant's output
   vector<int> a, b;
 
-  for (int i = 0; i < k; i++) {
+  for (int i = 0; i < n; i++) {
       int x, y;
       if (!(fout >> x) || !(fout >> y)) finish(0, WRONG_OUTPUT_FORMAT);
-      if (!(0 <= x && x < k && n - k <= y && y < n))
+      if (!(0 <= x && x < n && m <= y && y < m + n))
           finish(0, WRONG_OUTPUT_FORMAT);
       if ((x & y) != x) finish(0, WRONG);
 
@@ -73,7 +73,7 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   a.erase(unique(a.begin(), a.end()), a.end());
   sort(b.begin(), b.end());
   b.erase(unique(b.begin(), b.end()), b.end());
-  if ((int)a.size() != k || (int)b.size() != k) finish(0, WRONG);
+  if ((int)a.size() != n || (int)b.size() != n) finish(0, WRONG);
 
   finish(1, CORRECT);
 

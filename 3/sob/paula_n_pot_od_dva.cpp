@@ -16,12 +16,12 @@ int main() {
     cin.tie(0);
     cout.tie(0);
 
-    int n, k;
-    cin >> n >> k;
+    int n, m;
+    cin >> n >> m;
 
-    int a = 0, b = n - k;
+    int a = 0, b = m;
     for (int i = 19; i >= 0; i--) {
-        if (!((1 << i) & k)) continue;
+        if (!((1 << i) & n)) continue;
         for (int x = b; x < b + (1 << i); x++)
             cout << a + (x & ((1 << i) - 1)) << " " << x << "\n";
         a += (1 << i);

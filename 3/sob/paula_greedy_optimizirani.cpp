@@ -16,16 +16,15 @@ int main() {
     cin.tie(0);
     cout.tie(0);
 
-    int n, k;
-    cin >> n >> k;
+    int n, m;
+    cin >> n >> m;
 
-    int lo = n - k;
-    for (int i = k - 1; i >= 0; ) {
-        int hi = lo;
-        while ((hi & i) != i) hi++;
-        for (int j = hi; j >= lo; j--)
-            cout << i-- << " " << j << "\n";
-        lo = hi + 1;
+    for (n--; n >= 0; ) {
+        int x = m;
+        while ((x & n) != n) x++;
+        for (int i = x; i >= m; i--)
+            cout << n-- << " " << i << "\n";
+        m = x + 1;
     }
 
     return 0;

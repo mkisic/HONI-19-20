@@ -18,15 +18,15 @@ MAXN = 10**6
 
 class Test(object):
   def __init__(self, n, k):
-    self.n = n
-    self.k = k
+    self.n = k
+    self.m = n - k
 
   def validate(self):
-    assert 2 <= self.n <= MAXN
-    assert 1 <= self.k <= self.n / 2
+    assert 1 <= self.n <= self.m
+    assert self.n + self.m <= MAXN
 
   def write(self, fd=sys.stdout):
-    print>>fd, self.n, self.k
+    print>>fd, self.n, self.m
 
 
 def remove_cases():

@@ -43,26 +43,26 @@ int main() {
     cin.tie(0);
     cout.tie(0);
 
-    int n, k;
-    cin >> n >> k;
+    int n, m;
+    cin >> n >> m;
 
-    for (int i = n - k; i < n; i++)
+    for (int i = m; i < m + n; i++)
         //for (int j = k - 1; j >= 0; j--)
         //    if ((i & j) == j) e[i].push_back(j);
         for (int j = i; ; j = (j - 1) & i) {
-            if (j < k) e[i].push_back(j);
+            if (j < n) e[i].push_back(j);
             if (j == 0) break;
         }
 
-    for (int i = 0; i < k; i++)
+    for (int i = 0; i < n; i++)
         match[i] = -1;
 
-    for (int i = n - k; i < n; i++) {
+    for (int i = m; i < m + n; i++) {
         tick++;
         assert(f(i));
     }
 
-    for (int i = 0; i < k; i++)
+    for (int i = 0; i < n; i++)
         cout << i << " " << match[i] << "\n";
 
     return 0;

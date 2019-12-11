@@ -16,13 +16,13 @@ int main() {
     cin.tie(0);
     cout.tie(0);
 
-    int n, k;
-    cin >> n >> k;
+    int n, m;
+    cin >> n >> m;
 
     set<int> S;
-    for (int i = n - k; i < n; i++) S.insert(i);
+    for (int i = m; i < m + n; i++) S.insert(i);
     
-    for (int i = k - 1; i >= 0; i--) {
+    for (int i = n - 1; i >= 0; i--) {
         for (auto j : S)
             if ((i & j) == i) {
                 S.erase(j);
