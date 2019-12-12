@@ -69,6 +69,29 @@ void gen_tree_shallow() {
   }
 }
 
+void gen_tree_leaves() {
+  int max_leaves = 65 + rand() % 35;
+  int rounds = 2 + rand() % 4;
+  for (int i = 1; i <= rounds; ++i)
+    add_edge(0, i);
+  int mid = 3 * n / 5;
+  for (int i = rounds + 1; i < mid; ++i)
+    add_edge(i, i - rounds);
+  for (int i = 0; i < mid; ++i)
+    if (adj[i].size() == 1)
+      max_leaves--;
+  for (int i = mid; i < n; ++i) {
+    int j = rand() % i;
+    if (rand() % 10 || max_leaves == 0) {
+      while (adj[j].size() != 1)
+        j = rand() % i;
+    }
+    if (adj[j].size() != 1)
+      max_leaves--;
+    add_edge(i, j);
+  }
+}
+
 void gen_input_simple() {
   for (int i = 0; i < n; ++i)
     input[i] = 'a' + rand() % k;
@@ -146,6 +169,72 @@ vector<int> calc_path(int u, int v) {
   return path;
 }
 
+void gen_rounds(int branches, int branch_len) {
+  input[0] = 'f';
+  for (int i = 1; i <= branches; ++i) {
+    input[i] = 'a';
+    add_edge(i, 0);
+  }
+  for (int i = branches + 1; i <= branches * branch_len; ++i) {
+    input[i] = 'a';
+    add_edge(i, i - branches);
+  }
+}
+
+void gen_special() {
+  gen_rounds(3, 10000);
+  queue<pair<int, int>> q;
+  for (int i = 29998; i <= 30000; ++i)
+    q.push({i, 0});
+  int next_id = 30001;
+  while (!q.empty()) {
+    auto it = q.front(); q.pop();
+    for (int i = 0; i < 4; ++i) {
+      int id = next_id++;
+      if (id >= n) continue;
+      input[id] = 'a' + rand() % 26;
+      add_edge(it.first, id);
+      q.push({id, it.second + 1});
+    }
+  }
+  
+  int x = 35001 + rand() % 5000;
+  int y = 40000 + rand() % 5000;
+  vector<int> path = calc_path(x, y);
+  for (int j = 0; j < (int)path.size() / 2; ++j) {
+    int jj = (int)path.size() - 1 - j;
+    input[path[jj]] = input[path[j]];
+  }
+}
+
+void gen_special2() {
+  const int b = 140;
+  gen_rounds(b, 30);
+  queue<pair<int, int>> q;
+  for (int i = 29 * b + 1; i <= 30 * b; ++i)
+    q.push({i, 0});
+  int next_id = 30 * b + 1;
+  const vector<int> vec = {2, 2, 2, 3, 3, 3};
+  while (!q.empty()) {
+    auto it = q.front(); q.pop();
+    for (int i = 0; i < vec[it.second]; ++i) {
+      int id = next_id++;
+      if (id >= n) continue;
+      input[id] = 'a' + rand() % 26;
+      add_edge(it.first, id);
+      q.push({id, it.second + 1});
+    }
+  }
+  
+  int x = 40000 + rand() % 4000;
+  int y = 44000 + rand() % 4000;
+  vector<int> path = calc_path(x, y);
+  for (int j = 0; j < (int)path.size() / 2; ++j) {
+    int jj = (int)path.size() - 1 - j;
+    input[path[jj]] = input[path[j]];
+  }
+}
+
 void apply_reverse() {
   int reps = max(10, n / 2000);
   for (int i = 0; i < reps; ++i) {
@@ -161,6 +250,7 @@ void apply_reverse() {
 
 void apply_mapping() {
   mapping_applied = true;
+  mapping.resize(n);
   random_shuffle(mapping.begin(), mapping.end());
 }
 
@@ -228,6 +318,29 @@ int main(int argc, char **argv) {
   } else if (type == "chain-longpalin") {
     gen_chain();
     gen_input_longpalin();
+  } else if (type == "leaves-simple") {
+    gen_tree_leaves();
+    gen_input_simple();
+    apply_mapping();
+  } else if (type == "leaves-reverse") {
+    gen_tree_leaves();
+    gen_input_simple();
+    apply_reverse();
+    apply_mapping();
+  } else if (type == "leaves-reset") {
+    gen_tree_leaves();
+    gen_input_reset();
+    apply_mapping();
+  } else if (type == "leaves-longpalin") {
+    gen_tree_leaves();
+    gen_input_longpalin();
+    apply_mapping();
+  } else if (type == "special") {
+    gen_special();
+    apply_mapping();
+  } else if (type == "special2") {
+    gen_special2();
+    apply_mapping();
   } else {
     assert(false);
   }
