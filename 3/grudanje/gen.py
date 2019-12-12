@@ -90,6 +90,30 @@ def gen_random(n, q, abc):
 
   return Test(s, q, qs, p)
 
+def grdi(n, q):
+  p = []
+  for i in range(n):
+    p.append(i+1)
+
+  for i in range(10):
+    l = random.randint(0, n-1)
+    r = random.randint(0, n-1)
+    t = p[l]
+    p[l] = p[r]
+    p[r] = t
+  
+  qs = []
+  for i in range(q):
+    l = random.randint(1, n // 10)
+    r = random.randint(n - n//10, n)
+    qs.append((l, r))
+  
+  s = ""
+  for i in range(n):
+    if random.randint(1, 100) < 10: s += "a"
+    else: s += "l"
+
+  return Test(s, q, qs, p)
 
 
 def gen_cases():
@@ -119,6 +143,7 @@ def gen_cases():
     cluster = []
     cluster.append(gen_random(500, 500, 26))
     cluster.append(gen_random(500, 500, 4))
+    cluster.append(grdi(500,500))
     real.append(cluster)
   
   # N, Q <= 3000
@@ -128,6 +153,7 @@ def gen_cases():
     cluster = []
     cluster.append(gen_random(3000, 3000, 26))
     cluster.append(gen_random(3000, 3000, 4))
+    cluster.append(grdi(3000,3000))
     real.append(cluster)
 
   # samo slova "a"
@@ -136,6 +162,7 @@ def gen_cases():
   for test in range(2):
     cluster = []
     cluster.append(gen_random(MAXN, MAXQ, 1))
+    cluster.append(grdi(MAXN, MAXQ))
     real.append(cluster)
 
   # N, Q <= 10^5
