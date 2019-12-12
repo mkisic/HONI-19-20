@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int maxn = 105;
+const int maxn = 250;
 int N;
 int gol;
 int rezultat[3][maxn];
