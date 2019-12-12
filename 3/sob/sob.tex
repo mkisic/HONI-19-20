@@ -1,0 +1,75 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=110,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Sob}
+
+\setlength\intextsep{-0.1cm}
+\begin{wrapfigure}[9]{r}{0.17\textwidth}
+\centering
+\includegraphics[width=0.17\textwidth]{img/sob.png}
+\end{wrapfigure}
+
+Bio je Badnjak, tišina i mrak, i sve je bilo vrlo mirno, i kiša je vani kapala
+gotovo nečujno, te se u sobi nije moglo čuti ništa osim otkucaja srca dvaju
+tijela koja su se po prvi put našla jedno na drugom, gdje je veće srce kucalo
+sporo, mirno i sigurno, a manje srce je kucalo brzo, panično, i bolno
+pritisnuto slomljenim rebrima; te prigušenih jecaja našeg junaka
+Sebastijana koji leži sam sa sobom, a sob je jako velik, težak i leži mu na
+prsima.
+
+Kako bi se izbavio iz nevolje prije Božića (k.) , neophodno je da riješi
+sljedeći zadatak: Zadani su prirodni brojevi $N$ i $M$. Potrebno je upariti
+brojeve iz skupova $A = \{ 0, 1, 2, \dots, N - 1 \}$ i $B = \{ M, \dots, M + N - 1
+\}$ u $N$ parova, tako da za da uparene brojeve $x \in A$ i $y \in B$ vrijedi
+$x \mathbin{\&} y = x$, gdje s $\&$ označavamo bitovno I.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom su retku prirodni brojevi $N$ i $M$ $(1 \le N \le M, N + M \le 10^6)$
+iz teksta zadatka.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+Ispišite $N$ redaka. U svakom retku ispišite po dva broja $x$ i $y$, pri čemu je
+$x$ iz skupa $A$ i $y$ iz skupa $B$. Ispisani parovi trebaju činiti uparivanje
+opisano u tekstu zadatka.
+
+Moguće je dokazati da rješenje uvijek postoji.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+ \subsection*{Bodovanje}
+{\renewcommand{\arraystretch}{1.4}
+  \setlength{\tabcolsep}{6pt}
+  \begin{tabular}{ccl}
+ Podzadatak & Broj bodova & Ograničenja \\ \midrule
+  1 & 10 & $N$ je potencija broja $2$ \\
+  2 & 29 & $N + M$ je potencija broja $2$ \\
+  3 & 39 & $N + M \le 1000$ \\
+  4 & 32 & Nema dodatnih ograničenja.
+\end{tabular}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Probni primjeri}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/sob.dummy.in.1}{test/sob.dummy.out.1} &
+\sampleinputs{test/sob.dummy.in.2}{test/sob.dummy.out.2} &
+\sampleinputs{test/sob.dummy.in.3}{test/sob.dummy.out.3}
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
