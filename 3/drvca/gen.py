@@ -90,6 +90,7 @@ def isti(n, t):
 
   return Test(n, p)
 
+
 def preklopljeni(n, isti, maks):
   d2 = random.randint(2, 10)
   d1 = d2 * random.randint(2, 10)
@@ -119,7 +120,7 @@ def preklopljeni(n, isti, maks):
   for i in range(5):
     random.shuffle(p)
 
-  if i in range(n):
+  for i in range(n):
     if maks:
       p[i] = MAXH - p[i]
 
