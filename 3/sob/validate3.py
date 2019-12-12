@@ -8,28 +8,28 @@ def check(lines):
     nl = []   # ispravno formatirane linije
     E = "\n"  # line ending
 
-    n, k = map(int, lines[0].split())
-    assert 1 <= n <= 10**6, "krivi n"
-    assert 1 <= k <= n // 2, "krivi k"
-    nl.append("{} {}{}".format(n, k, E))
+    n, m = map(int, lines[0].split())
+    assert 1 <= n <= m, "krivi n i m odnos"
+    assert 1 <= n + m <= 10 ** 6, "krivi n + m"
+    nl.append("{} {}{}".format(n, m, E))
 
     assert lines == nl, "Krivi format (%s vs %s)" % (lines, nl)
     assert lines[-1][-1] == "\n", "Zadnji red ne zavrsava sa \\n"
-    return {'n': n, 'k': k}
+    return {'n': n, 'm': m}
 
 
 # Ocekivani clusteri! Ovo vjerojatno zelis promijeniti!
-expected_clusters = {'K potencija': 1, 'N potencija': 1, 'Mali': 1, 'Veliki': 1}
+expected_clusters = {'N potencija': 1, 'N + M potencija': 1, 'Mali': 1, 'Veliki': 1}
 
 
 def what_cluster(data):
     # na temelju povratne informacije iz check(lines)
     # zakljucuje za TP u kojoj je bodovnoj sekciji
     n = data['n']
-    k = data['k']
-    if (k & (k - 1)) == 0: return 'K potencija'
+    m = data['m']
     if (n & (n - 1)) == 0: return 'N potencija'
-    if n <= 1000: return 'Mali'
+    if ((n + m) & (n + n - 1)) == 0: return 'N + M potencija'
+    if n + m <= 1000: return 'Mali'
     return 'Veliki'
 
 
