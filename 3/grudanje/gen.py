@@ -115,6 +115,29 @@ def grdi(n, q):
 
   return Test(s, q, qs, p)
 
+def lepi(n, q):
+  p = []
+  for i in range(n):
+    p.append(i+1)
+
+  for i in range(10):
+    l = random.randint(0, n-1)
+    r = random.randint(0, n-1)
+    t = p[l]
+    p[l] = p[r]
+    p[r] = t
+  
+  qs = []
+  for i in range(q):
+    l = random.randint(1, n // 10)
+    r = random.randint(n - n//10, n)
+    qs.append((l, r))
+  
+  s = ""
+  for i in range(n):
+    s += "a"
+
+  return Test(s, q, qs, p)
 
 def gen_cases():
   remove_cases()
@@ -162,7 +185,7 @@ def gen_cases():
   for test in range(2):
     cluster = []
     cluster.append(gen_random(MAXN, MAXQ, 1))
-    cluster.append(grdi(MAXN, MAXQ))
+    cluster.append(lepi(MAXN, MAXQ))
     real.append(cluster)
 
   # N, Q <= 10^5
@@ -172,6 +195,7 @@ def gen_cases():
     cluster = []
     cluster.append(gen_random(MAXN, MAXQ, 26))
     cluster.append(gen_random(MAXN, MAXQ, 4))
+    cluster.append(grdi(MAXN, MAXQ))
     real.append(cluster)
 
   for i, batch in enumerate(real):
