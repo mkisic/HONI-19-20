@@ -132,6 +132,7 @@ int main() {
 
       drugi.erase(it);
       prvi.pb(a);
+      cnt[a] --;
       a += d;
 
       if(unique == 1 || drugi.size() == 1) {
