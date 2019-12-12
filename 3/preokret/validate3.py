@@ -9,12 +9,12 @@ def check(lines):
     E = "\n"  # line ending
 
     n = int(lines[0].strip())
-    assert 1 <= n <= 100, "n kriv"
+    assert 1 <= n <= 250, "n kriv"
     nl.append("{}{}".format(n, E))
 
     for i in range(1, n + 1):
       x = int(lines[i].strip())
-      assert x == 1 or x == 2: "x kriv"
+      assert x == 1 or x == 2, "x kriv"
       nl.append("{}{}".format(x, E))
 
     assert lines == nl, "Krivi format (%s vs %s)" % (lines, nl)

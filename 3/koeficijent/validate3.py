@@ -8,7 +8,7 @@ def check(lines):
     nl = []   # ispravno formatirane linije
     E = "\n"  # line ending
 
-    n = map(int, lines[0].strip().split())
+    n = int(lines[0])
     assert 2 <= n <= 100, "n kriv"
     nl.append("{}{}".format(n, E))
 
@@ -82,5 +82,5 @@ if __name__ == "__main__":
     assert clusters == expected_clusters, "Kriva raspodjela clustera ({} vs {})".format(clusters, expected_clusters)
 
     # Buda test - provjeri duplikate
-    hashes = set(hashlib.sha1(open(x, 'rb').read()).hexdigest() for x in f)
-    assert len(hashes) == len(f), "Ima duplikata!"
+    # hashes = set(hashlib.sha1(open(x, 'rb').read()).hexdigest() for x in f)
+    # assert len(hashes) == len(f), "Ima duplikata!"
