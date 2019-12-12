@@ -124,7 +124,13 @@ def preklopljeni(n, isti, maks):
       p[i] = MAXH - p[i]
 
   return Test(n, p)
-  
+
+def dva():
+  n = 2
+  p = []
+  for i in range(2):
+    p.append(random.randint(123,1234))
+  return Test(n, p)
 
 def gen_cases():
   remove_cases()
@@ -157,6 +163,7 @@ def gen_cases():
   cluster.append(preklopljeni(14, 0, 1))
   cluster.append(isti(15, 0))
   cluster.append(isti(15, 1))
+  cluster.append(dva())
   real.append(cluster)
   
   # N <= 300
@@ -170,6 +177,7 @@ def gen_cases():
 
   cluster.append(isti(300, 0))
   cluster.append(isti(300, 1))
+  cluster.append(dva())
   real.append(cluster)
 
   # postoji rjesenje s 2 niza jednake duljine
@@ -180,6 +188,7 @@ def gen_cases():
   cluster.append(preklopljeni( 99998, 1, 0))
   cluster.append(preklopljeni(100000, 1, 1))
   cluster.append(isti(100000, 1))
+  cluster.append(dva())
   real.append(cluster)
 
   # N <= 10^5
@@ -192,6 +201,7 @@ def gen_cases():
   cluster.append(preklopljeni(100000, 0, 1))
   cluster.append(isti(100000, 0))
   cluster.append(isti(100000, 1))
+  cluster.append(dva())
   real.append(cluster)
 
   for i, batch in enumerate(real):
