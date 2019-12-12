@@ -90,7 +90,7 @@ def isti(n, t):
 
   return Test(n, p)
 
-def preklopljeni(n, isti):
+def preklopljeni(n, isti, maks):
   d2 = random.randint(2, 10)
   d1 = d2 * random.randint(2, 10)
 
@@ -118,6 +118,10 @@ def preklopljeni(n, isti):
 
   for i in range(5):
     random.shuffle(p)
+
+  if i in range(n):
+    if maks:
+      p[i] = MAXH - p[i]
 
   return Test(n, p)
   
@@ -148,8 +152,9 @@ def gen_cases():
     cluster.append(generiraj(14 + (i%2), random.randint(2, 10), i % 2, 0))
     cluster.append(generiraj(14 + (i%2), random.randint(2, 10), i % 2, 1))
 
-  cluster.append(preklopljeni(14, 0))
-  cluster.append(preklopljeni(15, 0))
+  cluster.append(preklopljeni(14, 0, 0))
+  cluster.append(preklopljeni(15, 0, 0))
+  cluster.append(preklopljeni(14, 0, 1))
   cluster.append(isti(15, 0))
   cluster.append(isti(15, 1))
   real.append(cluster)
@@ -159,7 +164,9 @@ def gen_cases():
   for i in range(4):
     cluster.append(generiraj(299 + (i%2), random.randint(100, 250), i % 2, 0))
     cluster.append(generiraj(299 + (i%2), random.randint(100, 250), i % 2, 1))
-    cluster.append(preklopljeni(299 + (i%2), 0))
+    cluster.append(preklopljeni(299 + (i%2), 0, 0))
+  
+  cluster.append(preklopljeni(300, 0, 1))
 
   cluster.append(isti(300, 0))
   cluster.append(isti(300, 1))
@@ -170,8 +177,8 @@ def gen_cases():
   for i in range(8):
     cluster.append(generiraj(100000, 50000, i % 2, 0))
 
-  cluster.append(preklopljeni( 99998, 1))
-  cluster.append(preklopljeni(100000, 1))
+  cluster.append(preklopljeni( 99998, 1, 0))
+  cluster.append(preklopljeni(100000, 1, 1))
   cluster.append(isti(100000, 1))
   real.append(cluster)
 
@@ -180,8 +187,9 @@ def gen_cases():
   for i in range(4):
     cluster.append(generiraj(99999 + (i%2), random.randint(20000, 50000), i % 2, 0))
     cluster.append(generiraj(99999 + (i%2), random.randint(20000, 50000), i % 2, 1))
-    cluster.append(preklopljeni(99999 + (i % 2), 0))
+    cluster.append(preklopljeni(99999 + (i % 2), 0, 0))
 
+  cluster.append(preklopljeni(100000, 0, 1))
   cluster.append(isti(100000, 0))
   cluster.append(isti(100000, 1))
   real.append(cluster)
