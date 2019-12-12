@@ -68,7 +68,7 @@ def check(lines):
     return {'n' : n, 'chain' : chain, 'leaves': leaves}
 
 # Ocekivani clusteri! Ovo vjerojatno zelis promijeniti!
-expected_clusters = {'Mali': 1, 'Lanac': 1, 'Veliki': 1}
+expected_clusters = {'Mali': 1, 'Lanac': 1, 'Malo listova': 1, 'Veliki': 1}
 
 
 def what_cluster(data):
@@ -76,6 +76,7 @@ def what_cluster(data):
     # zakljucuje za TP u kojoj je bodovnoj sekciji
     if data['n'] <= 3000: return 'Mali'
     if data['chain']: return 'Lanac'
+    if data['leaves'] <= 100: return 'Malo listova'
     return 'Veliki'
 
 
