@@ -3,7 +3,7 @@ using namespace std;
 int N, M;
 
 void output(int a, int b) {
-  cout << a << " " << b << endl;
+  cout << a << " " << b << "\n";
 }
 
 void solve() {
