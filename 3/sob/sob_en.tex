@@ -1,0 +1,73 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=110,
+  timelimit=1 second,
+  memorylimit=512 MiB,
+]{Sob}
+
+\setlength\intextsep{-0.1cm}
+\begin{wrapfigure}[9]{r}{0.17\textwidth}
+\centering
+\includegraphics[width=0.17\textwidth]{img/sob.png}
+\end{wrapfigure}
+
+It was a dark and dreary Christmas Eve when our hero pondered, weak and weary,
+over a quaint and curious COCI task. When he nodded, nearly napping, suddenly
+he heard a tapping, tapping and a mighty roar. A giant reindeer broke through
+his chamber door, merely this and nothing more. While our hero's heart slightly
+  fluttered, the beast simply uttered: \textit{``I won't leave until you solve this problem''}.
+
+In the problem you were given two integers $N$ and $M$ and you were supposed
+to perfectly match the numbers from sets $A = \{ 0, 1, 2, \dots, N - 1 \}$ and
+$B = \{ M, \dots, M + N - 1\}$ into $N$ pairs, such that for the matched numbers
+$x \in A$ and $y \in B$ it holds $x \mathbin{\&} y = x$, where $\&$ denotes a
+bitwise AND operation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Input}
+The first line contains two integers $N$ and $M$
+$(1 \le N \le M, N + M \le 10^6)$ from the task description.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Output}
+You should output $N$ lines and in each line you should output two integers $x$
+and $y$, where $x$ belongs to set $A$ and $y$ belongs to set $B$. Numbers in
+each line should correspond to one of the matched pairs from task description.
+
+It is possible to prove that the solution always exists.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+ \subsection*{Scoring}
+{\renewcommand{\arraystretch}{1.4}
+  \setlength{\tabcolsep}{6pt}
+  \begin{tabular}{ccl}
+ Subtask & Score & Constraints \\ \midrule
+  1 & 10 & $N$ is a power of $2$ \\
+  2 & 29 & $N + M$ is a power of $2$ \\
+  3 & 39 & $N + M \le 1000$ \\
+  4 & 32 & No additional constraints.
+\end{tabular}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Examples}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/sob.dummy.in.1}{test/sob.dummy.out.1} &
+\sampleinputs{test/sob.dummy.in.2}{test/sob.dummy.out.2} &
+\sampleinputs{test/sob.dummy.in.3}{test/sob.dummy.out.3}
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
