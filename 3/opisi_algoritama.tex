@@ -171,7 +171,7 @@ Vremenska složenost ovog dijela je $\mathcal{O}(N(N\Sigma * Q\Sigma))=
 \mathcal{O}((N^2 + Q)\Sigma)$, gdje $\Sigma$ označava veličinu abecede
 (u našem slučaju $\Sigma=26$).
 
-Za sve bodove bilo je potrebno primjetiti sljedeće: ako je riječ savršena nakon
+Za sve bodove bilo je potrebno primijetiti sljedeće: ako je riječ savršena nakon
 $i$-te grude, tada će onda biti savršena i nakon svake grude poslije $i$-te
 grude. To svojstvo nam omogućava da binarnom pretragom pronađemo prvu grudu
 nakon koje riječ postane savršena. Provjeru u binarnoj pretrazi radit ćemo kao
@@ -181,7 +181,62 @@ Vremenska složenost: $\mathcal{O}((N\Sigma + Q\Sigma)\log N) = \mathcal{O}((N \
 
 \subsection*{Zadatak: Drvca}
 \textsf{Pripremili: Marin Kišić i Josip Klepec}\\
-\textsf{Potrebno znanje: }
+\textsf{Potrebno znanje: ad-hoc, ugrađene strukture podataka}
+
+Formalnim rječnikom, zadatak je bio razdvojiti zadanih $N$ brojeva u $2$
+aritmetička niza.
+
+Za 20 bodova bilo je dovoljno u $\mathcal{O}(2^N)$ fiksirati neku bitmasku u
+kojoj vrijednost $i$-tog bita govori u kojem se redu nalazi $i$-ti broj. Nakon
+tog trebalo je još provjeriti jesu li redovi aritmetički nizovi.
+
+Za dodatnih $30$ bodova bilo je potrebno primijetiti da će najmanji broj iz
+niza biti i najmanji broj u jednom od redova. Sada, najmanji broj stavimo kao
+prvi broj u prvi red, fiksiramo neki broj iz niza koji ćemo staviti na drugo
+mjesto u prvom redu. Sada, kada znamo prvi i drugi broj prvog reda, znamo i
+razliku između svaka dva susjedna broja u prvom redu pa možemo dodavati broj po
+broj u prvi red tako dugo dok broj koji želimo dodati postoji u originalnom
+nizu te  nakon svakog dodavanja provjerimo tvore li svi brojevi koje nismo
+stavili u prvi red aritmetički niz.  Ako je tako, onda smo našli rješenje. Ako
+nakon isprobavanja svih mogućih brojeva za drugi broj u prvom redu nismo našli
+rješenje, onda ono ni ne postoji.
+
+Vremenska složenost je $\mathcal{O}(N^3)$.
+
+U stilu Boba Graditelja: \emph{“Mozemo li to popraviti? Naravno da mozemo!”}
+
+Potrebno je primijetiti da za prva dva broja u prvom redu ne trebamo isprobavati
+sve kombinacije (najmanji broj, neki broj iz niza), već samo tri kombinacije.
+Promotrimo tri najmanja broja iz niza, označimo ih s $A \le B \le C$. Sigurno
+znamo da, ako postoji rješenje, jedan od redova će početi s $(A, B)$ ili $(A, C)$
+ili $(B, C)$.
+
+Vremenska složenost je $\mathcal{O}(N^2)$.
+
+Za treći podzadatak možemo probati započeti jedan od redova na sva tri gore
+opisana načina, napraviti niz od točno $\frac{N}{2}$ brojeva i onda provjeriti
+tvori li ostalih $\frac{N}{2}$ brojeva aritmetički niz.
+
+Vremenska složenost je $\mathcal{O}(N)$.
+
+Za sve bodove fiksirat ćemo na gore spomenuta tri načina početak jednog reda.
+Zatim ćemo dodavati broj po broj u taj red te provjeriti tvore li svi brojevi
+koji su ostali aritmetički niz. Tu provjeru moramo napraviti pametnije od
+naivnog rješenja for petljom. Održavat ćemo dva skupa. U jednom ćemo pamtiti sve
+brojeve koji su ostali, a u drugom razlike između susjednih brojeva koji su u
+prvom skupu. Kada broj izbacimo iz prvog skupa, tj. dodamo ga u prvi red, onda
+moramo iz drugog skupa izbaciti razlike između njega i brojeva susjednih njemu,
+ali i ubaciti razliku između brojeva koji su mu bili susjedi jer su sada oni
+posatli susjedi. Kada imamo ta dva skupa i znamo kako ih održavati, možemo samo
+u skupu razlika provjeriti je li najveći broj jednak najmanjem. Ako jest, onda
+su svi brojevi u skupu jednaki, a to znači da je razlika između svaka dva
+susjedna broja koja su ostala jednaka, a to znači da ti brojevi tvore
+aritmetički niz, odnosno da smo pronašli rješenje. Sve operacije nad
+spomenutim skupovima može podržati kolekcija \texttt{std::set} u jeziku
+C++. Slične kolekcije postoje i u ostalim podržanim jezicima uz iznimku
+programskog jezika C.
+
+Vremenska složenost je $\mathcal{O}(N \log N)$.
 
 \subsection*{Zadatak: Lampice}
 \textsf{Pripremio: Tonko Sabolčec}\\
