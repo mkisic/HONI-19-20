@@ -6,14 +6,117 @@
 \usepackage{amsmath}
 \usepackage[normalem]{ulem}
 \usetikzlibrary{angles,quotes}
-\contestname{Hrvatsko otvoreno natjecanje u informatici\\3.\ kolo, 14. studenog 2019.}
+\contestname{Hrvatsko otvoreno natjecanje u informatici\\3.\ kolo, 14. prosinca 2019.}
 \markright{\textbf{\textsf{Opisi algoritama}}}
 
 \begin{document}
 
 \section*{Opisi algoritama}
-Zadatke, testne primjere i rješenja pripremili: 
-Primjeri implementiranih rješenja su dani u priloženim izvornim kodovima.
+Zadatke, testne primjere i rješenja pripremili: Fabijan Bošnjak, Nikola
+Dmitrović, Marin Kišić, Josip Klepec, Daniel Paleka, Ivan Paljak, Tonko
+Sabolčec i Paula Vidas. Primjeri implementiranih rješenja su dani u priloženim
+izvornim kodovima.
+
+\subsection*{Zadatak: Koeficijent}
+\textsf{Pripremio: Nikola Dmitrović}\\
+\textsf{Potrebno znanje: naredba učitavanja i ispisivanja}
+
+Nekoliko je različitih načina na koje možemo riješiti ovaj zadatak.
+Najjednostavniji način je ispis izraza oblika $(N-1)+1$. Uočite da ispis
+razmaka, koji Python obavezno dodaje, nije dozvoljen što nas dovodi do
+činjenice da u naredbi ispisa trebamo koristiti svojstva separatora
+\texttt{sep}.
+
+\textit{Programski kod (pisan u \texttt{Python 3}):}
+
+\vspace{-2ex}
+\begin{verbatim}
+N = int(input())
+print(N-1,'+',1,sep = '')
+# može i ovako.. print(N-1,1,sep='+')
+\end{verbatim}
+
+Drugačije rješenje moglo je ići u smjeru kreiranja stringa oblika $1+1+\dots+1$
+s ukupno $N$ jedinica.
+
+\textit{Programski kod (pisan u \texttt{Python 3}):}
+
+\vspace{-2ex}
+\begin{verbatim}
+N = int(input())
+s = '1'
+for i in range(N-1):
+    s += '+1'
+print(s)
+\end{verbatim}
+
+\subsection*{Zadatak: Hajduk}
+\textsf{Pripremio: Fabijan Bošnjak}\\
+\textsf{Potrebno znanje: }
+
+\subsection*{Zadatak: Preokret}
+\textsf{Pripremio: Nikola Dmitrović}\\
+\textsf{Potrebno znanje: naredba ponavljanja, rad s nizovima}
+
+Zadatak se sastoji od tri dijela. Za svakog natjecatelja po nešto.  Krenimo
+redom. Da bi odrediti koliko je koji tim postigao golova dovoljno je učitavati
+zadane vrijednosti i brojati koliko se puta pojavio broj $1$, a koliko broj $0$.
+
+\textit{Programski kod (pisan u \texttt{Python 3}):}
+
+\vspace{-2ex}
+\begin{verbatim}
+N = int(input())
+city = protivnik = 0
+for i in range(N):
+    gol = int(input())
+    if gol == 1:
+      city += 1
+    else:
+      protivnik += 1
+print(city, protivnik)
+\end{verbatim}
+
+Nastavimo dalje. Da bi odredili i koliko se puta dogodio neriješen rezultat
+trebamo pratiti kada je broj postignutih golova jednak, tj. kada će razlika
+postignutih golova biti jednaka nuli.
+
+\textit{Programski kod (pisan u \texttt{Python 3}):}
+
+\vspace{-2ex}
+\begin{verbatim}
+N = int(input())
+city = protivnik = 0
+nerijeseno = 1 # zbog 0:0
+for i in range(N):
+    gol = int(input())
+    if gol == 1:
+      city += 1
+    else:
+      protivnik += 1
+    nerijeseno += (city == protivnik)
+print(city, protivnik)
+print(nerijeseno)
+\end{verbatim}
+
+Za treći dio zadatka uočimo da se preokret sastoji od tri dijela. Prvo, jedan
+od timova gubi i počne postizati golove. Drugo, nakon niza postignutih golova
+dođe do neriješenog rezultata. Treće, tu ne stane već nastavi davati golove.
+Znači, razlika postignutih golova prvo pada do nule i onda nastavi rasti. Ili
+obrnuto, ovisno jel li City pravi preokret ili njegov protivnik. Jednu od
+implementacija rješenja možete pronaći u priloženim izvornim kodovima.
+
+\subsection*{Zadatak: Grudanje}
+\textsf{Pripremio: Marin Kišić}\\
+\textsf{Potrebno znanje: }
+
+\subsection*{Zadatak: Drvca}
+\textsf{Pripremili: Marin Kišić i Josip Klepec}\\
+\textsf{Potrebno znanje: }
+
+\subsection*{Zadatak: Lampice}
+\textsf{Pripremio: Tonko Sabolčec}\\
+\textsf{Potrebno znanje: }
 
 \subsection*{Zadatak: Sob}
 \textsf{Pripremili: Paula Vidas i Daniel Paleka}\\
