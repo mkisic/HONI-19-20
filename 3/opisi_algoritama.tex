@@ -144,6 +144,8 @@ Znači, razlika postignutih golova prvo pada do nule i onda nastavi rasti. Ili
 obrnuto, ovisno jel li City pravi preokret ili njegov protivnik. Jednu od
 implementacija rješenja možete pronaći u priloženim izvornim kodovima.
 
+\clearpage
+
 \subsection*{Zadatak: Grudanje}
 \textsf{Pripremio: Marin Kišić}\\
 \textsf{Potrebno znanje: prefiks sume, binarna pretraga}
@@ -240,7 +242,101 @@ Vremenska složenost je $\mathcal{O}(N \log N)$.
 
 \subsection*{Zadatak: Lampice}
 \textsf{Pripremio: Tonko Sabolčec}\\
-\textsf{Potrebno znanje: }
+\textsf{Potrebno znanje: hashiranje, binarno pretraživanje, centroidna
+dekompozicija stabla}
+
+Prvi podzadatak moguće je riješiti na više načina. Opisat ćemo rješenje pomoću
+hashiranja koje će nam koristiti i za konačno rješenje. Ukorijenimo stablo u
+čvoru $R$. Zanimaju nas svi palindromski segmenti kojima je jedan kraj u čvoru
+$R$.
+Za svaki čvor $X$ računamo dvije hash vrijednosti:
+
+\[down_x = x_0B^{k-1} + x_1B^{k-2} + \dots + x_{k-1}B^0\]
+\[up_x = x_0B^0 + x_1B^1 + \dots + x_{k-1}B^{k-1}\]
+
+Pri tome je $x_0$, $x_1$, \dots, $x_{k-1}$ niz boja na putu od korijena $R$ do
+čvora $X$ ($color(R) = x_0$, $color(X) = x_{k-1}$), a $B$ vrijednost baze
+hashiranja. Ove dvije vrijednosti mogu se jednostavno odrediti jednim DFS
+obilaskom po stablu. Put od žaruljice $R$ do žaruljice $X$ je palindromski
+segment ako vrijedi $down_X = up_X$.  Ako ovaj postupak ponovimo za svaki
+mogući korijen stabla, pokrili smo sve slučajeve. Složenost tog algoritma
+iznosi $\mathcal{O}(N^2)$.
+
+Drugi podzadatak klasični je problem traženja najduljeg palindroma u nizu, koji
+se moze riješiti pomoću
+\href{https://en.wikipedia.org/wiki/Longest_palindromic_substring}{Manacherovog
+algoritma}.
+
+Treći podzadatak zapravo je jednak drugom podzadatku samo što Manacherov algoritam
+moramo primijeniti za svaki par listova u stablu, kojih zbog ograničenja ima
+dovoljno malo.
+
+Potpuno rješenje započet ćemo sljedećom zamjedbom: Ako postoji palindromski
+segment duljine $K > 2$, tada postoji i palindromski segment duljine $K - 2$.
+Drugim riječima, traženu duljinu moguće je pronaći binarnim pretraživanjem za
+segmente parne i neparne duljine.
+
+No, kako provjeriti postoji li palindrom određene duljine u nekom stablu? Kako
+bismo odgovorili na to pitanje, prvo ćemo riješiti lakšu verziju tog problema --
+provjerit ćemo postoji li palindrom zadane duljine koji prolazi korijenom
+(unaprijed određenim čvorom) stabla, čvorom $R$.
+
+Na ukorijenjenom stablu, put između neka dva čvora $A$ i $B$ sastoji se od
+dvije grane na stablu, pri čemu je duljina jedne grane veća ili jednaka duljini
+druge grane. Pretpostavimo da se čvor $A$ nalazi na duljoj grani. Put između
+čvorova $A$ i $B$ rastavit cemo na $3$ dijela: put od $A$ do $C$, put od $C$ do
+korijena stabla i put od korijena stabla do čvora $B$, pri čemu je $C$ odabran
+tako da su duljine $A-C$ i $R-B$ jednake. Primijetite kako je $C$ jedinstveno
+određen čvorom $A$, budući da nas zanimaju samo palindromi fiksne duljine. Kako
+bismo provjerili je li put od $A$ do $B$ palindromski segment, dovoljno je
+provjeriti sljedeće:
+
+\begin{itemize}
+  \item (1) Put od $R$ do $C$ je palindrom (na slici označeno crveno)
+  \item (2) Slijed boja na putu od $C$ do $A$ jednak je slijedu boja na putu od $R$
+    do $B$ (na slici označeno plavom).
+\end{itemize}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.4\textwidth]{pic/opisi_lampice.png}
+\end{figure}
+
+Za svaki čvor stabla unaprijed odredimo hash vrijednosti $down_X$ i $up_X$ na
+isti način kao što je opisano u rješenju prvog podzadatka. Prvu provjeru
+jednostavno radimo uspoređivanjem vrijednosti $down_C$ i $up_C$. Drugu provjeru
+moguće je napraviti usporedbom vrijednosti:
+
+\begin{itemize}
+  \item $down_B$
+  \item (3) $down_A - down\_par(C) B^{dep(A)-dep(C)}$, gdje je $par(C)$ roditelj
+        čvora $C$, a $dep(X)$ dubina čvora $X$.
+\end{itemize}
+
+Sada znamo efikasno provjeriti je li put od čvora $A$ do čvora $B$ palindromski
+segment, ali to i dalje nije dovoljno brzo jer postoji $\mathcal{O}(N^2)$
+mogućih parova $(A, B)$. Pokušajmo promatrati problem iz malo drugačijeg kuta:
+Ako nam je poznat čvor $A$, postoji li (barem jedan) čvor $B$ koji zadovoljava
+navedena svojstva?  Neka je $S_B$ skup hasheva u koji ćemo staviti vrijednosti
+$down_B$ svih čvorova $B$ u promatranom stablu. Tada za neki čvor $A$ možemo
+provjeriti postoji li odgovarajući čvor $B$ tako da provjerimo uvjet (1) i
+postoji li hash vrijednost (3) u skupu $S_B$. Pretpostavlja se da je složenost
+operacija dodavanja vrijednosti u skup i provjeru postoji li neka vrijednost u
+skupu $\mathcal{O}(1)$ koristenjem hash tablice (\texttt{std::unordered\_set} u
+jeziku C++). Složenost cijele provjere iznosi $\mathcal{O}(n)$.
+
+\textbf{Napomena:} prilikom implementacije potrebno je paziti da najviši
+zajednički predak čvorova iz skupa $S_B$ i čvora $A$ bude upravo korijen $R$.
+
+Sada kada znamo postoji li palindromski segment određene duljine koji prolazi
+korijenom stabla $R$, možemo primijeniti centroidnu dekompoziciju. Ako za svako
+dekomponirano stablo napravimo provjeru s centroidom kao korijenom stabla,
+pokrit ćemo sve slučajeve, odnosno moći ćemo provjeriti postoji li palindrom
+određene duljine u cijelom stablu. Složenost takve provjere iznosi $\mathcal{O}(n \log n)$.
+Dodavanje razine binarnog pretraživanja dovodi do konačnog rješenja složenosti
+$\mathcal{O}(n \log^2 n)$.
+
+\clearpage
 
 \subsection*{Zadatak: Sob}
 \textsf{Pripremili: Paula Vidas i Daniel Paleka}\\
