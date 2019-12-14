@@ -146,7 +146,38 @@ implementacija rješenja možete pronaći u priloženim izvornim kodovima.
 
 \subsection*{Zadatak: Grudanje}
 \textsf{Pripremio: Marin Kišić}\\
-\textsf{Potrebno znanje: }
+\textsf{Potrebno znanje: prefiks sume, binarna pretraga}
+
+Za $14$ bodova bilo je potrebano samo simulirati ono što piše u zadatku. Jednom
+for-petljom ćemo slovo po slovo označavati s \texttt{‘*’}. Nakon toga ćemo
+drugom for-petljom proći po svim intervalima te za svaki interval trećom
+for-petljom provjeriti je li savršen.
+
+Vremenska složenost ovog dijela je $\mathcal{O}(NQN)=\mathcal{O}(QN^2)$.
+
+Za dodatnih $14$ bodova bilo je potrebno poznavati ideju prefiks suma. Recimo
+da za svako slovo imamo niz $pref$ u kojem će na poziciji $i$ pisati broj tog
+slova od početka riječi do $i$-tog slova. Primjerice, za riječ \texttt{abcaab}
+i slovo \texttt{'a'}, niz $pref$ bio bi $[1, 1, 1, 2, 3, 3]$. Niz $pref$ nam je
+koristan jer sada možemo u $\mathcal{O}(1)$ odrediti kolko puta se to slovo
+pojavljuje u intervalu od
+$L$-tog slova do $R$-tog slova u riječi. Formula je $pref[R]-pref[L-1]$.
+
+Sad je ideja da prije prolaska po intervalima izračunamo niz pref za svako
+slovo. Zatim, kada prolazimo po intervalima ćemo, uz pomoć niza $pref$, za svako
+slovo odrediti kolko ga ima u trenutnom intervalu.
+
+Vremenska složenost ovog dijela je $\mathcal{O}(N(N\Sigma * Q\Sigma))=
+\mathcal{O}((N^2 + Q)\Sigma)$, gdje $\Sigma$ označava veličinu abecede
+(u našem slučaju $\Sigma=26$).
+
+Za sve bodove bilo je potrebno primjetiti sljedeće: ako je riječ savršena nakon
+$i$-te grude, tada će onda biti savršena i nakon svake grude poslije $i$-te
+grude. To svojstvo nam omogućava da binarnom pretragom pronađemo prvu grudu
+nakon koje riječ postane savršena. Provjeru u binarnoj pretrazi radit ćemo kao
+i u prethodnoj parcijali (uz pomoć prefiks suma).
+
+Vremenska složenost: $\mathcal{O}((N\Sigma + Q\Sigma)\log N) = \mathcal{O}((N \log N + Q)\Sigma)$.
 
 \subsection*{Zadatak: Drvca}
 \textsf{Pripremili: Marin Kišić i Josip Klepec}\\
