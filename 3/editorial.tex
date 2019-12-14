@@ -78,7 +78,49 @@ Time complexity: $\mathcal{O}((N\Sigma + Q\Sigma)\log N) = \mathcal{O}((N \log N
 
 \subsection*{Task: Drvca}
 \textsf{Suggested by: Marin Kišić i Josip Klepec}\\
-\textsf{Necessary skills: }
+\textsf{Necessary skills: ad-hoc, basic data structures}
+
+More formally, the task statement asks us to divide the input data into
+two arithmetic sequences.
+
+To obtain $20$ points, it was enough to try all possible combinations and
+check whether some of them satisfies all conditions. The time complexity
+of this solution is $\mathcal{O}(N \cdot 2^N)$.
+
+For additional $30$ points, it was enough to observe that the smallest
+number in the input must also be the smallest number in one of the
+arithmetic sequences. Now, let's fix the second smallest number in that
+sequence. Now we have also fixed the difference between two successive
+elements of that sequence, meaning that we can easily calculate what number
+could be next in the sequence. We will add new numbers to that sequence,
+one by one, and each time check whether the remaining numbers form another
+arithmetic sequence. The time complexity of this solution is $\mathcal{O}(N^3)$.
+
+As Bob the Builder would say: ``Can we fix it? -- Yes, we can!``
+
+We can note that the two smallest numbers of one arithmetic sequence could only
+be fixed in three different ways. If we observe the three smallest numbers in
+the input (denoting them with $A \le B \le C$), we can easily conclude that one
+arithmetic sequence must start with either $(A, B)$, $(A, C)$ or $(B, C)$.
+
+This observation leads us to an algorithm of time complexity $\mathcal{O}(N^2)$.
+
+Finally, to obtain all points, we can speed up the idea from above. More
+precisely, we will speed up the check whether all elements that were
+not included in first sequence form another arithmetic sequence. We will
+keep two (multi)sets around. The first set will contain all remaining numbers, and
+the other will contain the differences of neighbouring elements from first
+set. When we remove the number from the first set, i.e. append it to the
+first sequence, we need to remove the difference between it and its neighbours
+from the second set. We also need to add the difference between the neighbours
+of removed element because they have now become neighbouring elements. The check
+whether the remaining number form an arithmetic sequence boils down to checking
+whether the smallest element from the second set is equal to the largest element
+in that same set. All operations on the aforementioned sets are supported
+by the STL collection \texttt{std::set} in C++. Naturally, other supported
+languages (with exception of C) also offer similar built-in collections.
+
+The time complexity is $\mathcal{O}(N \log N)$.
 
 \subsection*{Task: Lampice}
 \textsf{Suggested by: Tonko Sabolčec}\\
