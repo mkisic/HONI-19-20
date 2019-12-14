@@ -45,7 +45,36 @@ at the end (or vice versa).
 
 \subsection*{Task: Grudanje}
 \textsf{Suggested by: Marin Kišić}\\
-\textsf{Necessary skills: }
+\textsf{Necessary skills: prefix sums, binary search}
+
+In order to score $14$ points, it was enough to simply simulate the process
+described in the problem statement.
+
+The time complexity of that solution is $\mathcal{O}(NQN)=\mathcal{O}(QN^2)$.
+
+In order to score additional $14$ points, you could use prefix sums to speed
+up the solution above. Suppose that for every letter you built an array $pref$
+in which an element at position $i$ stores the number of occurences of that
+letter from the beginning of the string to the $i$-th letter (inclusive). For
+example, for a word \texttt{abcaab} and a latter \texttt{'a'}, the array $pref$
+would be $[1, 1, 1, 2, 3, 3]$. That array is useful because now we can determine
+in $\mathcal{O}(1)$ what is the number of occurrences of a certain letter in
+an interval from $L$-th to the $R$-th letter in our original word. The formula
+for that is $pref[R]-pref[L-1]$.
+
+The idea is now to precompute this array for every letter, thus obtaining an
+algorithm with complexity $\mathcal{O}(N(N\Sigma * Q\Sigma))=
+\mathcal{O}((N^2 + Q)\Sigma)$, where $\Sigma$ denotes the size of our
+alphabet.
+
+In order to score all points, you could observe the following: if a word is
+prefect after $i$-th snowball, it will also be perfect after every other snowball
+thrown after the $i$-th one. This property allows us to use binary search. The
+check inside binary search is done similarly to the algorithm above (using
+prefix sums).
+
+Time complexity: $\mathcal{O}((N\Sigma + Q\Sigma)\log N) = \mathcal{O}((N \log N + Q)\Sigma)$.
+
 
 \subsection*{Task: Drvca}
 \textsf{Suggested by: Marin Kišić i Josip Klepec}\\
