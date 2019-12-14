@@ -1,0 +1,72 @@
+\documentclass[a4paper]{article}
+\usepackage{zadaci}
+\usepackage{wrapfig}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage[normalem]{ulem}
+\usetikzlibrary{angles,quotes}
+\contestname{Hrvatsko otvoreno natjecanje u informatici\\3.\ kolo, 14. studenog 2019.}
+\markright{\textbf{\textsf{Opisi algoritama}}}
+
+\begin{document}
+
+\section*{Opisi algoritama}
+Zadatke, testne primjere i rješenja pripremili: 
+Primjeri implementiranih rješenja su dani u priloženim izvornim kodovima.
+
+\subsection*{Zadatak: Sob}
+\textsf{Pripremili: Paula Vidas i Daniel Paleka}\\
+\textsf{Potrebno znanje: matematika, pohlepni algoritmi}
+
+Uređeni par $(a, b)$ zvat ćemo \emph{dobrim} ako vrijedi $a \mathbin\& b = a$.
+
+Prvi podzadatak možemo riješiti tako da $a \in A$ uparimo sa onim $b \in B$ za
+kojeg vrijedi $b \mathbin{\textrm{mod}} N = a$.
+
+Drugi podzadatak možemo riješiti sljedećim algoritmom: Neka su
+$i_1 > i_2 > ... > i_k$ pozicije jedinica u binarnom zapisu od $N$. Uparit ćemo
+najmanjih $2^{i_1}$ elemenata skupova $A$ i $B$ tako da uparimo one $a$ i $b$
+za koje vrijedi $a \equiv b \mod 2^{i_1}$. Zatim uzmemo sljedećih $2^{i_2}$
+najmanjih elemenata i uparimo one koji su jednaki modulo $2^{i_2}$, itd.
+Dokaz da su odabrani parovi dobri ostavljamo čitatelju za vježbu.
+
+Treći podzadatak mogao se riješiti na više načina. Jedan mogući način je da
+napravimo bipartitni graf sa čvorovima iz skupova $A$ i $B$ te dodamo bridove
+između svih dobrih parova. Na dobivenom grafu napravimo algoritam za uparivanje
+na bipartitnom grafu (\emph{bipartite matching}), na primjer u složenosti
+$\mathcal{O}(NE)$, pri čemu je $E$ broj bridova u grafu.
+Primjetimo da broj bridova možemo ograničiti sa $E < 3^{10} = 59049$.
+
+Drugi način koristi sljedeći pohlepni algoritam: Prolazimo kroz elemente skupa
+$A$ od većih prema manjima i trenutni element uparimo sa najmanjim još
+neuparenim elementom skupa $B$ s kojim ga smijemo upariti.
+
+Ako pokrenemo taj algoritam na nekoliko primjera, možemo uočiti sljedeću
+pravilnost: Neka se najveći element skupa $A$, tj. $N - 1$, upari sa $b \in B$.
+Tada se upare i $N - 1 - t$ sa $b - t$ za svaki $t \in \{1, 2, ..., b - M\}$.
+Nakon što maknemo uparene elemente dobili smo isti zadatak, sada za skupove
+$A' = \{0, 1, ..., N - 1 - (b - M) - 1\}$ i
+$B' = \{b + 1, b + 2, ..., M + N - 1\}$. Ovo rješenje možemo implementirati u
+složenosti $\mathcal{O}(N)$.
+
+Dokaz prethodne tvrdnje:\\
+Neka je $a = N - 1$ (radi ljepših oznaka) i $b$, kao i prije, najmanji element
+skupa $B$ za kojeg vrijedi $a \mathbin\& b = a$. Indeksom $i$ ćemo označavati znamenku
+težine $2^i$. Ako je $b = M$ nemamo što za dokazivati, pa pretpostavimo da je
+$b > M$ i označimo $k = b - M$. Neka je $i$ pozicija najmanje značajne jedinice u $b$.
+Očito mora biti $a_j = b_j = 0$ za $j < i$. Kada bi bilo $a_i = 0$ onda bi vrijedilo
+$a \mathbin\& (b - 1) = a$ pa $b$ ne bi bio najmanji element od $B$ koji se može upariti
+sa $a$. Dakle, $a_i = b_i = 1$. Sada je očito da je $(a - t, b - t)$ dobar par za
+$t \in \{1, 2, ..., 2^i\}$. Ako je $k \leq 2^i$ gotovi smo, inače promatramo sljedeću
+najmanje značajnu jedinicu u $b$ i induktivno ponavljamo isti postupak.
+Preostaje još pokazati da uvijek postoji neki $b \in B$ s kojim se $a$ može upariti, no
+to ostavljamo čitateljici za vježbu.
+
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% End:
