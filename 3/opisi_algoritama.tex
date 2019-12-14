@@ -9,6 +9,14 @@
 \contestname{Hrvatsko otvoreno natjecanje u informatici\\3.\ kolo, 14. prosinca 2019.}
 \markright{\textbf{\textsf{Opisi algoritama}}}
 
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true,
+linkcolor=blue,
+filecolor=magenta,
+urlcolor=cyan,
+}
+
 \begin{document}
 
 \section*{Opisi algoritama}
@@ -53,7 +61,36 @@ print(s)
 
 \subsection*{Zadatak: Hajduk}
 \textsf{Pripremio: Fabijan Bošnjak}\\
-\textsf{Potrebno znanje: }
+\textsf{Potrebno znanje: naredba ponavljanja, naredba odlučivanja}
+
+Odredimo najprije koliko je glasova dobio trener s oznakom $1$, a koliko su
+glasova dobili ostali treneri. Ovo bismo mogli napraviti tako da, prilikom
+učitavanja, varijablu $A$ povećamo za $1$ ako smo učitali broj $1$, a
+varijablu $B$ povećavamo za $1$ ako smo učitali broj različit od $1$.
+
+Sve što nam preostaje je odrediti je li trener s oznakom $1$ osvojio barem
+polovicu glasova. Ovaj uvjet elegantno možemo provjeriti uspoređivanjem
+varijabli $A$ i $B$. Naime, ako je $A \ge B$, tada je trener s oznakom $1$
+sigurno osvojio barem polovicu glasova.
+
+Naravno, isti uvjet mogli smo provjeriti uspoređivanjem varijable $A$ s
+varijablom $N$ (ukupnim brojem glasova), međutim, naivna implementacija
+ovog smjera razmišljanja mogla nas je koštati bodova. Matematički gledano,
+uvjet "trener $1$ osvojio je barem polovicu glasova" odgovara izrazu
+$A \ge \frac{N}{2}$ kojeg bismo naivno u naš program mogli ukomponirati
+u obliku $A >= N / 2$. Greška u dijelu podržanih programskih jezika se krije
+u činjenici da znak \texttt{'/'} označava tzv. cjelobrojno dijeljenje. Probajte
+sami pronaći primjer u kojem ovakva implementacija nije ispravna.
+
+Problem cjelobrojnog dijeljenja rješavamo jednostavnom algebarskom manipulacijom
+pa umjesto $A >= N / 2$ pišemo $2 * A >= N$. Na taj smo način izbjegli
+cjelobrojno dijeljenje.
+
+Na kraju još valja upozoriti na rješenja koja se oslanjaju na "pravo dijeljenje",
+odnosno, na rad s decimalnim brojevima. U ovom zadatku to uglavnom neće biti
+problem, no načelno vam savjetujemo da izbjegavate rad s decimalnim brojevima
+ako je to moguće. Više o ovoj temi možete pročitati
+\href{http://wiki.xfer.hr/art_epsilon/}{ovdje}.
 
 \subsection*{Zadatak: Preokret}
 \textsf{Pripremio: Nikola Dmitrović}\\
