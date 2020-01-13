@@ -1,12 +1,24 @@
+#!/usr/bin/python3
+
 import random
 import string
+import math
+import sys
 
-n = 100
-print(n)
-#print(''.join(random.choice(string.ascii_lowercase) for _ in range(n)))
+n = int(sys.argv[1])
+a = int(sys.argv[2])
 
-s = ''
-while len(s) < n:
-    s += random.choice(string.ascii_lowercase[:5]) * random.randint(1, n // 4)
+b = random.randint(1, a)
+m = min(n, n * b // a + random.randint(1, int(math.sqrt(n))))
 
-print(s[:n])
+A = string.ascii_lowercase[:a]
+B = random.sample(A, b)
+
+d = random.randint(0, n - m)
+
+s = ''.join(random.choices(A, k=d) +
+            random.choices(B, k=m) +
+            random.choices(A, k=n - d - m))
+
+print(len(s))
+print(s)
