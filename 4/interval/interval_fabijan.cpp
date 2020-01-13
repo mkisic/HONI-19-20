@@ -46,21 +46,9 @@ int main()
         }
     }
 
-    /*for (int i = 0; i <= N; i++)
-        for (int j = 0; j <= N; j++)
-            for (int k = 0; k <= K; k++)
-                if (dpL[i][j][k]) 
-                    cout << i << ' ' << j << ' ' << k << " = " << dpL[i][j][k] << endl;*/_
-
     for (int i = L - 1; i <= R; i++)
-    {
         for (int j = 0; j <= K; j++)
-        {
             sol = max(sol, dpL[i][1][j] + dpR[i + 1][N][K - j]);
-        }
-    }
-
-    cout << suma << ' ' << sol << endl;
 
     cout << suma - sol << '\n';
 }
