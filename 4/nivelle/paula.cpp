@@ -17,14 +17,14 @@ int main() {
 
     int sol_cnt = ALPHA, sol_l = -1, sol_r = -1;
 
-    vector<int> last(ALPHA, -1), sorted(ALPHA, -1);
+    vector<int> last(ALPHA, -1), sorted(ALPHA + 1, -1);
     for (int i = 0; i < n; i++) {
         int c = s[i] - 'a';
         sorted.erase(find(sorted.begin(), sorted.end(), last[c]));
         last[c] = i;
         sorted.insert(sorted.begin(), i);
 
-        for (int j = 1; j < ALPHA; j++)
+        for (int j = 1; j <= ALPHA; j++)
             if (j * (sol_r - sol_l + 1) < sol_cnt * (i - sorted[j])) {
                 sol_cnt = j;
                 sol_l = sorted[j] + 1;
