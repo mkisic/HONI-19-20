@@ -13,8 +13,7 @@ int dpR[maxn][maxn][maxk];
 
 int main()
 {
-    cin >> N >> K;
-    cin >> L >> R;
+    cin >> N >> L >> R >> K;
     for (int i = 1; i <= N; i++)
         cin >> a[i];
     for (int i = L; i <= R; i++)

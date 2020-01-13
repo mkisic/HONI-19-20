@@ -39,6 +39,7 @@ void compute(int t) {
   REP(i, 3) REP(j, MAXK) dp[i][j].clear();
 
   REP(k, K + 1) {
+    dp[0][k].pb(-inf);
     FOR(i, 1, n) {
       if (i == left) dp[0][k].pb(0);
       else dp[0][k].pb(-inf);
@@ -59,9 +60,14 @@ void compute(int t) {
       REP(i, n - len + 1) {
         int j = i + len - 1;
         int curr = -inf;
+        if (j > right || i >= left) {
+          if (i == left && j >= left && j < right) curr = 0;
+          dp[x][k].pb(curr);
+          continue;
+        }
         curr = max(curr, dp[(x + 2) % 3][k][i + 1]);
         curr = max(curr, dp[(x + 2) % 3][k][i]);
-        if (k - abs(i - j) >= 0) curr = max(curr, dp[(x + 1) % 3][k - abs(i - j)][j - 1] + p[j] - p[i]);
+        if (k - abs(i - j) >= 0) curr = max(curr, dp[(x + 1) % 3][k - abs(i - j)][i + 1] + p[j] - p[i]);
         dp[x][k].pb(curr);
         if (i == 0 && j >= left && j <= right) {
           if (t == 0) dpL[j][k] = curr;
@@ -79,7 +85,9 @@ void compute(int t) {
 int merge(int x) {
   int ret = 0;
   REP(k, K + 1) {
-    ret = max(ret, dpL[x][k] + dpR[x + 1][K - k]);
+    int tmp = dpL[x][k];
+    if (x + 1 <= R) tmp += dpR[x + 1][K - k];
+    ret = max(ret, tmp);
   }
   return ret;
 }
@@ -90,7 +98,7 @@ int main() {
   REP(i, n) scanf("%d",&p[i]);
 
   REP(i, 2) compute(i);
-  int sol = 0;
+  int sol = dpR[L][K];
   FOR(i, L, R + 1) sol = max(sol, merge(i));
 
   int sum = 0;
