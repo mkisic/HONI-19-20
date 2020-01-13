@@ -4,14 +4,6 @@ using namespace std;
 #define TRACE(x) cerr << #x << " = " << x << endl
 #define _ << " _ " <<
 
-#define fi first
-#define se second
-
-typedef long long ll;
-typedef long double ld;
-typedef pair<int, int> pii;
-typedef vector<int> vi;
-
 const int ALPHA = 26;
   
 int main() {
@@ -23,18 +15,19 @@ int main() {
     string s;
     cin >> n >> s;
 
-    int sol_cnt = 1e9, sol_l = -1, sol_r = -1;
+    int sol_cnt = ALPHA, sol_l = -1, sol_r = -1;
 
-    vector<int> pre(ALPHA, -1);
+    vector<int> last(ALPHA, -1), sorted(ALPHA, -1);
     for (int i = 0; i < n; i++) {
-        pre[s[i] - 'a'] = i;
+        int c = s[i] - 'a';
+        sorted.erase(find(sorted.begin(), sorted.end(), last[c]));
+        last[c] = i;
+        sorted.insert(sorted.begin(), i);
 
-        auto v = pre;
-        sort(v.rbegin(), v.rend());
         for (int j = 1; j < ALPHA; j++)
-            if ((ll)j * (sol_r - sol_l + 1) < (ll)sol_cnt * (i - v[j])) {
+            if (j * (sol_r - sol_l + 1) < sol_cnt * (i - sorted[j])) {
                 sol_cnt = j;
-                sol_l = v[j] + 1;
+                sol_l = sorted[j] + 1;
                 sol_r = i;
             }
     }

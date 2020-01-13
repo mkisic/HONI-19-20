@@ -25,8 +25,6 @@ using namespace std;
 #define TRACE(x) cout << #x << " = " << x << endl
 #define _ << " _ " <<
 
-typedef long long ll;
-
 int count_unique(int l, int r, string& s) {
     string t = s.substr(l - 1, r - l + 1);
     sort(t.begin(), t.end());
@@ -74,8 +72,8 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   int out_cnt = count_unique(out_l, out_r, s);
 
   // Compare off_cnt/(off_r - off_l + 1) and out_cnt/(out_r - out_l + 1)
-  ll A = (ll)off_cnt * (out_r - out_l + 1);
-  ll B = (ll)out_cnt * (off_r - off_l + 1);
+  int A = off_cnt * (out_r - out_l + 1);
+  int B = out_cnt * (off_r - off_l + 1);
   if (A < B) finish(0, WRONG);
   else if (A == B) finish(1, CORRECT);
   else finish(0, TEST_DATA_ERROR);
