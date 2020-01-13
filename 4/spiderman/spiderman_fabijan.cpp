@@ -33,6 +33,6 @@ int main()
     }
 
     for (int i = 1; i <= N; i++)
-    	cout << sol[h[i]] << ' ';
+    	cout << sol[h[i]] - (K == 0) << ' ';
     cout << '\n';
 }
