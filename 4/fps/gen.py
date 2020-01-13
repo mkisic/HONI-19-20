@@ -27,7 +27,7 @@ class Test(object):
         assert(1 <= self.y <= MAXY)
         
     def write(self, fd=sys.stdout):
-        print>>fd, self.x, self.y
+        print>>fd, self.x, '\n' ,self.y
 
 def remove_cases():
     cases = glob.glob('test/%s.dummy.in.*' % PROBLEM)
@@ -50,15 +50,18 @@ def gen_cases():
     dummy = []
 
     dummy.append(Test(
-        1, 1
+        1,
+        1
     ))
 
     dummy.append(Test(
-        10, 1
+        10,
+        1
     ))
 
     dummy.append(Test(
-        10,25
+        10,
+        25
     ))
 
     for i, test in enumerate(dummy):
