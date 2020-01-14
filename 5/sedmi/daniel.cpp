@@ -31,8 +31,7 @@ inline void match(int i, int j) {
 int N;
 int S = 1005;
 int a[MaxN], b[MaxN];
-int row_cnt[MaxS], col_cnt[MaxS];
-vector<int> row_mem[MaxS], col_mem[MaxS];
+map<int, vector<int>> row_mem, col_mem;
 vector<int> adj[MaxN];
 bool been[MaxN];
 vector<vector<int>> paths;
@@ -193,15 +192,19 @@ void dfs_path(int i, int parent) {
 }
 
 void make_adj() {
-  FOR(k, 1, S+1) {
-    assert((int)row_mem[k].size() <= 2);
-    assert((int)col_mem[k].size() <= 2);
+  for (auto &elem: row_mem) {
+    //    assert((int)elem->second.size() <= 2);
     
-    if ((int)row_mem[k].size() == 2) {
-      connect(row_mem[k][0], row_mem[k][1]);
+    if ((int)elem.second.size() == 2) {
+      connect(elem.second[0], elem.second[1]);
     }
-    if ((int)col_mem[k].size() == 2) {
-      connect(col_mem[k][0], col_mem[k][1]);
+
+  }
+  for (auto &elem: col_mem) {
+    //    assert((int)elem->second.size() <= 2);
+
+    if ((int)elem.second.size() == 2) {
+      connect(elem.second[0], elem.second[1]);
     }
   }
 }
@@ -234,8 +237,6 @@ void load() {
   cin >> N;
   REP(i, N) {
     cin >> a[i] >> b[i];
-    row_cnt[a[i]]++;
-    col_cnt[b[i]]++;
     row_mem[a[i]].push_back(i);
     col_mem[b[i]].push_back(i);
   }
