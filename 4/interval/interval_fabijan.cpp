@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int maxn = 1e2 + 5;
-const int maxk = 1e4 + 5;
+const int maxn = 100 + 5;
+const int maxk = 10000/4 + 5;
 int N, K;
 int L, R;
 int a[maxn];
@@ -14,6 +14,7 @@ int solL[maxn][maxk];
 int main()
 {
     cin >> N >> L >> R >> K;
+    K = min(K, N * N / 4 + 2);
     for (int i = 1; i <= N; i++)
         cin >> a[i];
     for (int i = L; i <= R; i++)

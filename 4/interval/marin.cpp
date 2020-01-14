@@ -60,8 +60,9 @@ void compute(int t) {
       REP(i, n - len + 1) {
         int j = i + len - 1;
         int curr = -inf;
-        if (j > right || i >= left) {
+        if (j > right || i >= left || j < left) {
           if (i == left && j >= left && j < right) curr = 0;
+          if (j == left - 1 && i <= left) curr = 0;
           dp[x][k].pb(curr);
           continue;
         }
