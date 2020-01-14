@@ -1,0 +1,71 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=20,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{FPS}
+
+\setlength\intextsep{-0.1cm}
+\begin{wrapfigure}[7]{r}{0.26\textwidth}
+\centering
+\includegraphics[width=0.26\textwidth]{img/fps.png}
+\end{wrapfigure}
+
+Naši dragi prijatelji Fabijan i Patrik su prošle godine bili jako dobri te su
+za Božić zaslužili odlične poklone. Fabijan je od Djeda Mraza tražio dva
+kontrolera, a njegov prijatelj Patrik najbolju igru na svijetu. Naravno, ta
+igra je \textit{FIFA 20}. Na Božićno su jutro bili oduševljeni jer su pod
+drvcem našli upravo ono što su tražili. Prepuni veselja našli su se kod
+Patrika kako bi što prije započeli s igranjem. Za svoju prvu utakmicu
+odabrali su okršaj titana s dna HNL tablice, Fabijan će upravljati igračima
+Varaždina, a Patrik će igrati protiv njega u dresovima Istre.
+
+Kako bi stigli na Božićni ručak, u postavkama igre su postavili da utakmica
+traje točno $X$ minuta. Patrik na svom računalu može igrati igru u $Y$
+FPS-a (\textit{engl.}\ Frames Per Second (sličica u sekundi)), tj. njegovo
+računalo svake sekunde prikaže $Y$ sličica. Nakon što su odigrali utakmicu
+  Fabijan je pitao Patrika: \textit{,,Patriče, koliko je sličica tvoje računalo
+  prikazalo za vrijeme ove utakmice?''}. Dečki se za vrijeme praznika ne žele
+baviti matematikom pa vas mole da odgovorite na Fabijanov upit.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom je retku prirodan broj $X$ $(1 \le X \le 100)$ iz teksta zadatka.
+
+U drugom je retku prirodan broj $Y$ $(1 \le Y \le 100)$ iz teksta zadatka.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+U jedini redak ispišite broj sličica prikazanih na Patrikovom računalu za
+vrijeme utakmice.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Probni primjeri}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/fps.dummy.in.1}{test/fps.dummy.out.1} &
+\sampleinputs{test/fps.dummy.in.2}{test/fps.dummy.out.2} &
+\sampleinputs{test/fps.dummy.in.3}{test/fps.dummy.out.3}
+\end{tabularx}
+
+\textbf{Pojašnjenje prvog probnog primjera:}
+Jedna minuta sadrži $60$ sekundi. Ako se svake sekunde prikaže jedna sličica,
+ukupno će biti prikazano $60$ sličica.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
