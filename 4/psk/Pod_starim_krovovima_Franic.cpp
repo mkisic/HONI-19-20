@@ -43,6 +43,7 @@ int main()
 	cout << n - cnt << endl;
 	for(int i = 0; i < n; i++)
 		cout << sol[i] << " ";
+  cout << endl;
 	return 0;
 }
 
