@@ -1,7 +1,7 @@
 for f in test/*.in*;
 do
   echo "Provjera" $f
-  ./svi_isti < $f > tmp
+  ./m3 < $f > tmp
   diff -q tmp ${f/.in/.out}
   rm tmp
   echo "--------------------"
