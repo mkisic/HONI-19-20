@@ -18,7 +18,7 @@ def check(lines):
     isti = 1
     prev = -1
     for i in range(2, 2 + m):
-      k = int(lines[2])
+      k = int(lines[i])
       if prev == -1: prev = k
       if k != prev: isti = 0
       assert 1 <= k <= n, "k kriv"
