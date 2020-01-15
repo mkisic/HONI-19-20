@@ -21,7 +21,7 @@ int main()
         weight += K;
         if (weight > N)
         {
-            weight -= N;
+            weight = K;
             sol++;
         }
     }
