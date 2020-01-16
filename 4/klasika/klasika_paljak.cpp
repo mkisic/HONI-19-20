@@ -68,7 +68,7 @@ int trie_get(Node *node, int bit, int val, int from, int to) {
       return trie_get(node->zero, bit - 1, val, from, to);
     else
       return (1 << bit) + trie_get(node->one, bit - 1, val, from, to);
-  } else { // want 9
+  } else { // want 0
     if (!node->zero || lower_bound(node->zero->ids.begin(), node->zero->ids.end(), from) ==
                       upper_bound(node->zero->ids.begin(), node->zero->ids.end(), to))
       return trie_get(node->one, bit - 1, val, from, to);
