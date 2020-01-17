@@ -106,7 +106,7 @@ int main() {
       e[x].pb(n);
       events.pb({-1, n});
     } else {
-      int x, y; cin >> x >> y;
+      int x, y; cin >> y >> x;
       events.pb({x, y});
     }
   }
