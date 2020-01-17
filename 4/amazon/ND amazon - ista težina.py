@@ -4,4 +4,4 @@ M = int(input())
 for i in range(M):
     K = int(input())
 
-print((M * K) // N + bool(M * K % N))
+print(M // (N // K) + bool(M % (N // K)))
