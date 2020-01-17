@@ -19,7 +19,7 @@ struct Query {
 };
 
 struct Node {
-  vector<int> ids;
+  set<int> ids;
   Node *zero, *one;
   Node () {
     zero = one = NULL;
@@ -45,32 +45,28 @@ void dfs(int node, int dad, int xval) {
 }
 
 void trie_add(Node *node, int bit, int val, int id) {
-  node->ids.push_back(id);
-  sort(node->ids.begin(), node->ids.end());
+  node->ids.insert(id);
   if (bit < 0) return;
   if (val & (1 << bit)) {
-    if (!node->one) node->one = new Node();
+    if (node->one == NULL) node->one = new Node();
     trie_add(node->one, bit - 1, val, id);
   } else {
-    if (!node->zero) node->zero = new Node();
+    if (node->zero == NULL) node->zero = new Node();
     trie_add(node->zero, bit - 1, val, id);
   }
 }
 
 int trie_get(Node *node, int bit, int val, int from, int to) {
   if (bit < 0) return 0;
-  assert(node != NULL);
-  assert(upper_bound(node->ids.begin(), node->ids.end(), to) !=
-         lower_bound(node->ids.begin(), node->ids.end(), from));
   if ((val & (1 << bit)) == 0) { // want 1
-    if (!node->one || lower_bound(node->one->ids.begin(), node->one->ids.end(), from) ==
-                      upper_bound(node->one->ids.begin(), node->one->ids.end(), to))
+    if (node->one == NULL ||
+        node->one->ids.lower_bound(from) == node->one->ids.upper_bound(to))
       return trie_get(node->zero, bit - 1, val, from, to);
     else
       return (1 << bit) + trie_get(node->one, bit - 1, val, from, to);
   } else { // want 0
-    if (!node->zero || lower_bound(node->zero->ids.begin(), node->zero->ids.end(), from) ==
-                      upper_bound(node->zero->ids.begin(), node->zero->ids.end(), to))
+    if (node->zero == NULL ||
+        node->zero->ids.lower_bound(from) == node->zero->ids.upper_bound(to))
       return trie_get(node->one, bit - 1, val, from, to);
     else
       return (1 << bit) + trie_get(node->zero, bit - 1, val, from, to);
@@ -99,12 +95,14 @@ int main(void) {
 
   dfs(0, -1, 0);
 
-  trie_add(&root, 31, 0, l[0]);
+  trie_add(&root, 30, 0, l[0]);
+  int i = 1;
   for (const auto &qq : Q) {
     if (!qq.print)
-      trie_add(&root, 31, rxor[qq.x], l[qq.x]);
+      trie_add(&root, 30, rxor[qq.x], l[qq.x]);
     else
-      printf("%d\n", trie_get(&root, 31, rxor[qq.x], l[qq.y], r[qq.y]));
+      printf("%d\n", trie_get(&root, 30, rxor[qq.x], l[qq.y], r[qq.y]));
+    ++i;
   }
 
   return 0;
