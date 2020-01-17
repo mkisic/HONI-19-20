@@ -7,7 +7,7 @@ for i in range(N):
 
 print(N - (ukupno // Zi + (bool(ukupno % Zi))))
 
-print(ukupno)
+#print(ukupno)
 for i in range(N):
     if ukupno - Zi > 0:
         print(Zi, end = ' ')
