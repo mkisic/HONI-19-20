@@ -54,7 +54,7 @@ bool ima(node *T, int x) {
 
 const int MAX = 30;
 
-int search(int x) {
+int search(int x, int y) {
   int ret = 0;
   node *tmp = trie;
   for(int i = MAX; i >= 0; --i) {
@@ -66,7 +66,7 @@ int search(int x) {
     if((1 << i) & d[x]) {
       swap(zelim, moram);
     }
-    if(ima(zelim, x)) {
+    if(ima(zelim, y)) {
       tmp = zelim;
       ret += (1 << i);
     } else {
@@ -106,8 +106,8 @@ int main() {
       e[x].pb(n);
       events.pb({-1, n});
     } else {
-      int x; cin >> x;
-      events.pb({+1, x});
+      int x, y; cin >> x >> y;
+      events.pb({x, y});
     }
   }
 
@@ -115,11 +115,12 @@ int main() {
   dodaj(1);
   REP(i, q) {
     int x = events[i].second;
+    int y = events[i].first;
 
     if(events[i].first == -1) {
       dodaj(x);
     } else {
-      cout << search(x) << '\n';
+      cout << search(x, y) << '\n';
     }
   }
 }
