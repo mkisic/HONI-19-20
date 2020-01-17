@@ -1,0 +1,83 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=110,
+  timelimit=1 second,
+  memorylimit=512 MiB,
+]{Nivelle}
+
+\setlength\intextsep{-0.1cm}
+\begin{wrapfigure}[9]{r}{0.17\textwidth}
+\centering
+\includegraphics[width=0.17\textwidth]{img/nivelle.png}
+\end{wrapfigure}
+
+\textit{Original task description has been altered due to excessive violence.
+The following program is suitable for minors.}
+
+Bojan sees $N$ cute little fluffy edible toys \textit{(yaay!)} on a store shelf,
+ordered from $1$ to $N$. Each fluffy toy is colored in one of $26$ different
+colors. Each color is denoted by a lowercase letter from the English alphabet.
+Bojan wants to eat some of these toys \textit{(drool)}.
+
+For any set of toys, we can define its \textit{colorfulness} as the number of
+different colors of toys in a set, divided by the total number of toys in a
+set. Bojan hates colorfulness. Bojan is very hungry. Bojan wants to eat a
+contiguous subsequence of toys.
+
+Help Bojan find a contiguous subsequence of toys whose colorfulness is as
+small as possible.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Input}
+The first line contains an integer $N$ $(1 \le N \le 100\ 000)$, the length
+of array of toys from task description.
+
+The second line contains a string $S$ of length $N$. The $i$-th character of
+the string represents the color of $i$-th toy from the shelf.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Output}
+Output two indices $L$ and $R$ $(1 \le L \le R \le N)$, which denote that the
+sought contiguous subsequence of toys is located at positions $L$, $L+1$,
+\dots, $R$.
+
+If there exists more than one contiguous subsequence with the same minimal
+colorfulness, you can output $L$ and $R$ which define any of them.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+ \subsection*{Scoring}
+{\renewcommand{\arraystretch}{1.4}
+  \setlength{\tabcolsep}{6pt}
+  \begin{tabular}{ccl}
+ Subtask & Score & Constraints \\ \midrule
+  1 & 7 & $N \le 100$ \\
+  2 & 17 & $N \le 2\ 000$ \\
+  3 & 13 & $S$ contains only letters \texttt{'a'} and \texttt{'b'} \\
+  4 & 25 & $S$ contains only letters  \texttt{'a'}, \texttt{'b'},
+               \texttt{'c'}, \texttt{'d'} and \texttt{'e'} \\
+  5 & 48 & No additional constraints.
+\end{tabular}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Examples}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/nivelle.dummy.in.1}{test/nivelle.dummy.out.1} &
+\sampleinputs{test/nivelle.dummy.in.2}{test/nivelle.dummy.out.2} &
+\sampleinputs{test/nivelle.dummy.in.3}{test/nivelle.dummy.out.3}
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
