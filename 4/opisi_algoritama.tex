@@ -218,6 +218,46 @@ ograničenje od \texttt{256 MiB}. Postoji druga optimizacija koja zamjenjuje
 dimenziju $N$ s malom konstantom, ali za implementacijske detalje te
 optimizacije proučite službeno rješenje.
 
+\subsection*{Zadatak: Klasika}
+\textsf{Pripremio: Ivan Paljak}\\
+\textsf{Potrebno znanje: dfs obilazak stabla, stoblo}
+
+Prva dva podzadatka bilo je moguće riješiti više ili manje efikasnom simulacijom
+onoga što piše u tekstu zadatka pa ćemo razradu tih algoritama ostaviti
+čitateljima za vježbu.
+
+U trećem je podzadatku na svaki upit tipa \texttt{Query} trebalo odgovoriti sa
+najduljim putem u stablu koji započinje u danom čvoru $a$. Primijetimo da je
+definicija duljine puta pomalo neobična, odnosno, umjesto da zbrajamo duljine
+bridova, trebamo koristiti operaciju \textit{xor}. Označimo sa $d(x, y)$
+duljinu puta od čvora $x$ do čvora $y$. Primijetimo da vrijedi $d(x, y) = d(1,
+x)$ \texttt{xor} $d(1, y)$. Ovo svojstvo možemo iskoristiti
+tako da za svaki čvor u stablu pamtimo njegovu udaljenost do korijena. Ovo je
+lagano održavati usprkos dodavanju novih čvorova u stablo. Kada dođe upit tipa
+\texttt{Query a b}, zadatak se zapravo svodi na pronalaženje neke od zapamćenih
+udaljenosti koja xorana s udaljenošću $d(1, a)$ daje najveću vrijednost. Radi
+se o poznatom problemu kojeg rješavamo strukturom \textit{stoblo} (engl.\
+\textit{trie}). Ako niste upoznati s tim problemom, probajte najprije sami
+razmisliti kako biste ga riješili koristeći strukturu stoblo, a u slučaju da ne
+uspijete, posjetite ovu
+\href{https://www.hackerearth.com/practice/notes/lalitkundu95/tutorial-on-trie-and-example-problems/}{poveznicu}.
+
+Rješenje koje osvaja sve bodove je konceptualno veoma slično, jedini nam je
+problem što prilikom prolaska po stoblu nismo sigurni nalazimo se u grani
+u kojoj živi neki čvor iz podstabla čvora $b$. Zamislimo da su za svaki čvor
+poznate vrijednosti \texttt{discovery} i \texttt{finish} koje odgovaraju
+trenutku ulaska i izlaska dfs obilaska stabla u tom čvoru. Kada bismo u svakom
+čvoru stobla \texttt{discovery} vrijednosti svih čvorova koji žive u tom
+podstablu, tada znamo da se po stoblu smijemo kretati samo po čvorovima
+u čijim skupovima postoje vrijednosti veće ili jednake \texttt{discovery[b]} i
+manje ili jednake \texttt{finish[b]}. Ispada da je sve ovo relativno jednostavno
+izvesti. Najprije ćemo (offline) procesirati sve upite tipa \texttt{Add} te
+jednim dfs obilaskom odrediti \texttt{discovery} i \texttt{finish} vrijednosti.
+Zatim ćemo ponovno proći kroz sve upite. Oni upiti koji dodaju element u stoblo
+će po putu dodavati i vrijednost \texttt{discovery[x]} u odgovarajuće skupove, a
+ostali će upiti samo paziti da prilikom obilaska stobla ne ulaze u podstabla
+koja nemaju čvorove u odgovarajućem intervalu.
+
 \subsection*{Zadatak: Nivelle}
 \textsf{Pripremili: Daniel Paleka i Paula Vidas}\\
 \textsf{Potrebno znanje: metoda kliznog prozora, metoda dva pokazivača}
