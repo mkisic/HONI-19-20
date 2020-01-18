@@ -88,6 +88,56 @@ paketa u toj dostavi. Na kraju, ako je težina trenutne dostave veća od $0$, to
 znači da se u trenutnoj dostavi nalaze neki paketi pa je potrebno dodatno
 povećati brojač za jedan.
 
+\subsection*{Zadatak: Spiderman}
+\textsf{Pripremio: Ivan Paljak}\\
+\textsf{Potrebno znanje: matematika, analiza složenosti}
+
+Riješimo najprije jednostavnije varijante zadatka iz odlomka o bodovanju.
+
+Prvu parcijalu vrijednu $14$ bodova moguće je riješiti jednostavnom simulacijom,
+odnosno, sa dvije ugnježđene petlje možemo za svaki par nebodera provjeriti
+može li Peter s jednog skočiti na drugi. Vremenska složenost ovakvog rješenja
+je $\mathcal{O}(N^2)$.
+
+Za dodatnih $14$ bodova bilo je potrebno iskoristiti činjenicu da postoji svega
+$2000$ različitih visina među neboderima. Ako za svaku visinu zapamtimo koliko
+ima nebodera te visine, zadatak smo u stvari sveli na prethodno opisano
+rješenje.  Razlika je samo u tome što nećemo posjetiti svaki par nebodera, već
+svaki par različitih visina. Vremenska složenost ovakvog rješenja je
+$\mathcal{O}(M^2)$ gdje $M$ predstavlja broj različitih visina među neboderima.
+
+U testnim primjerima vrijednima dodatnih $14$ bodova, vrijedilo je $K = 0$.
+Odnosno, sa zgrade visine $h_i$ bilo je moguće skočiti na zgradu visine $h_j$
+ako je $h_j$ djelitelj broja $h_i$. Djelitelje nekog broja $x$ možemo relativno
+jednostavno pronaći u vremenskoj složenosti $\mathcal{O}(\sqrt{x})$ pa smo time
+dobili algoritam vremenske složenosti $\mathcal{O}(N\sqrt{max_H})$. Ako niste
+upoznati s popularnim algoritmom koji traži djelitelje nekog broja, savjetujemo
+vam da taj algoritam proučite putem
+\href{https://www.math.uh.edu/~minru/web/divis2.html}{ove poveznice}.
+
+Za osvajanje svih bodova bilo je moguće blago modificirati prethodno opisani
+algoritam (naputak: promatrajte djelitelje broja $h_i - k$), ali ovdje ćemo
+iznijeti drugačiji algoritam koji postiže bolju vremensku složenost. Zapitajmo
+se: ,,\textit{Sa kojih bismo sve nebodera mogli skočiti na neboder visine
+$h_i$}''.  Odgovor je, dakako, sa nebodera visine $K$, $K + h_i$, $K + 2h_i$,
+$K + 3h_i$, \dots.  Neka $max_H$ označava visinu najvišeg mogućeg nebodera,
+tada na neboder visine $h_i$, zbog prethodnog zaključka, možemo skočiti sa
+$\sim \frac{max_H}{h_i}$ nebodera.  Postavlja se pitanje je li algoritam koji
+prolazi po svim visinskim kandidatima sa kojih možemo skočiti na svaki od
+nebodera dovoljno brz.  Pretpostavimo najgori slučaj gdje su visine svih
+nebodera u ulazu različite, odnosno neboderi su visina $1$, $2$, \dots,
+$max_H$. Za prvi (najniži) neboder imamo $\sim \frac{max_H}{1}$ kandidata, za
+drugi neboder imamo $\sim \frac{max_H}{2}$ kandidata, \dots i konačno za
+najviši neboder imamo $\sim \frac{max_H}{max_H}$ kandidata. Odnosno, ukupan
+broj kandidata iznosi $\sim max_H \lg max_H$ što je dovoljno dobro za osvajanje
+svih bodova na ovom zadatku. Ako vam ovaj zaključak nije
+poznat, savjetujemo vam da ponovo proučite analizu vremenske složenosti
+Eratostenovog sita ili proučite
+\href{https://www.cs.umd.edu/class/spring2016/cmsc351-0101/harmonic.pdf}{ovaj
+dokument}.
+
+Ovisno o načinu implementacije, trebalo je dodatno paziti na slučaj kada je
+$K=0$ (skakanje na isti neboder).
 
 \subsection*{Zadatak: Holding}
 \textsf{Pripremili: Fabijan Bošnjak i Marin Kišić}\\
