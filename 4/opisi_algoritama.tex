@@ -89,7 +89,7 @@ znači da se u trenutnoj dostavi nalaze neki paketi pa je potrebno dodatno
 povećati brojač za jedan.
 
 \subsection*{Zadatak: Pod starim krovovima}
-\textsf{Pripremili: Nikola Dmitrović i Marin Kišić}\\
+\textsf{Pripremio: Nikola Dmitrović}\\
 \textsf{Potrebno znanje: pohlepni algoritam}
 
 Rješenje se zasniva na ideji da tekućinom do vrha redom punimo čaše ovisno o
@@ -198,6 +198,11 @@ odlučili mijenjati $i$, $j$; a pozicije brojeva izvan intervala koje smo odluč
 mijenjati $l$, $k$; posve je svejedno hoće li se zamijeniti $i$,$k$ te $j$,$l$ ili $i$,$l$ te
 $j$,$k$. Formalni dokaz te tvrdnje ostavljamo čitateljici za vježbu.
 
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.4\textwidth]{editorial_holding.png}
+\end{figure}
+
 Sada je očigledno jedino bitno odrediti koje elemente biramo unutar intervala
 te koje izvan i bitno je da ih je jednak broj. To možemo ostvariti dinamikom $dp$
 kojoj su argumenti trenutna pozicija izvan intervala, pozicija unutar intervala
@@ -296,8 +301,6 @@ Zatim ćemo ponovno proći kroz sve upite. Oni upiti koji dodaju element u stobl
 će po putu dodavati i vrijednost \texttt{discovery[x]} u odgovarajuće skupove, a
 ostali će upiti samo paziti da prilikom obilaska stobla ne ulaze u podstabla
 koja nemaju čvorove u odgovarajućem intervalu.
-
-\clearpage
 
 \subsection*{Zadatak: Nivelle}
 \textsf{Pripremili: Daniel Paleka i Paula Vidas}\\
