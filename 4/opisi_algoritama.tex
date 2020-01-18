@@ -88,6 +88,45 @@ paketa u toj dostavi. Na kraju, ako je težina trenutne dostave veća od $0$, to
 znači da se u trenutnoj dostavi nalaze neki paketi pa je potrebno dodatno
 povećati brojač za jedan.
 
+\subsection*{Zadatak: Pod starim krovovima}
+\textsf{Pripremili: Nikola Dmitrović i Marin Kišić}\\
+\textsf{Potrebno znanje: pohlepni algoritam}
+
+Rješenje se zasniva na ideji da tekućinom do vrha redom punimo čaše ovisno o
+njihovoj zapremnini, počevši od onih s najvećom. Na taj ćemo način sigurno
+oslobodili najviše čaša.
+
+Promotrimo prvo slučaj kada su sve čaše iste zapremnine. U tom je slučaju
+svejedno koje čaše punimo do vrha. Sada samo treba odrediti koliko je čaša
+potrebno da bi se u njih ulio zbroj svih tekućina po čašama. Jedno od stanja u
+čašama možemo simulirati tako da zbroj tekućina razlijevamo redom počevši od
+prve čaše pa sve dok ne potrošimo svu tekućinu.
+
+\textit{Programski kod (pisan u \texttt{Python 3}):}
+
+\vspace{-2ex}
+\begin{verbatim}
+N = int(input())
+ukupno = 0
+for i in range(N):
+  Ti, Zi = map(int, input().split())
+  ukupno += Ti
+print(N - (ukupno // Zi + (bool(ukupno % Zi))))
+for i in range(N):
+  if ukupno - Zi > 0:
+    print(Zi, end = ' ')
+    ukupno -= Zi
+  elif ukupno > 0:
+    print(ukupno, end = ' ')
+    ukupno = 0
+  else:
+print(0, end = ' ')
+\end{verbatim}
+
+U slučaju kada čaše nisu iste zapremnine, nužno je tekućinu prelijevati iz čaša
+manje zapremnine u čaše veće zapremnine. Prvo čaše treba sortirati po njihovoj
+zapremnini i onda iz manjih prelijevati u veće.
+
 \subsection*{Zadatak: Spiderman}
 \textsf{Pripremio: Ivan Paljak}\\
 \textsf{Potrebno znanje: matematika, analiza složenosti}
@@ -257,6 +296,8 @@ Zatim ćemo ponovno proći kroz sve upite. Oni upiti koji dodaju element u stobl
 će po putu dodavati i vrijednost \texttt{discovery[x]} u odgovarajuće skupove, a
 ostali će upiti samo paziti da prilikom obilaska stobla ne ulaze u podstabla
 koja nemaju čvorove u odgovarajućem intervalu.
+
+\clearpage
 
 \subsection*{Zadatak: Nivelle}
 \textsf{Pripremili: Daniel Paleka i Paula Vidas}\\
