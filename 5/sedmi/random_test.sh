@@ -1,4 +1,9 @@
-while true; do
+if [[ $# -ne 3 ]] ; then
+    echo "Pokreni ./random_test.sh N prvo_rjesenje drugo_rjesenje"
+    exit 0
+fi
+
+while true ; do
     ./random_gen.py $1 > inp
     ./$2 < inp > off
     ./$3 < inp > out
