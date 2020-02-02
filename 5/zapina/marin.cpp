@@ -34,16 +34,6 @@ int mul(int a, int b) {
 int n, dp[2][MAXN][MAXN];
 int povrh[MAXN][MAXN];
 
-int f(int a, int b) {
-  if (a < b) return 1;
-  if (b == 1) return a;
-  if (b == a || b == 0) return 1;
-  if (povrh[a][b] != -1) return povrh[a][b];
-  int ret = f(a - 1, b - 1);
-  ret = add(ret, f(a - 1, b));
-  return povrh[a][b] = ret;
-}
-
 int rek(int ok, int a, int b) {
   if (b == n + 1) {
     if (a != 0) return 0;
@@ -53,7 +43,7 @@ int rek(int ok, int a, int b) {
   if (dp[ok][a][b] != -1) return dp[ok][a][b];
   int ret = 0;
   REP(i, a + 1) {
-    ret = add(ret, mul(f(a, i), rek(ok | (b == i), a - i, b + 1)));
+    ret = add(ret, mul(povrh[a][i], rek(ok | (b == i), a - i, b + 1)));
   }
   return dp[ok][a][b] = ret;
 }
@@ -61,7 +51,13 @@ int rek(int ok, int a, int b) {
 int main() {
   cin >> n;
   memset(dp, -1, sizeof dp);
-  memset(povrh, -1, sizeof povrh);
+  povrh[0][0] = 1;
+  FOR(i, 1, MAXN) {
+    REP(j, i + 1) {
+      povrh[i][j] = povrh[i - 1][j];
+      if (j) povrh[i][j] = add(povrh[i][j], povrh[i - 1][j - 1]);
+    }
+  }
   cout << rek(0, n, 1) << endl;
   return 0;
 }
