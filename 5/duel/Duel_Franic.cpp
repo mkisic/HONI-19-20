@@ -2,34 +2,42 @@
 
 using namespace std;
 
-const int MAXN = 1e5 + 5;
+const int MAXN = 1005;
 
 int n, p, f, idx;
-bool patrik[MAXN], fabijan[MAXN];
+long long patrik[MAXN], fabijan[MAXN];
 
 int main()
 {
-	for(int i = 0; i < MAXN; i++)
-		patrik[i] = fabijan[i] = 0;
 	cin >> n; 
 	cin >> p; 
 	for(int i = 0; i < p; i++)
-	{
-		cin >> idx;
-		patrik[idx] = 1;
-	}
+		cin >> patrik[i];
 	cin >> f; 
 	for(int i = 0; i < f; i++)
-	{
-		cin >> idx;
-		fabijan[idx] = 1;
-	}
+		cin >> fabijan[i];
+		
 	int cnt1 = 0, cnt2 = 0;
-	for(int i = 1; i <= n; i++)
+	for(int i = 0; i < p; i++)
 	{
-		if(patrik[i] && !fabijan[i])
+		bool rijesio = false;
+		for(int j = 0; j < f; j++)
+		{
+			if(patrik[i] == fabijan[j])
+				rijesio = true;
+		}
+		if(!rijesio)
 			cnt1++;
-		if(fabijan[i] && !patrik[i])
+	}
+	for(int i = 0; i < f; i++)
+	{
+		bool rijesio = false;
+		for(int j = 0; j < p; j++)
+		{
+			if(fabijan[i] == patrik[i])
+				rijesio = true;
+		}
+		if(!rijesio)
 			cnt2++;
 	}
 	cout << cnt1 << endl << cnt2;

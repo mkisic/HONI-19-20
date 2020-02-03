@@ -14,7 +14,8 @@ import math
 PROBLEM = "duel"
 sys.setrecursionlimit(1000010)
 
-MAXN = 100
+MAXN = pow(10,18)
+MAXK = 1000
 
 class Test(object):
     def __init__(self, n, p, pat, f, fab):
@@ -27,21 +28,11 @@ class Test(object):
 
     def validate(self):
         assert(1 <= self.n <= MAXN)
-        assert(0 <= self.p <= MAXN)
-        assert(0 <= self.f <= MAXN)
-        for i in range(MAXN):
-            self.bio.append(0)
-        for i in self.pat:
-            assert(1 <= i <= self.n)
-            assert(self.bio[i] == 0)
-            self.bio[i] = 1
-        for i in range(MAXN):
-            self.bio[i] = 0
-        for i in self.fab:
-            assert(1 <= i <= self.n)
-            assert(self.bio[i] == 0)
-            self.bio[i] = 1
-            
+        assert(0 <= self.p <= MAXK)
+        assert(0 <= self.f <= MAXK)
+        assert(len(self.pat) == len(set(self.pat)))
+        assert(len(self.fab) == len(set(self.fab)) )           
+
     def write(self, fd=sys.stdout):
         print>>fd, self.n
         print>>fd, self.p, ' '.join(map(str, self.pat))
@@ -58,17 +49,29 @@ def remove_cases():
         os.remove(c)
 
 def gen_random(case):
-    n = random.randint(MAXN // 2, MAXN)
     if(case == 1):
         n = 2
         p = f = 1
     elif(case == 2):
-        p = f = random.randint(0,n)
+        n = random.randint(500, 1000)
+        p = random.randint(min(500 ,n // 2), min(1000, n))
+        f = random.randint(min(500 ,n // 2), min(1000, n))
     else:
-        p = random.randint(n // 2,n)
-        f = random.randint(n // 2,n)
-    pat = random.sample(xrange(1, n), p)
-    fab = random.sample(xrange(1, n), f)
+        n = random.randint(MAXN // 2, MAXN)
+        p = random.randint(min(500 ,n // 2), min(1000, n))
+        f = random.randint(min(500 ,n // 2), min(1000, n))
+    pat = []
+    fab = []
+    for i in range(p):
+        if(n < 2000):
+            pat = random.sample(xrange(1, n), p)
+        else:
+            pat.append(random.randint(1,n))
+    for i in range(f):
+        if(n < 2000):
+            fab = random.sample(xrange(1, n), f)
+        else:
+            fab.append(random.randint(1,n))
         
     return Test(n, p, pat, f, fab)
 
@@ -103,9 +106,9 @@ def gen_cases():
     subtask1 = []
     for i in range(1, 11):
         print('Generating subtask 1, case ', i)
-        if(i < 3):
+        if(i < 2):
             subtask1.append(gen_random(1))
-        elif(i < 5):
+        elif(i < 6):
             subtask1.append(gen_random(2))
         else:
             subtask1.append(gen_random(3))
