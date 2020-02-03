@@ -71,7 +71,7 @@ void rek(int cvor, int rod)
 		tr = intervali[ptr[graf[cvor][i].a]].begin();
 		pom = intervali[ptr[graf[cvor][i].a]].end();
 		pom--;
-		br_puta -= (tr -> first == 0 ? 1 : 0) + (pom -> second == n - 1 ? 1 : 0);
+		br_puta -= ((tr -> first == 0) ? 1 : 0) + ((pom -> second == (n - 1)) ? 1 : 0);
 		rj += min((long long)graf[cvor][i].c2, (long long)graf[cvor][i].c1 * br_puta); // min za long long?
 		max_vel = max(max_vel, (int)intervali[ptr[graf[cvor][i].a]].size());
 	}
@@ -93,11 +93,7 @@ void rek(int cvor, int rod)
 	REP(i, 0, (int)graf[cvor].size())
 	{
 		if(graf[cvor][i].a == rod) continue;
-		if((int)intervali[ptr[graf[cvor][i].a]].size() == max_vel)
-		{
-			max_vel = -1;
-			continue;
-		}
+		if(ptr[cvor] == ptr[graf[cvor][i].a]) continue;
 		dodaj(ptr[cvor], ptr[graf[cvor][i].a]);
 	}
 	int pom_ptr = br_ptr++;
