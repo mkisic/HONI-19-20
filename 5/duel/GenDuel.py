@@ -93,9 +93,9 @@ def gen_cases():
         0, []
     ))
     dummy.append(Test(
-        3,
-        3, [1, 2, 3],
-        3, [1, 2, 3]
+        1234567890,
+        3, [100000, 2000000, 987],
+        3, [100000, 24, 8]
     ))
 
     for i, test in enumerate(dummy):
@@ -108,7 +108,7 @@ def gen_cases():
         print('Generating subtask 1, case ', i)
         if(i < 2):
             subtask1.append(gen_random(1))
-        elif(i < 6):
+        elif(i < 8):
             subtask1.append(gen_random(2))
         else:
             subtask1.append(gen_random(3))
