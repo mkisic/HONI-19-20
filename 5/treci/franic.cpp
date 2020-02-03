@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const int MAXN = 5005;
+const int MAXN = 105;
 
 bool bio[MAXN][MAXN];
 
@@ -15,17 +15,17 @@ int main()
 	cin >> n >> k;
 	for(int i = 0; i < n; i++)
 	{
-		for(int k = 0; k < n; k++)
+		for(int j = 0; j < k; j++)
 		{
 			cin >> c;
 			if(c == '*')
 			{
-				bio[i][k] = 1;
-				if(i == 0 && k == 0)
+				bio[i][j] = 1;
+				if(i == 0 && j == 0)
 					sol++;
-				else if((i == 0 && !bio[i][k - 1]) || k == 0 && !bio[i - 1][k])
+				else if((i == 0 && !bio[i][j - 1]) || k == 0 && !bio[i - 1][j])
 					sol++;
-				else if(i != 0 && k != 0 && !bio[i - 1][k] && !bio[i][k - 1])
+				else if(i != 0 && j != 0 && !bio[i - 1][j] && !bio[i][j - 1])
 					sol++;
 			}	
 		}
