@@ -41,7 +41,7 @@ int main()
 		if(!rijesio)
 			cnt2++;
 	}
-	cout << cnt1 << endl << cnt2;
+	cout << cnt1 << endl << cnt2 << endl;
 	return 0;
 }
 
