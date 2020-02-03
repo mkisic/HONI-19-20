@@ -35,7 +35,7 @@ int main()
 		bool rijesio = false;
 		for(int j = 0; j < p; j++)
 		{
-			if(fabijan[i] == patrik[i])
+			if(fabijan[i] == patrik[j])
 				rijesio = true;
 		}
 		if(!rijesio)
