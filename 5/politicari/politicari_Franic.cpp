@@ -44,7 +44,7 @@ int main()
 	int poc = bio[stanje.first][stanje.second] - 1;
 	//cout << len << " " << poc << endl;
 	if(k <= poc)
-		cout << slijed[k];
+		cout << slijed[k - 1];
 	else 
 		cout << slijed[(k - poc) % len + poc - 1];// << " " << (k - poc) % len + poc - 1;
 	return 0;
