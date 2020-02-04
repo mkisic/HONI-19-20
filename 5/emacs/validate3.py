@@ -4,10 +4,8 @@
 import copy
 import string
 
-
-dr = [0, 1, 0, -1]
-ds = [1, 0, -1, 0]
-
+dr = [-1, -1, 0, 1, 1, 1, 0, -1]
+ds = [0, 1, 1, 1, 0, -1, -1, -1]
 
 def inside(r, s, R, S):
     return r >= 0 and r < R and s >= 0 and s < S
@@ -17,7 +15,7 @@ def check_singles(r, s, grid):
     for i in range(r):
         for j in range(s):
             if grid[i][j] == '.': continue
-            for k in range(4):
+            for k in range(8):
                 ii = i + dr[k]
                 jj = j + ds[k]
                 if inside(ii, jj, r, s) and grid[ii][jj] == '*':
@@ -45,7 +43,7 @@ def check_intersections(r, s, grid):
     for i in range(r):
         for j in range(s):
             if grid[i][j] == 0: continue;
-            for k in range(4):
+            for k in range(8):
                 ii = i + dr[k]
                 jj = j + ds[k]
                 if inside(ii, jj, r, s) and grid[ii][jj] != 0 and grid[ii][jj] != grid[i][j]:
