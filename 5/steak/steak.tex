@@ -1,0 +1,81 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=20,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Steak}
+
+%\setlength\intextsep{-0.1cm}
+%\begin{wrapfigure}[3]{r}{0.26\textwidth}
+%\centering
+%\includegraphics[width=0.20\textwidth]{img/steak.png}
+%\end{wrapfigure}
+
+Ivan voli jesti odreske. Jednom je u intervjuu za \textit{Gloriju} izjavio da svake
+godine točno $N$ puta pojede po jedan srednje pečeni primjerak. Što se tiče
+priloga, tu je malo neodlučan. Ne može odlučiti je li bolje jesti mrkvu ili
+brokulu. Zato je odlučio da će, ako odrezak jede na parni dan u godini,
+prilog biti brokula, a ako ga jede na neparni dan, prilog biti mrkva.
+
+\textbf{Dogovor} -- svaki mjesec u godini ima $30$ dana.
+
+\textbf{Definicija} -- dan je paran (odnosno neparan) ako je njegov redni broj
+u godini paran (odnosno neparan). Primjerice, 8. veljače je paran jer je 38.
+dan u godini, dok je 25.  rujna neparan jer je 265. dan u godini.
+
+Za svaki od $N$ obroka znamo dan $D$ i mjesec $M$ kada je Ivan objedovao.
+Napišite program koji će za svaki zadani dan ispisati što je bio prilog uz
+odrezak.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom je retku prirodan broj $N$ $(1 \le N \le 100)$ iz teksta zadatka.
+
+U sljedećih $2N$ redaka su parovi podataka koji opisuju $i$-ti dan kada je Ivan
+jeo odrezak. Pri tome vrijedi da je u prvom retku (para) prirodan broj $D$
+$(1 \le D \le 30)$, a u drugom retku riječ $M$ (\texttt{SIJECANJ},
+\texttt{VELJACA}, \texttt{OZUJAK}, \texttt{TRAVANJ}, \texttt{SVIBANJ},
+\texttt{LIPANJ}, \texttt{SRPANJ}, \texttt{KOLOVOZ}, \texttt{RUJAN},
+\texttt{LISTOPAD}, \texttt{STUDENI} ili \texttt{PROSINAC}), redom dan i naziv
+mjeseca u godini kada se jeo odrezak.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+U $i$-ti od $N$ redaka ispišite naziv priloga koji se jeo uz odrezak tijekom
+$i$-tog jedenja odreska. Nazivi priloga su \texttt{"BROKULA"} ili
+\texttt{"MRKVA"} (bez navodnika, velika slova).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+\subsection*{Bodovanje}
+U testnim primjerima vrijednima $10$ bodova, vrijedit će $N=3$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Probni primjeri}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/steak.dummy.in.1}{test/steak.dummy.out.1} &
+\sampleinputs{test/steak.dummy.in.2}{test/steak.dummy.out.2} &
+\sampleinputs{test/steak.dummy.in.3}{test/steak.dummy.out.3}
+\end{tabularx}
+
+  %\textbf{Pojašnjenje prvog probnog primjera:}
+
+%21. siječnja je 21. dan u godini. Radi se o neparnom danu pa Ivan jede mrkvu.\\
+%19. veljače je 49. dan u godini. Radi se o neparnom danu pa Ivan jede mrkvu.\\
+%16. lipnja je 166. dan u godini. Radi se o parnom danu pa Ivan jede brokulu.\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
