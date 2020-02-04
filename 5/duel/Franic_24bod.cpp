@@ -4,9 +4,8 @@ using namespace std;
 
 const int MAXN = 1005;
 
-long long n;
-int p, f;
-long long patrik[MAXN], fabijan[MAXN];
+int p, f, n;
+int patrik[MAXN], fabijan[MAXN];
 
 int main()
 {

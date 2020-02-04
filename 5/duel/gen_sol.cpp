@@ -19,7 +19,11 @@ int main()
 	for(char i = '0'; i <= '9'; i++)
 	{
 		string idx = "";
-		idx += i;
+		const string deset = "10";
+		if(i < '9')
+			idx += (char)(i + 1);
+		else
+			idx = "10";
 		string nameIn = "test\\duel.in." + idx;
 		string nameOut = "test\\duel.out." + idx;
 		string del = "del " + nameOut;

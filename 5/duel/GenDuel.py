@@ -37,6 +37,7 @@ class Test(object):
         print>>fd, self.n
         print>>fd, self.p, ' '.join(map(str, self.pat))
         print>>fd, self.f, ' '.join(map(str, self.fab))
+        print>>fd, '\n'
 
 
 def remove_cases():
@@ -52,27 +53,38 @@ def gen_random(case):
     if(case == 1):
         n = 2
         p = f = 1
+        t = 0
     elif(case == 2):
         n = random.randint(500, 1000)
         p = random.randint(min(500 ,n // 2), min(1000, n))
         f = random.randint(min(500 ,n // 2), min(1000, n))
+        t = random.randint(1, f)
+        
+    elif(case == 3):
+        n = random.randint(500000000, 1000000000)
+        p = random.randint(min(500 ,n // 2), min(1000, n))
+        f = random.randint(min(500 ,n // 2), min(1000, n))
+        t = random.randint(1, f)
+           
     else:
         n = random.randint(MAXN // 2, MAXN)
         p = random.randint(min(500 ,n // 2), min(1000, n))
         f = random.randint(min(500 ,n // 2), min(1000, n))
+        t = random.randint(1, f)
+        
     pat = []
     fab = []
-    for i in range(p):
-        if(n < 2000):
-            pat = random.sample(xrange(1, n), p)
-        else:
+    if(n < 2000):
+        pat = random.sample(xrange(1, n), p)
+    else:
+        for i in range(p):
             pat.append(random.randint(1,n))
-    for i in range(f):
-        if(n < 2000):
-            fab = random.sample(xrange(1, n), f)
-        else:
-            fab.append(random.randint(1,n))
-        
+    for i in range (t):
+        fab.append(pat[i])
+    while(len(fab) != f):
+        x = random.randint(1,n)
+        if(not(x in fab)):
+            fab.append(x)
     return Test(n, p, pat, f, fab)
 
 
@@ -108,11 +120,12 @@ def gen_cases():
         print('Generating subtask 1, case ', i)
         if(i < 2):
             subtask1.append(gen_random(1))
-        elif(i < 8):
+        elif(i < 7):
             subtask1.append(gen_random(2))
-        else:
+        elif(i < 9):
             subtask1.append(gen_random(3))
-
+        else:
+            subtask1.append(gen_random(4))
     real.append(subtask1)
     
 
@@ -120,8 +133,8 @@ def gen_cases():
         for j, test in enumerate(batch):
             test.validate()
             print>>sys.stderr, 'Generating test/%s.in.%d' \
-                    % (PROBLEM, j)
-            input = 'test/%s.in.%d' % (PROBLEM, j)
+                    % (PROBLEM, j + 1)
+            input = 'test/%s.in.%d' % (PROBLEM, j + 1)
             test.write(file(input, 'wt'))
 
 def main():
