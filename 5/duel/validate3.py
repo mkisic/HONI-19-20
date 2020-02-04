@@ -13,8 +13,16 @@ def check(lines):
     assert 1 <= n <= 10**18, "n kriv"
     nl.append("{}{}".format(n, E));
 
-    A = list(map(int, lines[1].split()))
-    B = list(map(int, lines[2].split()))
+    A = []
+    B = []
+
+    A.append(int(lines[1].strip()))
+    for i in range(A[0]):
+        A.append(int(lines[2 + i].strip()))
+
+    B.append(int(lines[2 + A[0]].strip()))
+    for i in range(B[0]):
+        B.append(int(lines[3 + A[0] + i].strip()))
 
     assert 1 <= len(A) <= 1 + min(1000, n), "kriva duljina prvog niza"
     assert 1 <= len(B) <= 1 + min(1000, n), "kriva duljina drugog niza"
@@ -28,8 +36,11 @@ def check(lines):
     for i in range(1, len(B)):
         assert 1 <= B[i] <= n, "kriv indeks zadatka"
 
-    nl.append("{}{}".format(' '.join(list(map(str, A))), E))
-    nl.append("{}{}".format(' '.join(list(map(str, B))), E))
+    for x in A:
+        nl.append("{}{}".format(x, E))
+
+    for x in B:
+        nl.append("{}{}".format(x, E))
 
     assert lines == nl, "Krivi format (%s vs %s)" % (lines, nl)
     assert lines[-1][-1] == "\n", "Zadnji red ne zavrsava sa \\n"
@@ -37,13 +48,13 @@ def check(lines):
 
 
 # Ocekivani clusteri! Ovo vjerojatno zelis promijeniti!
-expected_clusters = {'Mali': 1, 'Srednji': 5, 'int veliki': 2, 'llint veliki': 2}
+expected_clusters = {'Mali': 2, 'Srednji': 4, 'int veliki': 2, 'llint veliki': 2}
 
 
 def what_cluster(data):
     # na temelju povratne informacije iz check(lines)
     # zakljucuje za TP u kojoj je bodovnoj sekciji
-    if data['n'] == 2 and data['p'] == data['f'] == 1: return 'Mali'
+    if data['n'] == 3 and data['p'] == data['f'] == 2: return 'Mali'
     if data['n'] <= 1000: return 'Srednji'
     if data['n'] <= 2*(10**9): return 'int veliki'
     return 'llint veliki'
