@@ -1,0 +1,186 @@
+  \NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{zadaci}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% process the options...
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% import packages...
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[croatian]{babel}
+\RequirePackage{fancyhdr}
+\RequirePackage{graphicx}
+\RequirePackage{verbatim}
+\RequirePackage{tabularx}
+\RequirePackage{geometry}
+\RequirePackage{booktabs}
+\RequirePackage{lastpage} % number of pages
+\RequirePackage{titlesec} % custom section spacing
+\RequirePackage{pgfkeys} % enable options
+\RequirePackage[pdfborder={0 0 0}]{hyperref} % enable index creation
+\RequirePackage{import} % enable relative imports
+\RequirePackage{grffile} % enable dots in figure filenames
+\RequirePackage{enumitem} % control itemize whitespace
+\RequirePackage{microtype}
+\RequirePackage{lmodern}
+% Alternative font families
+%\RequirePackage{mathpazo}
+%\RequirePackage{charter}
+%\RequirePackage{concmath}
+%\RequirePackage{fourier}
+%\RequirePackage{euler}
+%\RequirePackage{newcent}
+%\RequirePackage{palatino}
+%\RequirePackage{kpfonts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% contest and problem parameters..
+\newcommand{\@contestname}{}
+\newcommand{\contestname}[1]{\renewcommand{\@contestname}{#1}}
+\newcommand{\@documentname}{}
+\newcommand{\documentname}[1]{\renewcommand{\@documentname}{#1}}
+\newcommand{\@problemname}{}
+\newcommand{\problemname}[1]{\renewcommand{\@problemname}{#1}}
+\newcommand{\@timelimit}{}
+\newcommand{\timelimit}[1]{\renewcommand{\@timelimit}{#1}}
+\newcommand{\@memorylimit}{}
+\newcommand{\memorylimit}[1]{\renewcommand{\@memorylimit}{#1}}
+\newcommand{\@problemtype}{}
+\newcommand{\problemtype}[1]{\renewcommand{\@problemttype}{#1}}
+\newcommand{\@problempoints}{}
+\newcommand{\problempoints}[1]{\renewcommand{\@problempoints}{#1}}
+
+\pgfkeys{
+  timelimit/.estore in = \@timelimit,
+  memorylimit/.estore in = \@memorylimit,
+  problemtype/.estore in = \@problemtype,
+  problempoints/.estore in = \@problempoints,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% look and feel...
+\geometry{
+	a4paper,
+        margin=1in,
+	left=25mm,
+	right=25mm,
+	top=32mm,
+	bottom=30mm,
+        headheight=20mm,
+        headsep=6mm,
+}
+\titlespacing*{\section}{0pt}{2ex}{1ex} % space before and after
+\titlespacing*{\subsection}{0pt}{1ex}{.5ex} % space before and after
+\setlength{\parindent}{0in} % no indent
+\setlength{\parskip}{0.1in} % paragraph skip
+\linespread{1.04} % increase line spread a bit
+\pagestyle{fancy} % setup header and footer
+\fancyhf{}
+\renewcommand{\headrulewidth}{.2pt}
+\renewcommand{\footrulewidth}{.2pt}
+\fancyhead[L]{\includegraphics[height=.7cm]{pic/HSIN_logo.pdf} \hspace{.1cm} \parbox[b]{6cm}{\textsf{\@contestname}}}
+\fancyhead[R]{\textsf{\rightmark}}
+\fancyfoot[C]{\textsf{\thepage \hspace{1pt} od \pageref*{LastPage}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% constest summary
+
+\newtoks\tabtoks
+\newcounter{totalpoints}
+\newcommand\addtabtoks[1]{\global\tabtoks\expandafter{\the\tabtoks#1}}
+\newcommand*\resettabtoks{\global\tabtoks{}}
+\newcommand*\printtabtoks{\the\tabtoks}
+\newcommand{\problemline}[5]{
+  \addtabtoks{\textbf{#1} & #3 & #4 & #5 \\}
+  \addtocounter{totalpoints}{#5}
+}
+\newcommand{\contestsummary}{
+  \@starttoc{prl}
+  \begin{center}
+  \setlength{\tabcolsep}{6pt}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{.71\textwidth}{lccr}
+    \toprule
+    Zadatak  &
+    Vremensko ograničenje &
+    Memorijsko ograničenje &
+    Bodovi \\ \midrule
+    \printtabtoks \midrule
+      \textbf{Ukupno} & & & \arabic{totalpoints} \\
+    \bottomrule
+  \end{tabularx}
+  \end{center}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% titlepage
+\newcommand{\coverpage}[1]{
+  \thispagestyle{empty}
+  \begin{center}
+    \vspace{2cm}
+    \begin{center}
+      \includegraphics[scale=0.52]{pic/HSIN_logo.pdf}
+    \end{center}
+    \vspace{1.5cm}
+    \textsf{\Large {\LARGE \textbf{#1}}\\
+      \vspace{.5cm}
+       {\large 5. kolo, 8. veljače 2020.}
+     }
+  \end{center}
+  \vspace{1.2cm}
+  \begin{center}
+    \textsf{\LARGE \textbf{Zadaci}}
+  \end{center}
+  \begin{center}
+    \begin{minipage}{\textwidth}
+      \contestsummary
+    \end{minipage}
+  \end{center}
+  \vspace{1.5cm}
+  %\begin{center}
+    %\includegraphics[height=2cm]{pic/CI_footer_wide.png}
+  %\end{center}
+  \vspace{\fill}
+  \clearpage
+  \setcounter{page}{1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% environments and macros
+\newenvironment{statement}[2][]{
+  \clearpage
+  \pgfkeys{#1}
+  \problemname{#2}
+  \addtocontents{prl}{
+    \protect\problemline
+    {\@problemname}
+    {\@problemtype}
+    {\@timelimit}
+    {\@memorylimit}
+    {\@problempoints}
+  }
+  \phantomsection
+  \addcontentsline{toc}{subsection}{\@problemname}
+  \section*{Zadatak: \@problemname}
+  \markright{Zadatak \textbf{\@problemname} \\
+    \@timelimit\ /\
+    \@memorylimit\ /\
+      \@problempoints\ bodova}
+  %\vspace{-.5em}
+  %\-\hspace{1em} \textsf{Broj bodova: \@problempoints} \\
+  %\-\hspace{1em} \textsf{Vremensko ograničenje: \@timelimit} \\
+  %\-\hspace{1em} \textsf{Memorijsko ograničenje: \@memorylimit}
+  %\vspace{.5em}
+} {
+}
+\newcolumntype{'}{@{\hskip\tabcolsep\vrule width .2pt\hskip\tabcolsep}}
+\newcommand{\sampleinputs}[2]{
+  \textbf{ulaz}
+  \linespread{1}{\verbatiminput{#1}}
+  \textbf{izlaz}
+  \linespread{1}{\verbatiminput{#2}}
+}
+\renewcommand{\t}[1]{\texttt{#1}}
+
