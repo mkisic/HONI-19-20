@@ -35,11 +35,13 @@ class Test(object):
 
     def write(self, fd=sys.stdout):
         print>>fd, self.n
-        print>>fd, self.p, ' '.join(map(str, self.pat))
-        print>>fd, self.f, ' '.join(map(str, self.fab))
-        print>>fd, '\n'
-
-
+        print>>fd, self.p
+        for i in self.pat:
+            print>>fd, i
+        print>>fd, self.f
+        for i in self.fab:
+            print>>fd, i
+            
 def remove_cases():
     cases = glob.glob('test/%s.dummy.in.*' % PROBLEM)
     cases += glob.glob('test/%s.dummy.out.*' % PROBLEM)
@@ -51,26 +53,24 @@ def remove_cases():
 
 def gen_random(case):
     if(case == 1):
-        n = 2
-        p = f = 1
-        t = 0
+        n = 3
+        p = f = 2
     elif(case == 2):
         n = random.randint(500, 1000)
         p = random.randint(min(500 ,n // 2), min(1000, n))
         f = random.randint(min(500 ,n // 2), min(1000, n))
-        t = random.randint(1, f)
         
     elif(case == 3):
         n = random.randint(500000000, 1000000000)
         p = random.randint(min(500 ,n // 2), min(1000, n))
         f = random.randint(min(500 ,n // 2), min(1000, n))
-        t = random.randint(1, f)
            
     else:
         n = random.randint(MAXN // 2, MAXN)
         p = random.randint(min(500 ,n // 2), min(1000, n))
         f = random.randint(min(500 ,n // 2), min(1000, n))
-        t = random.randint(1, f)
+
+    t = random.randint(0, min(p,f))
         
     pat = []
     fab = []
@@ -118,7 +118,7 @@ def gen_cases():
     subtask1 = []
     for i in range(1, 11):
         print('Generating subtask 1, case ', i)
-        if(i < 2):
+        if(i < 3):
             subtask1.append(gen_random(1))
         elif(i < 7):
             subtask1.append(gen_random(2))
