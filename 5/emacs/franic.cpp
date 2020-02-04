@@ -23,7 +23,7 @@ int main()
 				bio[i][j] = 1;
 				if(i == 0 && j == 0)
 					sol++;
-				else if((i == 0 && !bio[i][j - 1]) || k == 0 && !bio[i - 1][j])
+				else if((i == 0 && !bio[i][j - 1]) || j == 0 && !bio[i - 1][j])
 					sol++;
 				else if(i != 0 && j != 0 && !bio[i - 1][j] && !bio[i][j - 1])
 					sol++;
