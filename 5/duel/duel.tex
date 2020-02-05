@@ -1,0 +1,77 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=30,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Duel}
+
+%\setlength\intextsep{-0.1cm}
+%\begin{wrapfigure}[3]{r}{0.26\textwidth}
+%\centering
+%\includegraphics[width=0.20\textwidth]{img/steak.png}
+%\end{wrapfigure}
+
+Unatoč tome što su jako dobri prijatelji, Fabijan i Patrik su oduvijek rivali u
+stvarnom svijetu programiranja i virtualnom svijetu popularne igre
+\textit{FIFA 20}. Od Božića su odigrali $824$ utakmice, a
+trenutni je rezultat $412:412$. Zaključili su da su u virtualnom svijetu
+nogometa podjednako dobri. Sada je na redu borba za titulu najboljeg programera.
+Dogovorili su se da će duelom odlučiti, jednom za svagda, tko je bolji
+programer, a čija mačka crnu vunu prede.
+
+Za duel su pripremili $N$ zadataka. Od $N$ zadataka Patrik je točno riješio
+njih $P$, a Fabijan $F$. Sada svakog od njih zanima koliko je zadatka on
+točno riješio, a koje njegov rival nije.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom je retku prirodan broj $N$ $(1 \le N \le 10^{18})$ iz teksta zadatka.
+
+U drugom je retku cijeli broj $P$ $(0 \le P \le min(1000, N))$ iz teksta
+zadatka.  Slijedi $P$ različitih brojeva $P_i$ $(1 \le P_i \le N)$, svaki u
+svom retku, indeksi zadataka koje je Patrik uspješno riješio.
+
+U sljedećem je retku cijeli broj $F$ $(0 \le F \le min(1000, N))$ iz teksta
+zadatka.  Slijedi $F$ različitih brojeva $F_i$ $(1 \le F_i \le N)$, svaki u
+svom retku, indeksi zadataka koje je Fabijan uspješno riješio.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+U prvi redak ispišite koliko je zadataka Patrik riješio, a Fabijan nije.\\
+U drugi redak ispišite koliko je zadataka Fabijan riješio, a Patrik nije.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+\subsection*{Bodovanje}
+U testnim primjerima vrijednima $6$ boda vrijedit će $N = 3$ i $P = F = 2$. \\
+U testnim primjerima vrijednima dodatnih $12$ bodova vrijedit će $N \le 1000$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Probni primjeri}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/duel.dummy.in.1}{test/duel.dummy.out.1} &
+\sampleinputs{test/duel.dummy.in.2}{test/duel.dummy.out.2} &
+\sampleinputs{test/duel.dummy.in.3}{test/duel.dummy.out.3}
+\end{tabularx}
+
+  %\textbf{Pojašnjenje prvog probnog primjera:}
+
+%21. siječnja je 21. dan u godini. Radi se o neparnom danu pa Ivan jede mrkvu.\\
+%19. veljače je 49. dan u godini. Radi se o neparnom danu pa Ivan jede mrkvu.\\
+%16. lipnja je 166. dan u godini. Radi se o parnom danu pa Ivan jede brokulu.\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+  %%% TeX-master: "../hio.tex"
+%%% End:
