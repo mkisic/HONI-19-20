@@ -1,0 +1,70 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=110,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Zapina}
+
+Čak $N$ mladih informatičara priprema se za drugi dio natjecateljske sezone na
+zimskom kampu mladih informatičara u \sout{Krapini} Zagrebu. Gospodin Malnar,
+veliki zagovornik reda, rada i discipline, poslagao je informatičare u red i
+svakome dao nekoliko (možda i nula) zadataka. Ukupno je podijelio \textbf{N
+različitih} zadataka te zna da, ako je $i$-tom informatičaru u redu dao točno
+$i$ zadataka, tada je taj informatičar sretan.
+
+Na koliko je različitih načina gospodin Malnar mogao raspodijeliti zadatke tako
+da je \textbf{barem jedan} informatičar bio sretan? Dva načina su različita
+ako postoje informatičar i zadatak takvi da je u jednom načinu informatičar
+dobio taj zadatak, a u drugom nije.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom je retku prirodan broj $N$ $(1 \le N \le 350)$ iz teksta zadatka.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+Ispišite ostatak pri dijeljenju traženog broja načina s $10^9+7$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+ \subsection*{Bodovanje}
+{\renewcommand{\arraystretch}{1.4}
+  \setlength{\tabcolsep}{6pt}
+  \begin{tabular}{ccl}
+ Podzadatak & Broj bodova & Ograničenja \\ \midrule
+  1 & 22 & $1 \le N \le 7$ \\
+  2 & 33 & $1 \le N \le 20$ \\
+  3 & 55 & Nema dodatnih ograničenja
+\end{tabular}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Probni primjeri}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/zapina.dummy.in.1}{test/zapina.dummy.out.1} &
+\sampleinputs{test/zapina.dummy.in.2}{test/zapina.dummy.out.2} &
+\sampleinputs{test/zapina.dummy.in.3}{test/zapina.dummy.out.3}
+\end{tabularx}
+
+\textbf{Pojašnjenje drugog probnog primjera:}
+
+Načini raspodjele u kojima je barem jedan informatičar sretan su:
+\begin{enumerate}
+  \item Prvi zadatak prvom informatičaru u redu, a drugi drugom.
+  \item Drugi zadatak prvom infromatičaru u redu, a prvi drugom.
+  \item Oba zadatka drugom informatičaru u redu.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
