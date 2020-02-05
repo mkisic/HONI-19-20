@@ -1,0 +1,60 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=50,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Emacs}
+
+%\setlength\intextsep{-0.1cm}
+%\begin{wrapfigure}[3]{r}{0.26\textwidth}
+%\centering
+%\includegraphics[width=0.20\textwidth]{img/steak.png}
+%\end{wrapfigure}
+
+Daniel je, igrajući se u svom najdražem text editoru, nacrtao sliku visine $N$
+i širine $M$ znakova. Slika se sastoji od znakova \texttt{'.'} i
+\texttt{'*'}, a znakovi \texttt{'*'} čine nekoliko pravokutnika koji se ne
+preklapaju niti dodiruju na rubovima ili vrhovima.
+
+Pomozite Danielu izbrojiti pravokutnike na slici.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom su retku dva prirodna broja $N$ i $M$ $(1 \le N, M \le 100)$, dimenzije
+slike.\\
+U sljedećih se $N$ redaka nalazi po $M$ znakova \texttt{'.'} i
+\texttt{'*'} koji predstavljaju sliku koju je Daniel nacrtao.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+Ispišite broj pravokutnika na slici.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+\subsection*{Bodovanje}
+U testnim primjerima vrijednima $10$ bodova, svi će se pravokutnici sastojati
+od samo jednog znaka \texttt{'*'}.\\
+U testnim primjerima vrijednima dodatnih $15$ bodova, vrijedit će $N = 1$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Probni primjeri}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/emacs.dummy.in.1}{test/emacs.dummy.out.1} &
+\sampleinputs{test/emacs.dummy.in.2}{test/emacs.dummy.out.2} &
+\sampleinputs{test/emacs.dummy.in.3}{test/emacs.dummy.out.3}
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
