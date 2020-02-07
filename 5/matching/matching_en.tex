@@ -1,0 +1,74 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=110,
+  timelimit=? seconds,
+  memorylimit=512 MiB,
+]{Matching}
+
+You are given $N$, where $N$ is even, points on a plane that have integer
+coordinates. For each integer $a$, there are at most two points with coordinates
+$(a, x)$. Analogously, for each integer $b$, there are at most two points
+with coordinates $(x, b)$.
+
+You are able to draw horizontal or vertical line segments between pairs of given
+points. Is it possible to draw $\frac{N}{2}$ lines such that each of the
+given points is an endpoint of exactly one line segment and that no two line
+segments intersect?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Input}
+The first line contains an even integer $N$ $(2 \le N \le 100\ 000)$ from
+the task description
+
+The $i$-th of the next $N$ lines contains two integers $X_i$, $Y_i$
+$(1 \le X_i, Y_i \le 100\ 000)$, coordinates of the $i$-th point.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Output}
+If it is not possible to draw the line segments as explained in the task
+statement, you should output \texttt{"NE"} (NO in Croatian) in a single line.
+
+Otherwise, you should output \texttt{"DA"} (YES in Croatian) in the first
+line. In each of the next $\frac{N}{2}$ lines you should output two
+space-separated integers $i$ and $j$ $(1 \le i, j \le N)$, which represent
+indices of the points that are connected with a drawn line segment.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+ \subsection*{Scoring}
+{\renewcommand{\arraystretch}{1.4}
+  \setlength{\tabcolsep}{6pt}
+  \begin{tabular}{ccl}
+ Subtask & Score & Constraints \\ \midrule
+    1 & 5 &   \makecell[l]{$2 \le N \le 20$, for each integer $a$, there is an even
+              number of points with coordinates $(a, x)$ \\ and an even number
+              of points with coordinates
+              $(x, a)$. } \\
+  2 & 6 & $2 \le N \le 20$ \\
+  3 & 7 & $2 \le N \le 40$ \\
+  4 & 40 & $2 \le N \le 2000$ \\
+  5 & 52 & No additional constraints.
+\end{tabular}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Examples}
+%\begin{tabularx}{\textwidth}{X'X'X}
+%\sampleinputs{test/zapina.dummy.in.1}{test/zapina.dummy.out.1} &
+%\sampleinputs{test/zapina.dummy.in.2}{test/zapina.dummy.out.2} &
+%\sampleinputs{test/zapina.dummy.in.3}{test/zapina.dummy.out.3}
+%\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
