@@ -1,0 +1,90 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=110,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Putovanje}
+
+Mali Fabijan jako voli putovati. On želi popiti \sout{piv} kavu u svakom od $N$
+gradova označenih brojevima od $1$ do $N$. Gradovi su međusobno povezani s $(N
+- 1)$ dvosmjernih cesta na način da se iz svakog grada može doći u svaki drugi
+putujući tim cestama. On će kave ispijati redom u gradovima od $1$ do $N$ (svoje
+putovanje započinje u gradu $1$, a završava u gradu $N$). Najprije iz grada
+$1$ (u kojem je već popio kavu) putuje u grad $2$ kako bi mogao tamo popiti
+kavu. Pritom će možda morati proći i kroz neke druge gradove (kroz koje je
+možda i ranije prošao), ali u njima neće stati kako bi popio kavu.  Nakon što
+je popio kavu u gradu $2$ putuje do grada $3$ i tako dalje dok ne popije
+posljednju kavu u gradu $N$.
+
+Da bi prešao neku cestu, Fabijan mora imati kratu za nju. Cesta $i$ na
+raspolaganju ima dvije karte: jednokratnu koja košta $C_{i1}$ kuna i
+višekratnu koja košta $C_{i2}$ kuna. Za svaku cestu on može ili svaki puta
+kada ju prelazi kupiti jednokratnu kartu ili jednom kupiti višekratnu kartu
+te više nikada ne kupovati kartu za nju.
+
+Budući da Fabijan nije dobio stipendiju, ne zna hoće li si moći priuštiti ovo
+putovanje. Odredite kolika je najmanja cijena njegovog putovanja ako karte
+kupuje optimalno.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom se retku nalazi prirodan broj $N$ $(2 \le N \le 200\ 000)$ iz teksta
+zadatka.
+
+U $i$-tom od sljedećih $(N - 1)$ redaka nalaze se po četiri prirodna broja
+$A_i$, $B_i$, $C_{i1}$, $C_{i2}$ $(1 \le A_i, B_i \le N, 1 \le C_{i1} \le
+C_{i2} \le 100\ 000)$ koji označavaju da su gradovi $A_i$ i $B_i$ povezani
+cestom čije cijene karata su   $C_{i1}$ i $C_{i2}$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+U jedini redak ispišite najmanju cijenu putovanja.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+ \subsection*{Bodovanje}
+{\renewcommand{\arraystretch}{1.4}
+  \setlength{\tabcolsep}{6pt}
+  \begin{tabular}{ccl}
+ Podzadatak & Broj bodova & Ograničenja \\ \midrule
+  1 & 20 & $2 \le N \le 2000$ \\
+  2 & 25 & Svaki će grad biti povezan s najviše dva druga grada. \\
+  3 & 65 & Nema dodatnih ograničenja.
+\end{tabular}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Probni primjeri}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/putovanje.dummy.in.1}{test/putovanje.dummy.out.1} &
+\sampleinputs{test/putovanje.dummy.in.2}{test/putovanje.dummy.out.2} &
+\sampleinputs{test/putovanje.dummy.in.3}{test/putovanje.dummy.out.3}
+\end{tabularx}
+
+\clearpage
+
+\textbf{Pojašnjenje prvog probnog primjera:}
+
+Fabijan prvo putuje od grada $1$ do grada $2$ te mu je optimalno kupiti
+višekratnu kartu ($5$ kuna) za cestu koja ih povezuje. Zatim putuje od grada
+$2$ preko grada $1$ do grada $3$. Ima višekratnu kartu za cestu od grada $2$ do
+grada $1$, a za cestu od grada $1$ do grada $3$ može kupiti jednokratnu kartu
+($2$ kune). Na putu od grada $3$ do grada $4$ kupuje još jednu jednokratnu
+kartu za cestu koja povezuje gradove $3$ i $2$ ($2$ kune) te kupuje jednokratnu
+kartu za cestu koja povezuje gradove $2$ i $4$ ($1$ kuna). Sve zajedno je
+potrošio $10$ kuna.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
