@@ -1,0 +1,57 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=50,
+  timelimit=1 second,
+  memorylimit=512 MiB,
+]{Emacs}
+
+%\subsection*
+
+While playing in his favourite text editor, Daniel decided to draw a picture
+that was $N$ characters high and $M$ characters wide. The picture consists
+solely of characters \texttt{'.'} and \texttt{'*'} such that characters
+\texttt{'*'} form some non-overlapping rectangles. The rectangles don't even
+touch each other on their sides or corners.
+
+Help Daniel count the number of rectangles drawn on the picture.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Input}
+The first line contains two integers $N$ and $M$ $(1 \le N, M \le 100)$ from
+task description. \\
+Each of The next $N$ lines contains $M$ characters \texttt{'.'} or
+\texttt{'*'} which represent the picture that Daniel drew.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Output}
+In a single line you should output the number of rectangles on the picture.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+\subsection*{Scoring}
+In the test cases worth a total of $10$ points, all rectangles will consist
+of a single \texttt{'*'} character.\\
+In the test cases worth additional $15$ points, it will hold $N = 1$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Examples}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/emacs.dummy.in.1}{test/emacs.dummy.out.1} &
+\sampleinputs{test/emacs.dummy.in.2}{test/emacs.dummy.out.2} &
+\sampleinputs{test/emacs.dummy.in.3}{test/emacs.dummy.out.3}
+\end{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
