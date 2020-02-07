@@ -31,6 +31,7 @@ using namespace std;
 typedef pair<int, int> pii;
 
 const int INF = 1e9;
+const int MAXN = 1e5 + 10;
 
 /**
  * @param p fraction of points awarded to the contestant.
@@ -77,8 +78,8 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
       else finish(0, WRONG);
   }
 
-  vector<vector<int>> in(n), out(n);
-  vector<vector<pii>> query(n);
+  vector<vector<int>> in(MAXN), out(MAXN);
+  vector<vector<pii>> query(MAXN);
   vector<bool> matched(n, false);
   for (int i = 0; i < n / 2; i++) {
       int a, b;
@@ -105,7 +106,7 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
   if (fout >> smece) finish(0, WRONG_OUTPUT_FORMAT);
 
   set<int> S = {INF};
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < MAXN; i++) {
       for (int a : in[i]) S.insert(a);
       for (auto p : query[i])
           if (*S.lower_bound(p.fi) <= p.se) finish(0, WRONG);

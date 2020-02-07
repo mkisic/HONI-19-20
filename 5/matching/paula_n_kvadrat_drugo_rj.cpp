@@ -15,39 +15,24 @@ typedef vector<int> vi;
 const int INF = 1e9;
 
 const int OFF = 1 << 17;
-struct SegTree {
-    set<int> t[2 * OFF];
+struct NotSegTree {
+    set<int> t[OFF];
 
-    SegTree() {
-        for (int i = 1; i < 2 * OFF; i++)
+    NotSegTree() {
+        for (int i = 1; i < OFF; i++)
             t[i].insert(INF);
     }
 
-    void insert(int l, int r, int x, int i = 1, int lo = 0, int hi = OFF) {
-        if (r <= lo || hi <= l) return;
-        if (l <= lo && hi <= r) t[i].insert(x);
-        else {
-            int mid = (lo + hi) / 2;
-            insert(l, r, x, 2 * i + 0, lo, mid);
-            insert(l, r, x, 2 * i + 1, mid, hi);
-        }
+    void insert(int l, int r, int x) {
+        for (int i = l; i < r; i++) t[i].insert(x);
     }
 
-    void erase(int l, int r, int x, int i = 1, int lo = 0, int hi = OFF) {
-        if (r <= lo || hi <= l) return;
-        if (l <= lo && hi <= r) t[i].erase(x);
-        else {
-            int mid = (lo + hi) / 2;
-            erase(l, r, x, 2 * i + 0, lo, mid);
-            erase(l, r, x, 2 * i + 1, mid, hi);
-        }
+    void erase(int l, int r, int x) {
+        for (int i = l; i < r; i++) t[i].erase(x);
     }
 
     int lower_bound(int i, int x) {
-        int lb = INF;
-        for (i += OFF; i > 0; i /= 2)
-            lb = min(lb, *t[i].lower_bound(x));
-        return lb;
+        return *t[i].lower_bound(x);
     }
 } M[2], P[2];
 
@@ -74,7 +59,6 @@ void find_path(int i, bool is_cycle) {
     while (!vis[i]) {
         vis[i] = true;
         if (V[x[i][o]][o].size() == 1) break;
-        assert(V[x[i][o]][o].size() != 0);
 
         int j = V[x[i][o]][o][0] ^ V[x[i][o]][o][1] ^ i;
 

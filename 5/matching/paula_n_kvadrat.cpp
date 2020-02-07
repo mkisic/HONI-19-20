@@ -12,46 +12,6 @@ typedef long double ld;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
-const int INF = 1e9;
-
-const int OFF = 1 << 17;
-struct SegTree {
-    set<int> t[2 * OFF];
-
-    SegTree() {
-        for (int i = 1; i < 2 * OFF; i++)
-            t[i].insert(INF);
-    }
-
-    void insert(int l, int r, int x, int i = 1, int lo = 0, int hi = OFF) {
-        if (r <= lo || hi <= l) return;
-        if (l <= lo && hi <= r) t[i].insert(x);
-        else {
-            int mid = (lo + hi) / 2;
-            insert(l, r, x, 2 * i + 0, lo, mid);
-            insert(l, r, x, 2 * i + 1, mid, hi);
-        }
-    }
-
-    void erase(int l, int r, int x, int i = 1, int lo = 0, int hi = OFF) {
-        if (r <= lo || hi <= l) return;
-        if (l <= lo && hi <= r) t[i].erase(x);
-        else {
-            int mid = (lo + hi) / 2;
-            erase(l, r, x, 2 * i + 0, lo, mid);
-            erase(l, r, x, 2 * i + 1, mid, hi);
-        }
-    }
-
-    int lower_bound(int i, int x) {
-        int lb = INF;
-        for (i += OFF; i > 0; i /= 2)
-            lb = min(lb, *t[i].lower_bound(x));
-        return lb;
-    }
-} M[2], P[2];
-
-
 const int MAXN = 1e5 + 10;
 int x[MAXN][2];
 vector<int> V[MAXN][2];
@@ -59,6 +19,8 @@ bool vis[MAXN];
 int cycle_id[MAXN];
 vector<vector<int>> cycle;
 queue<pii> Q[2];
+vector<pii> M[2];
+set<pii> P[2];
 
 void no() {
     cout << "NE\n";
@@ -74,17 +36,13 @@ void find_path(int i, bool is_cycle) {
     while (!vis[i]) {
         vis[i] = true;
         if (V[x[i][o]][o].size() == 1) break;
-        assert(V[x[i][o]][o].size() != 0);
 
         int j = V[x[i][o]][o][0] ^ V[x[i][o]][o][1] ^ i;
 
         if (is_cycle) {
             cycle.back().push_back(i);
             cycle_id[i] = (int)cycle.size() - 1;
-
-            int l = x[i][o ^ 1], r = x[j][o ^ 1];
-            if (l > r) swap(l, r);
-            P[o].insert(l, r + 1, x[i][o]);
+            P[o].insert({i, j});
         } else {
             if (o == st_o)
                 Q[o].push({i, j});
@@ -96,6 +54,14 @@ void find_path(int i, bool is_cycle) {
 
     if (is_cycle) cycle.back().push_back(i);
     if (!is_cycle && o == st_o) no();
+}
+
+bool intersect(pii& a, pii& b, int o) {
+    int la = x[a.fi][o ^ 1], ra = x[a.se][o ^ 1], ma = x[b.fi][o ^ 1];
+    if (la > ra) swap(la, ra);
+    int lb = x[b.fi][o], rb = x[b.se][o], mb = x[a.fi][o];
+    if (lb > rb) swap(lb, rb);
+    return (la <= ma && ma <= ra) && (lb <= mb && mb <= rb);
 }
 
 int main() {
@@ -126,29 +92,29 @@ int main() {
     while (!(Q[0].empty() && Q[1].empty())) {
         int o = Q[0].empty();
         int i = Q[o].front().fi, j = Q[o].front().se;
+        pii& a = Q[o].front();
         Q[o].pop();
 
         int l = x[i][o ^ 1], r = x[j][o ^ 1];
         if (l > r) swap(l, r);
 
-        if (M[o ^ 1].lower_bound(x[i][o], l) <= r) no();
+        for (pii& b : M[o ^ 1]) if (intersect(a, b, o)) no();
 
-        for (int y = P[o ^ 1].lower_bound(x[i][o], l); y <= r;
-                y = P[o ^ 1].lower_bound(x[i][o], l)) {
-            int c = cycle_id[V[y][o ^ 1][0]];
-            if (matched_cycle[c]) continue;
+        set<int> intersect_cycles;
+        for (pii b : P[o ^ 1])
+            if (intersect(a, b, o)) intersect_cycles.insert(cycle_id[b.fi]);
+
+        for (int c : intersect_cycles) {
             matched_cycle[c] = true;
             for (int k = 0; k < (int)cycle[c].size() - 1; k++) {
                 int oc = k & 1, ic = cycle[c][k], jc = cycle[c][k + 1];
-                int lc = x[ic][oc ^ 1], rc = x[jc][oc ^ 1];
-                if (lc > rc) swap(lc, rc);
-                P[oc].erase(lc, rc + 1, x[ic][oc]);
+                P[oc].erase({ic, jc});
                 if (oc == o) Q[oc].push({ic, jc});
             }
         }
 
-        M[o].insert(l, r, x[i][o]);
-        sol.push_back({i, j});
+        M[o].push_back(a);
+        sol.push_back(a);
     }
 
     for (int i = 0; i < (int)cycle.size(); i++)
