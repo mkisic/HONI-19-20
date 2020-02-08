@@ -1,0 +1,89 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=110,
+  timelimit=1 second,
+  memorylimit=512 MiB,
+]{Putovanje}
+
+Little Fabijan loves bars and travels. He wishes to drink \sout{beer} coffee in
+each of the $N$ towns in his country conveniently numbered from $1$ to $N$.
+The towns are connected via $(N - 1)$ bidirectional roads such that each town
+is reachable from any other town by traversing some of the roads. Fabijan
+decided to drink coffee in every town in order from town number $1$ to town
+number $N$.  Therefore, he starts from town number $1$ (where he drinks his
+first coffee) and travels to town number $2$ for his next cup of coffee.
+During that travel he might pass through a number of different towns but he
+won't make a coffee stop in those towns. After drinking coffee in town $2$,
+he will proceed to travel to town $3$, and so on until he finally reaches
+town $N$ where he will drink his last coffee.
+
+In order to traverse a certain road, he needs to have a valid ticket. The $i$-th
+road can be traversed if you have either a single-pass ticket which costs $C_{i1}$
+euros or a multi-pass ticket which costs $C_{i2}$ euros. For each road, Fabijan can
+decide to buy a single-pass ticket each time he needs to traverse that road or
+he might opt to buy a multi-pass ticket once.
+
+Write a program that computes the smallest number of euros Fabijan needs to spend
+on tickets in order to successfully complete his travels.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Input}
+The first line contains an integer $N$ $(2 \le N \le 200\ 000)$ from task
+description.
+
+In $i$-th of the next $(N - 1)$ lines there are four integers $A_i$, $B_i$,
+$C_{i1}$, $C_{i2}$ $(1 \le A_i, B_i \le N, 1 \le C_{i1} \le C_{i2} \le 100\
+000)$ which represent that towns $A_i$ and $B_i$ are connected with
+a road with ticket prices $C_{i1}$ and $C_{i2}$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Output}
+In a single line output the smallest cost of travel.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+ \subsection*{Scoring}
+{\renewcommand{\arraystretch}{1.4}
+  \setlength{\tabcolsep}{6pt}
+  \begin{tabular}{ccl}
+ Subtask & Score & Constraints \\ \midrule
+  1 & 20 & $2 \le N \le 2000$ \\
+  2 & 25 & Each town will be directly connected with at most two other towns. \\
+  3 & 65 & No additional constraints.
+\end{tabular}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Examples}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/putovanje.dummy.in.1}{test/putovanje.dummy.out.1} &
+\sampleinputs{test/putovanje.dummy.in.2}{test/putovanje.dummy.out.2} &
+\sampleinputs{test/putovanje.dummy.in.3}{test/putovanje.dummy.out.3}
+\end{tabularx}
+
+\clearpage
+
+\textbf{Clarification of the first example:}
+
+Fabijan first travels from town $1$ to town $2$ and it is optimal for
+him to buy a multi-pass ticket ($5$ euros) for the road which connects them.
+Then he travels from town $2$ to town $3$ via town $1$. He already has a
+multi-pass ticket that takes him from $2$ to $1$ and he buys a single-pass
+ticket from town $1$ to town $3$ ($2$ euros). On his travels from town $3$ to
+town $4$ he buys another single-pass ticket that takes him from town $3$ back
+to town $2$ ($2$ euros) and after that buys a single-pass ticket that takes him from town $2$
+to town $4$ ($1$ euro). In total, he spent $5+2+2+1=10$ euros.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
