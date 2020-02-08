@@ -228,17 +228,17 @@ Prvi podzadatak možemo riješiti tako da za svaki mogući raspored provjerimo
 postoji li sretan informatičar. Mogućih rasporeda ima $N^N$.
 
 Drugi podzadatak možemo riješiti koristeći formulu uključivanja-isključivanja.
-Ako s $a(S)$, gdje je $S \subset \{1, 2, \ldots, N\}$, označimo broj rasporeda
+Ako s $a(S)$, gdje je $S \subseteq \{1, 2, \ldots, N\}$, označimo broj rasporeda
 u kojima su svi informatičari iz skupa $S$ sretni, tada je broj dobrih
 rasporeda jednak
 
-$$\sum_{S \subset \{1, 2, \ldots, N\}} (-1)^{|S| + 1} a(S)$$.
+$$\sum_{S \subseteq \{1, 2, \ldots, N\}}{(-1)^{|S| + 1} a(S)}.$$
 
-Neka je $S = {s_1, s_2, \ldots, s_k}$. Ako je $s_1 + s_2 + \cdots + s_k > N$
+Neka je $S = \{s_1, s_2, \ldots, s_k\}$. Ako je $s_1 + s_2 + \cdots + s_k > N$
 onda je očito $a(S) = 0$. Inače, vrijedi 
 
-$$a(S) = \binom{n}{s_1} \binom{n - s_1}{s_2} \cdots \binom{n - (s_1 + s_2 +
-\cdots s_{k-1}}{s_k} (n - k)^{n - (s_1 + s_2 + \cdots + s_k)}$$.
+$$a(S) = \binom{N}{s_1} \binom{N - s_1}{s_2} \cdots \binom{N - (s_1 + s_2 +
+\cdots s_{k-1})}{s_k} (N - k)^{N - (s_1 + s_2 + \cdots + s_k)}.$$
 
 Povrhe možemo preprocessati koristeći relaciju $\binom{n}{k} = \binom{n - 1}{k
 - 1} + \binom{n - 1}{k}$, u složenosti $\mathcal{O}(N^2)$.
@@ -246,16 +246,16 @@ Povrhe možemo preprocessati koristeći relaciju $\binom{n}{k} = \binom{n - 1}{k
 Ukupna vremenska složenost je $\mathcal{O}(N 2^N)$.
 
 Treći podzadatak rješavamo dinamičkim programiranjem. Neka je $dp(n, k)$ broj
-raspodjela $k$ zadataka na $n$ informatičara u kojima je bar jedan informatičar
+raspodjela $k$ zadataka na $n$ informatičara u kojima je barem jedan informatičar
 sretan. Imamo dvije mogućnosti -- hoćemo li $n$-tom informatičaru dati točno $n$
-zadataka (pa da bude sretan), ili nećemo. U prvom slučaju je broj načina jednak
-(ako je $k \leq n$)
+zadataka (pa da bude sretan), ili nećemo. U prvom slučaju je, ako je $k \leq n$,
+broj načina jednak
 
 $$\binom{k}{n} (n - 1)^{(k - n)},$$
 
 a u drugom
 
-$$\sum_{0 \leq i \leq k, i \neq n} \binom{k}{i} dp(n - 1, k - i)$$.
+$$\sum_{0 \leq i \leq k, i \neq n}{\binom{k}{i} dp(n - 1, k - i)}.$$
 
 Ukupna vremenska složenost je $\mathcal{O}(N^3)$.
 
