@@ -112,7 +112,7 @@ structure which supports the following operations:
 
 \begin{itemize}
   \item add a line segment $(x_1, y)$ -- $(x_2, y)$
-  \item remove a previously added line segment $(x_1, y)$ -- $(x_2, y)$ 
+  \item remove a previously added line segment $(x_1, y)$ -- $(x_2, y)$
   \item determine for some $x$ and $y_1$ what is the smallest $y_2 \ge y_1$ such that
     there exists a line segment with $y$ coordinate equal to $y_2$ which contains
     the point $(x, y_2)$ (or determine that no such $y_2$ exists)
@@ -137,7 +137,7 @@ We leave out the rest of the details as an exercise to the reader.
 \clearpage
 
 \subsection*{Task: Putovanje}
-\textsf{Suggested by: Gabrijel Jambrošić i Marin Kišić}\\
+\textsf{Suggested by: Gabrijel Jambrošić and Marin Kišić}\\
 \textsf{Necessary skills: lca, small-to-large}
 
 Note that we really care about the number of times we need to traverse
@@ -163,7 +163,7 @@ on a tree. Let's root the tree in an arbitrary node. Let $L$ be the lowest
 common ancestor of $X$ and $(X+1)$. Let's now increase \texttt{dp[X]} by
 $1$, increase \texttt{dp[X+1]} by 1 and decrease \texttt{dp[L]} by $2$.
 Now we can simply find out the number of traversals of each road by calculating
-the sum of \texttt{dp} values in a subtree of that road. 
+the sum of \texttt{dp} values in a subtree of that road.
 
 This solution is implemented in \texttt{putovanje\_lca.cpp}.
 
@@ -173,28 +173,46 @@ so-called \textit{small-to-large} trick. That solution is implemented in
 on this \href{https://codeforces.com/blog/entry/72017#comment-563190}{link}.
 
 
-\subsection*{Task: Nivelle}
-\textsf{Suggested by: Daniel Paleka}\\
-\textsf{Necessary skills: sliding window technique, two pointers}
+\subsection*{Task: Zapina}
+\textsf{Suggested by: Marin Kišić and Paula Vidas}\\
+\textsf{Necessary skills: dynamic programming, counting}
 
-We can implement a solution of time complexity $\mathcal{O}(N^2)$ which
-for every substring calculates the number of different letters in it. If
-we use the so-called sliding window technique, we need to keep track
-how many times each letter appears and note each time when a new letter
-starts or stops appearing. For implementation details, check the attached
-(slower) source code.
+The first subtask can be solved by simply checking if there is at least one
+happy programmer for each possible assignment of tasks. There are $N^N$
+possible task assignments in total.
 
-Note that the numerator of the expression we want to minimize, i.e. the
-number of different characters in a substring, can either be $1$, $2$, \dots,
-$26$. Therefore, it is enough to fix its value in every possible way and
-determine the largest possible substring which has exactly that many different
-characters. Now we have $26$ values to compare and pick the smallest one.
+The second subtask can be solved using the inclusion-exclusion principle.
+If with $a(S)$, where $S \subseteq \{1, 2, \ldots, N\}$, denotes the number
+of task assignments in which all programmers from set $S$ are happy, then the
+number of good assignments is equal to
 
-A simple implementation calculates for each starting character the longest
-substring which contains exactly $K$ different characters. If we calculate
-for each character and each position the first next appearance of that
-character, for each starting character we can quickly check $\le 26$ strings
-which go to \textit{the next new character}.
+$$\sum_{S \subseteq \{1, 2, \ldots, N\}}{(-1)^{|S| + 1} a(S)}.$$
+
+Let $S = \{s_1, s_2, \ldots, s_k\}$. If $s_1 + s_2 + \cdots + s_k > N$
+then obviously $a(S) = 0$. Otherwise, it holds
+
+$$a(S) = \binom{N}{s_1} \binom{N - s_1}{s_2} \cdots \binom{N - (s_1 + s_2 +
+\cdots s_{k-1})}{s_k} (N - k)^{N - (s_1 + s_2 + \cdots + s_k)}.$$
+
+Binomial coefficients can be precomputed using the well-known relation
+$\binom{n}{k} = \binom{n - 1}{k - 1} + \binom{n - 1}{k}$ in time complexity
+$\mathcal{O}(N^2)$.
+
+The total time complexity is $\mathcal{O}(N 2^N)$.
+
+Finally, the third subtask can be solved using dynamic programming. Let $dp(n, k)$
+be the number of assignments of $k$ tasks to $n$ programmers among which there is
+at least one happy programmer. There are two possibilities -- we can give the $n$-th
+programmer exactly $n$ tasks (and make him happy), or we won't. In the first case,
+if $k \geq n$, the number of ways equals
+
+$$\binom{k}{n} (n - 1)^{(k - n)},$$
+
+and in the other it equals
+
+$$\sum_{0 \leq i \leq k, i \neq n}{\binom{k}{i} dp(n - 1, k - i)}.$$
+
+The total time complexity is $\mathcal{O}(N^3)$.
 
 \end{document}
 %%% Local Variables:
