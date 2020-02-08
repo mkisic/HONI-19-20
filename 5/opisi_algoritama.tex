@@ -1,0 +1,267 @@
+\documentclass[a4paper]{article}
+\usepackage{zadaci}
+\usepackage{wrapfig}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage[normalem]{ulem}
+\usetikzlibrary{angles,quotes}
+\contestname{Hrvatsko otvoreno natjecanje u informatici\\5.\ kolo, 8. veljače 2020.}
+\markright{\textbf{\textsf{Opisi algoritama}}}
+
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true,
+linkcolor=blue,
+filecolor=magenta,
+urlcolor=cyan,
+}
+
+\begin{document}
+
+\section*{Opisi algoritama}
+Zadatke, testne primjere i rješenja pripremili: Nikola Dmitrović, Karlo Franić,
+Gabrijel Jambrošić, Marin Kišić, Daniel Paleka, Ivan Paljak i Paula Vidas.
+Primjeri implementiranih rješenja su dani u priloženim izvornim kodovima.
+
+\subsection*{Zadatak: Steak}
+\textsf{Pripremio: Nikola Dmitrović}\\
+\textsf{Potrebno znanje: naredba učitavanja brojeva i riječi, naredba
+ispisivanja, naredba odlučivanja, naredba ponavljanjaj}
+
+Na prvo čitanje se čini da ćemo za redni broj dana u godini trebati uzeti u
+obzir i mjesec, tj. da ćemo prvo morati odrediti redni broj zadanog mjeseca,
+taj redni broj pomnožiti s $30$ i na to dodati datum. Npr. dan \texttt{16 LIPANJ}
+je $30 \cdot 6 + 16 = 196$.
+dan u godini (lipanj je šesti mjesec).
+
+Međutim, kako je dogovoreno da će svaki mjesec imati $30$ dana, možemo
+zaključiti da se parnost/neparnost dana $D$ iz teksta zadatka neće mijenjati u
+ovisnosti o mjesecu u kojem se nalazi. Primjerice, ako promatramo slučaj kada
+je $D=16$, redni broj toga dana u siječnju će biti $16$, u veljači $46$, u
+ožujku $76$, itd., sve parni brojevi kao što je i sam broj $16$.
+
+U testnim primjerima vrijednima 10 bodova nije bilo nužno koristiti naredbu ponavljanja.
+
+\textit{Programski kod (pisan u \texttt{Python 3}):}
+
+\vspace{-2ex}
+\begin{verbatim}
+N = int(input())
+for i in range(N):
+    D = int(input())
+    M = input()
+    if D % 2 == 0:
+        print('BROKULA')
+    else:
+        print('MRKVA')
+\end{verbatim}
+
+\subsection*{Zadatak: Duel}
+\textsf{Pripremili: Karlo Franić i Ivan Paljak}\\
+\textsf{Potrebno znanje: jednodimenzionalna polja}
+
+Za $6$ bodova bilo je dovoljno provjeriti jesu li Fabijan i Patrik riješili oba
+ista zadatka ili je svatko riješio jedan koji drugi nije uspio riješiti.
+
+Za dodatnih $12$ bodova bilo je potrebno stvoriti dva polja (jedno za Patrika, a
+drugo za Fabijana) u kojima ćemo s $1$ označiti riješen zadatak, a s $0$ onaj koji
+nije riješen. Zatim smo mogli naredbom ponavljanja proći kroz oba polja te u
+svakom prebrojati koliko ima jedinica, a da se na istoj poziciji u drugom
+polju nalazi nula.
+
+Za sve bodove u polje je bilno potrebno spremati indekse zadataka te
+naredbom ponavljanja za svaki zadatak koji je Patrik riješio provjeriti nalazi
+li se isti zadatak u popisu Fabijanovih zadataka. Isti proces tada ponavljamo
+za Fabijanove zadatke.
+
+Također za zadatak postoji alternativno rješenje koje prebroji koliko
+su istih zadataka riješili. Odgovor na pitanje zašto nam je ta informacija
+korisna ostavljamo čitateljici za vježbu.
+
+\clearpage
+
+\subsection*{Zadatak: Emacs}
+\textsf{Pripremila: Paula Vidas}\\
+\textsf{Potrebno znanje: naredba ponavljanja, rad sa stringovima}
+
+Broj pravokutnika na slici jednak je broju gornjih lijevih kuteva pravokutnika.
+Polje $(i, j)$ je gornji lijevi kut nekog pravokutnika ako u tom polju piše
+\texttt{'*'}, a u poljima $(i - 1, j)$ i $(i, j - 1)$ piše \texttt{'.'}.
+Naravno, moramo dodatno pripaziti na polja u prvom retku i prvom stupcu.
+
+Alternativno, možemo BFS algoritmom pronaći broj povezanih područja znakova
+\texttt{'*'}.
+
+\subsection*{Zadatak: Političari}
+\textsf{Pripremio: Ivan Paljak}\\
+\textsf{Potrebno znanje: iskorištavanje cikličnosti}
+
+Na ovom zadatku bilo je moguće osvojiti $50\%$ ($35$) bodova naivnom implementacijom
+onog što piše u tekstu zadatka. Odnosno, bilo je potrebno ispravno
+implementirati pravila kojima se političari međusobno optužuju te tako saznati
+koji će se političar pojaviti u $K$-toj emisiji. Vremenska složenost ovog
+pristupa je $\mathcal{O}(K)$, a implementaciju možete vidjeti u izvornom kodu
+\texttt{politicari\_brute.cpp}.
+
+Za osvajanje svih bodova bilo je potrebno primijetiti da je proces cikličan.
+Budući sljedeći gost ovisi o isključivo tome tko je bio prethodni gost te tko
+je tog gosta optužio, zaključujemo da postoji $\mathcal{O}(N^2)$ različitih emisija
+(stanja). Dakako, dvije emisije smatramo jednakima ako u njima gostuje isti
+političar koji je optužen od strane iste osobe. U protivnom, emisije smatramo
+različitima.
+
+Budući da je broj stanja znatno manji od rednog broja emisije koja nas zanima u
+tekstu zadatka, možemo simulirati proces iz zadatka sve dok se ponovno ne
+dogodi emisija koju smo već vidjeli. U tom trenutku, ako smo do sad zapamtili
+neke relevantne informacije, možemo metodama matematike i računanja odrediti
+tko će gostovati u $K$-toj emisiji.
+
+Pretpostavimo da smo simulirajući proces primijetili da je $i$-ta emisija jednaka
+nekoj prethodnoj $j$-toj emisiji. U tom slučaju smo ušli u ciklus veličine $(i-j)$ te
+zaključujemo da je gost $K$-te emisije jednak gostu koji se pojavio u $(j + ((K -
+j) \% (i - j)))$-toj emisiji, gdje znakom $\%$ označavamo operator modulo.
+
+Vremenska složenost ovakvog algoritma je $\mathcal{O}(N^2)$.
+
+\subsection*{Zadatak: Matching}
+\textsf{Pripremili: Paula Vidas i Daniel Paleka}\\
+\textsf{Potrebno znanje: tournament stablo}
+
+Ako povežemo točke koje imaju jednaku jednu koordinatu, točke će biti
+podijeljene u \textit{cikluse} i \textit{puteve}. Za puteve je određeno koje
+točke moramo spojiti. Ako postoji put sa neparno mnogo točaka odgovor je odmah
+\texttt{"NE"}. Za cikluse moramo odrediti hoćemo li povući sve vodoravne ili sve okomite
+dužine (u nastavku teksta to zovemo \textit{orijentacijom}).
+
+Ciklusa ima najviše $\frac{N}{4}$, pa za podzadatak $(N \le 40)$ možemo
+isprobati svih $2^{\text{broj ciklusa}}$ mogućnosti za orijentacije ciklusa, i
+provjeriti postoji li neka mogućnost u kojoj se dužine ne sijeku.
+
+Glavna ideja je sljedeća: na početku putevi određuju neke dužine koje moramo
+nacrtati, pa onda te dužine određuju orijentacije onih ciklusa koje sijeku i
+crtamo te dužine, itd. Ako u nekom trenutku nacrtamo dužinu koja siječe neku
+već nacrtanu ili dobijemo da neki ciklus ne može biti niti okomit niti
+vodoravan, onda je odgovor \texttt{"NE"}.
+
+Za podzadatak $N \leq 2000$ to možemo napraviti u složenosti $O(N^2)$:
+
+Nađemo puteve i cikluse, te dužine iz puteva ubacimo u \textit{queue} dužina koje treba
+nacrtati. Sve dok queue nije prazan, uzimamo dužinu iz queuea. Provjerimo
+siječe li se s nekim već nacrtanim dužinama (moguće je i da smo za neki ciklus
+nacrtali obje orijentacije, pa će se sijeći u točki, i tada je odgovor \texttt{"NE"}).
+Zatim prođemo po svih ciklusima kojima još nismo odredili orijentaciju, te ako
+dužina siječe ciklus, moramo ga orijentirati suprotno od dužine i ubaciti te
+nove dužine u queue. Na kraju se eventualno može dogoditi da za neke cikluse
+nismo odredili orijentaciju, pa njih sve orijentiramo jednako.
+
+Za $N \le 10^5$, moramo pametnije napraviti provjeru siječe li se dužina s nekim
+drugim dužinama. Pomoću tournament stabla napravit ćemo strukturu koja podržava:
+
+\begin{itemize}
+  \item dodaj dužinu $(x_1, y)$ -- $(x_2, y)$
+  \item makni dužinu $(x_1, y)$ -- $(x_2, y)$ (koja je nekada prije ubačena)
+  \item odredi za neke $x$ i $y_1$ najmanji $y_2 \ge y_1$ takav da postoji
+    dužina s $y$ koordinatom jednakom $y_2$ koja sadrži točku $(x, y_2)$ (ili
+    odredi da takav $y_2$ ne postoji)
+\end{itemize}
+
+U čvoru tournamenta pamtit ćemo skup svih y koordinata dužina kojima su x
+koordinate u intervalu za koji je odgovoran taj čvor. Prva dva upita su
+ubacivanje (odnosno izbacivanje) $y$ u određene čvorove. Za odgovor na treći
+upit, nađemo takav $y_2$ za svaki čvor odgovoran za $x$ (pomoću
+\texttt{lower\_bound}-a u \texttt{std::set}-u), i uzmemo minimalni. Složenost
+sva tri upita je $\mathcal{O}(\log^2 N)$. Za implementaciju pogledajte
+službeni kod.
+
+Dužina koja siječe dužinu $(x, y_1) - (x, y_2)$ postoji ako je odgovor na treći
+upit za $x$ i $y_1$ manji ili jednak od $y_2$.
+
+Imat ćemo dvije strukture -- za okomite i za vodoravne dužine -- u kojima ćemo
+spremiti dužine još neorijentiranih ciklusa, te dvije strukture u kojima
+spremamo nacrtane dužine. Razradu detalja ostavljamo čitatelju na vježbu.
+
+\subsection*{Zadatak: Putovanje}
+\textsf{Pripremili: Gabrijel Jambrošić i Marin Kišić}\\
+\textsf{Potrebno znanje: lca, manje na veće}
+
+Primjetimo da je pravi problem u zadatku saznati koliko puta ćemo proći
+svakom cestom. Kada to znamo, lako možemo odrediti želimo li kupiti višekratnu
+ili jednokratnu kartu za svaku cestu.
+
+Za prvi podzadatak bilo je dovoljno samo nekim algoritmom poput dfs-a ili bfs-a
+pronaći put između $X$ i $X+1$ te brojač svih cesta na putu povećati za $1$.
+
+U drugom podzadatku nemamo stablo, nego lanac. Zapišimo taj lanac kao niz. Sada
+za svaki par $X$ i $X+1$ možemo u nekom nizu \texttt{dp} na poziciji
+\texttt{min(poz[X], poz[X+1])} povećati vrijednost za $1$, a na poziciji
+\texttt{max(poz[X], poz[X+1])} smanjiti vrijednost za $1$. Nakon što smo to
+napravili, za sve $X$ od $1$ do $(N-1)$, imat ćemo varijablu \texttt{cnt},
+prolaziti nizom \texttt{dp} te \texttt{cnt} mjenjati za vrijednost
+\texttt{dp[i]} (\texttt{cnt += dp[i]}). Primjetimo da zapravo sada u svakom
+trenu u varijabli \texttt{cnt} piše koliko puta smo tu cestu prešli.
+
+Za sve bodove ćemo ovaj algoritam prilagoditi da radi na stablu.
+Ukorijenimo stablo u proizvoljnom čvoru. Neka je $L$ prvi zajednički predak
+(\textit{lowest common ancestor (LCA)}) od $X$ i $(X+1)$. Povećajmo sada
+\texttt{dp[X]} za $1$, \texttt{dp[X+1]} za $1$,
+te smanjimo \texttt{dp[L]} za $2$. Sada kada bismo za neku cestu uzeli sumu svih
+\texttt{dp}
+vrijednosti u podstablu te ceste zapravo bismo dobili koliko puta smo prošli tu
+cestu.
+
+Ovo rješenje je implementirano u \texttt{putovanje\_lca.cpp}
+
+Vremenska složenost je $\mathcal{O}(N \log N)$.
+
+Postoji i alternativno rješenje iste vremenske složenosti koje koristi \textit{
+  manje na veće} trik, a implementacija tog rješenja se nalazi u
+\texttt{putovanje\_stl.cpp}, a za idejske detalje pogledajte rješenje jako
+sličnog zadatka opisano na ovom
+\href{https://codeforces.com/blog/entry/72017#comment-563190}{linku}.
+
+\subsection*{Zadatak: Zapina}
+\textsf{Pripremili: Marin Kišić i Paula Vidas}\\
+\textsf{Potrebno znanje: dinamičko programiranje, prebrojavanje}
+
+Prvi podzadatak možemo riješiti tako da za svaki mogući raspored provjerimo
+postoji li sretan informatičar. Mogućih rasporeda ima $N^N$.
+
+Drugi podzadatak možemo riješiti koristeći formulu uključivanja-isključivanja.
+Ako s $a(S)$, gdje je $S \subset \{1, 2, \ldots, N\}$, označimo broj rasporeda
+u kojima su svi informatičari iz skupa $S$ sretni, tada je broj dobrih
+rasporeda jednak
+
+$$\sum_{S \subset \{1, 2, \ldots, N\}} (-1)^{|S| + 1} a(S)$$.
+
+Neka je $S = {s_1, s_2, \ldots, s_k}$. Ako je $s_1 + s_2 + \cdots + s_k > N$
+onda je očito $a(S) = 0$. Inače, vrijedi 
+
+$$a(S) = \binom{n}{s_1} \binom{n - s_1}{s_2} \cdots \binom{n - (s_1 + s_2 +
+\cdots s_{k-1}}{s_k} (n - k)^{n - (s_1 + s_2 + \cdots + s_k)}$$.
+
+Povrhe možemo preprocessati koristeći relaciju $\binom{n}{k} = \binom{n - 1}{k
+- 1} + \binom{n - 1}{k}$, u složenosti $\mathcal{O}(N^2)$.
+
+Ukupna vremenska složenost je $\mathcal{O}(N 2^N)$.
+
+Treći podzadatak rješavamo dinamičkim programiranjem. Neka je $dp(n, k)$ broj
+raspodjela $k$ zadataka na $n$ informatičara u kojima je bar jedan informatičar
+sretan. Imamo dvije mogućnosti -- hoćemo li $n$-tom informatičaru dati točno $n$
+zadataka (pa da bude sretan), ili nećemo. U prvom slučaju je broj načina jednak
+(ako je $k \leq n$)
+
+$$\binom{k}{n} (n - 1)^{(k - n)},$$
+
+a u drugom
+
+$$\sum_{0 \leq i \leq k, i \neq n} \binom{k}{i} dp(n - 1, k - i)$$.
+
+Ukupna vremenska složenost je $\mathcal{O}(N^3)$.
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% End:
