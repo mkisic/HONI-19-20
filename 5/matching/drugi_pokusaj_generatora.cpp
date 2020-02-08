@@ -36,23 +36,44 @@ void scatter_points(vector<pii>& points) {
     }
 }
 
+void validate(vector<pii>& points) {
+    vector<int> cnt0(MAXN, 0), cnt1(MAXN, 0);
+    bool ok;
+    for (auto& p : points) {
+        assert(1 <= p.fi && p.fi <= MAXN);
+        assert(1 <= p.se && p.se <= MAXN);
+        cnt0[p.fi - 1]++;
+        cnt1[p.se - 1]++;
+    }
+    for (int c : cnt0) assert(c <= 2);
+    for (int c : cnt1) assert(c <= 2);
+}
+
+void validate(Group& g) {
+    vector<int> cnt0(g.n, 0), cnt1(g.n, 0);
+    bool ok;
+    for (auto& p : g.points) {
+        assert(0 <= p.fi && p.fi < g.n);
+        assert(0 <= p.se && p.se < g.n);
+        cnt0[p.fi]++;
+        cnt1[p.se]++;
+    }
+    for (int c : cnt0) assert(c <= 2);
+    for (int c : cnt1) assert(c <= 2);
+    assert(g.lo_point.fi != g.hi_point.fi);
+    assert(g.lo_point.se != g.hi_point.se);
+    assert(cnt0[g.lo_point.fi] == 0);
+    assert(cnt1[g.lo_point.se] == 0);
+    assert(cnt0[g.hi_point.fi] == 0);
+    assert(cnt1[g.hi_point.se] == 0);
+}
+
 void print(vector<pii>& points) {
     scatter_points(points);
+    validate(points);
     shuffle(points.begin(), points.end(), rng);
     cout << points.size() << "\n";
     for (auto p : points) cout << p.fi << " " << p.se << "\n";
-}
-
-void shift_group(Group& g, int dx, int dy = -1) {
-    if (dy == -1) dy = dx;
-    for (auto& p : g.points) {
-        p.fi += dx;
-        p.se += dy;
-    }
-    g.lo_point.fi += dx;
-    g.lo_point.se += dy;
-    g.hi_point.fi += dx;
-    g.hi_point.se += dy;
 }
 
 void make_space(Group& g, pii& q) {
@@ -96,15 +117,23 @@ Group generate_group(int n) {
         m -= k;
     }
     assert(points.size() == n);
-
+    
     return Group({n, points, make_pair(n / 2 - 1, n / 2 - 1), make_pair(n / 2, n / 2)});
 }
 
 void link_groups(Group& a, Group& b) {
-    shift_group(b, a.n);
+    for (auto& p : b.points) {
+        p.fi += a.n;
+        p.se += a.n;
+    }
+    b.lo_point.fi += a.n;
+    b.lo_point.se += a.n;
+    b.hi_point.fi += a.n;
+    b.hi_point.se += a.n;
     a.points.insert(a.points.end(), b.points.begin(), b.points.end());
+
     for (int x : {a.hi_point.fi, b.lo_point.fi})
-        for (int y : {a.hi_point.se, b.lo_point.fi})
+        for (int y : {a.hi_point.se, b.lo_point.se})
             a.points.push_back(make_pair(x, y));
     a.hi_point = b.hi_point;
     a.n += b.n + 4;
@@ -117,10 +146,11 @@ void force_orientation(Group& a, bool o, bool two_extra_points = false) {
     if (o) p2.fi = a.n + 1;
     else p2.se = a.n + 1;
     make_space(a, p1);
+
+    a.n += 2;
     a.points.push_back(p1);
     a.points.push_back(p2);
-    a.n += 2;
-    
+
     if (two_extra_points) {
         pii p3 = {a.n + 1, a.n + 1};
         pii p4 = p3;
@@ -192,6 +222,7 @@ vector<pii> generate_testcase(int n, bool ans) {
     if (!ans) bad_group = rand() % k;
 
     vector<pii> points;
+    int max_xy = -1;
     int sum_sz = 0;
     for (int i = 0; i < k; i++) {
         int sz = n / k;
@@ -203,9 +234,11 @@ vector<pii> generate_testcase(int n, bool ans) {
         else if (k == 2) force = i;
         else force = rng() % 2;
         auto a = generate_big_group(sz, force, i == bad_group);
+        assert(max_xy < sum_sz - sz);
         for (auto& p : a) {
-            p.fi += i * (n / k);
-            p.se += i * (n / k); 
+            p.fi += sum_sz - sz;
+            p.se += sum_sz - sz; 
+            max_xy = max(max_xy, max(p.fi, p.se));
         }
         points.insert(points.end(), a.begin(), a.end());
     }

@@ -74,9 +74,10 @@ void find_path(int i, bool is_cycle) {
     while (!vis[i]) {
         vis[i] = true;
         if (V[x[i][o]][o].size() == 1) break;
-        assert(V[x[i][o]][o].size() != 0);
+        assert(V[x[i][o]][o].size() == 2);
 
         int j = V[x[i][o]][o][0] ^ V[x[i][o]][o][1] ^ i;
+        assert(x[i][o] == x[j][o]);
 
         if (is_cycle) {
             cycle.back().push_back(i);
@@ -113,6 +114,10 @@ int main() {
 
     for (int i = 0; i < MAXN; i++)
         for (int j : {0, 1})
+            assert(V[i][j].size() <= 2);
+
+    for (int i = 0; i < MAXN; i++)
+        for (int j : {0, 1})
             if (V[i][j].size() == 1)
                 find_path(V[i][j][0], false);
     for (int i = 0; i < MAXN; i++)
@@ -127,6 +132,8 @@ int main() {
         int o = Q[0].empty();
         int i = Q[o].front().fi, j = Q[o].front().se;
         Q[o].pop();
+
+        assert(x[i][o] == x[j][o]);
 
         int l = x[i][o ^ 1], r = x[j][o ^ 1];
         if (l > r) swap(l, r);
