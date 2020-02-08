@@ -248,7 +248,7 @@ Ukupna vremenska složenost je $\mathcal{O}(N 2^N)$.
 Treći podzadatak rješavamo dinamičkim programiranjem. Neka je $dp(n, k)$ broj
 raspodjela $k$ zadataka na $n$ informatičara u kojima je barem jedan informatičar
 sretan. Imamo dvije mogućnosti -- hoćemo li $n$-tom informatičaru dati točno $n$
-zadataka (pa da bude sretan), ili nećemo. U prvom slučaju je, ako je $k \leq n$,
+zadataka (pa da bude sretan), ili nećemo. U prvom slučaju je, ako je $k \geq n$,
 broj načina jednak
 
 $$\binom{k}{n} (n - 1)^{(k - n)},$$
