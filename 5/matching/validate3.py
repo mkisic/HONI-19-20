@@ -54,7 +54,7 @@ def what_cluster(data):
     # na temelju povratne informacije iz check(lines)
     # zakljucuje za TP u kojoj je bodovnoj sekciji
     if data['n'] <= 20 and data['parno']: return 'mali parno'
-    if data['n'] <= 20: return 'mali parno'
+    if data['n'] <= 20: return 'mali'
     if data['n'] <= 40: return 'malo veci'
     if data['n'] <= 2000: return 'srednji'
     return 'veliki'
