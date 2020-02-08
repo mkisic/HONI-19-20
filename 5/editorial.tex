@@ -70,139 +70,108 @@ use the $\%$ character to denote the modulo operator.
 
 Time complexity of described solution is $\mathcal{O}(N^2)$.
 
-\subsection*{Task: Holding}
-\textsf{Suggested by: Fabijan Bošnjak and Marin Kišić}\\
-\textsf{Necessary skills: dynamic programming, memory optimizations}
+\clearpage
 
-The solution of the first subtask is based on dynamic programming where the
-state is a bitmask. We leave the rest of the details as a practice to the reader.
+\subsection*{Task: Matching}
+\textsf{Suggested by: Paula Vidas and Daniel Paleka}\\
+\textsf{Necessary skills: segment tree}
 
-In the second subtask it is known that $R = N$, which means that we can swap
-numbers on positions $L$, $L+1$, \dots, $R$ only with numbers on positions from
-$1$ to $L-1$ (the rest of the solution assumes that the word \textit{interval}
-refers to the agreed interval $L$, $L+1$, \dots, $R$). The first important observation
-is that we will never change the position of a certain number more than once. The
-second important observation, and much less obvious than the first, is that we
-only care about which elements were chosen to be swapped within the interval and which were
-chosen to be swapped outside the interval. Regardless of the way in which we have
-swapped these numbers, their total cost will remain invariant. For example, if we
-decided to swap positions $i$ and $j$ from within the interval with positions $k$
-and $l$ that are outside the interval, it doesn't matter whether we have changed
-$i$ with $k$ and $j$ with $l$ or $i$ with $l$ and $j$ with $k$. We leave the
-formal proof of this claim as an exercise to the reader.
+If we connect the points that share one coordinate, the points will be
+divided into \textit{cycles} and \textit{paths}. With paths it is clear which
+points should be connected with line segments. If there is a path with an odd
+number of points, we immediately conclude that the answer is \texttt{"NE"}. For
+cycles we must determine whether we will draw all horizontal or all vertical
+lines (in the rest of the editorial we call this \textit{orientation}).
 
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.4\textwidth]{editorial_holding.png}
-\end{figure}
+There are at most $\frac{N}{4}$ cycles, so in a subtask where $(N \le 40)$
+we can try all $2^{\text{broj ciklusa}}$ possible cycle orientations and check
+if there is one where line segments don't intersect.
 
-Now it is obvious that the only important thing left is to decide which elements
-should be chosen from inside and which elements should be chosen from outside
-of the interval and that the number of chosen elements from inside equals the
-number of chosen elements outside of interval. We can achieve that using $dp$
-whose arguments are the current position outside the interval, current position
-inside the interval and the total amount of money we have spent thus far. The
-$dp$ function returns the maximum decrease in sum of elements in our interval.
-The initial state of $dp$ is $dp(1, L, 0)$ and the state where we will find our
-solution is $dp(L - 1, R, K)$.
+The main idea is as follows: at the beginning the paths determine some line
+segments that must be drawn. These line segments determine the orientations
+of those cycles that they intersect, which determine the orientations of some
+other cycles, etc. If at some point during this process we draw a line segment
+that intersects some line segment that is already drawn or we conclude that
+both cycle orientations are invalid, then the answer is \texttt{"NE"}.
 
-\begin{multline}
-  dp(poz_{out}, poz_{in}, spent) = \max \biggl\{ dp(poz_{out} - 1, poz_{in}, spent),
-  dp(poz_{out}, poz_{in} - 1, spent),\\
-  dp(poz_{out} - 1, poz_{in} - 1, spent - (poz_{in} - poz_{out})) + A[poz_{in}] - A[poz_{out}] \biggr\}
-\end{multline}
+For a subtask where $N \leq 2000$, we can do that in $\mathcal{O}(N^2)$:
 
-The first $dp$ transition tells us not to take an element on position $poz_{out}$,
-the second transition tells us not to take an element on position $poz_{in}$, while
-the third transition tells us to take both elements and swap them, thus spending
-$poz_{in} - poz_{out}$ kunas.
+First, we find all paths and cycles and place all line segments from paths into
+a \textit{FIFO queue} of the lines that need to be drawn. While the queue is not
+empty, we pop a line segment from it and check whether it intersects any of the
+previously drawn line segments (then the answer is \texttt{"NE"}). Then we
+traverse over not-yet-oriented cycles and orient those cycles which intersect
+with the line segment we are about to draw (orientation of the cycle needs to
+be different than the orientation of the line segment). In the end we might have
+some leftover cycles which we can orient in the same orientation (doesn't matter
+which one).
 
-The complexity of this algorithm is $\mathcal{O}(N^2 \cdot K)$.
+For the final subtask where $N \le 10^5$, we need to check those line segment
+intersections more efficiently. We will use a segment tree to devise a data
+structure which supports the following operations:
 
-This algorithm is therefore fast enough for the whole solution, but doesn't
-include the swaps from the right side of the interval because $R=N$. Suppose
-that the optimal solution takes $X$ elements left of the interval, $Y$ elements
-right of the interval and $X+Y$ elements from inside the interval. It is obvious
-that, if we sort positions of elements we took from within the interval, first
-$X$ elements will be swapped with the $X$ chosen elements on the left side and
-next $Y$ elements will be swapped with the $Y$ chosen elements on the right side.
-This leads us to a conclusion that there is a line between positions within the
-interval which determines that all elements from the interval left of that line
-will be swapped with chosen elements left of the interval, and vice versa for
-the right side. Since we don't know where that line might lie and since we
-don't actually care how many swaps are made on each side of an interval, we
-can to place that line on each position within the interval. We can do that
-with the following lines of code:
+\begin{itemize}
+  \item add a line segment $(x_1, y)$ -- $(x_2, y)$
+  \item remove a previously added line segment $(x_1, y)$ -- $(x_2, y)$ 
+  \item determine for some $x$ and $y_1$ what is the smallest $y_2 \ge y_1$ such that
+    there exists a line segment with $y$ coordinate equal to $y_2$ which contains
+    the point $(x, y_2)$ (or determine that no such $y_2$ exists)
+\end{itemize}
 
-\vspace{-2ex}
-\begin{verbatim}
-for i in range (L - 1, R+1):
-  for j in range (0, K + 1):
-    sol = max(sol, dpL(L - 1, i, j) + dpR(R + 1, i + 1, K - j))
-\end{verbatim}
+In each node of the segment tree we will store a set of all $y$ coordinates
+whose $x$ coordinates are in an interval for which that node is responsible.
+The first two operations boil down to standard addition/deletion of $y$ to
+corresponding nodes. To answer the third operation, we will find such $y_2$ for
+each node responsible for $x$ (e.g. by using \texttt{lower\_bound} in \texttt{std::set}) and
+return minimal such value. The complexity of all three operations is
+$\mathcal{O}(\log^2 N)$. For implementation details, check the official solution.
 
-What are $dpL$ and $dpR$? $dpL$ is the same $dp$ from the last subtask and
-$dpR$ is completely identical to it but is being done from the other side. The
-complexity of each $dp$ is $\mathcal{O}(N^2 \cdot K)$ and the complexity of
-merging their solutions is $\mathcal{O}(N \cdot K)$. Therefore, the total
-complexity of the algorithm is $\mathcal{O}(N^2 \cdot K)$.
+Line segment which intersects the line segment $(x, y_1)$ -- $(x, y_2)$ exists if
+the answer to the third query for $x$ and $y_1$ is less than or equal to $y_2$.
 
-Why can't you score all the points with that solution then? Because tridimensional
-array of the form \texttt{int dp[N][N][K]} takes up too much memory for $N = 100$, but it
-fits for $N=50$. Therefore, we still need to optimize our memory consumption.
-There are multiple ways to achieve that, but perhaps the easiest is to note that,
-in the worst case for any $N$, $L$ and $R$, the maximum amount of money Ivica
-needs to perform all swaps is going to be bounded by $\frac{N^2}{4}$. Luckily,
-arrays of the form \texttt{int dp[N][N][N*N/4]} fit into the given memory limit
-of \texttt{256 MiB}. There is another optimization which swaps the dimension $N$
-with a smaller constant, you can check the implementation of that optimization
-in the attached source code.
+We will use two such data structures -- one for horizontal and one for vertical
+line segments -- in which we will store the line segments of not-yet-oriented
+cycles and two additional data structures to store already drawn line segments.
+We leave out the rest of the details as an exercise to the reader.
 
-\subsection*{Task: Klasika}
-\textsf{Suggested by: Ivan Paljak}\\
-\textsf{Necessary skills: dfs tree traversal, trie}
+\clearpage
 
-The first two subtasks were solvable by more or less efficient attempts
-to simulate the process described in the task statement. We will leave
-further analysis of those solutions as exercises to the reader.
+\subsection*{Task: Putovanje}
+\textsf{Suggested by: Gabrijel Jambrošić i Marin Kišić}\\
+\textsf{Necessary skills: lca, small-to-large}
 
-In the third subtask you were supposed to answer each \texttt{Query} with
-the longest path in a tree which starts on given node $a$. Note that the
-definition of path length is a bit peculiar, i.e. instead of summing up
-the edge weights, we are asked to \texttt{xor} them. Let's denote the distance
-between nodes $x$ and $y$ with $d(x,y)$. Note that $d(x, y) = d(1, x)$ \texttt{xor}
-$d(1, y)$ holds for each pair of nodes. We can use this property and keep around
-the distance from the root to each of the nodes while executing the queries.
-Finding the greatest distance from a given node $a$ now boils down to finding
-another value $d(1, b)$ from the set of remembered values which when \texttt{xor}-ed
-with $d(1, a)$ gives a maximal value. This is a well-known problem which can be
-easily solved using the \textit{trie} data structure. If you are not familiar with
-the problem, we suggest you try to find the solution by yourself. If you don't
-succeed, check out
- \href{https://www.hackerearth.com/practice/notes/lalitkundu95/tutorial-on-trie-and-example-problems/}{this link}.
+Note that we really care about the number of times we need to traverse
+each of the roads. Once we know that, it is pretty easy to decide whether
+we will buy multiple single-pass tickets or a single multi-pass ticket.
 
-The solution which scores all points is conceptually very similar to the
-one described above. The only problem we are having is that, when we traverse
-the trie, we don't know whether that part of the trie holds any value that
-is related to a node that is in a subtree of node $b$. Imagine that we know
-the values \texttt{discovery} and \texttt{finish} for each node which represent
-the moments when a dfs traversal function enters and leaves that particular node.
-Suppose that in each trie node we store a set of discovery times of all tree
-nodes whose distances from the root live in that subtree of our trie. Then we
-could simply make sure never to enter a trie node that doesn't hold a value
-related to subtree of node $b$ while processing the \texttt{Query}. More
-precisely, we can traverse a node in a trie if its set of discovery times
-contains a value that is greater or equal to \texttt{discovery[b]} and
-less or equal to \texttt{finish[b]}.
+In the first subtask, it was enough to use an algorithm like BFS or DFS to
+find a path between $X$ and $X+1$ while increasing the counter of traversals
+for each edge.
 
-Turns out this is relatively easy to achieve. First we will apply all
-\texttt{Add} queries (offline) and use a single dfs traversal to find
-\texttt{discovery} and \texttt{finish} values for each node. Then we will
-traverse through all queries once more and perform the algorithm described
-above. When adding a new element to the trie, we will simply append the
-corresponding \texttt{discovery} value to each of the visited trie nodes.
-Finally, when answering a query we will make sure we don't visit trie
-nodes that don't contain values related to the subtree of node $b$.
+In the second subtask our tree is actually a chain. Let's think about that
+chain as an array. Let's also keep around another array called \texttt{dp}.
+Now, for every pair $X$ and $X+1$ we can increase \texttt{dp[min(pos[X], pos[X+1])]}
+by $1$ and decrease \texttt{dp[max(pos[X], pos[X+1])]} by $1$ where \texttt{pos[x]}
+denotes the position of node $x$ in our chain. After we have done this for all
+neighbouring pairs, we can go over the \texttt{dp} array and add its elements
+into some variable \texttt{cnt}. Note that in each moment of this traversal that
+variable holds the number of times we have traversed the corresponding edge
+in a chain.
+
+To score all points we will slightly modify this algorithm to make it work
+on a tree. Let's root the tree in an arbitrary node. Let $L$ be the lowest
+common ancestor of $X$ and $(X+1)$. Let's now increase \texttt{dp[X]} by
+$1$, increase \texttt{dp[X+1]} by 1 and decrease \texttt{dp[L]} by $2$.
+Now we can simply find out the number of traversals of each road by calculating
+the sum of \texttt{dp} values in a subtree of that road. 
+
+This solution is implemented in \texttt{putovanje\_lca.cpp}.
+
+There is an alternative solution of the same time complexity which uses the
+so-called \textit{small-to-large} trick. That solution is implemented in
+\texttt{putovanje\_stl.cpp}. You can read about a very similar idea
+on this \href{https://codeforces.com/blog/entry/72017#comment-563190}{link}.
+
 
 \subsection*{Task: Nivelle}
 \textsf{Suggested by: Daniel Paleka}\\
