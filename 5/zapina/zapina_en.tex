@@ -1,0 +1,73 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=110,
+  timelimit=1 second,
+  memorylimit=512 MiB,
+]{Zapina}
+
+There is a total of $N$ young programmers which are preparing for the second
+part of competitive season during a winter camp in \sout {Krapina} Zagreb.
+Mr. Malnar, a big promoter of order, discipline and hard work, told the
+programmers to form a line and gave each of them a certain number (possibly zero)
+tasks. He gave away a total of \textbf{N different} tasks and he knows that the
+$i$-th programmer in line will be happy if they got exactly $i$ tasks.
+
+In how many different ways could Mr. Malnar give out the tasks in such a way
+that \textbf{at least one} programmer was happy? Two ways of giving out the
+tasks are considered different if there exists a programmer and a task such that
+in one way that programmer received that task while in the other one they
+didn't.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Input}
+The first line contains an integer $N$ $(1 \le N \le 350)$ from task
+description.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Output}
+Output the sought number of ways modulo $10^9+7$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+ \subsection*{Scoring}
+{\renewcommand{\arraystretch}{1.4}
+  \setlength{\tabcolsep}{6pt}
+  \begin{tabular}{ccl}
+ Subtask & Score & Constraints \\ \midrule
+  1 & 22 & $1 \le N \le 7$ \\
+  2 & 33 & $1 \le N \le 20$ \\
+  3 & 55 & No additional constraints.
+\end{tabular}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Examples}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/zapina.dummy.in.1}{test/zapina.dummy.out.1} &
+\sampleinputs{test/zapina.dummy.in.2}{test/zapina.dummy.out.2} &
+\sampleinputs{test/zapina.dummy.in.3}{test/zapina.dummy.out.3}
+\end{tabularx}
+
+\textbf{Clarification of the second example:}
+
+Ways of giving out the tasks in which at least one programmer is
+happy are:
+\begin{enumerate}
+  \item First task to first programmer, second task to the second one.
+  \item Second task to the first programmer, first task to the second one.
+  \item Both tasks to the second programmer.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
