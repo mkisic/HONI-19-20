@@ -32,7 +32,7 @@ int main() {
     moze[x] = 1;
   }
   int start = 2;
-  if (ima[1] > ima[0]) start = 3;
+  if (ima[1] > ima[0]) start = 1;
   for (int i = start; i <= MAXN; i += 2) {
     if (!moze[i]) {
       cout << i << endl;
