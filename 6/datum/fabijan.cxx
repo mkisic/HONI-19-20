@@ -48,9 +48,9 @@ bool check(string x)
     if (month(x) == 2)
     {
         if (!(year(x) % 4)) 
-            if (day(x) > 29) return 0;
+            {if (day(x) > 29) return 0;}
         else 
-            if (day(x) > 28) return 0;
+            {if (day(x) > 28) return 0;}
     }
     return 1;
 }
