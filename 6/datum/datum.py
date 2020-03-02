@@ -1,0 +1,75 @@
+import time
+
+dates = [];
+mj= [31,29,31,30,31,30,31,31,30,31,30,31];
+
+def palin(y):
+	day = (y % 10) * 10 + (y % 100) / 10;
+	month = y / 1000 + ((y / 100) % 10) * 10;
+	return (month != 0 and month <= 12 and day <= mj[month - 1] and day != 0);
+
+def ispis(y):
+	ret = "";
+	ret += str(y % 10)
+	ret += str((y / 10) % 10)
+	ret += "."
+	ret += str((y / 100) % 10)
+	ret += str(y / 1000)
+	ret += ".";
+	ret += str((y / 1000))
+	ret += str((y / 100) % 10)
+	ret += str((y / 10) % 10)
+	ret += str(y % 10)
+	return ret;
+
+def bins(y):
+	lo = 0
+	hi = 365
+	mi = -1
+	while(lo < hi):
+		mi = (hi + lo) // 2
+		if(dates[mi] < y):
+			lo = mi + 1
+		else:
+			hi = mi
+	return dates[lo]
+
+def nadi(y):
+	lo = 0
+	hi = 365
+	mi = -1
+	while(lo < hi):
+		#print(mi, dates[mi])
+		mi = lo + (hi - lo) // 2
+		if(dates[mi] == y):
+			return 1
+		elif(dates[mi] < y):
+			lo = mi + 1
+		else:
+			hi = mi
+	return 0
+
+start_time = time.time()
+
+for i in range(10000):
+	if(palin(i)):
+		dates.append(i);
+
+q = int(input())
+nul = ord('0')
+
+while(q):
+	q = q - 1
+	date = raw_input()
+	year = (ord(date[6]) - nul) * 1000 + (ord(date[7]) - nul) * 100 + (ord(date[8]) - nul) * 10 + ord(date[9]) - nul
+	#print(nadi(year))
+	if(nadi(year)):
+		pal = ispis(year)
+		if(pal > date):
+			print(pal)
+		else:
+			print(ispis(bins(year + 1)))
+	else:
+		print(ispis(bins(year)))
+
+print("--- %s seconds ---" % (time.time() - start_time))
