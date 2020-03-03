@@ -14,19 +14,20 @@ int main()
 		string nameOut = "test\\" + zadatak + ".dummy.out." + idx;
 		string del = "del " + nameOut;
 		system(del.c_str());
-		string cmd = "datum.exe < " + nameIn + " > " + nameOut;
+		string cmd = "datum_brut_slow.exe < " + nameIn + " > " + nameOut;
 		cout << "Executing... " << cmd << endl;
 		system(cmd.c_str());
 	}
-	for(char i = 'a'; i <= 'j'; i++)
+	for(int i = 1; i <= 10; i++)
 	{
-		string idx = "1";
-		idx += i;
+		string idx = "10";
+		if(i != 10)
+			idx = char(i + '0');
 		string nameIn = "test\\" + zadatak + ".in." + idx;
 		string nameOut = "test\\" + zadatak + ".out." + idx;
 		string del = "del " + nameOut;
 		system(del.c_str());
-		string cmd = "datum.exe < " + nameIn + " > " + nameOut;
+		string cmd = "datum_brut_slow.exe < " + nameIn + " > " + nameOut;
 		cout << "Executing... " << cmd << endl;
 		system(cmd.c_str());
 	}

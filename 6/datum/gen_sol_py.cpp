@@ -11,10 +11,10 @@ int main()
 		string idx;
 		idx = i;
 		string nameIn = "test\\" + zadatak + ".dummy.in." + idx;
-		string nameOut = "test\\" + zadatak + ".dummy.out_py." + idx;
+		string nameOut = "test\\" + zadatak + ".dummy.out_py_brut." + idx;
 		string del = "del " + nameOut;
 		system(del.c_str());
-		string cmd = "datum.py < " + nameIn + " > " + nameOut;
+		string cmd = "datum_brut.py < " + nameIn + " > " + nameOut;
 		cout << "Executing... " << cmd << endl;
 		system(cmd.c_str());
 	}
@@ -23,10 +23,10 @@ int main()
 		string idx = "1";
 		idx += i;
 		string nameIn = "test\\" + zadatak + ".in." + idx;
-		string nameOut = "test\\" + zadatak + ".out_py." + idx;
+		string nameOut = "test\\" + zadatak + ".out_py_brut." + idx;
 		string del = "del " + nameOut;
 		system(del.c_str());
-		string cmd = "datum.py < " + nameIn + " > " + nameOut;
+		string cmd = "datum_brut.py < " + nameIn + " > " + nameOut;
 		cout << "Executing... " << cmd << endl;
 		system(cmd.c_str());
 	}

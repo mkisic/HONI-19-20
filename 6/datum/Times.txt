@@ -1,0 +1,7 @@
+datum.cpp 	  0.467
+datum_brut.cpp	  0.485
+datum.py	  0.552
+datum_brut.py	  3.729
+datum_mjesec.cpp  TLE
+datum_godina.cpp  TLE
+datum_slow_brut	  TLE
