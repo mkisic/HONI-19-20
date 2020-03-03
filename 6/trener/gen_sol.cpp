@@ -11,10 +11,10 @@ int main()
 		string idx;
 		idx += i;
 		string nameIn = "test\\" + zadatak + ".dummy.in." + idx;
-		string nameOut = "test\\" + zadatak + ".dummy.out." + idx;
+		string nameOut = "test\\" + zadatak + ".dummy.out_kvadrat." + idx;
 		string del = "del " + nameOut;
 		system(del.c_str());
-		string cmd = "Trener.exe < " + nameIn + " > " + nameOut;
+		string cmd = "Trener_kvadrat.exe < " + nameIn + " > " + nameOut;
 		cout << "Executing... " << cmd << endl;
 		system(cmd.c_str());
 	}
@@ -23,10 +23,10 @@ int main()
 		string idx = "1";
 		idx += i;
 		string nameIn = "test\\" + zadatak + ".in." + idx;
-		string nameOut = "test\\" + zadatak + ".out." + idx;
+		string nameOut = "test\\" + zadatak + ".out_kvadrat." + idx;
 		string del = "del " + nameOut;
 		system(del.c_str());
-		string cmd = "Trener.exe < " + nameIn + " > " + nameOut;
+		string cmd = "Trener_kvadrat.exe < " + nameIn + " > " + nameOut;
 		cout << "Executing... " << cmd << endl;
 		system(cmd.c_str());
 	}
