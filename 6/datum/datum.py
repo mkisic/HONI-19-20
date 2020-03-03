@@ -49,6 +49,20 @@ def nadi(y):
 			hi = mi
 	return 0
 
+def kasnije(a, b):
+	mja = (ord(a[3])- nul) * 10 + ord(a[4]) - nul;
+	mjb = (ord(b[3])- nul) * 10 + ord(b[4]) - nul;
+	daa = (ord(a[0])- nul) * 10 + ord(a[1]) - nul;
+	dab = (ord(b[0])- nul) * 10 + ord(b[1]) - nul;
+	if(mja > mjb):
+		return 1
+	if(mja == mjb):
+		if(daa > dab):
+			return 1
+		return 0
+	return 0
+
+
 start_time = time.time()
 
 for i in range(10000):
@@ -65,7 +79,7 @@ while(q):
 	#print(nadi(year))
 	if(nadi(year)):
 		pal = ispis(year)
-		if(pal > date):
+		if(kasnije(pal,date)):
 			print(pal)
 		else:
 			print(ispis(bins(year + 1)))
