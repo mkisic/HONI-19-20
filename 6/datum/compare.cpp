@@ -6,7 +6,7 @@ int main()
 {
 	for(char i = 'a'; i <= 'j'; i++)
 	{
-		string cmd = "fc test\\datum.out_brut.1";
+		string cmd = "fc test\\datum.out_py.1";
 		cmd += i;
 		cmd += " test\\datum.out.1";
 		cmd += i;

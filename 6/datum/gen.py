@@ -65,21 +65,28 @@ def remove_cases():
         print>>sys.stderr, 'Removing ' + c
         os.remove(c)
 
+def palin2 (s):
+    return s == rev(s)
+
 def gen_random(n, case, cnt = 0):
 
     dates = []
     if(case == 1):
         for i in range(10):
-            y = ALL[random.randint(0, 365)]
-            d = random.randint (1, (y % 10) * 10 + (y // 10) % 10)
-            m = ((y // 100) % 10) * 10 + (y // 1000)
+            y = d = m = "00"
+            while(palin2(tostr(d, 2) + tostr(m, 2) + tostr(y, 4))):
+                y = ALL[random.randint(0, 365)]
+                d = random.randint (1, (y % 10) * 10 + (y // 10) % 10)
+                m = ((y // 100) % 10) * 10 + (y // 1000)
             dates.append(tostr(d, 2) + "." + tostr(m, 2) + "." + tostr(y, 4))
     
     elif(case == 2):
         for i in range(10):
-            y = ALL[random.randint(0, 365)]
-            d = random.randint (1, (y % 10) * 10 + (y // 10) % 10)
-            m = random.randint(1, ((y // 100) % 10) * 10 + (y // 1000))
+            y = d = m = "00"
+            while(palin2(tostr(d, 2) + tostr(m, 2) + tostr(y, 4))):
+                y = ALL[random.randint(0, 365)]
+                d = random.randint (1, (y % 10) * 10 + (y // 10) % 10)
+                m = random.randint(1, ((y // 100) % 10) * 10 + (y // 1000))
             dates.append(tostr(d, 2) + "." + tostr(m, 2) + "." + tostr(y, 4))
     else:
         for i in range(n):
