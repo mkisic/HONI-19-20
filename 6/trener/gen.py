@@ -15,8 +15,8 @@ import string
 PROBLEM = "trener"
 sys.setrecursionlimit(1000010)
 
-MAXN = 75
-MAXK = 1000
+MAXN = 50
+MAXK = 1500
 
 class Test(object):
     def __init__(self, n, k, words):
@@ -113,19 +113,19 @@ def gen_cases():
         
     for i in range(3, 5):
         print('Generating subtask 1, case ', i)
-        subtask1.append(gen_random(75,75, 75, 75, 2, ord('a'), ord('z')))
+        subtask1.append(gen_random(50, 50, 100, 100, 2, ord('a'), ord('z')))
         
     for i in range(5, 6):
         print('Generating subtask 1, case ', i)
-        subtask1.append(gen_random(75,75, 75, 75, 2, ord('a'), ord('b')))
+        subtask1.append(gen_random(50, 50, 100, 100, 2, ord('a'), ord('b')))
 
     for i in range(6, 8):
         print('Generating subtask 1, case ', i)
-        subtask1.append(gen_random(75,75,750,750, 5, ord('a'), ord('z')))
+        subtask1.append(gen_random(MAXN, MAXN, MAXK, MAXK, 5, ord('a'), ord('z')))
 
     for i in range(8, 11):
         print('Generating subtask 1, case ', i)
-        subtask1.append(gen_random(75,75,750,750, 5, ord('a'), ord('b')))
+        subtask1.append(gen_random(MAXN, MAXN, MAXK, MAXK, 5, ord('a'), ord('b')))
 
     real.append(subtask1)
 
