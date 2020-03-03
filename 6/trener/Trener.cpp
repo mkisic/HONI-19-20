@@ -7,7 +7,7 @@ const int MOD = 1e9 + 13;
 const int base = 1337;
 const int base2 = 10037;
 const int MAXN = 80;
-const int MAXK = 1005;
+const int MAXK = 1505;
 
 string s;
 int n, k;
