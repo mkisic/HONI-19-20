@@ -33,6 +33,23 @@ string ispis(int y)
 	return ret;
 }
 
+bool kasnije(string a, string b)
+{
+	int mja = (a[3]- '0') * 10 + a[4] - '0';
+	int mjb = (b[3]- '0') * 10 + b[4] - '0';
+	int daa = (a[1]- '0') * 10 + a[0] - '0';
+	int dab = (b[1]- '0') * 10 + b[0] - '0';
+	if(mja > mjb)
+		return true;
+	if(mja == mjb)
+	{
+		if(daa > dab)
+			return true;
+		return false;
+	}
+	return false;
+}
+
 int main()
 {
 	for(int i = 1; i < 10000; i++)
@@ -46,7 +63,7 @@ int main()
 		if(dates.find(year) != dates.end())
 		{
 			string pal = ispis(year);
-			if(pal > date)
+			if(kasnije(pal, date))
 				cout << pal << endl;
 			else
 				cout << ispis(*(dates.lower_bound(year + 1))) << endl;
