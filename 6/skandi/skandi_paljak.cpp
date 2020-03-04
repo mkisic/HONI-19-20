@@ -82,22 +82,22 @@ void alternate(int node) {
 void vertex_cover() {
   coverV.resize(ver_id.size(), false);
   coverH.resize(hor_id.size(), false);
-  for (int i = 0; i < (int) hor_id.size(); ++i) {
+  for (int i = 0; i < (int)hor_id.size(); ++i) {
     if (matchH[i] != -1)
       matchV[matchH[i]] = i;
   }
-  for (int i = 0; i < (int) ver_id.size(); ++i) {
+  for (int i = 0; i < (int)ver_id.size(); ++i) {
     if (matchV[i] != -1) continue;
     alternate(i);
   }
 }
 
 void reconstruct() {
-  for (int i = 0; i < (int) ver_id.size(); ++i) {
+  for (int i = 0; i < (int)ver_id.size(); ++i) {
     const auto &coord = ver_coord[i];
     if (!coverV[i]) printf("%d %d DOLJE\n", coord.first, coord.second);
   }
-  for (int i = 0; i < (int) hor_id.size(); ++i) {
+  for (int i = 0; i < (int)hor_id.size(); ++i) {
     const auto &coord = hor_coord[i];
     if (coverH[i]) printf("%d %d DESNO\n", coord.first, coord.second);
   }
