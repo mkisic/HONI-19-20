@@ -80,10 +80,10 @@ while(q):
 	if(nadi(year)):
 		pal = ispis(year)
 		if(kasnije(pal,date)):
-			print(pal)
+			print(pal + '.')
 		else:
-			print(ispis(bins(year + 1)))
+			print(ispis(bins(year + 1)) + '.')
 	else:
-		print(ispis(bins(year)))
+		print(ispis(bins(year)) + '.')
 
-print("--- %s seconds ---" % (time.time() - start_time))
+#print("--- %s seconds ---" % (time.time() - start_time))

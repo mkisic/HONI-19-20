@@ -22,6 +22,8 @@ class Test(object):
     def __init__(self, n, dates):
         self.n = n   # array length
         self.dates = dates
+        for i in range(n):
+            self.dates[i] += '.'
 
     def validate(self):
         assert(1 <= self.n <= MAXN)

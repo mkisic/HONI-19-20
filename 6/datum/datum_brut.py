@@ -67,8 +67,6 @@ for i in range(10000):
 	if(palin(i)):
 		dates.append(i);
 
-print(len(dates))
-
 q = int(input())
 nul = ord('0')
 
@@ -80,10 +78,10 @@ while(q):
 		if(year == dates[i]):
 			pal = ispis(year)
 			if(kasnije(pal, date)):
-				print(pal)
+				print(pal + '.')
 			else:
-				print(ispis(dates[i + 1]))
+				print(ispis(dates[i + 1]) + '.')
 			break
 		elif(year < dates[i]):
-			print(ispis(dates[i]))
+			print(ispis(dates[i]) + '.')
 			break
