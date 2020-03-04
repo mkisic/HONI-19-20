@@ -65,7 +65,10 @@ int matching() {
   matchV.resize(ver_id.size(), -1);
   matchH.resize(hor_id.size(), -1);
   int ret = 0;
-  for (int i = 0; i < (int)ver_id.size(); ++i) ret += dfs(i);
+  for (int i = 0; i < (int)ver_id.size(); ++i) {
+    fill(bio.begin(), bio.end(), false);
+    ret += dfs(i);
+  }
   return ret;
 }
 
