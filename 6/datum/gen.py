@@ -14,7 +14,7 @@ import math
 PROBLEM = "datum"
 sys.setrecursionlimit(1000010)
 
-MAXN = 100000
+MAXN = 10000
 ALL = []
 DAYS = [31,29,31,30,31,30,31,31,30,31,30,31]
 
