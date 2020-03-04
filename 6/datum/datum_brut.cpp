@@ -68,21 +68,21 @@ int main()
 			{
 				string pal = ispis(year);
 				if(kasnije(pal, date))
-					cout << pal << endl;
+					cout << pal << "." << endl;
 				else
-					cout << ispis(dates[i + 1]) << endl;
+					cout << ispis(dates[i + 1]) << "." << endl;
 				break;
 			}
 			else if(year < dates[i])
 			{
-				cout << ispis(dates[i]) << endl;
+				cout << ispis(dates[i]) << "." << endl;
 				break;
 			}
 		}
 	}
 	end = clock();
 	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-	cout << endl<< time_spent;
+	//cout << endl<< time_spent;
 	return 0;
 }
 

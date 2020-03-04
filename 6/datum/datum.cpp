@@ -64,12 +64,12 @@ int main()
 		{
 			string pal = ispis(year);
 			if(kasnije(pal, date))
-				cout << pal << endl;
+				cout << pal << "." << endl;
 			else
-				cout << ispis(*(dates.lower_bound(year + 1))) << endl;
+				cout << ispis(*(dates.lower_bound(year + 1))) << "." << endl;
 		}
 		else
-			cout << ispis(*(dates.lower_bound(year))) << endl;
+			cout << ispis(*(dates.lower_bound(year))) << "." << endl;
 	}
 	return 0;
 }
