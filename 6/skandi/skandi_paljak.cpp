@@ -114,8 +114,8 @@ int main(void) {
   build_graph();
   printf("%d\n", matching());
 
-  vertex_cover();
-  reconstruct();
+  //vertex_cover();
+  //reconstruct();
 
   return 0;
 }

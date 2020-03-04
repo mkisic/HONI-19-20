@@ -42,7 +42,7 @@ void input()
 
 void solve()
 {
-    max_mask = (1 << (M - 1)) - 1;
+    max_mask = (1 << (M - 1));
     for (int i = 0; i < N; i++)
         for (int j = 0; j < max_mask; j++)
             dp[i][j] = prijelaz[i][j] = inf;
@@ -137,5 +137,5 @@ int main()
 {
     input();
     solve();
-    reconstruct();
+    //reconstruct();
 }
