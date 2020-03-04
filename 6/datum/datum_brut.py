@@ -63,11 +63,11 @@ def kasnije(a, b):
 	return 0
 
 
-start_time = time.time()
-
 for i in range(10000):
 	if(palin(i)):
 		dates.append(i);
+
+print(len(dates))
 
 q = int(input())
 nul = ord('0')
@@ -87,4 +87,3 @@ while(q):
 		elif(year < dates[i]):
 			print(ispis(dates[i]))
 			break
-print("--- %s seconds ---" % (time.time() - start_time))
