@@ -78,7 +78,7 @@ int main()
         a += y;
         if (check(a)) 
         {
-            a = a.substr(0, 2) + '.' + a.substr(2, 2) + '.' + a.substr(4, 4);
+            a = a.substr(0, 2) + '.' + a.substr(2, 2) + '.' + a.substr(4, 4) + '.';
             v.push_back(a);
         }
     }
