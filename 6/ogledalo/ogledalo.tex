@@ -1,0 +1,60 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=20,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Ogledalo}
+
+\setlength\intextsep{-0.1cm}
+\begin{wrapfigure}[12]{r}{0.22\textwidth}
+\centering
+\includegraphics[width=0.22\textwidth]{img/ogledalo.png}
+\end{wrapfigure}
+
+Stoji jedan čovjek ispred ogledala, pucketa prstima i pokušava se nečega
+sjetiti. Nakon sat vremena, dođe njegova majka te ga upita: ,,\textit{Zašto
+tu stojiš, <Ime>?}'', na što čovjek odgovori: ,,\textit{Aha, da, <Ime>.}''.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom se retku nalazi rečenica koju je izgovorila majka glavnog lika iz
+zadatka u kojoj su slova \texttt{'š'} zamijenjena slovima \texttt{'s'}. Ime
+glavnog lika sastojat će se od najviše $10$, a najmanje $2$ slova engleske
+abecede. Prvo slovo imena bit će veliko, a ostala mala.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+U jedinom retku ispišite ime glavnog lika iz teksta zadatka. Prvo slovo imena
+treba biti veliko, a ostala mala.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+\subsection*{Bodovanje}
+U testnim primjerima vrijednima $10$ bodova, čovjekovo ime sastojat će se od
+točno $5$ slova.\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Probni primjeri}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/ogledalo.dummy.in.1}{test/ogledalo.dummy.out.1} &
+\sampleinputs{test/ogledalo.dummy.in.2}{test/ogledalo.dummy.out.2} &
+\sampleinputs{test/ogledalo.dummy.in.3}{test/ogledalo.dummy.out.3}
+\end{tabularx}
+
+\textbf{Pojašnjenje drugog probnog primjera:}
+Nakon što je majka izgovorila njegovo ime, čovjek se sjetio da se zove Marko.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:

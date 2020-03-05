@@ -1,0 +1,83 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem statement
+\begin{statement}[
+  problempoints=50,
+  timelimit=1 sekunda,
+  memorylimit=512 MiB,
+]{Datum}
+
+\setlength\intextsep{-0.1cm}
+\begin{wrapfigure}[6]{r}{0.22\textwidth}
+\centering
+\includegraphics[width=0.22\textwidth]{img/datum.png}
+\end{wrapfigure}
+
+Sezona ispita je gotova te većina studenata Fakulteta elektrotehnike i
+računarstva zasluženo provodi slobodno vrijeme spavajući. U rijetkim
+trenucima kada su budni, uzimaju mobitel u ruke i vrijeme provode gledajući
+nove objave na Instagramu. Fabijan je jedan od tih studenata.
+
+Nedavno je naišao na sljedeću objavu -- datum \texttt{02.02.2020.} je prvi
+palindromični datum u posljednjih $909$ godina.
+
+Fabijan je zaključio da objava nije istinita jer je \texttt{31.02.2013.} bio
+palindromičan datum što je i napisao u komentaru ispod objave. No, ta ga je
+objava navela na razmišljanje o značenju izraza \textit{palindromični datum}
+te se za $N$ datuma zapitao koji je prvi sljedeći palindromični datum nakon
+njega. Datum je \textit{palindromičan} ako se, zanemarivši točke, slijeva nadesno čita
+jednako kao i zdesna nalijevo. Primjerice, datumi \texttt{02.02.2020.} i
+\texttt{12.10.0121.} su palindromični, dok \texttt{03.02.2020.} i
+\texttt{12.07.1993.} to nisu.
+
+\textbf{Napomena}: u zadatku je potrebno obratiti pozornost na prijestupne
+godine koje u veljači imaju $29$ dana. Za potrebe ovog zadatka, smatramo da je
+godina prijestupna ako je djeljiva s $4$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Input
+\subsection*{Ulazni podaci}
+U prvom je retku prirodan broj $N$ $(1 \le N \le 10\ 000)$ iz teksta zadatka.\\
+U sljedećih se $N$ redaka nalazi datum u formatu \texttt{DD.MM.YYYY.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Output
+\subsection*{Izlazni podaci}
+Za svaki datum iz ulaza ispišite prvi sljedeći palindromični datum. Traženi
+odgovor je potrebeno (te će uvijek biti moguće) ispisati u formatu
+\texttt{DD.MM.YYYY.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scoring
+\subsection*{Bodovanje}
+U testnim primjerima vrijednima $10$ bodova, vrijedit će $N=10$ te će svaki traženi
+datum biti unutar istog mjeseca i godine kao i zadani datum.
+
+U testnim primjerima vrijednima dodatnih $10$ bodova, vrijedit će $N=10$ te će svaki
+traženi datum biti unutar iste godine kao i zadani datum.
+
+U testnim primjerima vrijednima dodatnih $20$ bodova vrijedit će $N=10$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Examples
+\subsection*{Probni primjeri}
+\begin{tabularx}{\textwidth}{X'X'X}
+\sampleinputs{test/datum.dummy.in.1}{test/datum.dummy.out.1} &
+\sampleinputs{test/datum.dummy.in.2}{test/datum.dummy.out.2} &
+\sampleinputs{test/datum.dummy.in.3}{test/datum.dummy.out.3}
+\end{tabularx}
+
+\textbf{Pojašnjenje prvog probnog primjera:}
+ako je zadani datum palindromičan, Fabijana zanima prvi sljedeći koji je
+palindromičan, a to je upravo \texttt{12.02.2021.}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We're done
+\end{statement}
+
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% ispell-local-dictionary: "croatian"
+%%% TeX-master: "../hio.tex"
+%%% End:
