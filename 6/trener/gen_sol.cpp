@@ -3,7 +3,7 @@
 using namespace std;
 
 string zadatak = "trener";
-string tasks[] = {"1a","1b","2a","2b","2c","3a","3b","3c","3d","3e"};
+string tasks[] = {"1a","1b","1c","1d","2a","2b","2c","2d","2e","2f","3a","3b","3c","3d","3e","3f","3g","3h","3i","3j"};
 
 int main()
 {
@@ -19,7 +19,7 @@ int main()
 		cout << "Executing... " << cmd << endl;
 		system(cmd.c_str());
 	}
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < 20; i++)
 	{
 		string idx;
 			idx = tasks[i];

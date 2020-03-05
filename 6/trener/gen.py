@@ -39,7 +39,7 @@ class Test(object):
 
 def randomString(stringLength, a, b):
     letters = []
-    for i in range(a ,b):
+    for i in range(a ,b + 1):
         letters.append(chr(i))
     return ''.join(random.choice(letters) for i in range(stringLength))
 
@@ -113,19 +113,43 @@ def gen_cases():
         print('Generating subtask 1, case ', i)
         subtask1.append(gen_random(5, 5, 10, 10, 1, ord('a'), ord('z')))
         
-    for i in range(3, 5):
+    for i in range(3, 4):
+        print('Generating subtask 1, case ', i)
+        subtask1.append(gen_random(5, 5, 10, 10, 2, ord('a'), ord('z')))
+        
+    for i in range(4, 5):
+        print('Generating subtask 1, case ', i)
+        subtask1.append(gen_random(5, 5, 10, 10, 1, ord('x'), ord('x')))
+        
+    for i in range(5,7):
         print('Generating subtask 1, case ', i)
         subtask2.append(gen_random(50, 50, 100, 100, 2, ord('a'), ord('z')))
         
-    for i in range(5, 6):
+    for i in range(7,8):
+        print('Generating subtask 1, case ', i)
+        subtask2.append(gen_random(50, 50, 100, 100, 3, ord('a'), ord('z')))
+        
+    for i in range(8,9):
+        print('Generating subtask 1, case ', i)
+        subtask2.append(gen_random(50, 50, 100, 100, 2, ord('c'), ord('c')))
+        
+    for i in range(9, 11):
         print('Generating subtask 1, case ', i)
         subtask2.append(gen_random(50, 50, 100, 100, 2, ord('a'), ord('b')))
 
-    for i in range(6, 8):
+    for i in range(11, 13):
         print('Generating subtask 1, case ', i)
         subtask3.append(gen_random(MAXN, MAXN, MAXK, MAXK, 5, ord('a'), ord('z')))
 
-    for i in range(8, 11):
+    for i in range(13, 15):
+        print('Generating subtask 1, case ', i)
+        subtask3.append(gen_random(MAXN, MAXN, MAXK, MAXK, 8, ord('a'), ord('z')))
+
+    for i in range(15, 16):
+        print('Generating subtask 1, case ', i)
+        subtask3.append(gen_random(MAXN, MAXN, MAXK, MAXK, 5, ord('a'), ord('a')))
+        
+    for i in range(16, 21):
         print('Generating subtask 1, case ', i)
         subtask3.append(gen_random(MAXN, MAXN, MAXK, MAXK, 5, ord('a'), ord('b')))
 
