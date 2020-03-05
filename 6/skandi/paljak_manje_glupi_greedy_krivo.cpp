@@ -26,17 +26,30 @@ char grid[MAXN][MAXN];
 vector<Question> Q;
 vector<tuple<int, int, int>> sol;
 
-void parse_grid() {
+inline bool check_bio() {
+  for (int i = 0; i < R; ++i)
+    for (int j = 0; j < S; ++j)
+      if (grid[i][j] == '0' && !bio[i][j])
+        return false;
+  return true;
+}
+
+Question get_question() {
+  Question ret = {0, 0, 0, 0, -1};
   for (int i = 0; i < R; ++i) {
     for (int j = 0; j < S; ++j) {
       if (grid[i][j] == '1') continue;
       int _i = i, _j = j;
-      while (grid[_i][j] == '0') --_i;
-      while (grid[i][_j] == '0') --_j;
-      Q.push_back({_i, j, 1, 0, i - _i});
-      Q.push_back({i, _j, 0, 1, j - _j});
+      int s1 = 0, s2 = 0;
+      while (grid[_i][j] == '0') s1 += !bio[_i--][j];
+      while (grid[i][_j] == '0') s2 += !bio[i][_j--];
+      Question q1 = {_i, j, 1, 0, s1};
+      Question q2 = {i, _j, 0, 1, s2};
+      if (q1 < ret) ret = q1;
+      if (q2 < ret) ret = q2;
     }
   }
+  return ret;
 }
 
 int main(void) {
@@ -44,10 +57,9 @@ int main(void) {
   for (int i = 0; i < R; ++i)
     scanf("%s", grid[i]);
 
-  parse_grid();
-
-  sort(Q.begin(), Q.end());
-  for (const auto q : Q) {
+  while (!check_bio()) {
+    const auto &q = get_question();
+    //TRACE(q.r _ q.s _ q.dr _ q.ds _ q.len);
     int r = q.r + q.dr, s = q.s + q.ds;
     bool flag = false;
     while (r < R && s < S && grid[r][s] == '0' && !flag) {

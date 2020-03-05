@@ -47,7 +47,7 @@ class Test(object):
 
 
 def remove_cases():
-    cases += glob.glob('test/%s.in.*' % PROBLEM)
+    cases = glob.glob('test/%s.in.*' % PROBLEM)
     cases += glob.glob('test/%s.out.*' % PROBLEM)
     for c in cases:
         print>>sys.stderr, 'Removing ' + c
@@ -174,7 +174,7 @@ def gen_cases():
 
 
 def main():
-    random.seed(293431)
+    random.seed(293731)
     gen_cases()
 
 
