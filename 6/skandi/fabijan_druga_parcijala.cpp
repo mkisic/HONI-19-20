@@ -118,6 +118,7 @@ void reconstruct()
         {
             const_val = get_val(mask_sol, line);
             last_mask_sol = mask_sol;
+            minx = 1e9;
 
             for (int i = 0; i < max_mask; i++)
             {

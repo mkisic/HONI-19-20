@@ -105,5 +105,5 @@ int main()
 {
 	input();
 	solve();
-	reconstruct();
+	//reconstruct();
 }
