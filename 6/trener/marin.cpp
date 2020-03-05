@@ -37,7 +37,7 @@ int mul(int a, int b) {
 int n, k;
 int cnt[MAXM], dp[MAXM];
 
-unordered_map <string, int> ime, prosli;
+unordered_map <string, int> ime;
 int IME;
 
 vector <int> v[MAXM];
