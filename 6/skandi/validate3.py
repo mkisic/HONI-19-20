@@ -44,7 +44,7 @@ expected_clusters = {"prvi" : 1, "drugi" : 1, "treci" : 1}
 def what_cluster(data):
     # na temelju povratne informacije iz check(lines)
     # zakljucuje za TP u kojoj je bodovnoj sekciji
-    if data['jed'] <= 18: return "prvi"
+    if data['jed'] <= 9: return "prvi"
     if data['n'] <= 500 and data['m'] <= 10: return "drugi"
     return "treci"
 
