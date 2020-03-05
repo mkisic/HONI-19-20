@@ -5,7 +5,7 @@
 using namespace std;
 
 const int MAXN = 75;
-const int MAXK = 750;
+const int MAXK = 1505;
 const int MOD = 1e9 + 7;
 
 vector<string> prezime[MAXN];

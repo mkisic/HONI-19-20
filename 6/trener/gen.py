@@ -72,6 +72,29 @@ def gen_random(minn, maxn, mink, maxk, minus, minslovo, maxslovo):
         random.shuffle(temp)
         words.append(temp)
     return Test(n, k, words)
+def gen_extra(minn, maxn, mink, maxk):
+    n = random.randint(minn,maxn)
+    k = random.randint(mink, maxk)
+    words = []
+    for j in range(n):
+        temp = []
+        x = 0
+        if(j >= 5):
+            x = random.randint(0,2)
+        for i in range(x):
+            a = random.randint(0, n - 1)
+            word = words[j - 1][a]
+            if(a % 2 == 0):
+                word = word + chr(random.randint(ord('a'), ord('b')))
+            else:
+                word = chr(random.randint(ord('a'), ord('b'))) + word
+            temp.append(word)
+        for i in range(k - x):
+            temp.append(randomString(j + 1, ord('x'), ord('x')))
+        random.shuffle(temp)
+        words.append(temp)
+    return Test(n, k, words)
+            
 
 def gen_cases():
     remove_cases()
@@ -122,36 +145,38 @@ def gen_cases():
         subtask1.append(gen_random(5, 5, 10, 10, 1, ord('x'), ord('x')))
         
     for i in range(5,7):
-        print('Generating subtask 1, case ', i)
+        print('Generating subtask 2, case ', i)
         subtask2.append(gen_random(50, 50, 100, 100, 2, ord('a'), ord('z')))
         
     for i in range(7,8):
-        print('Generating subtask 1, case ', i)
+        print('Generating subtask 2, case ', i)
         subtask2.append(gen_random(50, 50, 100, 100, 3, ord('a'), ord('z')))
         
     for i in range(8,9):
-        print('Generating subtask 1, case ', i)
+        print('Generating subtask 2, case ', i)
         subtask2.append(gen_random(50, 50, 100, 100, 2, ord('c'), ord('c')))
         
     for i in range(9, 11):
-        print('Generating subtask 1, case ', i)
+        print('Generating subtask 2, case ', i)
         subtask2.append(gen_random(50, 50, 100, 100, 2, ord('a'), ord('b')))
+    subtask2.append(gen_extra(50,50,100,100))
 
     for i in range(11, 13):
-        print('Generating subtask 1, case ', i)
+        print('Generating subtask 3, case ', i)
         subtask3.append(gen_random(MAXN, MAXN, MAXK, MAXK, 5, ord('a'), ord('z')))
 
     for i in range(13, 15):
-        print('Generating subtask 1, case ', i)
+        print('Generating subtask 3, case ', i)
         subtask3.append(gen_random(MAXN, MAXN, MAXK, MAXK, 8, ord('a'), ord('z')))
 
     for i in range(15, 16):
-        print('Generating subtask 1, case ', i)
+        print('Generating subtask 3, case ', i)
         subtask3.append(gen_random(MAXN, MAXN, MAXK, MAXK, 5, ord('a'), ord('a')))
         
     for i in range(16, 21):
-        print('Generating subtask 1, case ', i)
+        print('Generating subtask 3, case ', i)
         subtask3.append(gen_random(MAXN, MAXN, MAXK, MAXK, 5, ord('a'), ord('b')))
+    subtask3.append(gen_extra(50,50,1500,1500))
 
     real.append(subtask1)
     real.append(subtask2)
