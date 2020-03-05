@@ -3,6 +3,7 @@
 using namespace std;
 
 string zadatak = "trener";
+string tasks[] = {"1a","1b","2a","2b","2c","3a","3b","3c","3d","3e"};
 
 int main()
 {
@@ -18,11 +19,10 @@ int main()
 		cout << "Executing... " << cmd << endl;
 		system(cmd.c_str());
 	}
-	for(int i = 1; i <= 10; i++)
+	for(int i = 0; i < 10; i++)
 	{
-		string idx = "10";
-		if(i != 10)
-			idx = char(i + '0');
+		string idx;
+			idx = tasks[i];
 		string nameIn = "test\\" + zadatak + ".in." + idx;
 		string nameOut = "test\\" + zadatak + ".out." + idx;
 		string del = "del " + nameOut;

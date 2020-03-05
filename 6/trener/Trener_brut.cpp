@@ -39,6 +39,9 @@ int dfs(int x, int y)
 
 int main()
 {
+	clock_t begin, end;
+	double time_spent;
+	begin = clock();
 	cin >> n >> k;
 	for(int i = 0; i < n; i++)
 	{
@@ -52,6 +55,9 @@ int main()
 		sol += dfs(0, i);
 	}
 	cout << sol;
+	end = clock();
+	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << endl<< time_spent;
 	return 0;
 }
 

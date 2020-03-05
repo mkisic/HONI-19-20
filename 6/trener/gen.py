@@ -107,35 +107,39 @@ def gen_cases():
 
     # 1. subtask -- N = 75, K = 750
     subtask1 = []
+    subtask2 = []
+    subtask3 = []
     for i in range(1, 3):
         print('Generating subtask 1, case ', i)
         subtask1.append(gen_random(5, 5, 10, 10, 1, ord('a'), ord('z')))
         
     for i in range(3, 5):
         print('Generating subtask 1, case ', i)
-        subtask1.append(gen_random(50, 50, 100, 100, 2, ord('a'), ord('z')))
+        subtask2.append(gen_random(50, 50, 100, 100, 2, ord('a'), ord('z')))
         
     for i in range(5, 6):
         print('Generating subtask 1, case ', i)
-        subtask1.append(gen_random(50, 50, 100, 100, 2, ord('a'), ord('b')))
+        subtask2.append(gen_random(50, 50, 100, 100, 2, ord('a'), ord('b')))
 
     for i in range(6, 8):
         print('Generating subtask 1, case ', i)
-        subtask1.append(gen_random(MAXN, MAXN, MAXK, MAXK, 5, ord('a'), ord('z')))
+        subtask3.append(gen_random(MAXN, MAXN, MAXK, MAXK, 5, ord('a'), ord('z')))
 
     for i in range(8, 11):
         print('Generating subtask 1, case ', i)
-        subtask1.append(gen_random(MAXN, MAXN, MAXK, MAXK, 5, ord('a'), ord('b')))
+        subtask3.append(gen_random(MAXN, MAXN, MAXK, MAXK, 5, ord('a'), ord('b')))
 
     real.append(subtask1)
+    real.append(subtask2)
+    real.append(subtask3)
 
 
     for i, batch in enumerate(real):
         for j, test in enumerate(batch):
             test.validate()
-            print>>sys.stderr, 'Generating test/%s.in.%d' \
-                    % (PROBLEM, j+1)
-            input = 'test/%s.in.%d' % (PROBLEM, j+1)
+            print>>sys.stderr, 'Generating test/%s.in.%d%c' \
+                    % (PROBLEM, i+1, chr(ord('a')+j))
+            input = 'test/%s.in.%d%c' % (PROBLEM, i+1, chr(ord('a')+j))
             test.write(file(input, 'wt'))
 
 def main():
