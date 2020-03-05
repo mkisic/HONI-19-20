@@ -115,9 +115,9 @@ def gen_cases():
   for i, batch in enumerate(real):
     for j, test in enumerate(batch):
       test.validate()
-      print>>sys.stderr, 'Generating test/%s.in.%d%c' \
-              % (PROBLEM, i+1, chr(ord('a')+j))
-      input = 'test/%s.in.%d%c' % (PROBLEM, i+1, chr(ord('a')+j))
+      print>>sys.stderr, 'Generating test/%s.in.%d' \
+              % (PROBLEM, i+1)
+      input = 'test/%s.in.%d' % (PROBLEM, i+1)
       test.write(file(input, 'wt'))
 
 def main():
