@@ -47,8 +47,6 @@ class Test(object):
 
 
 def remove_cases():
-    cases = glob.glob('test/%s.dummy.in.*' % PROBLEM)
-    cases += glob.glob('test/%s.dummy.out.*' % PROBLEM)
     cases += glob.glob('test/%s.in.*' % PROBLEM)
     cases += glob.glob('test/%s.out.*' % PROBLEM)
     for c in cases:
