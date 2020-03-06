@@ -9,7 +9,7 @@ def check(lines):
     nl = []   # ispravno formatirane linije
     E = "\n"  # line ending
 
-    n = int(lines[0])
+    k = int(lines[0])
     assert -MAX <= k <= MAX, "krivi k"
     nl.append("{}{}".format(k, E))
 
