@@ -77,97 +77,6 @@ struct graf {
       printf("%d %d\n", p.X, p.Y);
   }
 
-  int dobar_format() {
-    for(auto p : bridovi) {
-      if(p.X < 1 || p.X > n) return 0;
-      if(p.Y < 1 || p.Y > n) return 0;
-      if(p.X == p.Y) return 0;
-    }
-    return 1;
-  }
-
-  int dfs(int cvor, vector<int> &boja) {
-    if(boja[cvor] == 1) return 0;
-    if(boja[cvor] == 2) return 1;
-    boja[cvor] = 1;
-    int ret = 1;
-    for(auto p : bridovi)
-      if(p.X == cvor)
-        ret &= dfs(p.Y, boja);
-    boja[cvor] = 2;
-    return ret;
-  }
-
-  int ima_ciklusa() {
-    vector<int> boja(n + 1);
-    FOR(i, 1, n + 1)
-      if(!boja[i])
-        if(!dfs(i, boja))
-          return 1;
-    return 0;
-  }
-
-  void topoloski(int cvor, vector<int> &bio, vector<int> &poredak) {
-    if(bio[cvor]) return;
-    bio[cvor] = 1;
-    for(auto p : bridovi)
-      if(p.Y == cvor)
-        topoloski(p.X, bio, poredak);
-    poredak.push_back(cvor);
-  }
-
-  void odredi_pretke(int cvor, vector<int> &imam, vector<int> &v) {
-    if(imam[cvor]) return;
-    imam[cvor] = 1;
-    v.push_back(cvor);
-    for(auto p : bridovi)
-      if(p.Y == cvor)
-        odredi_pretke(p.X, imam, v);
-  }
-
-  llint odredi_funkciju() {
-    vector<int> bio(n + 1);
-    vector<int> poredak;
-    FOR(i, 1, n + 1)
-      if(!bio[i])
-        topoloski(i, bio, poredak);
-    vector<llint> dp(n + 1);
-    vector<vector<int> > preci(n + 1);
-    FOR(i, 1, n + 1) {
-      vector<int> imam(n + 1);
-      odredi_pretke(i, imam, preci[i]);
-    }
-    for(auto x : poredak) {
-      if(x == 1)
-        dp[x] = 1;
-      else {
-        llint suma_predaka = 0;
-        for(auto v : preci[x])
-          suma_predaka += dp[v];
-        dp[x] = -1 * suma_predaka;
-      }
-    }
-    return dp[n];
-  }
-
-  int check(llint ocekivano) {
-    if(!dobar_format()) {
-      cerr << "krivi format!" << endl;
-      return 0;
-    }
-    if(ima_ciklusa()) {
-      cerr << "ima ciklusa!" << endl;
-      return 0;
-    }
-    llint f = odredi_funkciju();
-    if(ocekivano != f) {
-      cerr << "vrijednosti funkcija se ne podudaraju!" << endl;
-      cerr << "checker je izracunao: " << f << endl;
-      return 0;
-    }
-    return 1;
-  }
-
 };
 
 vector<int> odredi_binarni_zapis(llint t) {
@@ -206,9 +115,7 @@ graf rijesi(llint t) {
 
 void pozovi(llint t) {
   graf g = rijesi(t);
-  //cerr << t << ": " << g.n << " " << g.bridovi.size() << endl;
   g.ispis();
-  assert(g.check(t));
 }
 
 int main() {
