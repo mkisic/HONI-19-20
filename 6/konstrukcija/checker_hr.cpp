@@ -83,12 +83,12 @@ struct graf {
     return 0;
   }
 
-  void topoloski(int cvor, vector<int> &bio, vector<int> &poredak) {
+  void topoloski(int cvor, vector<int> &bio, vector<int> &v) {
     if(bio[cvor]) return;
     bio[cvor] = 1;
     for(auto kamo : roditelji[cvor])
-      topoloski(kamo, bio, poredak);
-    poredak.push_back(cvor);
+      topoloski(kamo, bio, v);
+    v.push_back(cvor);
   }
 
   void odredi_pretke(int cvor, vector<int> &imam, vector<int> &v) {
@@ -99,18 +99,26 @@ struct graf {
       odredi_pretke(kamo, imam, v);
   }
 
-  __int128 odredi_funkciju() {
+  vector<int> poredak;
+  vector<vector<int> > preci;
+
+  void odredi_topoloski_poredak() {
     vector<int> bio(n + 1);
-    vector<int> poredak;
     FOR(i, 1, n + 1)
       if(!bio[i])
         topoloski(i, bio, poredak);
-    vector<__int128> dp(n + 1);
-    vector<vector<int> > preci(n + 1);
+  }
+  
+  void odredi_pretke() { 
+    preci = vector<vector<int> > (n + 1);
     FOR(i, 1, n + 1) {
       vector<int> imam(n + 1);
       odredi_pretke(i, imam, preci[i]);
     }
+  }
+
+  __int128 odredi_funkciju() {
+    vector<__int128> dp(n + 1);
     for(auto x : poredak) {
       if(x == 1)
         dp[x] = 1;
@@ -135,17 +143,7 @@ struct graf {
 
   int ispitaj_napetosti(int pocetak) { 
     const __int128 GRANICA = (__int128)1 << 80;
-    vector<int> bio(n + 1);
-    vector<int> poredak;
-    FOR(i, 1, n + 1)
-      if(!bio[i])
-        topoloski(i, bio, poredak);
     vector<__int128> dp(n + 1);
-    vector<vector<int> > preci(n + 1);
-    FOR(i, 1, n + 1) {
-      vector<int> imam(n + 1);
-      odredi_pretke(i, imam, preci[i]);
-    }
     for(auto x : poredak) {
       if(x == pocetak)
         dp[x] = 1;
@@ -181,6 +179,8 @@ struct graf {
       poruka = NOT_DIRECTED_GRAPH;
       return 0;
     }
+    odredi_topoloski_poredak();
+    odredi_pretke();
     __int128 f = odredi_funkciju();
     if(ocekivano != f) {
       poruka = WRONG;
@@ -208,10 +208,10 @@ void finish(double p, const string& m);
  * @param foff official output
  * @param fout contestant's output
  */
-void checker(ifstream& fin, ifstream& foff, ifstream& fout)
+void checker(ifstream& fin, ifstream& fout)
 {
-  const string WRONG_OUTPUT_FORMAT = "Krivo formatiran izlaz.";
-  const string TEST_DATA_ERROR = "Greska u sluzbenom ulazu ili izlazu.";
+  const string WRONG_OUTPUT_FORMAT = "Krivo formatiran izlaz."; 
+  const string TEST_DATA_ERROR = "Greska u sluzbenom ulazu.";
   const string TOO_BIG_N_OR_M = "Prekoracen broj cvorova ili bridova.";
 
   // Read official input
@@ -219,21 +219,7 @@ void checker(ifstream& fin, ifstream& foff, ifstream& fout)
 
   if (!(fin >> K)) finish(0.0, TEST_DATA_ERROR);
 
-  // Read official output
-  int n_official, m_official;
-  vector<par> bridovi_official;
-  if (!(foff >> n_official)) finish(0.0, TEST_DATA_ERROR);
-  if (!(foff >> m_official)) finish(0.0, TEST_DATA_ERROR);
-  REP(i, m_official) {
-    int x, y;
-    if (!(foff >> x)) finish(0.0, TEST_DATA_ERROR);
-    if (!(foff >> y)) finish(0.0, TEST_DATA_ERROR);
-    bridovi_official.push_back(par(x, y));
-  }
-  graf g_official(n_official, bridovi_official);
-  string poruka_official;
-  int t_official = g_official.check(K, poruka_official);
-  if(!t_official) finish(0.0, TEST_DATA_ERROR);
+  // official output has been ignored
 
   // Read contestant's output 
   int n, m;
@@ -273,11 +259,10 @@ int main(int argc, char *argv[])
   assert(argc == 4);
 
   ifstream fin(argv[1]);
-  ifstream foff(argv[2]); // official output can be ignored
   ifstream fout(argv[3]);
 
   assert(!fin.fail() && !fout.fail());
-  checker(fin, foff, fout);
+  checker(fin, fout);
   assert(false); // checker must terminate via finish() before exiting!
 
   return 0;
