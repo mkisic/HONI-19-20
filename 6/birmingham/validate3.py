@@ -2,25 +2,23 @@
 """Upotreba ./validate3.py test/*.in*"""
 
 import string
+import sys
+sys.setrecursionlimit(1000010)
 
-#v = []
-#bio = []
-#brojac = 0
+v = []
+bio = []
+brojac = 0
 
-#def dfs(cvor):
-#  global v
-#  global bio
-#  global brojac
-#  if bio[cvor] == 1: 
-#    return
-#  bio[cvor] = 1
-#  brojac = brojac + 1
-#  for t in v[cvor]:
-#    dfs(t)
-#  return
+def dfs(cvor):
+  bio[cvor] = 1
+  for t in v[cvor]:
+    if not bio[t]:
+      dfs(t)
+  return
 
   
 def check(lines):
+    global bio, v, brojac
     nl = []   # ispravno formatirane linije
     E = "\n"  # line ending
 
@@ -46,24 +44,28 @@ def check(lines):
     for i in range(1, q):
       assert niz[i - 1] < niz[i], "brojevi u nizu nisu razliciti"
 
-    #for i in range(n + 1):
-    #  L = []
-    #  v.append(L)
-    #  bio.append(0)
+    bio = []
+    v = []
+    brojac = 0
+    for i in range(n + 1):
+      L = []
+      v.append(L)
+      bio.append(0)
 
     for i in range(2, m+2):
         x, y = map(int, lines[i].split())
         assert 1 <= x <= n
         assert 1 <= y <= n
         assert x != y  
-        #v[x].append(y)
-        #v[y].append(x)
+        v[x].append(y)
+        v[y].append(x)
         nl.append("{} {}{}".format(x, y, E));
 
-    #dfs(1)
-    #print(brojac)
-    #print(n)
-    #assert brojac == n, "graf ima vise komponenti"
+    for i in range(1, n + 1):
+      if not bio[i]:
+        brojac += 1
+        dfs(i)
+    assert brojac == 1, "graf ima vise komponenti"
 
     assert lines == nl, "Krivi format (%s vs %s)" % (lines, nl)
     assert lines[-1][-1] == "\n", "Zadnji red ne zavrsava sa \\n"
